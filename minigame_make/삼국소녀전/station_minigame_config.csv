@@ -1,0 +1,3 @@
+minigame_config_id,minigame_type,trigger_weight
+1,SHUTDOWN,70
+2,BANK_HEIST,30

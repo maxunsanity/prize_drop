@@ -1,0 +1,44 @@
+{
+  "game_flow": "Start_Stage_Loop",
+  "stages": [
+    {
+      "stage_id": 1,
+      "stage_name": "초심자 영역",
+      "stage_goal": {
+        "type": "SCORE_THRESHOLD",
+        "value": 50
+      },
+      "difficulty_modifier": 1.0,
+      "rolling_sequence": {
+        "loop_condition": {
+          "type": "WHILE",
+          "check": "current_score < stage_goal.value AND current_resource > 0"
+        },
+        "iterations": [
+          {
+            "step_name": "dice_roll",
+            "action": "ROLL_DICE",
+            "parameters": {
+              "dice_type": "D6",
+              "resource_cost": 1
+            },
+            "output_calculation": "base_value * difficulty_modifier + random_bonus"
+          },
+          {
+            "step_name": "apply_effect",
+            "action": "APPLY_EFFECT",
+            "logic": "IF (roll_result >= 5) THEN gain_score(roll_result * 1.2) ELSE gain_score(roll_result * 0.8)","state_update": {
+              "resource": "DECREMENT_BY_COST",
+              "score": "ADD_CALCULATED_SCORE"
+            }
+          }
+        ],
+        "on_exit": {
+          "success": "Proceed_to_Stage_2",
+          "failure": "Game_Over_Message"
+        }
+      }
+    }
+    // ... Stage 2, Stage 3 ...
+  ]
+}

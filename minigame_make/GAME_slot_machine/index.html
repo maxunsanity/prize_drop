@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>LUCKY DOG SLOT</title>
+  <link rel="stylesheet" href="/src/style.css">
+</head>
+<body>
+  <div id="app">
+    <div id="ui-top" style="display:none;">
+      <span id="ui-bet-hidden">BET: 1</span>
+    </div>
+
+    <div class="machine-frame">
+      <div class="header-decor">
+        <div class="mascot">🐶</div>
+        <div class="title-ribbon">LUCKY DOG</div>
+        <div class="progress-container">
+          <div class="progress-bar"><div class="progress-fill"></div></div>
+          <div class="progress-text">38/100</div>
+        </div>
+      </div>
+
+      <div id="reel-container-wrapper">
+        <div id="reel-container">
+          <div class="reel" id="reel-0"><canvas></canvas></div>
+          <div class="reel-divider"></div>
+          <div class="reel" id="reel-1"><canvas></canvas></div>
+          <div class="reel-divider"></div>
+          <div class="reel" id="reel-2"><canvas></canvas></div>
+        </div>
+        <div class="side-marker left"></div>
+        <div class="side-marker right"></div>
+      </div>
+
+      <div id="payline"></div>
+
+      <div id="ui-bottom">
+        <div id="ui-coins" class="coin-pill">🐾 50</div>
+        <button id="btn-spin" class="spin-btn">SPIN</button>
+        <button id="btn-bet" class="bet-pill">x1</button>
+      </div>
+    </div>
+
+    <div id="ui-result"></div>
+    <button id="btn-add-coins" class="debug-btn">충전</button>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

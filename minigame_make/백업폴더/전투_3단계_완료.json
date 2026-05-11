@@ -1,0 +1,3839 @@
+{
+  "version": 1,
+  "designName": "전투_3단계_완료",
+  "exportedAt": "2026-04-29T10:06:16.458Z",
+  "nodes": [
+    {
+      "id": "n_YADtohiinx",
+      "type": "group",
+      "position": {
+        "x": 13.719995141790264,
+        "y": -993.9982794607713
+      },
+      "data": {
+        "color": "periwinkle",
+        "label": "테이블"
+      },
+      "style": {
+        "width": 1781.4930907278708,
+        "height": 563.6972604156376
+      },
+      "width": 1781.4930907278708,
+      "height": 563.6972604156376,
+      "zIndex": -1,
+      "measured": {
+        "width": 1781,
+        "height": 564
+      }
+    },
+    {
+      "id": "3dMvnKaXtRBlG9qJOqe0",
+      "type": "entry",
+      "position": {
+        "x": 88.75781499511062,
+        "y": -471.2259403214896
+      },
+      "data": {
+        "tags": [],
+        "label": "전투 시작",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "",
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 58
+      }
+    },
+    {
+      "id": "xbB65S1FVTQsKviTmpCo",
+      "type": "gate",
+      "position": {
+        "x": -353.2097867229422,
+        "y": 779.4860067613245
+      },
+      "data": {
+        "tags": [],
+        "label": "적 사망?",
+        "condition": "enemy_hp <= 0",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "",
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "WOGebJtUG9fTXv1AggCH",
+      "type": "action",
+      "position": {
+        "x": -26.430475450198543,
+        "y": 779.4860067613245
+      },
+      "data": {
+        "tags": [],
+        "label": "적 반격",
+        "duration": "short",
+        "difficulty": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "",
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 85
+      }
+    },
+    {
+      "id": "dbClGLpmQ22hftQwXs3M",
+      "type": "gate",
+      "position": {
+        "x": 589.7068173407584,
+        "y": 1091.2057209294726
+      },
+      "data": {
+        "tags": [],
+        "label": "플레이어 사망?",
+        "condition": "player_hp <= 0",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "",
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "JmXYql8aC8Thnor1Xcox",
+      "type": "success",
+      "position": {
+        "x": -353.2097867229422,
+        "y": 1005.6497838502853
+      },
+      "data": {
+        "tags": [],
+        "label": "승리!",
+        "mockSpec": {
+          "root": "victory-screen",
+          "elements": {
+            "top-hp": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "player_hp"
+              },
+              "children": []
+            },
+            "top-area": {
+              "type": "TopArea",
+              "props": {},
+              "children": [
+                "top-hp",
+                "top-spacer",
+                "top-gold",
+                "top-score"
+              ]
+            },
+            "top-gold": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "gold"
+              },
+              "children": []
+            },
+            "top-score": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "score"
+              },
+              "children": []
+            },
+            "top-spacer": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            },
+            "body-vstack": {
+              "type": "VStack",
+              "props": {},
+              "children": [
+                "body-spacer-top",
+                "victory-title",
+                "victory-subtitle",
+                "victory-hp-left",
+                "divider-spacer",
+                "body-spacer-bottom",
+                "find-enemy-btn"
+              ]
+            },
+            "bottom-area": {
+              "type": "BottomArea",
+              "props": {},
+              "children": [
+                "bottom-dice",
+                "bottom-item",
+                "bottom-weapon"
+              ]
+            },
+            "bottom-dice": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "dice"
+              },
+              "children": []
+            },
+            "bottom-item": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "item"
+              },
+              "children": []
+            },
+            "bottom-weapon": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "LjFFeQfJibzToAWeOUs9"
+              },
+              "children": []
+            },
+            "victory-title": {
+              "type": "Text",
+              "props": {
+                "text": "🏆 승리!",
+                "variant": "title"
+              },
+              "children": []
+            },
+            "divider-spacer": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            },
+            "find-enemy-btn": {
+              "on": {
+                "press": {
+                  "action": "setState",
+                  "params": {
+                    "value": 0,
+                    "statePath": "/sim.currentStep"
+                  }
+                }
+              },
+              "type": "Button",
+              "props": {
+                "label": "⚔️ 다음으로",
+                "variant": "primary",
+                "targetNodeId": "gate_is_boss"
+              },
+              "children": []
+            },
+            "victory-screen": {
+              "type": "Screen",
+              "props": {
+                "scrollable": false
+              },
+              "children": [
+                "top-area",
+                "body-vstack",
+                "bottom-area"
+              ]
+            },
+            "body-spacer-top": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            },
+            "victory-hp-left": {
+              "type": "Text",
+              "props": {
+                "text": "남은 나의 체력: {{player_hp}} / {{player_max_hp}}",
+                "variant": "muted"
+              },
+              "children": []
+            },
+            "victory-subtitle": {
+              "type": "Text",
+              "props": {
+                "text": "대단해요! 총 {{turn_count}}번의 맹공으로 적을 산산조각 냈습니다!",
+                "variant": "subtitle"
+              },
+              "children": []
+            },
+            "body-spacer-bottom": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            }
+          }
+        },
+        "mockPrompt": "승리 팝업\n적 찾기 버튼",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "",
+        "frictionScore": 0,
+        "mockGeneratedAt": "2026-04-27T09:28:43.283Z",
+        "mockInitialState": {
+          "dice": 3,
+          "gold": 120,
+          "item": 2,
+          "score": 870,
+          "enemy_hp": 50,
+          "player_hp": 45,
+          "turn_count": 4,
+          "enemy_max_hp": 50,
+          "sdt.autonomy": 50,
+          "player_max_hp": 100,
+          "enemy_hp_ratio": 1,
+          "sdt.competence": 50,
+          "sdt.motivation": 50,
+          "player_hp_ratio": 0.45,
+          "sdt.relatedness": 50,
+          "sim.activeModal": "",
+          "sim.activeScene": "",
+          "sim.currentStep": 0,
+          "sim.activeScreen": "",
+          "LjFFeQfJibzToAWeOUs9": 1
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 58
+      }
+    },
+    {
+      "id": "PkGUAqSomtLEOXEuyofe",
+      "type": "failure",
+      "position": {
+        "x": 908.580925671113,
+        "y": 1251.8747125689117
+      },
+      "data": {
+        "tags": [],
+        "label": "패배...",
+        "mockSpec": {
+          "root": "defeat-screen",
+          "elements": {
+            "spacer-il": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            },
+            "spacer-ir": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            },
+            "spacer-bot": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            },
+            "spacer-top": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            },
+            "defeat-body": {
+              "type": "VStack",
+              "props": {},
+              "children": [
+                "spacer-top",
+                "defeat-icon-row",
+                "defeat-title",
+                "defeat-subtitle",
+                "defeat-divider-text",
+                "spacer-bot",
+                "defeat-restart-btn"
+              ]
+            },
+            "defeat-title": {
+              "type": "Text",
+              "props": {
+                "text": "패배...",
+                "variant": "title"
+              },
+              "children": []
+            },
+            "defeat-screen": {
+              "type": "Screen",
+              "props": {
+                "scrollable": false
+              },
+              "children": [
+                "defeat-top-area",
+                "defeat-body"
+              ]
+            },
+            "defeat-hp-meter": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "player_hp"
+              },
+              "children": []
+            },
+            "defeat-icon-row": {
+              "type": "HStack",
+              "props": {},
+              "children": [
+                "spacer-il",
+                "defeat-skull-text",
+                "spacer-ir"
+              ]
+            },
+            "defeat-subtitle": {
+              "type": "Text",
+              "props": {
+                "text": "전투에서 쓰러졌습니다. 다시 도전해 보세요!",
+                "variant": "muted"
+              },
+              "children": []
+            },
+            "defeat-top-area": {
+              "type": "TopArea",
+              "props": {},
+              "children": [
+                "defeat-hp-meter",
+                "defeat-enemy-hp-meter",
+                "defeat-score-meter",
+                "defeat-gold-meter"
+              ]
+            },
+            "defeat-gold-meter": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "gold"
+              },
+              "children": []
+            },
+            "defeat-skull-text": {
+              "type": "Text",
+              "props": {
+                "text": "💀",
+                "variant": "title"
+              },
+              "children": []
+            },
+            "defeat-restart-btn": {
+              "on": {
+                "press": {
+                  "action": "setState",
+                  "params": {
+                    "value": 0,
+                    "statePath": "/sim.currentStep"
+                  }
+                }
+              },
+              "type": "Button",
+              "props": {
+                "label": "🔄  게임 다시 시작",
+                "variant": "primary",
+                "targetNodeId": "n_init_player"
+              },
+              "children": []
+            },
+            "defeat-score-meter": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "score"
+              },
+              "children": []
+            },
+            "defeat-divider-text": {
+              "type": "Text",
+              "props": {
+                "text": "— 최종 기록 —",
+                "variant": "muted"
+              },
+              "children": []
+            },
+            "defeat-enemy-hp-meter": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "enemy_hp"
+              },
+              "children": []
+            }
+          }
+        },
+        "mockPrompt": "패배 팝업\n게임 다시 시작 버튼",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "",
+        "frictionScore": 0,
+        "mockGeneratedAt": "2026-04-27T09:29:57.918Z",
+        "mockInitialState": {
+          "dice": 2,
+          "gold": 120,
+          "item": 1,
+          "score": 340,
+          "enemy_hp": 50,
+          "player_hp": 0,
+          "turn_count": 4,
+          "enemy_max_hp": 50,
+          "sdt.autonomy": 50,
+          "player_max_hp": 100,
+          "enemy_hp_ratio": 1,
+          "sdt.competence": 50,
+          "sdt.motivation": 50,
+          "player_hp_ratio": 0,
+          "sdt.relatedness": 50,
+          "sim.activeModal": "",
+          "sim.activeScene": "",
+          "sim.currentStep": 0,
+          "sim.activeScreen": "PkGUAqSomtLEOXEuyofe",
+          "LjFFeQfJibzToAWeOUs9": 1
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 58
+      }
+    },
+    {
+      "id": "HIOoyUfUBzgoZfaJbe2o",
+      "type": "choice",
+      "position": {
+        "x": -375.81049726026345,
+        "y": 44.91634473191179
+      },
+      "data": {
+        "tags": [],
+        "label": "공격 or 대기?",
+        "mockSpec": {
+          "root": "battle-screen",
+          "elements": {
+            "res-hp": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "player_hp"
+              },
+              "children": []
+            },
+            "btn-wait": {
+              "type": "Button",
+              "props": {
+                "label": "🛡️ 방어",
+                "variant": "secondary",
+                "targetNodeId": "fo2aXM16YcyoQpjqlom6"
+              }
+            },
+            "divider1": {
+              "type": "Divider",
+              "props": {},
+              "children": []
+            },
+            "divider2": {
+              "type": "Divider",
+              "props": {},
+              "children": []
+            },
+            "res-gold": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "gold"
+              },
+              "children": []
+            },
+            "top-area": {
+              "type": "TopArea",
+              "props": {},
+              "children": [
+                "res-hp",
+                "top-spacer",
+                "res-gold"
+              ]
+            },
+            "vs-label": {
+              "type": "Text",
+              "props": {
+                "text": "VS",
+                "variant": "title"
+              }
+            },
+            "btn-skill": {
+              "type": "Button",
+              "props": {
+                "label": "🔥 파이어볼 ({{skill_charges}}회)",
+                "variant": "secondary",
+                "targetNodeId": "trig_skill_calc"
+              }
+            },
+            "gold-info": {
+              "type": "Text",
+              "props": {
+                "text": "💰 골드 {{player_gold}}",
+                "variant": "muted"
+              },
+              "children": []
+            },
+            "kill-info": {
+              "type": "Text",
+              "props": {
+                "text": "💀 처치 {{kill_count}}/3",
+                "variant": "muted"
+              },
+              "children": []
+            },
+            "turn-info": {
+              "type": "HStack",
+              "props": {
+                "spacing": 8
+              },
+              "children": [
+                "turn-badge",
+                "turn-spacer",
+                "skill-badge"
+              ]
+            },
+            "btn-attack": {
+              "type": "Button",
+              "props": {
+                "label": "⚔️ 공격",
+                "variant": "secondary",
+                "targetNodeId": "lxkO9hDma1yfobSxAcnR"
+              }
+            },
+            "enemy-card": {
+              "type": "VStack",
+              "props": {
+                "spacing": 6
+              },
+              "children": [
+                "enemy-avatar",
+                "enemy-name",
+                "enemy-type",
+                "enemy-hp-row",
+                "enemy-hp-bar",
+                "o7Abz8WQRcrxNqsnTqLd"
+              ]
+            },
+            "enemy-name": {
+              "type": "Text",
+              "props": {
+                "text": "{{enemy_name}}",
+                "variant": "subtitle"
+              },
+              "children": []
+            },
+            "enemy-type": {
+              "type": "Text",
+              "props": {
+                "text": "Lv. 1",
+                "variant": "muted"
+              },
+              "children": []
+            },
+            "top-spacer": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            },
+            "turn-badge": {
+              "type": "Text",
+              "props": {
+                "text": "⚔️ 턴 {{turn_count}}",
+                "variant": "muted"
+              }
+            },
+            "vs-section": {
+              "type": "HStack",
+              "props": {
+                "spacing": 8
+              },
+              "children": [
+                "player-card",
+                "vs-label",
+                "enemy-card"
+              ]
+            },
+            "battle-body": {
+              "type": "VStack",
+              "props": {
+                "spacing": 12
+              },
+              "children": [
+                "turn-info",
+                "vs-section",
+                "divider1",
+                "player-info",
+                "divider2",
+                "action-section"
+              ]
+            },
+            "bottom-area": {
+              "type": "BottomArea",
+              "props": {},
+              "children": [
+                "bottom-gold",
+                "bottom-spacer",
+                "bottom-item"
+              ]
+            },
+            "bottom-gold": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "gold"
+              },
+              "children": []
+            },
+            "bottom-item": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "item"
+              },
+              "children": []
+            },
+            "info-spacer": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            },
+            "player-card": {
+              "type": "VStack",
+              "props": {
+                "spacing": 6
+              },
+              "children": [
+                "player-avatar",
+                "player-name",
+                "player-stats",
+                "player-hp-row",
+                "player-hp-bar",
+                "player-exp-row"
+              ]
+            },
+            "player-info": {
+              "type": "HStack",
+              "props": {
+                "spacing": 12
+              },
+              "children": [
+                "gold-info",
+                "info-spacer",
+                "kill-info"
+              ]
+            },
+            "player-name": {
+              "type": "Text",
+              "props": {
+                "text": "용사",
+                "variant": "subtitle"
+              },
+              "children": []
+            },
+            "skill-badge": {
+              "type": "Text",
+              "props": {
+                "text": "🔥 파이어볼 {{skill_charges}}회 남음",
+                "variant": "muted"
+              }
+            },
+            "turn-spacer": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            },
+            "enemy-avatar": {
+              "type": "Text",
+              "props": {
+                "text": "👺",
+                "variant": "title"
+              },
+              "children": []
+            },
+            "enemy-hp-bar": {
+              "type": "Progress",
+              "props": {
+                "color": "#FF4444",
+                "value": {
+                  "$state": "/enemy_hp_ratio"
+                }
+              }
+            },
+            "enemy-hp-row": {
+              "type": "Text",
+              "props": {
+                "text": "HP {{enemy_hp}} / {{enemy_max_hp}}",
+                "variant": "body"
+              },
+              "children": []
+            },
+            "player-stats": {
+              "type": "Text",
+              "props": {
+                "text": "Lv.{{player_level}} | EXP {{player_exp}} / {{exp_to_next}}",
+                "variant": "muted"
+              },
+              "children": []
+            },
+            "battle-screen": {
+              "type": "Screen",
+              "props": {
+                "scrollable": false
+              },
+              "children": [
+                "top-area",
+                "battle-body",
+                "bottom-area"
+              ]
+            },
+            "bottom-spacer": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            },
+            "player-avatar": {
+              "type": "Text",
+              "props": {
+                "text": "🧙",
+                "variant": "title"
+              },
+              "children": []
+            },
+            "player-hp-bar": {
+              "type": "Progress",
+              "props": {
+                "color": "#44BB44",
+                "value": {
+                  "$state": "/player_hp_ratio"
+                }
+              }
+            },
+            "player-hp-row": {
+              "type": "Text",
+              "props": {
+                "text": "HP {{player_hp}} / {{player_max_hp}}",
+                "variant": "body"
+              },
+              "children": []
+            },
+            "action-section": {
+              "type": "VStack",
+              "props": {
+                "spacing": 8
+              },
+              "children": [
+                "btn-attack",
+                "btn-skill",
+                "btn-wait"
+              ]
+            },
+            "player-exp-row": {
+              "type": "Text",
+              "props": {
+                "text": "ATK {{player_atk}} | DEF {{player_def}}",
+                "variant": "muted"
+              },
+              "children": []
+            },
+            "o7Abz8WQRcrxNqsnTqLd": {
+              "type": "Text",
+              "props": {
+                "text": "ATK {{enemy_atk}} | DEF {{enemy_def}}",
+                "variant": "muted"
+              }
+            }
+          }
+        },
+        "mockPrompt": "공격과 대기 버튼의 위치가 맘에 안드는데..",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "플레이어가 공격 또는 대기를 선택하는 분기. 공격 선택 시 즉시 공격 실행, 대기 선택 시 적 반격 없이 다음 턴으로.",
+        "frictionScore": 0,
+        "choiceStrategy": "uniform",
+        "mockGeneratedAt": "2026-04-28T03:51:48.451Z",
+        "mockInitialState": {
+          "hp": 0,
+          "dice": 3,
+          "gold": 120,
+          "item": 5,
+          "score": 340,
+          "enemy_hp": 0.55,
+          "player_hp": 0.72,
+          "sdt.autonomy": 50,
+          "enemy_hp_ratio": 1,
+          "sdt.competence": 50,
+          "sdt.motivation": 50,
+          "player_hp_ratio": 1,
+          "sdt.relatedness": 50,
+          "sim.activeModal": "",
+          "sim.activeScene": "",
+          "sim.currentStep": 0,
+          "sim.activeScreen": "",
+          "LjFFeQfJibzToAWeOUs9": 2
+        }
+      },
+      "measured": {
+        "width": 280,
+        "height": 105
+      }
+    },
+    {
+      "id": "lxkO9hDma1yfobSxAcnR",
+      "type": "action",
+      "position": {
+        "x": -692.2556434291953,
+        "y": 354.89038967311075
+      },
+      "data": {
+        "tags": [],
+        "label": "공격 실행",
+        "duration": "short",
+        "difficulty": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "플레이어가 적을 공격. 데미지를 입히고 적 사망 여부 판정으로 이동.",
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 280,
+        "height": 125
+      }
+    },
+    {
+      "id": "fo2aXM16YcyoQpjqlom6",
+      "type": "action",
+      "position": {
+        "x": -375.81049726026345,
+        "y": 354.89038967311075
+      },
+      "data": {
+        "tags": [],
+        "label": "대기 (방어 태세)",
+        "duration": "short",
+        "difficulty": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "플레이어가 이번 턴 행동을 넘기고 방어 태세를 취함. 적 반격 피해 감소 등의 효과 적용 가능.",
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 280,
+        "height": 125
+      }
+    },
+    {
+      "id": "trig_player_atk",
+      "type": "trigger",
+      "position": {
+        "x": -702.2324568987704,
+        "y": 779.4860067613245
+      },
+      "data": {
+        "tags": [],
+        "label": "플레이어 공격 계산",
+        "attributes": [
+          {
+            "key": "enemy_hp",
+            "type": "number",
+            "value": "enemy_hp - damage"
+          },
+          {
+            "key": "enemy_hp_ratio",
+            "type": "number",
+            "value": "(enemy_hp - damage) / enemy_max_hp"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "",
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 95
+      }
+    },
+    {
+      "id": "trig_enemy_atk",
+      "type": "trigger",
+      "position": {
+        "x": 589.7068173407584,
+        "y": 934.6031598133212
+      },
+      "data": {
+        "tags": [],
+        "label": "적 공격 계산",
+        "attributes": [
+          {
+            "key": "player_hp",
+            "type": "number",
+            "value": "player_hp - damage"
+          },
+          {
+            "key": "player_hp_ratio",
+            "type": "number",
+            "value": "(player_hp - damage) / player_max_hp"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "",
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 95
+      }
+    },
+    {
+      "id": "trig_calc_p_dmg",
+      "type": "trigger",
+      "position": {
+        "x": -702.2324568987704,
+        "y": 626.6641296188913
+      },
+      "data": {
+        "tags": [],
+        "label": "플레이어 데미지 굴림",
+        "attributes": [
+          {
+            "key": "damage",
+            "type": "number",
+            "value": "player_atk + rand.d6() - enemy_def"
+          },
+          {
+            "key": "turn_count",
+            "type": "number",
+            "value": "turn_count + 1"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "",
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 95
+      }
+    },
+    {
+      "id": "trig_calc_e_dmg",
+      "type": "trigger",
+      "position": {
+        "x": 589.7068173407584,
+        "y": 779.4860067613245
+      },
+      "data": {
+        "tags": [],
+        "label": "적 데미지 굴림",
+        "attributes": [
+          {
+            "key": "damage",
+            "type": "number",
+            "value": "enemy_atk + rand.d6() - player_def"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "",
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 71
+      }
+    },
+    {
+      "id": "n_init_player",
+      "type": "trigger",
+      "position": {
+        "x": 88.75781499511062,
+        "y": -200.2699788003846
+      },
+      "data": {
+        "tags": [],
+        "label": "플레이어 변수 초기화",
+        "attributes": [
+          {
+            "key": "enemy_name",
+            "type": "string",
+            "value": ""
+          },
+          {
+            "key": "player_hp",
+            "type": "number",
+            "value": "character.hp"
+          },
+          {
+            "key": "player_max_hp",
+            "type": "number",
+            "value": "character.max_hp"
+          },
+          {
+            "key": "player_hp_ratio",
+            "type": "number",
+            "value": "1"
+          },
+          {
+            "key": "player_atk",
+            "type": "number",
+            "value": "character.atk"
+          },
+          {
+            "key": "player_def",
+            "type": "number",
+            "value": "character.def"
+          },
+          {
+            "key": "player_level",
+            "type": "number",
+            "value": "character.level"
+          },
+          {
+            "key": "player_exp",
+            "type": "number",
+            "value": "character.exp"
+          },
+          {
+            "key": "exp_to_next",
+            "type": "number",
+            "value": "levelup_1.exp_to_next"
+          },
+          {
+            "key": "gold",
+            "type": "number",
+            "value": "character.gold"
+          },
+          {
+            "key": "skill_charges",
+            "type": "number",
+            "value": "fireball.cooldown_max"
+          },
+          {
+            "key": "damage",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "turn_count",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "kill_count",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "is_boss",
+            "type": "number",
+            "value": "0"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "",
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 407
+      }
+    },
+    {
+      "id": "n_init_enemy",
+      "type": "trigger",
+      "position": {
+        "x": -1207.4323099765516,
+        "y": -606.0216621426116
+      },
+      "data": {
+        "tags": [],
+        "label": "일반몹 변수 초기화",
+        "attributes": [
+          {
+            "key": "enemy_name",
+            "type": "string",
+            "value": "고블린"
+          },
+          {
+            "key": "enemy_hp",
+            "type": "number",
+            "value": "goblin.hp"
+          },
+          {
+            "key": "enemy_max_hp",
+            "type": "number",
+            "value": "goblin.max_hp"
+          },
+          {
+            "key": "enemy_hp_ratio",
+            "type": "number",
+            "value": "1"
+          },
+          {
+            "key": "enemy_atk",
+            "type": "number",
+            "value": "goblin.atk"
+          },
+          {
+            "key": "enemy_def",
+            "type": "number",
+            "value": "goblin.def"
+          },
+          {
+            "key": "enemy_exp_reward",
+            "type": "number",
+            "value": "goblin.exp_reward"
+          },
+          {
+            "key": "enemy_gold_reward",
+            "type": "number",
+            "value": "goblin.gold_reward"
+          },
+          {
+            "key": "is_boss",
+            "type": "number",
+            "value": "0"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "",
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 224,
+        "height": 263
+      }
+    },
+    {
+      "id": "n_init_boss",
+      "type": "trigger",
+      "position": {
+        "x": 1185.6815554808377,
+        "y": -566.9113557857463
+      },
+      "data": {
+        "label": "보스 변수 초기화",
+        "attributes": [
+          {
+            "key": "enemy_name",
+            "type": "string",
+            "value": "오크 족장"
+          },
+          {
+            "key": "enemy_hp",
+            "type": "number",
+            "value": "boss.hp"
+          },
+          {
+            "key": "enemy_max_hp",
+            "type": "number",
+            "value": "boss.max_hp"
+          },
+          {
+            "key": "enemy_hp_ratio",
+            "type": "number",
+            "value": "1"
+          },
+          {
+            "key": "enemy_atk",
+            "type": "number",
+            "value": "boss.atk"
+          },
+          {
+            "key": "enemy_def",
+            "type": "number",
+            "value": "boss.def"
+          },
+          {
+            "key": "enemy_exp_reward",
+            "type": "number",
+            "value": "boss.exp_reward"
+          },
+          {
+            "key": "enemy_gold_reward",
+            "type": "number",
+            "value": "boss.gold_reward"
+          },
+          {
+            "key": "is_boss",
+            "type": "number",
+            "value": "1"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "보스 전투 시작 시 엔티티에서 수치를 불러옵니다."
+      },
+      "measured": {
+        "width": 280,
+        "height": 303
+      }
+    },
+    {
+      "id": "trig_kill_reward",
+      "type": "trigger",
+      "position": {
+        "x": -353.2097867229422,
+        "y": 1275.4127917668432
+      },
+      "data": {
+        "label": "처치 보상 획득",
+        "attributes": [
+          {
+            "key": "player_exp",
+            "type": "number",
+            "value": "player_exp + enemy_exp_reward"
+          },
+          {
+            "key": "gold",
+            "type": "number",
+            "value": "gold + enemy_gold_reward"
+          },
+          {
+            "key": "kill_count",
+            "type": "number",
+            "value": "kill_count + 1"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 3,
+          "motivation": 5,
+          "relatedness": 0
+        },
+        "description": "몬스터 처치 후 exp와 골드를 획득합니다."
+      },
+      "measured": {
+        "width": 271,
+        "height": 141
+      }
+    },
+    {
+      "id": "gate_levelup",
+      "type": "gate",
+      "position": {
+        "x": -353.2097867229422,
+        "y": 1441.2149080761426
+      },
+      "data": {
+        "label": "레벨업?",
+        "condition": "player_exp >= exp_to_next",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 255,
+        "height": 65
+      }
+    },
+    {
+      "id": "n_levelup_screen",
+      "type": "choice",
+      "position": {
+        "x": -392.5689251633436,
+        "y": 2236.672917892499
+      },
+      "data": {
+        "label": "레벨업 화면",
+        "mockSpec": {
+          "root": "screen",
+          "elements": {
+            "s1": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            },
+            "s2": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            },
+            "body": {
+              "type": "VStack",
+              "props": {
+                "spacing": 16
+              },
+              "children": [
+                "s1",
+                "level-badge",
+                "title",
+                "divider1",
+                "stats-section",
+                "divider2",
+                "btn-continue",
+                "btn-boss",
+                "s2"
+              ]
+            },
+            "title": {
+              "type": "Text",
+              "props": {
+                "text": "Lv.{{player_level}} 달성!",
+                "variant": "title"
+              }
+            },
+            "screen": {
+              "type": "Screen",
+              "props": {},
+              "children": [
+                "body"
+              ]
+            },
+            "stat-hp": {
+              "type": "Text",
+              "props": {
+                "text": "❤️  HP  {{player_hp}} / {{player_max_hp}}",
+                "variant": "body"
+              }
+            },
+            "btn-boss": {
+              "type": "Button",
+              "props": {
+                "label": "💀 보스 도전 (위험!)",
+                "variant": "secondary",
+                "targetNodeId": "n_init_boss"
+              }
+            },
+            "divider1": {
+              "type": "Divider",
+              "props": {},
+              "children": []
+            },
+            "divider2": {
+              "type": "Divider",
+              "props": {},
+              "children": []
+            },
+            "stat-atk": {
+              "type": "Text",
+              "props": {
+                "text": "⚔️  공격력  {{player_atk}}",
+                "variant": "body"
+              }
+            },
+            "stat-def": {
+              "type": "Text",
+              "props": {
+                "text": "🛡️  방어력  {{player_def}}",
+                "variant": "body"
+              }
+            },
+            "stat-exp": {
+              "type": "Text",
+              "props": {
+                "text": "✨  다음 레벨까지  {{exp_to_next}} EXP",
+                "variant": "muted"
+              }
+            },
+            "stat-skill": {
+              "type": "Text",
+              "props": {
+                "text": "🔥  스킬  {{skill_charges}}회",
+                "variant": "body"
+              }
+            },
+            "level-badge": {
+              "type": "Text",
+              "props": {
+                "text": "⭐ LEVEL UP!",
+                "variant": "subtitle"
+              }
+            },
+            "btn-continue": {
+              "type": "Button",
+              "props": {
+                "label": "👺 계속 사냥",
+                "variant": "secondary",
+                "targetNodeId": "n_select_monster"
+              }
+            },
+            "stats-section": {
+              "type": "VStack",
+              "props": {
+                "spacing": 8
+              },
+              "children": [
+                "stat-hp",
+                "stat-atk",
+                "stat-def",
+                "stat-skill",
+                "stat-exp"
+              ]
+            }
+          }
+        },
+        "sdtEffects": {
+          "autonomy": 5,
+          "competence": 10,
+          "motivation": 20,
+          "relatedness": 0
+        },
+        "description": "레벨업 결과를 보여주고 다음 행동을 선택합니다."
+      },
+      "measured": {
+        "width": 280,
+        "height": 105
+      }
+    },
+    {
+      "id": "gate_kill_count",
+      "type": "gate",
+      "position": {
+        "x": 589.7068173407584,
+        "y": 1441.2149080761426
+      },
+      "data": {
+        "label": "3마리 처치?",
+        "condition": "kill_count >= 3",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "trig_kill_reset",
+      "type": "trigger",
+      "position": {
+        "x": 589.7068173407584,
+        "y": 1640
+      },
+      "data": {
+        "label": "킬 카운트 리셋",
+        "attributes": [
+          {
+            "key": "kill_count",
+            "type": "number",
+            "value": "0"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 71
+      }
+    },
+    {
+      "id": "trig_boss_reward",
+      "type": "trigger",
+      "position": {
+        "x": 268.5251151258402,
+        "y": 1100
+      },
+      "data": {
+        "label": "보스 처치 보상",
+        "attributes": [
+          {
+            "key": "player_exp",
+            "type": "number",
+            "value": "player_exp + enemy_exp_reward"
+          },
+          {
+            "key": "gold",
+            "type": "number",
+            "value": "gold + enemy_gold_reward"
+          },
+          {
+            "key": "skill_charges",
+            "type": "number",
+            "value": "skill_charges + levelup_1.skill_charges_restore"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 5,
+          "motivation": 10,
+          "relatedness": 0
+        },
+        "description": "보스 처치 후 exp와 골드를 획득합니다."
+      },
+      "measured": {
+        "width": 260,
+        "height": 141
+      }
+    },
+    {
+      "id": "gate_is_boss",
+      "type": "gate",
+      "position": {
+        "x": -353.2097867229422,
+        "y": 1100
+      },
+      "data": {
+        "label": "보스 처치?",
+        "condition": "is_boss == 1",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "n_select_monster",
+      "type": "choice",
+      "position": {
+        "x": 88.75781499511062,
+        "y": 124.56022832508489
+      },
+      "data": {
+        "label": "몬스터 선택",
+        "mockSpec": {
+          "root": "screen",
+          "elements": {
+            "s1": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            },
+            "s2": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            },
+            "body": {
+              "type": "VStack",
+              "props": {
+                "spacing": 20
+              },
+              "children": [
+                "s1",
+                "title",
+                "player-status",
+                "divider",
+                "normal-section",
+                "boss-section",
+                "s2"
+              ]
+            },
+            "title": {
+              "type": "Text",
+              "props": {
+                "text": "⚔️ 전투 상대 선택",
+                "variant": "title"
+              }
+            },
+            "screen": {
+              "type": "Screen",
+              "props": {},
+              "children": [
+                "body"
+              ]
+            },
+            "divider": {
+              "type": "Divider",
+              "props": {},
+              "children": []
+            },
+            "btn-boss": {
+              "type": "Button",
+              "props": {
+                "label": "보스 도전 ⚠️",
+                "variant": "secondary",
+                "targetNodeId": "n_init_boss"
+              }
+            },
+            "boss-info": {
+              "type": "Text",
+              "props": {
+                "text": "EXP 150 | 💰 60",
+                "variant": "muted"
+              }
+            },
+            "boss-title": {
+              "type": "Text",
+              "props": {
+                "text": "💀 오크 족장",
+                "variant": "subtitle"
+              }
+            },
+            "btn-normal": {
+              "type": "Button",
+              "props": {
+                "label": "일반몹 사냥",
+                "variant": "secondary",
+                "targetNodeId": "n_init_enemy"
+              }
+            },
+            "normal-info": {
+              "type": "Text",
+              "props": {
+                "text": "EXP 35 | 💰 10",
+                "variant": "muted"
+              }
+            },
+            "boss-section": {
+              "type": "VStack",
+              "props": {
+                "spacing": 6
+              },
+              "children": [
+                "boss-title",
+                "boss-info",
+                "btn-boss"
+              ]
+            },
+            "normal-title": {
+              "type": "Text",
+              "props": {
+                "text": "👺 고블린",
+                "variant": "subtitle"
+              }
+            },
+            "player-status": {
+              "type": "Text",
+              "props": {
+                "text": "Lv.{{player_level}}  HP {{player_hp}}/{{player_max_hp}}  💰{{player_gold}}  🔥{{skill_charges}}회",
+                "variant": "muted"
+              }
+            },
+            "normal-section": {
+              "type": "VStack",
+              "props": {
+                "spacing": 6
+              },
+              "children": [
+                "normal-title",
+                "normal-info",
+                "btn-normal"
+              ]
+            }
+          }
+        },
+        "sdtEffects": {
+          "autonomy": 7,
+          "competence": 0,
+          "motivation": 15,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "trig_skill_calc",
+      "type": "trigger",
+      "position": {
+        "x": -37.27040693880275,
+        "y": 354.89038967311075
+      },
+      "data": {
+        "label": "파이어볼 데미지 굴림",
+        "attributes": [
+          {
+            "key": "damage",
+            "type": "number",
+            "value": "player_atk + fireball.damage_bonus + rand.d6() - enemy_def"
+          },
+          {
+            "key": "skill_charges",
+            "type": "number",
+            "value": "skill_charges - 1"
+          },
+          {
+            "key": "turn_count",
+            "type": "number",
+            "value": "turn_count + 1"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 119
+      }
+    },
+    {
+      "id": "trig_skill_atk",
+      "type": "trigger",
+      "position": {
+        "x": -37.27040693880275,
+        "y": 498.2126561981121
+      },
+      "data": {
+        "label": "파이어볼 적용",
+        "attributes": [
+          {
+            "key": "enemy_hp",
+            "type": "number",
+            "value": "enemy_hp - damage"
+          },
+          {
+            "key": "enemy_hp_ratio",
+            "type": "number",
+            "value": "(enemy_hp - damage) / enemy_max_hp"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 95
+      }
+    },
+    {
+      "id": "n_p7Pjt1WpTD",
+      "type": "table",
+      "position": {
+        "x": 826.5250539117387,
+        "y": 78.5
+      },
+      "data": {
+        "tags": [],
+        "label": "",
+        "sheetId": "",
+        "description": "",
+        "dataTableKey": "table_moi7fr3g"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 220,
+        "height": 61
+      },
+      "parentId": "n_YADtohiinx"
+    },
+    {
+      "id": "n_VmoD3k4cCa",
+      "type": "entity",
+      "position": {
+        "x": 826.5250539117387,
+        "y": 354.6972604156377
+      },
+      "data": {
+        "label": "character",
+        "entityKey": "character",
+        "attributes": [
+          {
+            "key": "level",
+            "type": "number",
+            "value": "1"
+          },
+          {
+            "key": "exp",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "exp_to_next",
+            "type": "number",
+            "value": "100"
+          },
+          {
+            "key": "hp",
+            "type": "number",
+            "value": "100"
+          },
+          {
+            "key": "max_hp",
+            "type": "number",
+            "value": "100"
+          },
+          {
+            "key": "atk",
+            "type": "number",
+            "value": "10"
+          },
+          {
+            "key": "def",
+            "type": "number",
+            "value": "5"
+          },
+          {
+            "key": "gold",
+            "type": "number",
+            "value": "0"
+          }
+        ],
+        "description": ""
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 160,
+        "height": 322
+      },
+      "parentId": "n_YADtohiinx"
+    },
+    {
+      "id": "n_P68er6gGqU",
+      "type": "table",
+      "position": {
+        "x": 1075.1168054558602,
+        "y": 78.5
+      },
+      "data": {
+        "tags": [],
+        "label": "",
+        "sheetId": "",
+        "description": "",
+        "dataTableKey": "table_moi7m8i1"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 220,
+        "height": 61
+      },
+      "parentId": "n_YADtohiinx"
+    },
+    {
+      "id": "n_GNvQQddEbL",
+      "type": "entity",
+      "position": {
+        "x": 1075.1168054558602,
+        "y": 340.71392321970745
+      },
+      "data": {
+        "label": "boss",
+        "entityKey": "boss",
+        "attributes": [
+          {
+            "key": "name",
+            "type": "string",
+            "value": "오크 족장"
+          },
+          {
+            "key": "hp",
+            "type": "number",
+            "value": "150"
+          },
+          {
+            "key": "max_hp",
+            "type": "number",
+            "value": "150"
+          },
+          {
+            "key": "atk",
+            "type": "number",
+            "value": "15"
+          },
+          {
+            "key": "def",
+            "type": "number",
+            "value": "8"
+          },
+          {
+            "key": "exp_reward",
+            "type": "number",
+            "value": "120"
+          },
+          {
+            "key": "gold_reward",
+            "type": "number",
+            "value": "50"
+          }
+        ],
+        "description": ""
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 160,
+        "height": 290
+      },
+      "parentId": "n_YADtohiinx"
+    },
+    {
+      "id": "n_mBPdNwSIvF",
+      "type": "table",
+      "position": {
+        "x": 1623.4930907278708,
+        "y": 78.5
+      },
+      "data": {
+        "tags": [],
+        "label": "",
+        "sheetId": "",
+        "description": "",
+        "dataTableKey": "table_moi7ndxa"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 220,
+        "height": 61
+      },
+      "parentId": "n_YADtohiinx"
+    },
+    {
+      "id": "n_eblRbHfUsS",
+      "type": "entity",
+      "position": {
+        "x": 1623.4930907278708,
+        "y": 340.71392321970745
+      },
+      "data": {
+        "label": "goblin",
+        "entityKey": "goblin",
+        "attributes": [
+          {
+            "key": "name",
+            "type": "string",
+            "value": "고블린"
+          },
+          {
+            "key": "hp",
+            "type": "number",
+            "value": "40"
+          },
+          {
+            "key": "max_hp",
+            "type": "number",
+            "value": "40"
+          },
+          {
+            "key": "atk",
+            "type": "number",
+            "value": "6"
+          },
+          {
+            "key": "def",
+            "type": "number",
+            "value": "2"
+          },
+          {
+            "key": "exp_reward",
+            "type": "number",
+            "value": "30"
+          },
+          {
+            "key": "gold_reward",
+            "type": "number",
+            "value": "10"
+          }
+        ],
+        "description": ""
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 160,
+        "height": 290
+      },
+      "parentId": "n_YADtohiinx"
+    },
+    {
+      "id": "n_or5CnWXQ4i",
+      "type": "table",
+      "position": {
+        "x": 1335.2863764437825,
+        "y": 78.5
+      },
+      "data": {
+        "tags": [],
+        "label": "",
+        "sheetId": "",
+        "description": "",
+        "dataTableKey": "table_moi7p22x"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 220,
+        "height": 61
+      },
+      "parentId": "n_YADtohiinx"
+    },
+    {
+      "id": "n_GLngD7YVmr",
+      "type": "entity",
+      "position": {
+        "x": 1335.2863764437825,
+        "y": 294.53229103350304
+      },
+      "data": {
+        "label": "fireball",
+        "entityKey": "fireball",
+        "attributes": [
+          {
+            "key": "name",
+            "type": "string",
+            "value": "파이어볼"
+          },
+          {
+            "key": "damage_bonus",
+            "type": "number",
+            "value": "20"
+          },
+          {
+            "key": "cooldown_max",
+            "type": "number",
+            "value": "3"
+          },
+          {
+            "key": "cooldown_current",
+            "type": "number",
+            "value": "0"
+          }
+        ],
+        "description": ""
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 160,
+        "height": 194
+      },
+      "parentId": "n_YADtohiinx"
+    },
+    {
+      "id": "n_37SHM5hfyj",
+      "type": "table",
+      "position": {
+        "x": 559.6575591557212,
+        "y": 78.5
+      },
+      "data": {
+        "tags": [],
+        "label": "",
+        "sheetId": "",
+        "description": "",
+        "dataTableKey": "table_moi7yxag"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 220,
+        "height": 61
+      },
+      "parentId": "n_YADtohiinx"
+    },
+    {
+      "id": "n_jyU7omGUUt",
+      "type": "entity",
+      "position": {
+        "x": 133.5,
+        "y": 366.8495894951799
+      },
+      "data": {
+        "label": "levelup_1",
+        "entityKey": "levelup_1",
+        "attributes": [
+          {
+            "key": "level",
+            "type": "number",
+            "value": "1"
+          },
+          {
+            "key": "exp_to_next",
+            "type": "number",
+            "value": "35"
+          },
+          {
+            "key": "hp_gain",
+            "type": "number",
+            "value": "50"
+          },
+          {
+            "key": "atk_gain",
+            "type": "number",
+            "value": "8"
+          },
+          {
+            "key": "def_gain",
+            "type": "number",
+            "value": "4"
+          },
+          {
+            "key": "skill_charges_restore",
+            "type": "number",
+            "value": "3"
+          }
+        ],
+        "description": ""
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 171,
+        "height": 258
+      },
+      "parentId": "n_YADtohiinx"
+    },
+    {
+      "id": "n_levelup_2",
+      "type": "entity",
+      "position": {
+        "x": 322.15913921243373,
+        "y": 366.8495894951799
+      },
+      "data": {
+        "label": "levelup_2",
+        "entityKey": "levelup_2",
+        "attributes": [
+          {
+            "key": "level",
+            "type": "number",
+            "value": "2"
+          },
+          {
+            "key": "exp_to_next",
+            "type": "number",
+            "value": "70"
+          },
+          {
+            "key": "hp_gain",
+            "type": "number",
+            "value": "60"
+          },
+          {
+            "key": "atk_gain",
+            "type": "number",
+            "value": "10"
+          },
+          {
+            "key": "def_gain",
+            "type": "number",
+            "value": "5"
+          },
+          {
+            "key": "skill_charges_restore",
+            "type": "number",
+            "value": "3"
+          }
+        ]
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 171,
+        "height": 258
+      },
+      "parentId": "n_YADtohiinx"
+    },
+    {
+      "id": "n_levelup_3",
+      "type": "entity",
+      "position": {
+        "x": 507.58981206762746,
+        "y": 366.8495894951799
+      },
+      "data": {
+        "label": "levelup_3",
+        "entityKey": "levelup_3",
+        "attributes": [
+          {
+            "key": "level",
+            "type": "number",
+            "value": "3"
+          },
+          {
+            "key": "exp_to_next",
+            "type": "number",
+            "value": "500"
+          },
+          {
+            "key": "hp_gain",
+            "type": "number",
+            "value": "70"
+          },
+          {
+            "key": "atk_gain",
+            "type": "number",
+            "value": "12"
+          },
+          {
+            "key": "def_gain",
+            "type": "number",
+            "value": "6"
+          },
+          {
+            "key": "skill_charges_restore",
+            "type": "number",
+            "value": "3"
+          }
+        ]
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 171,
+        "height": 258
+      },
+      "parentId": "n_YADtohiinx"
+    },
+    {
+      "id": "gate_lv1",
+      "type": "gate",
+      "position": {
+        "x": -353.2097867229422,
+        "y": 1640
+      },
+      "data": {
+        "label": "레벨 1?",
+        "condition": "player_level == 1",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "gate_lv2",
+      "type": "gate",
+      "position": {
+        "x": -603.1603269556949,
+        "y": 1758.2273202437427
+      },
+      "data": {
+        "label": "레벨 2?",
+        "condition": "player_level == 2",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "trig_levelup_1",
+      "type": "trigger",
+      "position": {
+        "x": -1107.889075319067,
+        "y": 1370.5069186360065
+      },
+      "data": {
+        "label": "레벨업! (1→2)",
+        "attributes": [
+          {
+            "key": "player_level",
+            "type": "number",
+            "value": "player_level + 1"
+          },
+          {
+            "key": "player_exp",
+            "type": "number",
+            "value": "player_exp - exp_to_next"
+          },
+          {
+            "key": "exp_to_next",
+            "type": "number",
+            "value": "levelup_2.exp_to_next"
+          },
+          {
+            "key": "player_max_hp",
+            "type": "number",
+            "value": "player_max_hp + levelup_1.hp_gain"
+          },
+          {
+            "key": "player_hp",
+            "type": "number",
+            "value": "player_max_hp + levelup_1.hp_gain"
+          },
+          {
+            "key": "player_atk",
+            "type": "number",
+            "value": "player_atk + levelup_1.atk_gain"
+          },
+          {
+            "key": "player_def",
+            "type": "number",
+            "value": "player_def + levelup_1.def_gain"
+          },
+          {
+            "key": "skill_charges",
+            "type": "number",
+            "value": "skill_charges + levelup_1.skill_charges_restore"
+          },
+          {
+            "key": "player_hp_ratio",
+            "type": "number",
+            "value": "1"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 8,
+          "motivation": 15,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 263
+      }
+    },
+    {
+      "id": "trig_levelup_2",
+      "type": "trigger",
+      "position": {
+        "x": -1107.889075319067,
+        "y": 1744.1442346295516
+      },
+      "data": {
+        "label": "레벨업! (2→3)",
+        "attributes": [
+          {
+            "key": "player_level",
+            "type": "number",
+            "value": "player_level + 1"
+          },
+          {
+            "key": "player_exp",
+            "type": "number",
+            "value": "player_exp - exp_to_next"
+          },
+          {
+            "key": "exp_to_next",
+            "type": "number",
+            "value": "levelup_3.exp_to_next"
+          },
+          {
+            "key": "player_max_hp",
+            "type": "number",
+            "value": "player_max_hp + levelup_2.hp_gain"
+          },
+          {
+            "key": "player_hp",
+            "type": "number",
+            "value": "player_max_hp + levelup_2.hp_gain"
+          },
+          {
+            "key": "player_atk",
+            "type": "number",
+            "value": "player_atk + levelup_2.atk_gain"
+          },
+          {
+            "key": "player_def",
+            "type": "number",
+            "value": "player_def + levelup_2.def_gain"
+          },
+          {
+            "key": "skill_charges",
+            "type": "number",
+            "value": "skill_charges + levelup_2.skill_charges_restore"
+          },
+          {
+            "key": "player_hp_ratio",
+            "type": "number",
+            "value": "1"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 8,
+          "motivation": 15,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 263
+      }
+    },
+    {
+      "id": "trig_levelup_3",
+      "type": "trigger",
+      "position": {
+        "x": -1107.889075319067,
+        "y": 2132.4274505433964
+      },
+      "data": {
+        "label": "레벨업! (3→4)",
+        "attributes": [
+          {
+            "key": "player_level",
+            "type": "number",
+            "value": "player_level + 1"
+          },
+          {
+            "key": "player_exp",
+            "type": "number",
+            "value": "player_exp - exp_to_next"
+          },
+          {
+            "key": "exp_to_next",
+            "type": "number",
+            "value": "levelup_3.exp_to_next"
+          },
+          {
+            "key": "player_max_hp",
+            "type": "number",
+            "value": "player_max_hp + levelup_3.hp_gain"
+          },
+          {
+            "key": "player_hp",
+            "type": "number",
+            "value": "player_max_hp + levelup_3.hp_gain"
+          },
+          {
+            "key": "player_atk",
+            "type": "number",
+            "value": "player_atk + levelup_3.atk_gain"
+          },
+          {
+            "key": "player_def",
+            "type": "number",
+            "value": "player_def + levelup_3.def_gain"
+          },
+          {
+            "key": "skill_charges",
+            "type": "number",
+            "value": "skill_charges + levelup_3.skill_charges_restore"
+          },
+          {
+            "key": "player_hp_ratio",
+            "type": "number",
+            "value": "1"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 8,
+          "motivation": 15,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 263
+      }
+    },
+    {
+      "id": "memo_overview",
+      "type": "memo",
+      "position": {
+        "x": 394.76625091632644,
+        "y": -372.03864768433004
+      },
+      "data": {
+        "label": "3단계 전투 시스템 — 전체 구조",
+        "description": "2단계 기본 전투에서 확장된 RPG 전투 시스템입니다.\n\n전체 흐름:\n① 게임 시작 → 초기화\n② 몬스터 선택 (일반몹 / 보스)\n③ 전투 루프 (공격 / 파이어볼 / 방어)\n④ 처치 → 보상 획득 (exp + 골드)\n⑤ 레벨업 체크 → 레벨업 시 스탯 증가\n⑥ 킬카운트 3회 달성 → 자동 보스 등장\n⑦ 보스 처치 → 스킬 충전 → 선택 화면 복귀\n     \n수치 조정: \n모든 수치는 엔티티 노드에서 관리합니다.\n테이블 값만 수정하면 자동 반영됩니다."
+      },
+      "width": 367,
+      "height": 350,
+      "measured": {
+        "width": 367,
+        "height": 350
+      },
+      "resizing": false
+    },
+    {
+      "id": "memo_tables",
+      "type": "memo",
+      "position": {
+        "x": -678.4120202260395,
+        "y": -1538.1904252113147
+      },
+      "data": {
+        "label": "테이블 & 엔티티 구조",
+        "description": "5개 테이블이 각각 엔티티 노드와 1:1 연결됩니다.\n\n[character] → character_config\nlevel, exp, hp, atk, def, gold 초기값\n\n[goblin] → monster_normal\n일반몹 스탯 및 보상\n\n[boss] → monster_boss\n보스 스탯 및 보상\n\n[fireball] → skill_fireball\n스킬 데미지 보너스, 최대 사용 횟수\n\n[levelup_1/2/3] → level_up_config\n같은 테이블, 행(row)만 다르게 참조\n- levelup_1: row 2 (레벨1 데이터)\n- levelup_2: row 3 (레벨2 데이터)\n- levelup_3: row 4 (레벨3 데이터)\n\n참조 형식: {entityKey}.{필드명}\n예) goblin.atk / levelup_1.hp_gain"
+      },
+      "width": 389,
+      "height": 483,
+      "measured": {
+        "width": 389,
+        "height": 483
+      },
+      "resizing": false
+    },
+    {
+      "id": "memo_init",
+      "type": "memo",
+      "position": {
+        "x": -198.04658682534347,
+        "y": -307.8715630241015
+      },
+      "data": {
+        "label": "초기화 구조",
+        "collapsed": true,
+        "description": "게임 시작 시 반드시 초기화 노드 2개를 순서대로 거칩니다.\n\n[플레이어 변수 초기화]\n- character 엔티티에서 기본 스탯 로드\n- exp_to_next = levelup_1.exp_to_next (35)\n- skill_charges = fireball.cooldown_max (3)\n- kill_count, damage, turn_count = 0\n- is_boss = 0 (일반몹 상태)\n\n[일반몹 변수 초기화]\n- goblin 엔티티에서 적 스탯 로드\n- enemy_name = 고블린 (string 직접 입력)\n- is_boss = 0\n\n[보스 변수 초기화]\n- boss 엔티티에서 적 스탯 로드\n- enemy_name = 오크 족장\n- is_boss = 1\n\n주의: entry 노드에서 직접 변수를 쓰면\nUnknown Name 오류가 발생합니다.",
+        "_expandedHeight": 461
+      },
+      "style": {
+        "height": 36
+      },
+      "width": 332,
+      "height": 36,
+      "measured": {
+        "width": 332,
+        "height": 36
+      },
+      "resizing": false
+    },
+    {
+      "id": "memo_battle",
+      "type": "memo",
+      "position": {
+        "x": -424.1141668736484,
+        "y": 615.8345673145795
+      },
+      "data": {
+        "label": "전투 루프 상세",
+        "collapsed": true,
+        "description": "전투는 턴제로 진행됩니다.\n\n[공격 선택 시]\n① 공격 실행 (action 연출)\n② 플레이어 데미지 굴림\n   damage = player_atk + rand.d6() - enemy_def\n③ 플레이어 공격 계산 (enemy_hp 차감)\n④ 적 사망 체크 (enemy_hp <= 0)\n   → 승리 또는 적 반격으로\n\n[파이어볼 선택 시]\n① 파이어볼 데미지 굴림\n   damage = player_atk + fireball.damage_bonus\n           + rand.d6() - enemy_def\n   skill_charges -1\n② 파이어볼 적용 (enemy_hp 차감)\n③ 적 사망 체크\n\n[적 반격]\n① 적 반격 (action 연출)\n② 적 데미지 굴림\n   damage = enemy_atk + rand.d6() - player_def\n③ 적 공격 계산 (player_hp 차감)\n④ 플레이어 사망 체크 (player_hp <= 0)\n   → 패배 또는 다음 턴으로\n\n중요: damage 변수는 굴림과 적용을\n반드시 별도 노드로 분리해야 합니다.",
+        "_expandedHeight": 593
+      },
+      "style": {
+        "height": 36
+      },
+      "width": 296,
+      "height": 36,
+      "measured": {
+        "width": 296,
+        "height": 36
+      },
+      "resizing": false
+    },
+    {
+      "id": "memo_after_kill",
+      "type": "memo",
+      "position": {
+        "x": -68.55234128468123,
+        "y": 1172.625638306248
+      },
+      "data": {
+        "label": "처치 후 흐름 — 보상 & 분기",
+        "collapsed": true,
+        "description": "몬스터 처치 후 흐름:\n\n① 보스 처치 분기 (gate_is_boss)\n   is_boss == 1 → 보스 보상\n   is_boss == 0 → 일반몹 보상\n\n② 처치 보상 획득 (trig_kill_reward)\n   player_exp += enemy_exp_reward\n   player_gold += enemy_gold_reward\n   kill_count += 1\n\n③ 레벨업 체크 (player_exp >= exp_to_next)\n   레벨업 O → 레벨 분기\n     player_level == 1 → trig_levelup_1\n     player_level == 2 → trig_levelup_2\n     player_level >= 3 → trig_levelup_3\n   레벨업 X → 킬카운트 체크\n\n④ 킬카운트 체크 (kill_count >= 3)\n   3회 달성 → 킬카운트 리셋 → 보스 등장\n   미달     → 몬스터 선택 화면으로\n\n보스 처치 후:\n   보상 획득 + 스킬 충전\n   → 몬스터 선택 화면으로",
+        "_expandedHeight": 534
+      },
+      "style": {
+        "height": 36
+      },
+      "width": 280,
+      "height": 36,
+      "measured": {
+        "width": 280,
+        "height": 36
+      },
+      "resizing": false
+    },
+    {
+      "id": "memo_levelup",
+      "type": "memo",
+      "position": {
+        "x": -424.1141668736484,
+        "y": 1820.1963805800135
+      },
+      "data": {
+        "label": "레벨업 시스템",
+        "collapsed": true,
+        "description": "레벨업 조건: player_exp >= exp_to_next\n\n레벨별 분기:\n- player_level == 1 → trig_levelup_1 (levelup_1 참조)\n- player_level == 2 → trig_levelup_2 (levelup_2 참조)\n- 그 외           → trig_levelup_3 (levelup_3 참조)\n\n레벨업 시 적용 수치:\n- player_level +1\n- player_exp에서 exp_to_next 차감 (초과분 유지)\n- max_hp + hp_gain → 체력 전체 회복\n- atk + atk_gain\n- def + def_gain\n- skill_charges + skill_charges_restore\n- exp_to_next = 다음 레벨의 exp_to_next\n\n레벨업 화면 선택:\n[계속 사냥] → 몬스터 선택 화면\n[보스 도전] → 바로 보스 초기화 → 전투\n\n주의: 레벨업 후 exp_to_next가\n다음 레벨 값으로 갱신되어야 합니다.\n(levelup_1→2 시: levelup_2.exp_to_next)",
+        "_expandedHeight": 508
+      },
+      "style": {
+        "height": 36
+      },
+      "width": 336,
+      "height": 36,
+      "measured": {
+        "width": 336,
+        "height": 36
+      },
+      "resizing": false
+    },
+    {
+      "id": "memo_skill",
+      "type": "memo",
+      "position": {
+        "x": -93.47001007916737,
+        "y": 246.12478365433188
+      },
+      "data": {
+        "label": "스킬 시스템 — 파이어볼",
+        "collapsed": true,
+        "description": "파이어볼은 강력한 1회성 공격입니다.\n\n사용 조건: skill_charges > 0\n(현재 버튼 비활성화 미지원 → 카운트로 확인)\n\n데미지 공식:\ndamage = player_atk + fireball.damage_bonus\n        + rand.d6() - enemy_def\n\n현재 수치 (fireball 엔티티):\n- damage_bonus = 20 (추가 데미지)\n- cooldown_max = 3 (최대 사용 횟수)\n\n사용 시:\n- skill_charges -1\n- turn_count +1\n\n재충전 시점:\n- 레벨업 시: skill_charges_restore 만큼 충전\n- 보스 처치 시: skill_charges_restore 만큼 충전\n\n수치 변경:\nfireball 엔티티 노드의\ndamage_bonus, cooldown_max 값 수정",
+        "_expandedHeight": 529
+      },
+      "style": {
+        "height": 36
+      },
+      "width": 308,
+      "height": 36,
+      "measured": {
+        "width": 308,
+        "height": 36
+      },
+      "resizing": false
+    },
+    {
+      "id": "memo_variables",
+      "type": "memo",
+      "position": {
+        "x": -195.3292057744339,
+        "y": -359.7731343157769
+      },
+      "data": {
+        "label": "전체 변수 목록 - 플레이어",
+        "collapsed": true,
+        "description": "[플레이어 관련]\nplayer_hp: 현재 체력\nplayer_max_hp: 최대 체력\nplayer_hp_ratio: HP 비율 (게이지용 0~1)\nplayer_atk: 공격력\nplayer_def: 방어력\nplayer_level: 현재 레벨\nplayer_exp: 누적 경험치\nexp_to_next: 다음 레벨까지 필요 경험치\nplayer_gold: 보유 골드\nskill_charges: 파이어볼 남은 횟수\n\n\n[전투 상태]\ndamage: 이번 턴 임시 데미지\nturn_count: 누적 공격 횟수\nkill_count: 연속 처치 수 (3회=보스)\nis_boss: 보스 여부 (0=일반 1=보스)     ",
+        "_expandedHeight": 405
+      },
+      "style": {
+        "height": 36
+      },
+      "width": 334,
+      "height": 36,
+      "measured": {
+        "width": 334,
+        "height": 36
+      },
+      "resizing": false
+    },
+    {
+      "id": "memo_caution",
+      "type": "memo",
+      "position": {
+        "x": -286.5336438294063,
+        "y": -1589.270150691233
+      },
+      "data": {
+        "label": "LLE 작업 주의사항",
+        "description": "1. 노드 ID에 하이픈(-) 금지\n   엔진이 빼기 연산자로 인식합니다.\n   반드시 언더바(_) 사용\n\n2. damage 변수 분리 필수\n   같은 trigger에서 선언 후 즉시 사용하면\n   오류 발생. 굴림 노드와 적용 노드를 분리\n\n3. gate 양방향 연결 필수\n   true/false 둘 다 연결하지 않으면\n   LLE 유효성 검사 실패\n\n4. string 타입 엔티티 참조 불가\n   goblin.name 방식이 작동하지 않습니다.\n   enemy_name은 직접 문자열 입력 필요\n\n5. targetNodeId = 엣지 연결 일치\n   버튼의 targetNodeId와 실제 엣지 target이\n   반드시 같아야 합니다. 불일치 시 종료됨\n\n6. SDT 4개 필드 필수\n   motivation 누락 시 시뮬레이터 멈춤\n   { autonomy, competence, relatedness, motivation }\n\n7. 레벨업 exp_to_next\n   레벨업 시 현재 레벨이 아닌\n   다음 레벨의 exp_to_next를 참조해야 함"
+      },
+      "width": 347,
+      "height": 578,
+      "measured": {
+        "width": 347,
+        "height": 578
+      },
+      "resizing": false
+    },
+    {
+      "id": "n_Y7wA5o7Iz4",
+      "type": "memo",
+      "position": {
+        "x": 1509.097230103719,
+        "y": -685.7622531196942
+      },
+      "data": {
+        "color": "amber",
+        "label": "전체 변수 목록 - 몬스터",
+        "collapsed": true,
+        "description": "\n[적 관련]\nenemy_hp: 적 현재 체력\nenemy_max_hp: 적 최대 체력\nenemy_hp_ratio: 적 HP 비율 (게이지용)\nenemy_atk: 적 공격력\nenemy_def: 적 방어력\nenemy_exp_reward: 처치 시 경험치\nenemy_gold_reward: 처치 시 골드\nenemy_name: 적 이름 (string)\n\n[전투 상태]\ndamage: 이번 턴 임시 데미지\nturn_count: 누적 공격 횟수\nkill_count: 연속 처치 수 (3회=보스)\nis_boss: 보스 여부 (0=일반 1=보스)     ",
+        "_expandedHeight": 382
+      },
+      "style": {
+        "height": 36
+      },
+      "width": 281,
+      "height": 36,
+      "measured": {
+        "width": 281,
+        "height": 36
+      },
+      "resizing": false
+    },
+    {
+      "id": "n_RmGVkgLQ6W",
+      "type": "memo",
+      "position": {
+        "x": -1479.2655359972327,
+        "y": -657.4547734521303
+      },
+      "data": {
+        "color": "amber",
+        "label": "전체 변수 목록 - 몬스터",
+        "collapsed": true,
+        "description": "\n[적 관련]\nenemy_hp: 적 현재 체력\nenemy_max_hp: 적 최대 체력\nenemy_hp_ratio: 적 HP 비율 (게이지용)\nenemy_atk: 적 공격력\nenemy_def: 적 방어력\nenemy_exp_reward: 처치 시 경험치\nenemy_gold_reward: 처치 시 골드\nenemy_name: 적 이름 (string)\n\n[전투 상태]\ndamage: 이번 턴 임시 데미지\nturn_count: 누적 공격 횟수\nkill_count: 연속 처치 수 (3회=보스)\nis_boss: 보스 여부 (0=일반 1=보스)     ",
+        "_expandedHeight": 382
+      },
+      "style": {
+        "height": 36
+      },
+      "width": 281,
+      "height": 36,
+      "measured": {
+        "width": 281,
+        "height": 36
+      },
+      "resizing": false
+    },
+    {
+      "id": "n_gold_reward",
+      "type": "reward",
+      "position": {
+        "x": -54.20057718277192,
+        "y": 1275.4127917668432
+      },
+      "data": {
+        "label": "골드 획득",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 3,
+          "motivation": 5,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 60
+      }
+    },
+    {
+      "id": "n_7Sh8pLXfHq",
+      "type": "resource",
+      "position": {
+        "x": 237.7584425147199,
+        "y": 1275.4127917668432
+      },
+      "data": {
+        "tags": [],
+        "label": "자원",
+        "resourceId": "B0ubePt85yGolsY5SBRa",
+        "description": "",
+        "resourceKey": "gold"
+      },
+      "measured": {
+        "width": 56,
+        "height": 56
+      }
+    },
+    {
+      "id": "n_5Ht6fUMOjQ",
+      "type": "emotion",
+      "position": {
+        "x": -353.2097867229422,
+        "y": 895.7458311541751
+      },
+      "data": {
+        "tags": [],
+        "label": "감정",
+        "arousal": "high",
+        "needState": "satisfied",
+        "needSource": "competence",
+        "description": "",
+        "emotionType": "성취감",
+        "playerSegment": []
+      },
+      "measured": {
+        "width": 220,
+        "height": 89
+      }
+    },
+    {
+      "id": "n_GiRER2v4nD",
+      "type": "emotion",
+      "position": {
+        "x": 589.7068173407584,
+        "y": 1251.8747125689117
+      },
+      "data": {
+        "tags": [],
+        "label": "감정",
+        "arousal": "high",
+        "needState": "frustrated",
+        "needSource": "competence",
+        "description": "",
+        "emotionType": "좌절감",
+        "playerSegment": []
+      },
+      "measured": {
+        "width": 220,
+        "height": 89
+      }
+    },
+    {
+      "id": "n_jPEj9afEop",
+      "type": "emotion",
+      "position": {
+        "x": 293.57942635062636,
+        "y": 779.4860067613245
+      },
+      "data": {
+        "tags": [],
+        "label": "감정",
+        "arousal": "high",
+        "needState": "frustrated",
+        "needSource": "competence",
+        "description": "",
+        "emotionType": "좌절감",
+        "playerSegment": []
+      },
+      "measured": {
+        "width": 220,
+        "height": 89
+      }
+    },
+    {
+      "id": "n_2NLIkx0J06",
+      "type": "emotion",
+      "position": {
+        "x": -54.20057718277192,
+        "y": 1091.2057209294726
+      },
+      "data": {
+        "tags": [],
+        "label": "감정",
+        "arousal": "high",
+        "needState": "satisfied",
+        "needSource": "competence",
+        "description": "",
+        "emotionType": "성취감",
+        "playerSegment": []
+      },
+      "measured": {
+        "width": 220,
+        "height": 89
+      }
+    },
+    {
+      "id": "n_RfvWmS0erL",
+      "type": "emotion",
+      "position": {
+        "x": -1376.6470536275,
+        "y": 2224.3243682863467
+      },
+      "data": {
+        "tags": [],
+        "label": "감정",
+        "arousal": "high",
+        "needState": "satisfied",
+        "needSource": "competence",
+        "description": "",
+        "emotionType": "성취감",
+        "playerSegment": []
+      },
+      "measured": {
+        "width": 220,
+        "height": 89
+      }
+    },
+    {
+      "id": "n_yobro6uSUN",
+      "type": "emotion",
+      "position": {
+        "x": -1376.6470536275,
+        "y": 1668.8755564503542
+      },
+      "data": {
+        "tags": [],
+        "label": "감정",
+        "arousal": "high",
+        "needState": "satisfied",
+        "needSource": "competence",
+        "description": "",
+        "emotionType": "성취감",
+        "playerSegment": []
+      },
+      "measured": {
+        "width": 220,
+        "height": 89
+      }
+    },
+    {
+      "id": "n_Bds2jeJKZH",
+      "type": "emotion",
+      "position": {
+        "x": -1376.6470536275,
+        "y": 1912.4023884691733
+      },
+      "data": {
+        "tags": [],
+        "label": "감정",
+        "arousal": "high",
+        "needState": "satisfied",
+        "needSource": "competence",
+        "description": "",
+        "emotionType": "성취감",
+        "playerSegment": []
+      },
+      "measured": {
+        "width": 220,
+        "height": 89
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "xy-edge__xbB65S1FVTQsKviTmpCobottom-JmXYql8aC8Thnor1Xcoxtop-true",
+      "source": "xbB65S1FVTQsKviTmpCo",
+      "target": "n_5Ht6fUMOjQ",
+      "data": {
+        "label": "적 사망 (true)",
+        "gateBranch": "true"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__xbB65S1FVTQsKviTmpCoright-WOGebJtUG9fTXv1AggCHleft-false",
+      "source": "xbB65S1FVTQsKviTmpCo",
+      "target": "WOGebJtUG9fTXv1AggCH",
+      "data": {
+        "label": "적 생존 (false)",
+        "gateBranch": "false"
+      },
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "id": "xy-edge__WOGebJtUG9fTXv1AggCHbottom-trig_enemy_atkleft",
+      "source": "WOGebJtUG9fTXv1AggCH",
+      "target": "n_jPEj9afEop",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "id": "xy-edge__trig_enemy_atkbottom-dbClGLpmQ22hftQwXs3Mtop",
+      "source": "trig_enemy_atk",
+      "target": "dbClGLpmQ22hftQwXs3M",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__dbClGLpmQ22hftQwXs3Mbottom-PkGUAqSomtLEOXEuyofetop-true",
+      "source": "dbClGLpmQ22hftQwXs3M",
+      "target": "n_GiRER2v4nD",
+      "data": {
+        "label": "플레이어 사망 (true)",
+        "gateBranch": "true"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__HIOoyUfUBzgoZfaJbe2oleft-lxkO9hDma1yfobSxAcnRtop",
+      "source": "HIOoyUfUBzgoZfaJbe2o",
+      "target": "lxkO9hDma1yfobSxAcnR",
+      "data": {
+        "label": "공격 선택"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__HIOoyUfUBzgoZfaJbe2oright-fo2aXM16YcyoQpjqlom6top",
+      "source": "HIOoyUfUBzgoZfaJbe2o",
+      "target": "fo2aXM16YcyoQpjqlom6",
+      "data": {
+        "label": "대기 선택"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__lxkO9hDma1yfobSxAcnRbottom-trig_player_atktop",
+      "source": "lxkO9hDma1yfobSxAcnR",
+      "target": "trig_calc_p_dmg",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__trig_player_atkbottom-xbB65S1FVTQsKviTmpCotop",
+      "source": "trig_player_atk",
+      "target": "xbB65S1FVTQsKviTmpCo",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "id": "xy-edge__fo2aXM16YcyoQpjqlom6bottom-WOGebJtUG9fTXv1AggCHtop",
+      "source": "fo2aXM16YcyoQpjqlom6",
+      "target": "WOGebJtUG9fTXv1AggCH",
+      "data": {
+        "label": "대기 후 적 반격"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__3dMvnKaXtRBlG9qJOqe0bottom-n_inittop",
+      "source": "3dMvnKaXtRBlG9qJOqe0",
+      "target": "n_init_player",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__n_initbottom-HIOoyUfUBzgoZfaJbe2otop",
+      "source": "n_init_enemy",
+      "target": "HIOoyUfUBzgoZfaJbe2o",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__dbClGLpmQ22hftQwXs3Mright-HIOoyUfUBzgoZfaJbe2oleft-false",
+      "source": "dbClGLpmQ22hftQwXs3M",
+      "target": "HIOoyUfUBzgoZfaJbe2o",
+      "data": {
+        "label": "생존 → 다음 턴",
+        "gateBranch": "false"
+      },
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "right"
+    },
+    {
+      "id": "xy-edge__PkGUAqSomtLEOXEuyoferight-HIOoyUfUBzgoZfaJbe2oright",
+      "source": "PkGUAqSomtLEOXEuyofe",
+      "target": "n_init_player",
+      "data": {
+        "label": "패배후 부활"
+      },
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "right"
+    },
+    {
+      "id": "xy-edge__trig_calc_p_dmgbottom-trig_player_atktop_639c5526",
+      "source": "trig_calc_p_dmg",
+      "target": "trig_player_atk",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__trig_calc_e_dmgbottom-trig_enemy_atktop_8ab6c4c4",
+      "source": "trig_calc_e_dmg",
+      "target": "trig_enemy_atk",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__n_init_playerbottom-n_select_monstertop",
+      "source": "n_init_player",
+      "target": "n_select_monster",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__trig_kill_rewardbottom-gate_leveluptop",
+      "source": "trig_kill_reward",
+      "target": "gate_levelup",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__gate_levelupright-gate_kill_countleft-false",
+      "source": "gate_levelup",
+      "target": "gate_kill_count",
+      "data": {
+        "gateBranch": "false"
+      },
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "id": "xy-edge__gate_kill_countbottom-trig_kill_resettop-true",
+      "source": "gate_kill_count",
+      "target": "trig_kill_reset",
+      "data": {
+        "gateBranch": "true"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__trig_kill_resetbottom-n_init_bosstop",
+      "source": "trig_kill_reset",
+      "target": "n_init_boss",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "bottom"
+    },
+    {
+      "id": "xy-edge__gate_kill_countright-n_select_monsterleft-false",
+      "source": "gate_kill_count",
+      "target": "n_select_monster",
+      "data": {
+        "gateBranch": "false"
+      },
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "right"
+    },
+    {
+      "id": "xy-edge__n_init_bossbottom-HIOoyUfUBzgoZfaJbe2otop",
+      "source": "n_init_boss",
+      "target": "HIOoyUfUBzgoZfaJbe2o",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "left",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__trig_boss_rewardbottom-n_select_monstertop",
+      "source": "trig_boss_reward",
+      "target": "n_select_monster",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "top",
+      "targetHandle": "right"
+    },
+    {
+      "id": "xy-edge__n_levelup_screenbottom-n_select_monstertop",
+      "source": "n_levelup_screen",
+      "target": "n_select_monster",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "bottom"
+    },
+    {
+      "id": "xy-edge__n_levelup_screenright-n_init_bossright",
+      "source": "n_levelup_screen",
+      "target": "n_init_boss",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "right"
+    },
+    {
+      "id": "xy-edge__JmXYql8aC8Thnor1Xcoxbottom-gate_is_bosstop",
+      "source": "JmXYql8aC8Thnor1Xcox",
+      "target": "gate_is_boss",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__gate_is_bossbottom-trig_boss_rewardtop-true",
+      "source": "gate_is_boss",
+      "target": "n_2NLIkx0J06",
+      "data": {
+        "gateBranch": "true"
+      },
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "id": "xy-edge__gate_is_bossright-trig_kill_rewardleft-false",
+      "source": "gate_is_boss",
+      "target": "trig_kill_reward",
+      "data": {
+        "gateBranch": "false"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__n_select_monsterbottom-n_init_enemytop",
+      "source": "n_select_monster",
+      "target": "n_init_enemy",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "left",
+      "targetHandle": "right"
+    },
+    {
+      "id": "xy-edge__n_select_monsterright-n_init_bossleft",
+      "source": "n_select_monster",
+      "target": "n_init_boss",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "id": "xy-edge__trig_skill_calcbottom-trig_skill_atktop",
+      "source": "trig_skill_calc",
+      "target": "trig_skill_atk",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__trig_skill_atkbottom-xbB65S1FVTQsKviTmpColeft",
+      "source": "trig_skill_atk",
+      "target": "xbB65S1FVTQsKviTmpCo",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__HIOoyUfUBzgoZfaJbe2obottom-trig_skill_calctop",
+      "source": "HIOoyUfUBzgoZfaJbe2o",
+      "target": "trig_skill_calc",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e_v6dXXcrRnf",
+      "source": "n_p7Pjt1WpTD",
+      "target": "n_VmoD3k4cCa",
+      "data": {
+        "dataTableRowNumber": 2,
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "level"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "exp"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "exp_to_next"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "hp"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "max_hp"
+          },
+          {
+            "sourceColumnIndex": 5,
+            "targetKey": "atk"
+          },
+          {
+            "sourceColumnIndex": 6,
+            "targetKey": "def"
+          },
+          {
+            "sourceColumnIndex": 7,
+            "targetKey": "gold"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e_YCkppMqRNK",
+      "source": "n_P68er6gGqU",
+      "target": "n_GNvQQddEbL",
+      "data": {
+        "dataTableRowNumber": 2,
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "name"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "hp"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "max_hp"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "atk"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "def"
+          },
+          {
+            "sourceColumnIndex": 5,
+            "targetKey": "exp_reward"
+          },
+          {
+            "sourceColumnIndex": 6,
+            "targetKey": "gold_reward"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e_RS4d3xNxiQ",
+      "source": "n_mBPdNwSIvF",
+      "target": "n_eblRbHfUsS",
+      "data": {
+        "dataTableRowNumber": 2,
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "name"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "hp"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "max_hp"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "atk"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "def"
+          },
+          {
+            "sourceColumnIndex": 5,
+            "targetKey": "exp_reward"
+          },
+          {
+            "sourceColumnIndex": 6,
+            "targetKey": "gold_reward"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e_qbneZDTocr",
+      "source": "n_or5CnWXQ4i",
+      "target": "n_GLngD7YVmr",
+      "data": {
+        "dataTableRowNumber": 2,
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "name"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "damage_bonus"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "cooldown_max"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "cooldown_current"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e_CBYSIFEZYP",
+      "source": "n_37SHM5hfyj",
+      "target": "n_jyU7omGUUt",
+      "data": {
+        "dataTableRowNumber": 2,
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "level"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "exp_to_next"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "hp_gain"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "atk_gain"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "def_gain"
+          },
+          {
+            "sourceColumnIndex": 5,
+            "targetKey": "skill_charges_restore"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e_levelup_2_data",
+      "source": "n_37SHM5hfyj",
+      "target": "n_levelup_2",
+      "data": {
+        "dataTableRowNumber": 3,
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "level"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "exp_to_next"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "hp_gain"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "atk_gain"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "def_gain"
+          },
+          {
+            "sourceColumnIndex": 5,
+            "targetKey": "skill_charges_restore"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e_levelup_3_data",
+      "source": "n_37SHM5hfyj",
+      "target": "n_levelup_3",
+      "data": {
+        "dataTableRowNumber": 4,
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "level"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "exp_to_next"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "hp_gain"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "atk_gain"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "def_gain"
+          },
+          {
+            "sourceColumnIndex": 5,
+            "targetKey": "skill_charges_restore"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__gate_levelupbottom-gate_lv1top-true",
+      "source": "gate_levelup",
+      "target": "gate_lv1",
+      "data": {
+        "gateBranch": "true"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__gate_lv1bottom-trig_levelup_1top-true",
+      "source": "gate_lv1",
+      "target": "trig_levelup_1",
+      "data": {
+        "gateBranch": "true"
+      },
+      "type": "exec",
+      "sourceHandle": "left",
+      "targetHandle": "right"
+    },
+    {
+      "id": "xy-edge__gate_lv1right-gate_lv2left-false",
+      "source": "gate_lv1",
+      "target": "gate_lv2",
+      "data": {
+        "gateBranch": "false"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__gate_lv2bottom-trig_levelup_2top-true",
+      "source": "gate_lv2",
+      "target": "trig_levelup_2",
+      "data": {
+        "gateBranch": "true"
+      },
+      "type": "exec",
+      "sourceHandle": "top",
+      "targetHandle": "right"
+    },
+    {
+      "id": "xy-edge__gate_lv2right-trig_levelup_3left-false",
+      "source": "gate_lv2",
+      "target": "trig_levelup_3",
+      "data": {
+        "gateBranch": "false"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__trig_levelup_1bottom-n_levelup_screentop",
+      "source": "trig_levelup_1",
+      "target": "n_yobro6uSUN",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "left",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__trig_levelup_2bottom-n_levelup_screenleft",
+      "source": "trig_levelup_2",
+      "target": "n_Bds2jeJKZH",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "left",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__trig_levelup_3bottom-n_levelup_screenright",
+      "source": "trig_levelup_3",
+      "target": "n_RfvWmS0erL",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "left",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__trig_kill_rewardright-n_gold_rewardleft",
+      "source": "trig_kill_reward",
+      "target": "n_gold_reward",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "id": "xy-edge__trig_boss_rewardright-n_gold_rewardtop",
+      "source": "trig_boss_reward",
+      "target": "n_gold_reward",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__n_gold_rewardright-goldleft",
+      "source": "n_gold_reward",
+      "target": "n_7Sh8pLXfHq",
+      "data": {
+        "amount": 1,
+        "resourceAmountExpression": "enemy_gold_reward"
+      },
+      "type": "resource",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "id": "e_lgplQ860cY",
+      "source": "n_5Ht6fUMOjQ",
+      "target": "JmXYql8aC8Thnor1Xcox",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e_6pN2aWdX02",
+      "source": "n_GiRER2v4nD",
+      "target": "PkGUAqSomtLEOXEuyofe",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "id": "e_7Ed8o1qIEL",
+      "source": "n_jPEj9afEop",
+      "target": "trig_calc_e_dmg",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "id": "e_GnB1s1STDD",
+      "source": "n_2NLIkx0J06",
+      "target": "trig_boss_reward",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "id": "e_36BsFjVYRC",
+      "source": "n_RfvWmS0erL",
+      "target": "n_levelup_screen",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "bottom"
+    },
+    {
+      "id": "e_UQKYlc14Mm",
+      "source": "n_yobro6uSUN",
+      "target": "n_levelup_screen",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "bottom"
+    },
+    {
+      "id": "e_shAL7XMKpM",
+      "source": "n_Bds2jeJKZH",
+      "target": "n_levelup_screen",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "bottom"
+    }
+  ],
+  "resources": [
+    {
+      "id": "B0ubePt85yGolsY5SBRa",
+      "key": "gold",
+      "name": "골드",
+      "color": "#FFD700",
+      "icon": "coin",
+      "order": 0
+    },
+    {
+      "id": "XQecVcGX0EJpSXKSzXs5",
+      "key": "dice",
+      "name": "주사위",
+      "color": "marigold",
+      "icon": "box",
+      "order": 0
+    }
+  ]
+}

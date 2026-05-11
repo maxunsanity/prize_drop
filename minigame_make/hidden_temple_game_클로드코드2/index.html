@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Hidden Temple</title>
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+
+  <!-- TOP SECTION -->
+  <div class="top-section">
+    <div class="top-bar">
+      <button id="cheat-btn" class="sketch-btn">+100 ⛏️</button>
+      <div class="timer-badge">⏳ 숨겨진 사원</div>
+      <button id="reset-btn" class="sketch-btn">리셋</button>
+    </div>
+    <div class="door-container">
+      <div class="door-circle"><div class="door-inner">🚪</div></div>
+    </div>
+    <div class="stage-progress">
+      <div class="chest" data-stage="1">I</div><div class="line"></div>
+      <div class="chest" data-stage="2">II</div><div class="line"></div>
+      <div class="chest" data-stage="3">III</div><div class="line"></div>
+      <div class="chest" data-stage="4">IV</div><div class="line"></div>
+      <div class="chest" data-stage="5">V</div>
+    </div>
+    <div class="counter-container">
+      <div class="pickaxe-counter">⛏️ 50</div>
+      <div class="gem-counter">💎 0 / 0</div>
+    </div>
+  </div>
+
+  <!-- Three.js Canvas (Three.js appends canvas here) -->
+  <div id="canvas-container"></div>
+
+  <!-- Bottom Item Slots -->
+  <div id="item-slot-bar">
+    <div class="item-slot" data-slot="0"></div>
+    <div class="item-slot" data-slot="1"></div>
+    <div class="item-slot" data-slot="2"></div>
+  </div>
+
+  <!-- Modal layer -->
+  <div id="ui-layer"></div>
+
+  <!-- Custom cursor -->
+  <div id="custom-cursor">⛏️</div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

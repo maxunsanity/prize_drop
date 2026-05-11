@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>숨겨진 사원</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #faf8f5; font-family: 'Courier New', monospace; color: #222; overflow: hidden; height: 100vh; display: flex; flex-direction: column; }
+
+    #top-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 12px; border-bottom: 2px solid #222;
+    }
+    #top-bar button {
+      background: #faf8f5; border: 2px solid #222; font-family: inherit;
+      font-size: 14px; padding: 4px 10px; cursor: pointer;
+      box-shadow: 2px 2px 0 #222;
+    }
+    #top-bar button:active { transform: translate(2px,2px); box-shadow: none; }
+    #title-text { font-size: 16px; font-weight: bold; }
+
+    #stage-area {
+      display: flex; flex-direction: column; align-items: center;
+      padding: 8px 12px 4px; border-bottom: 2px solid #222;
+    }
+    #door { font-size: 36px; line-height: 1; margin-bottom: 4px; }
+    .stage-progress { display: flex; align-items: center; gap: 0; }
+    .chest { font-size: 13px; padding: 2px 6px; border: 2px solid #222; box-shadow: 2px 2px 0 #222; background: #faf8f5; }
+    .chest.done { background: #ffe082; }
+    .chest.active { background: #fff9c4; }
+    .line { width: 24px; height: 4px; background: #ccc; position: relative; overflow: hidden; }
+    .line.done { background: #222; }
+    .line.active { background: #ddd; }
+    .line.active::after {
+      content: ''; position: absolute; left: -100%; top: 0; height: 100%; width: 100%;
+      background: linear-gradient(90deg, transparent, #f5c518, transparent);
+      animation: goldflow 1s infinite linear;
+    }
+    @keyframes goldflow { to { left: 100%; } }
+
+    #counters { display: flex; gap: 16px; margin-top: 6px; font-size: 14px; }
+    #ui-pickaxe::before { content: '⛏️ '; }
+    #ui-gem-counter::before { content: '💎 '; }
+
+    #canvas-wrap { flex: 1; position: relative; border-top: 2px solid #222; border-bottom: 2px solid #222; overflow: hidden; }
+    #canvas-wrap canvas { display: block; width: 100% !important; height: 100% !important; }
+    #custom-cursor { position: fixed; pointer-events: none; font-size: 22px; transform: translate(-50%,-50%); z-index: 100; transition: none; display: none; }
+    #custom-cursor.swing { animation: swing 150ms ease; }
+    @keyframes swing { 0%{transform:translate(-50%,-50%) rotate(0)} 50%{transform:translate(-50%,-65%) rotate(-45deg)} 100%{transform:translate(-50%,-50%) rotate(0)} }
+
+    #bottom-bar {
+      padding: 8px 12px; border-top: 2px solid #222;
+      display: flex; flex-direction: column; align-items: center; gap: 4px;
+    }
+    #ui-item-slots { display: flex; gap: 10px; justify-content: center; }
+    .item-slot {
+      width: 56px; height: 56px; border: 2px dashed #888;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      font-size: 24px; position: relative; background: #faf8f5;
+    }
+    .item-slot.filled { border: 2px solid #222; box-shadow: 2px 2px 0 #222; background: #fffde7; }
+    .item-slot .slot-label { font-size: 10px; color: #888; position: absolute; bottom: 2px; }
+    .item-slot .slot-emoji { font-size: 26px; }
+
+    #stage-clear-modal {
+      display: none; position: fixed; inset: 0; background: rgba(250,248,245,0.92);
+      z-index: 200; flex-direction: column; align-items: center; justify-content: center; gap: 16px;
+    }
+    #stage-clear-modal.visible { display: flex; }
+    #stage-clear-modal h2 { font-size: 28px; border-bottom: 2px solid #222; padding-bottom: 8px; }
+    #stage-clear-modal p { font-size: 14px; }
+    #stage-clear-modal button {
+      background: #faf8f5; border: 2px solid #222; font-family: inherit;
+      font-size: 16px; padding: 8px 24px; cursor: pointer; box-shadow: 2px 2px 0 #222;
+    }
+
+    .float-text {
+      position: fixed; pointer-events: none; font-size: 16px; font-weight: bold;
+      z-index: 150; animation: floatUp 1s ease forwards;
+    }
+    @keyframes floatUp { 0%{opacity:1;transform:translateY(0)} 100%{opacity:0;transform:translateY(-40px)} }
+
+    .item-fly {
+      position: fixed; pointer-events: none; font-size: 28px; z-index: 160;
+      transition: all 0.8s cubic-bezier(0.4,0,0.2,1);
+    }
+  </style>
+</head>
+<body>
+  <div id="top-bar">
+    <button id="cheat-btn">+100 ⛏️</button>
+    <span id="title-text">⏳ 숨겨진 사원</span>
+    <button id="reset-btn">리셋</button>
+  </div>
+
+  <div id="stage-area">
+    <div id="door">🚪</div>
+    <div class="stage-progress" id="stage-progress"></div>
+    <div id="counters">
+      <span id="ui-pickaxe">0</span>
+      <span id="ui-gem-counter">0 / 0</span>
+    </div>
+  </div>
+
+  <div id="canvas-wrap">
+    <div id="custom-cursor">⛏️</div>
+  </div>
+
+  <div id="bottom-bar">
+    <div id="ui-item-slots"></div>
+  </div>
+
+  <div id="stage-clear-modal">
+    <h2 id="modal-title">관문 클리어!</h2>
+    <p id="modal-desc"></p>
+    <button id="modal-continue-btn">계속하기 →</button>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

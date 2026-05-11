@@ -1,0 +1,185 @@
+import json
+from datetime import datetime
+
+def sdt(c=0, r=0):
+    return {"autonomy": 0, "competence": c, "relatedness": r, "motivation": 0}
+
+NOW = datetime.utcnow().isoformat() + "Z"
+
+MOCK_INIT = {
+    "gold": 0,
+    "money_gain": 0,
+    "sim.activeModal": "", "sim.activeScene": "", "sim.currentStep": 0, "sim.activeScreen": ""
+}
+
+sprout_v3 = {
+    "version": 1,
+    "designName": "게임2_숙주나물_v3_선형플로우",
+    "exportedAt": NOW,
+    "resources": [
+        {"id": "res-gold", "key": "gold", "name": "Gold", "color": "#FFD700", "icon": "coin"}
+    ],
+    "attributes": [
+        {"key": "money_gain", "type": "number", "value": "0"}
+    ],
+    "nodes": [
+        {
+            "id": "n_entry", "type": "entry",
+            "position": {"x": 400, "y": 0},
+            "data": {
+                "label": "게임 진입",
+                "mockSpec": {
+                    "root": "screen",
+                    "elements": {
+                        "screen": {"type": "Screen", "props": {}, "children": ["body"]},
+                        "body": {"type": "VStack", "props": {}, "children": ["t", "b"]},
+                        "t": {"type": "Text", "props": {"text": "🌱 숙주나물 키우기 (Flow Version)", "variant": "title"}, "children": []},
+                        "b": {"type": "Button", "props": {"label": "키우기 시작", "variant": "primary", "targetNodeId": "n_init"}, "children": []}
+                    }
+                },
+                "mockInitialState": {**MOCK_INIT}
+            }
+        },
+        {
+            "id": "n_init", "type": "trigger",
+            "position": {"x": 400, "y": 150},
+            "data": {
+                "label": "초기화",
+                "attributes": [{"key": "money_gain", "type": "number", "value": "0"}],
+                "sdtEffects": sdt()
+            }
+        },
+        # ─── STAGE 1: Sprout ───
+        {
+            "id": "n_stage_1", "type": "scene",
+            "position": {"x": 400, "y": 300},
+            "data": {
+                "label": "🌱 1단계: 새싹 탄생",
+                "mockSpec": {
+                    "root": "screen",
+                    "elements": {
+                        "screen": {"type": "Screen", "props": {}, "children": ["body"]},
+                        "body": {"type": "VStack", "props": {}, "children": ["t", "img", "desc", "btn"]},
+                        "t": {"type": "Text", "props": {"text": "Stage 1: 새싹", "variant": "subtitle"}, "children": []},
+                        "img": {"type": "Text", "props": {"text": "🌱", "variant": "title"}, "children": []},
+                        "desc": {"type": "Text", "props": {"text": "귀여운 새싹이 고개를 내밀었습니다!", "variant": "muted"}, "children": []},
+                        "btn": {"type": "Button", "props": {"label": "더 키우기", "variant": "primary", "targetNodeId": "n_stage_2"}, "children": []}
+                    }
+                }
+            }
+        },
+        # ─── STAGE 2: Mid ───
+        {
+            "id": "n_stage_2", "type": "scene",
+            "position": {"x": 400, "y": 450},
+            "data": {
+                "label": "🌿 2단계: 쑥쑥 성장",
+                "mockSpec": {
+                    "root": "screen",
+                    "elements": {
+                        "screen": {"type": "Screen", "props": {}, "children": ["body"]},
+                        "body": {"type": "VStack", "props": {}, "children": ["t", "img", "desc", "btn"]},
+                        "t": {"type": "Text", "props": {"text": "Stage 2: 성장기", "variant": "subtitle"}, "children": []},
+                        "img": {"type": "Text", "props": {"text": "🌿", "variant": "title"}, "children": []},
+                        "desc": {"type": "Text", "props": {"text": "잎이 무성해지고 있습니다! 조금만 더!", "variant": "muted"}, "children": []},
+                        "btn": {"type": "Button", "props": {"label": "더 키우기", "variant": "primary", "targetNodeId": "n_stage_3"}, "children": []}
+                    }
+                }
+            }
+        },
+        # ─── STAGE 3: Full ───
+        {
+            "id": "n_stage_3", "type": "choice",
+            "position": {"x": 400, "y": 600},
+            "data": {
+                "label": "🌳 3단계: 완전 성장 (수확!)",
+                "mockSpec": {
+                    "root": "screen",
+                    "elements": {
+                        "screen": {"type": "Screen", "props": {}, "children": ["body"]},
+                        "body": {"type": "VStack", "props": {}, "children": ["t", "img", "desc", "btn_h", "sp", "btn_w"]},
+                        "t": {"type": "Text", "props": {"text": "Stage 3: 수확 적기!", "variant": "title"}, "children": []},
+                        "img": {"type": "Text", "props": {"text": "🌳", "variant": "title"}, "children": []},
+                        "desc": {"type": "Text", "props": {"text": "지금이 가장 통통해요! 수확하시겠어요?", "variant": "subtitle"}, "children": []},
+                        "btn_h": {"type": "Button", "props": {"label": "🧺 수확하기 (+100G)", "variant": "primary", "targetNodeId": "n_calc_success"}, "children": []},
+                        "sp": {"type": "Spacer", "props": {}, "children": []},
+                        "btn_w": {"type": "Button", "props": {"label": "조금 더 기다려보기 (위험!)", "variant": "secondary", "targetNodeId": "n_stage_4"}, "children": []}
+                    }
+                }
+            }
+        },
+        # ─── STAGE 4: Withered ───
+        {
+            "id": "n_stage_4", "type": "scene",
+            "position": {"x": 600, "y": 750},
+            "data": {
+                "label": "🍂 4단계: 시듦",
+                "mockSpec": {
+                    "root": "screen",
+                    "elements": {
+                        "screen": {"type": "Screen", "props": {}, "children": ["body"]},
+                        "body": {"type": "VStack", "props": {}, "children": ["t", "img", "desc", "btn"]},
+                        "t": {"type": "Text", "props": {"text": "Stage 4: 시들어버림...", "variant": "title"}, "children": []},
+                        "img": {"type": "Text", "props": {"text": "🍂", "variant": "title"}, "children": []},
+                        "desc": {"type": "Text", "props": {"text": "너무 오래 기다렸네요. 보상을 얻을 수 없습니다.", "variant": "muted"}, "children": []},
+                        "btn": {"type": "Button", "props": {"label": "처음부터 다시", "variant": "secondary", "targetNodeId": "n_init"}, "children": []}
+                    }
+                }
+            }
+        },
+        # ─── SUCCESS FLOW ───
+        {
+            "id": "n_calc_success", "type": "trigger",
+            "position": {"x": 200, "y": 750},
+            "data": {
+                "label": "성공 정산",
+                "attributes": [{"key": "money_gain", "type": "number", "value": "100"}],
+                "sdtEffects": sdt(c=1)
+            }
+        },
+        {
+            "id": "n_reward_hub", "type": "reward",
+            "position": {"x": 200, "y": 900},
+            "data": {"label": "보상 허브", "sdtEffects": sdt(c=1)}
+        },
+        {
+            "id": "n_res_gold", "type": "resource",
+            "position": {"x": 200, "y": 1050},
+            "data": {"label": "골드 지급", "resourceId": "res-gold", "resourceKey": "gold"}
+        },
+        {
+            "id": "n_end", "type": "success",
+            "position": {"x": 400, "y": 1200},
+            "data": {
+                "label": "결과 화면",
+                "mockSpec": {
+                    "root": "screen",
+                    "elements": {
+                        "screen": {"type": "Screen", "props": {}, "children": ["body"]},
+                        "body": {"type": "VStack", "props": {}, "children": ["t", "desc", "btn"]},
+                        "t": {"type": "Text", "props": {"text": "🏆 수확 대성공!", "variant": "title"}, "children": []},
+                        "desc": {"type": "Text", "props": {"text": "오빠의 타이밍은 정말 완벽해!", "variant": "subtitle"}, "children": []},
+                        "btn": {"type": "Button", "props": {"label": "다시 하기", "variant": "primary", "targetNodeId": "n_init"}, "children": []}
+                    }
+                }
+            }
+        }
+    ],
+    "edges": [
+        {"id": "e1", "source": "n_entry", "target": "n_init", "type": "exec"},
+        {"id": "e2", "source": "n_init", "target": "n_stage_1", "type": "exec"},
+        {"id": "e3", "source": "n_stage_1", "target": "n_stage_2", "type": "exec"},
+        {"id": "e4", "source": "n_stage_2", "target": "n_stage_3", "type": "exec"},
+        {"id": "e5", "source": "n_stage_3", "target": "n_calc_success", "type": "exec"},
+        {"id": "e6", "source": "n_stage_3", "target": "n_stage_4", "type": "exec"},
+        {"id": "e7", "source": "n_calc_success", "target": "n_reward_hub", "type": "exec"},
+        {"id": "e8", "source": "n_reward_hub", "target": "n_res_gold", "type": "resource", "data": {"resourceAmountExpression": "money_gain"}},
+        {"id": "e9", "source": "n_res_gold", "target": "n_end", "type": "exec"},
+        {"id": "e10", "source": "n_stage_4", "target": "n_init", "type": "exec"}
+    ]
+}
+
+with open('/Users/max/lle 안티그래비티/new_1/게임2_숙주나물_v3_선형플로우.json', 'w', encoding='utf-8') as f:
+    json.dump(sprout_v3, f, ensure_ascii=False, indent=2)
+
+print("숙주나물 v3 선형 플로우 버전 생성 완료!")

@@ -1,0 +1,8 @@
+slot_id,position,multiplier,weight,description
+1,left_edge,1,400,좌측 끝 슬롯
+2,left_mid,2,200,좌중간 슬롯
+3,left_center,3,160,좌중앙 슬롯
+4,center,10,2,잭팟 중앙 슬롯
+5,right_center,3,138,우중앙 슬롯
+6,right_mid,2,90,우중간 슬롯
+7,right_edge,1,10,우측 끝 슬롯

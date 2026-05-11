@@ -1,0 +1,17 @@
+config_key,value,type,description
+event_duration_days,10,int,이벤트 총 기간
+ball_debug_start,10,int,로컬 디버그 시작 구슬
+ball_per_normal,1,int,일반 레벨 클리어
+ball_per_hard,3,int,하드 레벨 클리어
+ball_per_superhard,5,int,슈퍼하드 레벨 클리어
+ball_event_bonus,6,int,이벤트 시작 보너스
+bumper_count,7,int,범퍼 수
+bumper_token_value,5,int,범퍼 1회 토큰 (스샷 기준 5)
+bumper_gauge_max,7,int,라운드당 범퍼 히트 상한
+dragon_count,4,int,드래곤 수
+dragon_stage_count,3,int,드래곤당 단계
+bot_min_interval_ms,30000,int,봇 최소 간격
+bot_max_interval_ms,90000,int,봇 최대 간격
+bot_min_token,50,int,봇 최소 기여
+bot_max_token,200,int,봇 최대 기여
+grand_prize_bundle_id,9999,int,Grand Prize 번들 ID

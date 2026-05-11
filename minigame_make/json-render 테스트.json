@@ -1,0 +1,1253 @@
+{
+  "version": 1,
+  "designName": "json-render 테스트",
+  "exportedAt": "2026-04-27T00:46:55.825Z",
+  "nodes": [
+    {
+      "id": "node-default-trigger",
+      "type": "entry",
+      "position": {
+        "x": 380,
+        "y": 117.8741286287921
+      },
+      "data": {
+        "tags": [],
+        "label": "진입",
+        "mockSpec": {
+          "root": "mock-fragment-root",
+          "elements": {
+            "res-gold": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "gold"
+              },
+              "children": []
+            },
+            "res-item": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "item"
+              },
+              "children": []
+            },
+            "guest-btn": {
+              "on": {
+                "press": {
+                  "action": "setState",
+                  "params": {
+                    "value": "guest",
+                    "statePath": "/sim.activeScreen"
+                  }
+                }
+              },
+              "type": "Button",
+              "props": {
+                "label": "게스트로 시작",
+                "variant": "secondary"
+              },
+              "children": []
+            },
+            "login-btn": {
+              "on": {
+                "press": {
+                  "action": "setState",
+                  "params": {
+                    "value": 1,
+                    "statePath": "/sim.currentStep"
+                  }
+                }
+              },
+              "type": "Button",
+              "props": {
+                "label": "게임 시작",
+                "variant": "primary",
+                "targetNodeId": "sBxQYmCexxHf5AbFNFPP"
+              },
+              "children": [],
+              "targetNodeId": "r61TWVS4Vncx0w3FLjXp"
+            },
+            "logo-title": {
+              "type": "Text",
+              "props": {
+                "text": "⚔️ 왕국의 전설",
+                "variant": "title"
+              },
+              "children": []
+            },
+            "mid-spacer": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            },
+            "res-weapon": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "LjFFeQfJibzToAWeOUs9"
+              },
+              "children": []
+            },
+            "top-spacer": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            },
+            "logo-header": {
+              "type": "VStack",
+              "props": {},
+              "children": [
+                "logo-title",
+                "logo-subtitle"
+              ]
+            },
+            "login-vstack": {
+              "type": "VStack",
+              "props": {},
+              "children": [
+                "top-spacer",
+                "logo-header",
+                "subtitle-text",
+                "divider-spacer",
+                "login-btn",
+                "guest-btn",
+                "mid-spacer",
+                "version-text"
+              ]
+            },
+            "resource-hud": {
+              "type": "TopArea",
+              "props": {},
+              "children": [
+                "res-gold",
+                "res-weapon",
+                "res-item"
+              ]
+            },
+            "version-text": {
+              "type": "Text",
+              "props": {
+                "text": "v1.0.0 · © 2025 Kingdom Studios",
+                "variant": "muted"
+              },
+              "children": []
+            },
+            "logo-subtitle": {
+              "type": "Text",
+              "props": {
+                "text": "Kingdom of Legends",
+                "variant": "subtitle"
+              },
+              "children": []
+            },
+            "subtitle-text": {
+              "type": "Text",
+              "props": {
+                "text": "새로운 모험이 당신을 기다립니다. 지금 바로 시작하세요!",
+                "variant": "muted"
+              },
+              "children": []
+            },
+            "divider-spacer": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            },
+            "mock-fragment-root": {
+              "type": "Screen",
+              "props": {},
+              "children": [
+                "resource-hud",
+                "login-vstack"
+              ]
+            }
+          }
+        },
+        "intensity": 5,
+        "mockPrompt": "ResourceBar를 TopArea로 변경하고 Screen 아래로 옮겨줘",
+        "description": "",
+        "mockGeneratedAt": "2026-04-24T04:29:04.071Z",
+        "mockInitialState": {
+          "gold": 0,
+          "item": 0,
+          "sdt.autonomy": 50,
+          "sdt.competence": 50,
+          "sdt.motivation": 50,
+          "sdt.relatedness": 50,
+          "sim.activeModal": "",
+          "sim.activeScene": "",
+          "sim.currentStep": 0,
+          "sim.activeScreen": "",
+          "LjFFeQfJibzToAWeOUs9": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 58
+      }
+    },
+    {
+      "id": "xiHZckMRldXABpGjAjZO",
+      "type": "scene",
+      "position": {
+        "x": 721.6611613372932,
+        "y": 440.6584866505831
+      },
+      "data": {
+        "tags": [],
+        "label": "전투",
+        "mockSpec": {
+          "root": "battle-screen",
+          "elements": {
+            "btn-flee": {
+              "on": {
+                "press": {
+                  "action": "setState",
+                  "params": {
+                    "value": "gdQM5KtGSugtLsWS8D7g",
+                    "statePath": "/sim.activeScene"
+                  }
+                }
+              },
+              "type": "Button",
+              "props": {
+                "label": "🏃 도주",
+                "variant": "secondary",
+                "targetNodeId": "MR8FaIXWU9LORAFMTl88"
+              },
+              "children": []
+            },
+            "btn-item": {
+              "type": "Button",
+              "props": {
+                "label": "🧪 아이템",
+                "variant": "secondary",
+                "targetNodeId": "MR8FaIXWU9LORAFMTl88"
+              },
+              "children": []
+            },
+            "res-gold": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "gold"
+              },
+              "children": []
+            },
+            "res-item": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "item"
+              },
+              "children": []
+            },
+            "tab-flee": {
+              "type": "TabBarButton",
+              "props": {
+                "icon": "run",
+                "label": "도주",
+                "targetNodeId": "gdQM5KtGSugtLsWS8D7g"
+              },
+              "children": []
+            },
+            "top-area": {
+              "type": "TopArea",
+              "props": {},
+              "children": [
+                "res-gold",
+                "res-item",
+                "res-weapon"
+              ]
+            },
+            "btn-attack": {
+              "type": "Button",
+              "props": {
+                "label": "⚔️  공격",
+                "variant": "primary",
+                "targetNodeId": "MR8FaIXWU9LORAFMTl88"
+              },
+              "children": []
+            },
+            "enemy-card": {
+              "type": "VStack",
+              "props": {},
+              "children": [
+                "enemy-name-row",
+                "enemy-hp-row",
+                "enemy-hp-bar",
+                "enemy-spacer"
+              ]
+            },
+            "enemy-name": {
+              "type": "Text",
+              "props": {
+                "text": "🐉 암흑 드래곤",
+                "variant": "subtitle"
+              },
+              "children": []
+            },
+            "res-weapon": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "LjFFeQfJibzToAWeOUs9"
+              },
+              "children": []
+            },
+            "tab-battle": {
+              "type": "TabBarButton",
+              "props": {
+                "icon": "sword",
+                "label": "전투",
+                "targetNodeId": "xiHZckMRldXABpGjAjZO"
+              },
+              "children": []
+            },
+            "battle-body": {
+              "type": "VStack",
+              "props": {},
+              "children": [
+                "battle-title-row",
+                "enemy-card",
+                "player-card",
+                "action-buttons"
+              ]
+            },
+            "bottom-area": {
+              "type": "BottomArea",
+              "props": {},
+              "children": [
+                "tab-battle",
+                "tab-negotiate",
+                "tab-flee"
+              ]
+            },
+            "enemy-level": {
+              "type": "Text",
+              "props": {
+                "text": "Lv. 42",
+                "variant": "muted"
+              },
+              "children": []
+            },
+            "player-card": {
+              "type": "VStack",
+              "props": {},
+              "children": [
+                "player-name-row",
+                "player-hp-row",
+                "player-hp-bar",
+                "player-mp-row",
+                "player-mp-bar",
+                "player-spacer"
+              ]
+            },
+            "player-name": {
+              "type": "Text",
+              "props": {
+                "text": "🧙 용사",
+                "variant": "subtitle"
+              },
+              "children": []
+            },
+            "battle-title": {
+              "type": "Text",
+              "props": {
+                "text": "⚔️ 전투",
+                "variant": "title"
+              },
+              "children": []
+            },
+            "enemy-hp-bar": {
+              "type": "Progress",
+              "props": {
+                "value": 0.76
+              },
+              "children": []
+            },
+            "enemy-hp-row": {
+              "type": "HStack",
+              "props": {},
+              "children": [
+                "enemy-hp-text",
+                "enemy-hp-spacer",
+                "enemy-hp-val"
+              ]
+            },
+            "enemy-hp-val": {
+              "type": "Text",
+              "props": {
+                "text": "{{gold}}",
+                "variant": "tabular"
+              },
+              "children": []
+            },
+            "enemy-spacer": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            },
+            "player-hp-sp": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            },
+            "player-level": {
+              "type": "Text",
+              "props": {
+                "text": "Lv. 30",
+                "variant": "muted"
+              },
+              "children": []
+            },
+            "player-mp-sp": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            },
+            "title-spacer": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            },
+            "battle-screen": {
+              "type": "Screen",
+              "props": {
+                "scrollable": false
+              },
+              "children": [
+                "top-area",
+                "battle-body",
+                "bottom-area"
+              ]
+            },
+            "btn-skill-row": {
+              "type": "HStack",
+              "props": {},
+              "children": [
+                "btn-attack",
+                "btn-item",
+                "btn-flee"
+              ]
+            },
+            "enemy-hp-text": {
+              "type": "Text",
+              "props": {
+                "text": "HP",
+                "variant": "muted"
+              },
+              "children": []
+            },
+            "player-hp-bar": {
+              "type": "Progress",
+              "props": {
+                "value": 0.7
+              },
+              "children": []
+            },
+            "player-hp-row": {
+              "type": "HStack",
+              "props": {},
+              "children": [
+                "player-hp-label",
+                "player-hp-sp",
+                "player-hp-val"
+              ]
+            },
+            "player-hp-val": {
+              "type": "Text",
+              "props": {
+                "text": "210 / 300",
+                "variant": "tabular"
+              },
+              "children": []
+            },
+            "player-mp-bar": {
+              "type": "Progress",
+              "props": {
+                "value": 0.5
+              },
+              "children": []
+            },
+            "player-mp-row": {
+              "type": "HStack",
+              "props": {},
+              "children": [
+                "player-mp-label",
+                "player-mp-sp",
+                "player-mp-val"
+              ]
+            },
+            "player-mp-val": {
+              "type": "Text",
+              "props": {
+                "text": "60 / 120",
+                "variant": "tabular"
+              },
+              "children": []
+            },
+            "player-spacer": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            },
+            "tab-negotiate": {
+              "type": "TabBarButton",
+              "props": {
+                "icon": "message_circle",
+                "label": "협상",
+                "targetNodeId": "FUBJKG81eyf0CfHcEBqW"
+              },
+              "children": []
+            },
+            "action-buttons": {
+              "type": "VStack",
+              "props": {},
+              "children": [
+                "btn-skill-row"
+              ]
+            },
+            "enemy-name-row": {
+              "type": "HStack",
+              "props": {},
+              "children": [
+                "enemy-name",
+                "enemy-name-spacer",
+                "enemy-level"
+              ]
+            },
+            "battle-subtitle": {
+              "type": "Text",
+              "props": {
+                "text": "적을 처치하라!",
+                "variant": "muted"
+              },
+              "children": []
+            },
+            "enemy-hp-spacer": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            },
+            "player-hp-label": {
+              "type": "Text",
+              "props": {
+                "text": "HP",
+                "variant": "muted"
+              },
+              "children": []
+            },
+            "player-mp-label": {
+              "type": "Text",
+              "props": {
+                "text": "MP",
+                "variant": "muted"
+              },
+              "children": []
+            },
+            "player-name-row": {
+              "type": "HStack",
+              "props": {},
+              "children": [
+                "player-name",
+                "player-name-spacer",
+                "player-level"
+              ]
+            },
+            "battle-title-row": {
+              "type": "HStack",
+              "props": {},
+              "children": [
+                "battle-title",
+                "title-spacer",
+                "battle-subtitle"
+              ]
+            },
+            "enemy-name-spacer": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            },
+            "player-name-spacer": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            }
+          }
+        },
+        "mockPrompt": "간단한 전투 스크린을 만들어줘",
+        "description": "",
+        "loadingTime": "instant",
+        "mockGeneratedAt": "2026-04-24T08:47:05.111Z",
+        "mockInitialState": {
+          "gold": 120,
+          "item": 3,
+          "sdt.autonomy": 50,
+          "sdt.competence": 50,
+          "sdt.motivation": 50,
+          "sdt.relatedness": 50,
+          "sim.activeModal": "",
+          "sim.activeScene": "xiHZckMRldXABpGjAjZO",
+          "sim.currentStep": 0,
+          "sim.activeScreen": "",
+          "LjFFeQfJibzToAWeOUs9": 1
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 60
+      }
+    },
+    {
+      "id": "FUBJKG81eyf0CfHcEBqW",
+      "type": "scene",
+      "position": {
+        "x": 721.6611613372932,
+        "y": 560.7434900288214
+      },
+      "data": {
+        "tags": [],
+        "label": "협상",
+        "description": "",
+        "loadingTime": "instant"
+      },
+      "measured": {
+        "width": 220,
+        "height": 60
+      }
+    },
+    {
+      "id": "gdQM5KtGSugtLsWS8D7g",
+      "type": "scene",
+      "position": {
+        "x": 721.6611613372932,
+        "y": 669.2016702398063
+      },
+      "data": {
+        "tags": [],
+        "label": "도주",
+        "mockSpec": {
+          "root": "escape-screen",
+          "elements": {
+            "top-area": {
+              "type": "TopArea",
+              "props": {},
+              "children": [
+                "gold-meter",
+                "item-meter",
+                "weapon-meter"
+              ]
+            },
+            "escape-btn": {
+              "on": {
+                "press": {
+                  "action": "setState",
+                  "params": {
+                    "value": "confirm-escape",
+                    "statePath": "/sim.activeModal"
+                  }
+                }
+              },
+              "type": "Button",
+              "props": {
+                "label": "도주 시도하기",
+                "variant": "secondary",
+                "targetNodeId": "sBxQYmCexxHf5AbFNFPP"
+              },
+              "children": []
+            },
+            "gold-meter": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "gold"
+              },
+              "children": []
+            },
+            "item-meter": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "item"
+              },
+              "children": []
+            },
+            "scene-desc": {
+              "type": "Text",
+              "props": {
+                "text": "적의 추격을 따돌리고 현장에서 탈출을 시도합니다. 지금 도주하면 전투와 협상의 기회를 잃게 됩니다.",
+                "variant": "muted"
+              },
+              "children": []
+            },
+            "status-row": {
+              "type": "HStack",
+              "props": {},
+              "children": [
+                "status-label",
+                "spacer-status",
+                "status-value"
+              ]
+            },
+            "escape-body": {
+              "type": "VStack",
+              "props": {},
+              "children": [
+                "scene-title",
+                "scene-desc",
+                "status-row",
+                "escape-progress-label",
+                "escape-progress",
+                "spacer-body",
+                "escape-btn"
+              ]
+            },
+            "scene-title": {
+              "type": "Text",
+              "props": {
+                "text": "도주",
+                "variant": "title"
+              },
+              "children": []
+            },
+            "spacer-body": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            },
+            "status-label": {
+              "type": "Text",
+              "props": {
+                "text": "탈출 성공률",
+                "variant": "muted"
+              },
+              "children": []
+            },
+            "status-value": {
+              "type": "Text",
+              "props": {
+                "text": "68%",
+                "variant": "tabular"
+              },
+              "children": []
+            },
+            "weapon-meter": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "LjFFeQfJibzToAWeOUs9"
+              },
+              "children": []
+            },
+            "escape-screen": {
+              "type": "Screen",
+              "props": {
+                "scrollable": false
+              },
+              "children": [
+                "top-area",
+                "escape-body"
+              ]
+            },
+            "spacer-status": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            },
+            "escape-progress": {
+              "type": "Progress",
+              "props": {
+                "value": 0.68
+              },
+              "children": []
+            },
+            "escape-progress-label": {
+              "type": "Text",
+              "props": {
+                "text": "탈출 진행도",
+                "variant": "muted"
+              },
+              "children": []
+            }
+          }
+        },
+        "mockPrompt": "정말 도주하시겠습니까? 모달",
+        "description": "",
+        "loadingTime": "instant",
+        "mockGeneratedAt": "2026-04-24T08:48:47.860Z",
+        "mockInitialState": {
+          "gold": 120,
+          "item": 3,
+          "sdt.autonomy": 50,
+          "sdt.competence": 50,
+          "sdt.motivation": 50,
+          "sdt.relatedness": 50,
+          "sim.activeModal": "",
+          "sim.activeScene": "",
+          "sim.currentStep": 0,
+          "sim.activeScreen": "",
+          "LjFFeQfJibzToAWeOUs9": 1
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 60
+      }
+    },
+    {
+      "id": "r61TWVS4Vncx0w3FLjXp",
+      "type": "choice",
+      "position": {
+        "x": 380,
+        "y": 440.6584866505831
+      },
+      "data": {
+        "tags": [],
+        "label": "선택",
+        "mockSpec": {
+          "root": "mock-fragment-root",
+          "elements": {
+            "tab-map": {
+              "on": {
+                "press": {
+                  "action": "setState",
+                  "params": {
+                    "value": "map",
+                    "statePath": "/sim.activeScreen"
+                  }
+                }
+              },
+              "type": "TabBarButton",
+              "props": {
+                "icon": "map",
+                "label": "지도"
+              },
+              "children": []
+            },
+            "res-gold": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "gold"
+              },
+              "children": []
+            },
+            "res-item": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "item"
+              },
+              "children": []
+            },
+            "tab-home": {
+              "on": {
+                "press": {
+                  "action": "setState",
+                  "params": {
+                    "value": "home",
+                    "statePath": "/sim.activeScreen"
+                  }
+                }
+              },
+              "type": "TabBarButton",
+              "props": {
+                "icon": "home",
+                "label": "홈"
+              },
+              "children": []
+            },
+            "top-area": {
+              "type": "TopArea",
+              "props": {},
+              "children": [
+                "res-gold",
+                "res-item",
+                "res-weapon"
+              ]
+            },
+            "res-weapon": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "LjFFeQfJibzToAWeOUs9"
+              },
+              "children": []
+            },
+            "tab-battle": {
+              "on": {
+                "press": {
+                  "action": "setState",
+                  "params": {
+                    "value": "battle",
+                    "statePath": "/sim.activeScreen"
+                  }
+                }
+              },
+              "type": "TabBarButton",
+              "props": {
+                "icon": "sword",
+                "label": "전투",
+                "targetNodeId": "xiHZckMRldXABpGjAjZO"
+              },
+              "children": []
+            },
+            "title-text": {
+              "type": "Text",
+              "props": {
+                "text": "선택의 기로",
+                "variant": "title"
+              },
+              "children": []
+            },
+            "bottom-area": {
+              "type": "BottomArea",
+              "props": {},
+              "children": [
+                "tab-battle",
+                "tab-inventory",
+                "tab-map",
+                "tab-home"
+              ]
+            },
+            "choice-btn-1": {
+              "on": {
+                "press": {
+                  "action": "setState",
+                  "params": {
+                    "value": "xiHZckMRldXABpGjAjZO",
+                    "statePath": "/sim.activeScene"
+                  }
+                }
+              },
+              "type": "Button",
+              "props": {
+                "label": "🗡️  전투를 선택한다",
+                "variant": "primary",
+                "targetNodeId": "xiHZckMRldXABpGjAjZO"
+              },
+              "children": []
+            },
+            "choice-btn-2": {
+              "on": {
+                "press": {
+                  "action": "setState",
+                  "params": {
+                    "value": "FUBJKG81eyf0CfHcEBqW",
+                    "statePath": "/sim.activeScene"
+                  }
+                }
+              },
+              "type": "Button",
+              "props": {
+                "label": "🤝  협상을 시도한다",
+                "variant": "secondary",
+                "targetNodeId": "FUBJKG81eyf0CfHcEBqW"
+              },
+              "children": []
+            },
+            "choice-btn-3": {
+              "on": {
+                "press": {
+                  "action": "setState",
+                  "params": {
+                    "value": "gdQM5KtGSugtLsWS8D7g",
+                    "statePath": "/sim.activeScene"
+                  }
+                }
+              },
+              "type": "Button",
+              "props": {
+                "label": "🏃  도주를 선택한다",
+                "variant": "secondary",
+                "targetNodeId": "gdQM5KtGSugtLsWS8D7g"
+              },
+              "children": []
+            },
+            "choice-label": {
+              "type": "Text",
+              "props": {
+                "text": "행동을 선택하세요",
+                "variant": "subtitle"
+              },
+              "children": []
+            },
+            "header-vstack": {
+              "type": "VStack",
+              "props": {},
+              "children": [
+                "title-text",
+                "subtitle-text"
+              ]
+            },
+            "subtitle-text": {
+              "type": "Text",
+              "props": {
+                "text": "세 가지 길이 당신 앞에 펼쳐져 있습니다. 어떤 선택을 하시겠습니까?",
+                "variant": "muted"
+              },
+              "children": []
+            },
+            "tab-inventory": {
+              "on": {
+                "press": {
+                  "action": "setState",
+                  "params": {
+                    "value": "inventory",
+                    "statePath": "/sim.activeScreen"
+                  }
+                }
+              },
+              "type": "TabBarButton",
+              "props": {
+                "icon": "backpack",
+                "label": "인벤토리"
+              },
+              "children": []
+            },
+            "choices-vstack": {
+              "type": "VStack",
+              "props": {},
+              "children": [
+                "choice-btn-1",
+                "choice-btn-2",
+                "choice-btn-3"
+              ]
+            },
+            "divider-spacer": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            },
+            "mock-fragment-root": {
+              "type": "Screen",
+              "props": {
+                "scrollable": true
+              },
+              "children": [
+                "top-area",
+                "NbAJFF7t3lxUnVTQqpKW",
+                "header-vstack",
+                "divider-spacer",
+                "choice-label",
+                "choices-vstack",
+                "bottom-area"
+              ]
+            },
+            "NbAJFF7t3lxUnVTQqpKW": {
+              "type": "HStack",
+              "props": {},
+              "children": []
+            }
+          }
+        },
+        "mockPrompt": "TopArea와 BottomArea에 HStack을 넣고 기존 컴포넌트를 자식으로 넣어줘",
+        "description": "",
+        "choiceStrategy": "uniform",
+        "mockGeneratedAt": "2026-04-24T04:52:53.838Z",
+        "mockInitialState": {
+          "gold": 0,
+          "item": 0,
+          "sdt.autonomy": 50,
+          "sdt.competence": 50,
+          "sdt.motivation": 50,
+          "sdt.relatedness": 50,
+          "sim.activeModal": "",
+          "sim.activeScene": "",
+          "sim.currentStep": 0,
+          "sim.activeScreen": "",
+          "LjFFeQfJibzToAWeOUs9": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "sBxQYmCexxHf5AbFNFPP",
+      "type": "action",
+      "position": {
+        "x": 380,
+        "y": 295.4871510283823
+      },
+      "data": {
+        "tags": [],
+        "label": "액션",
+        "duration": "short",
+        "difficulty": 5,
+        "description": ""
+      },
+      "measured": {
+        "width": 220,
+        "height": 85
+      }
+    },
+    {
+      "id": "MR8FaIXWU9LORAFMTl88",
+      "type": "reward",
+      "position": {
+        "x": 1068.8166334841305,
+        "y": 440.6584866505831
+      },
+      "data": {
+        "tags": [],
+        "label": "보상",
+        "description": ""
+      },
+      "measured": {
+        "width": 220,
+        "height": 60
+      }
+    },
+    {
+      "id": "q2Z5sKdHe0K0Hool7sc3",
+      "type": "resource",
+      "position": {
+        "x": 1324.63371695846,
+        "y": 295.4871510283823
+      },
+      "data": {
+        "tags": [],
+        "label": "자원",
+        "description": "",
+        "resourceKey": "gold"
+      },
+      "measured": {
+        "width": 56,
+        "height": 56
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "xy-edge__r61TWVS4Vncx0w3FLjXpright-xiHZckMRldXABpGjAjZOleft",
+      "source": "r61TWVS4Vncx0w3FLjXp",
+      "target": "xiHZckMRldXABpGjAjZO",
+      "data": {
+        "animated": false
+      },
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "id": "xy-edge__r61TWVS4Vncx0w3FLjXpright-FUBJKG81eyf0CfHcEBqWleft",
+      "source": "r61TWVS4Vncx0w3FLjXp",
+      "target": "FUBJKG81eyf0CfHcEBqW",
+      "data": {
+        "animated": false
+      },
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "id": "xy-edge__r61TWVS4Vncx0w3FLjXpright-gdQM5KtGSugtLsWS8D7gleft",
+      "source": "r61TWVS4Vncx0w3FLjXp",
+      "target": "gdQM5KtGSugtLsWS8D7g",
+      "data": {
+        "animated": false
+      },
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "id": "x6zhNBru5OpFPf2XAMCk",
+      "source": "node-default-trigger",
+      "target": "sBxQYmCexxHf5AbFNFPP",
+      "data": {
+        "animated": false
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "b9LgMImqPJ8lPQRSFI8p",
+      "source": "sBxQYmCexxHf5AbFNFPP",
+      "target": "r61TWVS4Vncx0w3FLjXp",
+      "data": {
+        "animated": false
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__FUBJKG81eyf0CfHcEBqWright-sBxQYmCexxHf5AbFNFPPright",
+      "source": "FUBJKG81eyf0CfHcEBqW",
+      "target": "sBxQYmCexxHf5AbFNFPP",
+      "data": {
+        "animated": false
+      },
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "right"
+    },
+    {
+      "id": "xy-edge__gdQM5KtGSugtLsWS8D7gright-sBxQYmCexxHf5AbFNFPPright",
+      "source": "gdQM5KtGSugtLsWS8D7g",
+      "target": "sBxQYmCexxHf5AbFNFPP",
+      "data": {
+        "animated": false
+      },
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "right"
+    },
+    {
+      "id": "xy-edge__xiHZckMRldXABpGjAjZOright-MR8FaIXWU9LORAFMTl88left",
+      "source": "xiHZckMRldXABpGjAjZO",
+      "target": "MR8FaIXWU9LORAFMTl88",
+      "data": {
+        "animated": false
+      },
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "id": "xy-edge__MR8FaIXWU9LORAFMTl88top-sBxQYmCexxHf5AbFNFPPright",
+      "source": "MR8FaIXWU9LORAFMTl88",
+      "target": "sBxQYmCexxHf5AbFNFPP",
+      "data": {
+        "animated": false
+      },
+      "type": "exec",
+      "sourceHandle": "top",
+      "targetHandle": "right"
+    },
+    {
+      "id": "xy-edge__q2Z5sKdHe0K0Hool7sc3bottom-MR8FaIXWU9LORAFMTl88right",
+      "source": "MR8FaIXWU9LORAFMTl88",
+      "target": "q2Z5sKdHe0K0Hool7sc3",
+      "data": {
+        "amount": 1,
+        "animated": false
+      },
+      "type": "resource",
+      "sourceHandle": "right",
+      "targetHandle": "bottom"
+    }
+  ],
+  "resources": [
+    {
+      "id": "igShW5lnkHIDj2aiZ8PC",
+      "key": "gold",
+      "name": "골드",
+      "description": "흔해빠진 자원",
+      "color": "marigold",
+      "icon": "badge_dollar_sign",
+      "order": 0
+    },
+    {
+      "id": "Cj6rWSkBp1zY7AbybgHm",
+      "key": "LjFFeQfJibzToAWeOUs9",
+      "name": "무기",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "color": "marigold",
+      "icon": "sword",
+      "order": 1
+    },
+    {
+      "id": "R4YSELtt62l3TPOqU1Gt",
+      "key": "item",
+      "name": "아이템",
+      "color": "#b53ccd",
+      "icon": "sword",
+      "order": 1
+    }
+  ]
+}

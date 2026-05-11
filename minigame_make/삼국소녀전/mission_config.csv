@@ -1,0 +1,30 @@
+mission_id,mission_category,mission_type,claim_type,mission_tier,display_name,display_desc,reset_interval_hours,reset_base_time,active_from,active_until,trigger_skill_id,duration_hours,reward_config_id,next_mission_id,is_hidden
+1001,NORMAL,DAILY,MANUAL,1,오늘의 주사위 굴리기,주사위를 10번 굴리세요.,24,null,null,null,null,null,2001,null,false
+1002,NORMAL,DAILY,MANUAL,1,오늘의 건설,건물을 3번 업그레이드하세요.,24,null,2026-05-05 00:00:00,2026-05-10 23:59:59,null,null,2001,null,false
+1003,NORMAL,DAILY,MANUAL,1,출발 통과,출발 칸을 1번 통과하세요.,24,null,null,null,null,null,2001,null,false
+1004,NORMAL,DAILY,MANUAL,1,금전 모으기,오늘 30만 금전을 획득하세요.,24,null,null,null,null,null,2001,null,false
+1005,NORMAL,DAILY,MANUAL,1,탈출의 달인,탈출권을 1번 사용하세요.,24,null,null,null,null,null,2001,null,false
+1006,NORMAL,DAILY,AUTO,1,오늘의 로그인,게임에 접속하면 즉시 보상!,24,null,null,null,null,null,2001,null,false
+1007,NORMAL,DAILY,MANUAL,1,복불복의 신,복불복 칸을 2번 밟으세요.,24,null,null,null,null,null,2001,null,false
+1008,NORMAL,DAILY,MANUAL,2,대담한 굴림,x3 이상 배수로 3번 굴리세요.,24,null,null,null,null,null,2001,null,false
+1010,NORMAL,DAILY,MANUAL,3,퀵 승리,오늘의 미션 3가지를 완료하세요.,24,null,null,null,null,null,2012,null,false
+1101,NORMAL,WEEKLY,MANUAL,2,주간 주사위,이번 주 주사위 50번 굴리기,168,null,null,null,null,null,2003,null,false
+1102,NORMAL,WEEKLY,MANUAL,2,주간 금전왕,이번 주 금전 100만 획득,168,null,null,null,null,null,2004,null,false
+1103,NORMAL,WEEKLY,MANUAL,2,주간 건설왕,이번 주 건물 15번 업그레이드,168,null,null,null,null,null,2007,null,false
+1104,NORMAL,WEEKLY,MANUAL,2,주간 소비왕,이번 주 금전 50만 소비,168,null,null,null,null,null,2003,null,false
+1105,NORMAL,WEEKLY,MANUAL,2,탈옥왕,이번 주 감옥 2번 탈출,168,null,null,null,null,null,2005,null,false
+1106,NORMAL,WEEKLY,MANUAL,2,토큰 수집,이번 주 토큰 1개 수집,168,null,null,null,null,null,2003,null,false
+1107,NORMAL,WEEKLY,MANUAL,3,배수의 달인,이번 주 배수 총 10번 사용,168,null,null,null,null,null,2017,null,false
+1301,EVENT,TIMED,MANUAL,2,[5.5] 어린이날 로그인,오늘 로그인하세요.,24,null,2026-05-05 00:00:00,2026-05-10 23:59:59,null,null,2013,null,false
+1302,EVENT,TIMED,MANUAL,2,[5.5] 주사위 파티,주사위 30번 굴리기,24,null,2026-05-05 00:00:00,2026-05-10 23:59:59,null,null,2014,null,false
+1303,EVENT,TIMED,MANUAL,2,[5.5] 건설 챌린지,건물 5번 업그레이드,24,null,2026-05-05 00:00:00,2026-05-10 23:59:59,null,null,2013,null,false
+1304,EVENT,TIMED,MANUAL,3,[5.5] 어린이날 퀵 승리,3가지 미션을 완료하세요.,24,null,2026-05-05 00:00:00,2026-05-10 23:59:59,null,null,2016,null,false
+1311,EVENT,TIMED,MANUAL,2,[5.5] 홍등 수집,홍등 조각 10개 사용,null,null,2026-05-05 00:00:00,2026-05-10 23:59:59,null,null,2013,null,false
+1500,EVENT,TIMED,AUTO,3,새벽 주사위 3배,00시~06시 주사위 배율 3배! 지금 바로 적용됩니다.,null,null,2026-05-05 00:00:00,2026-05-05 06:00:00,null,null,2019,null,false
+1401,EVENT,TRIGGERED,MANUAL,3,전투의 서막,72시간 안에 주사위 20번 굴리고 건설 5회 달성!,null,null,null,null,9001,72,2015,null,false
+1402,EVENT,TRIGGERED,MANUAL,4,황금 열쇠,48시간 안에 금전 50만 획득!,null,null,null,null,9002,48,2018,null,false
+1403,EVENT,TRIGGERED,AUTO,3,번영의 시작,아이템 획득! 임대료 2배 버프가 즉시 발동됩니다.,null,null,null,null,9003,24,2020,null,false
+2000,NORMAL,DAILY,AUTO,1,오늘의 건설,건물을 3번 업그레이드하세요.,24,null,2026-05-05 00:00:00,2026-05-10 23:59:59,null,null,2001,1001,false
+3001,EVENT,TIMED,MANUAL,2,복불복 3회 착지,복불복 칸에 3번 착지하세요.,null,null,2026-05-06 13:00:00,2026-05-09 13:00:00,null,null,4001,null,false
+3002,EVENT,TIMED,MANUAL,2,주사위 ×3 이상 굴리기 5회,배수 ×3 이상으로 주사위를 5번 굴리세요.,null,null,2026-05-06 13:00:00,2026-05-09 13:00:00,null,null,4002,null,false
+99999,EVENT,DAILY,MANUAL,1,타이쿤 이벤트 토너먼트 1단계,정거장에서 타이쿤 재화 1을 획득하세요.,48,null,null,null,null,null,null,null,false

@@ -1,0 +1,859 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>📘 GAME.md 작성 &amp; 명령 가이드</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="35a31009-efac-8114-bb32-e0255215cf2d" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">📘</span></div><h1 class="page-title" dir="auto">📘 <a href="http://GAME.md">GAME.md</a> 작성 &amp; 명령 가이드</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><blockquote id="145d84a5-7f08-4550-8ec4-b1905997e82a" class="">이 문서는 <a href="http://GAME.md">GAME.md</a>를 작성할 때와 AI에게 구현을 지시할 때의 표준 가이드야.</blockquote></div><div style="display:contents" dir="auto"><blockquote id="3814b863-c993-4cbe-af79-f2dadc79f42b" class="">새 게임을 만들 때마다 이 문서를 참조해서 일관된 품질을 유지해.</blockquote></div><div style="display:contents" dir="auto"><hr id="8aa34888-f41f-430c-a2f6-58823a851ca4"/></div><div style="display:contents" dir="auto"><h2 id="608c1253-c5f9-4d35-8a30-a7552a418bc7" class="">1. 표준 섹션 구조 (모든 게임 공통)</h2></div><div style="display:contents" dir="auto"><p id="52ba32a2-b06a-48da-8f7e-cbf1c2e0b25a" class="">모든 <a href="http://GAME.md">GAME.md</a>는 아래 구조를 반드시 따라야 해:</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js" integrity="sha512-m3JYEI6gx5fh9jF10FjGoMzVKcV2N6nchcDcqPCdI1L3R2WQV7br2XVNR8iTLb2daOMRl3zldbcfT40xU2ntVw==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><pre id="e2469007-2427-4066-9c39-ae8807de3e58" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">YAML front matter
+├── identity
+├── implementation    ← 파일 구조 (게임마다 명시)
+├── components
+├── entities
+├── mechanics         ← actions + loops
+└── goals
+
+## Design Pillars     ← 핵심 설계 원칙 (3~5개)
+## User Flow          ← 플레이어 행동 흐름 (필수)
+## Mechanics in Depth ← 구현 세부 규칙
+## Content Guidelines ← 데이터 추가/수정 방법
+## Anti-Patterns      ← [CRITICAL] 버그 방지 목록</code></pre></div><div style="display:contents" dir="auto"><h3 id="0aeb123c-3823-413a-a291-7e1b6562dc4e" class="">작성 원칙</h3></div><div style="display:contents" dir="auto"><ul id="4ba8fdb2-d065-458d-892f-8d63653f83f2" class="bulleted-list"><li style="list-style-type:disc"><code>components</code>는 평탄하고 단순하게 — <a href="http://chess.md">chess.md</a> 수준</li></ul></div><div style="display:contents" dir="auto"><ul id="65fd009e-2abf-4fa1-9b57-8ee5b877ad8e" class="bulleted-list"><li style="list-style-type:disc"><code>implementation.files</code>에 각 파일의 역할을 한 줄로 명시</li></ul></div><div style="display:contents" dir="auto"><ul id="32093f32-e693-4367-b9d9-4164d219b04f" class="bulleted-list"><li style="list-style-type:disc"><code>data_files</code>에 CSV 파일 목록 포함</li></ul></div><div style="display:contents" dir="auto"><ul id="2fa49e1d-58c6-44f8-ae09-36f21b09d025" class="bulleted-list"><li style="list-style-type:disc">Anti-Patterns는 <code>[CRITICAL]</code> 태그 + 이유 한 줄 필수</li></ul></div><div style="display:contents" dir="auto"><hr id="c6c34776-be99-4289-96d2-4ed3d5034556"/></div><div style="display:contents" dir="auto"><h2 id="cad1b84c-49eb-4421-9a8c-dd419c9bc588" class="">2. User Flow — 별도 강조</h2></div><div style="display:contents" dir="auto"><h3 id="f36f9bb7-6935-4f4f-aecb-6647207d1734" class="">왜 필수인가</h3></div><div style="display:contents" dir="auto"><p id="4e024de6-f27f-4b3b-a002-2a167abcc9f1" class="">User Flow가 없으면 AI가 아래 항목들을 임의로 결정해:</p></div><div style="display:contents" dir="auto"><ul id="d6ebc406-752b-4433-b9b6-bec608bec22c" class="bulleted-list"><li style="list-style-type:disc">화면 전환 순서</li></ul></div><div style="display:contents" dir="auto"><ul id="6c0e0d3e-3cf0-4fc4-93d6-4c641b462e4d" class="bulleted-list"><li style="list-style-type:disc">모달/팝업이 뜨는 시점</li></ul></div><div style="display:contents" dir="auto"><ul id="048a44cd-0739-480b-82f9-729173f8e2e3" class="bulleted-list"><li style="list-style-type:disc">ANI ID가 어느 순간에 실행되는지</li></ul></div><div style="display:contents" dir="auto"><ul id="ed962f07-f099-4cef-b26a-88a194e35f4f" class="bulleted-list"><li style="list-style-type:disc">소진 같은 예외 상황 처리</li></ul></div><div style="display:contents" dir="auto"><p id="5224eb76-20a3-4f0a-93c9-34c01699997c" class="">User Flow가 있으면:</p></div><div style="display:contents" dir="auto"><ul id="69df5fc8-7966-4fea-8f8d-6d580c9a64a5" class="bulleted-list"><li style="list-style-type:disc">AI가 화면 흐름을 정확히 이해</li></ul></div><div style="display:contents" dir="auto"><ul id="71bcdc41-bdda-42fa-8caa-5d193489ca86" class="bulleted-list"><li style="list-style-type:disc">개발자가 기획 의도를 바로 파악</li></ul></div><div style="display:contents" dir="auto"><ul id="ad449eca-15a1-4d9b-af43-bbfbdee17e7b" class="bulleted-list"><li style="list-style-type:disc">모달 자동 진행 같은 오류 사전 방지</li></ul></div><div style="display:contents" dir="auto"><h3 id="6a34ca49-37d5-40ce-b8d7-6329e9548d02" class="">작성 방법</h3></div><div style="display:contents" dir="auto"><pre id="06b99ac0-1caa-4e7b-bfd3-72f3803f230b" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">## User Flow
+
+### 1. [단계명]
+트리거 이벤트
+  → 화면/팝업 ID
+  → 플레이어 행동
+  → 다음 단계
+      ├── 분기 A → 결과 A
+      └── 분기 B → 결과 B</code></pre></div><div style="display:contents" dir="auto"><h3 id="90041efa-a6f2-4a29-85c4-9675db14db29" class="">규칙</h3></div><div style="display:contents" dir="auto"><ul id="cd0e2a02-7740-4f40-8523-0b7e480e458c" class="bulleted-list"><li style="list-style-type:disc">단계마다 번호 부여 (1. 진입 / 2. 메인 게임 / 3. 클리어 등)</li></ul></div><div style="display:contents" dir="auto"><ul id="383b5ba1-3d4c-4ad5-8173-d6b94e386751" class="bulleted-list"><li style="list-style-type:disc">화살표(<code>→</code>)로 흐름 표현</li></ul></div><div style="display:contents" dir="auto"><ul id="718d85c8-7736-48a8-9157-eb7a4f51a97d" class="bulleted-list"><li style="list-style-type:disc">분기는 들여쓰기 + <code>├──</code> / <code>└──</code></li></ul></div><div style="display:contents" dir="auto"><ul id="fd6d663a-4dc9-4623-b56a-3f48f3056f45" class="bulleted-list"><li style="list-style-type:disc">각 단계에서 실행되는 ANI ID 명시</li></ul></div><div style="display:contents" dir="auto"><ul id="51d1c19d-d6e4-41db-9667-cfe0720b3904" class="bulleted-list"><li style="list-style-type:disc">예외 흐름 (소진, 타임아웃 등) 반드시 포함</li></ul></div><div style="display:contents" dir="auto"><h3 id="a3ce4815-de52-4e89-bf59-e4a4e6e3920a" class="">예시 (Hidden Temple 기준)</h3></div><div style="display:contents" dir="auto"><pre id="3456d0ce-e6e1-410f-aabe-2f3985f3fc62" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">### 1. 진입
+이벤트 배너 탭
+  → HT-UI-001 진입 팝업
+  → &quot;발굴 시작&quot; 탭
+  → HT-UI-002 메인 게임 화면
+
+### 2. 메인 게임
+타일 탭
+  → HT-ANI-001 곡괭이 스윙
+  → HT-ANI-002 타일 파괴
+  → 내용물 판정:
+      GEM          → gems_collected +1, HT-ANI-006
+      ITEM         → 마지막 조각 → item_collect 시퀀스
+      EMPTY_REWARD → 소량 보상, HT-ANI-006
+      EMPTY        → 먼지 효과만
+
+### 3. 아이템 발굴
+마지막 아이템 조각 파괴
+  → HT-ANI-003: 아이템 중심 팝업 (0.5초 대기)
+  → HT-ANI-004: 이모지 rotate(360°) → 슬롯 비행 0.8s
+  → 슬롯 filled = true → check_stage_clear()
+
+### 4. 스테이지 클리어
+active_items.every(filled) == true
+  → HT-ANI-005: 슬롯 아이템 → Door 비행
+  → #stage-clear-modal 표시 (자동 진행 금지)
+  → 플레이어 탭 → 다음 스테이지
+
+### 5. 예외: 소진
+pickaxe_count == 0
+  → 충전 유도 팝업
+  → board_state 완전 보존 (리셋 절대 금지)
+  → 복귀 시 resume() → 이어서 진행</code></pre></div><div style="display:contents" dir="auto"><hr id="355358f8-3158-49e1-81f4-d3f001a80f23"/></div><div style="display:contents" dir="auto"><h2 id="025a5f8f-a45b-41af-8fba-379952719ba4" class="">3. AI 구현 명령 템플릿</h2></div><div style="display:contents" dir="auto"><h3 id="179a98ae-10fb-4f71-aaf7-f3f840950ea3" class="">기본 명령 (한 번의 명령으로 구현)</h3></div><div style="display:contents" dir="auto"><pre id="51a5b1e3-df69-44c2-b8e0-be82dea4c2d6" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">GAME_[게임명].md 파일은 게임 기획서 포맷이야.
+이걸 자세히 읽고 게임을 제작하는데
+관련 csv도 첨부해 놓았으니깐
+찬찬히 아주 자세히 살펴 보면서 만들어야 돼.
+
+특히 Anti-Patterns 섹션에 명시된 버그들은
+반드시 사전에 방지하면서 구현해줘.
+구현 완료 후 아래 순서로 직접 테스트하고 결과를 보고해줘:
+
+1. 게임 실행 → 첫 화면이 정상 표시되는가
+2. 핵심 입력 → [게임 핵심 동작]이 실행되는가
+3. 보상 연출 → 아이템/보상 애니메이션이 실행되는가
+4. 단계 전환 → 클리어 모달이 뜨고 다음 단계로 넘어가는가
+5. 예외 처리 → 재화 소진 시 진행 동결되고 리셋되지 않는가
+
+위 5가지 중 하나라도 동작하지 않으면
+완료 선언하지 말고 즉시 수정해줘.
+그리고 Anti-Patterns 항목을 하나씩 체크해서 보고해줘.</code></pre></div><div style="display:contents" dir="auto"><h3 id="29f02090-8c3b-4d52-9641-93e7341104d7" class="">핵심 포인트</h3></div><div style="display:contents" dir="auto"><ul id="30255459-2b09-4217-8a40-415e10caf49c" class="bulleted-list"><li style="list-style-type:disc"><strong>&quot;자세히 읽고&quot;</strong> → AI가 파일을 제대로 파악하게 유도</li></ul></div><div style="display:contents" dir="auto"><ul id="1b32ccea-2548-43bc-af72-ca397dab3f55" class="bulleted-list"><li style="list-style-type:disc"><strong>&quot;csv도 첨부&quot;</strong> → 데이터 파일까지 함께 읽게 유도</li></ul></div><div style="display:contents" dir="auto"><ul id="bc0574dd-809f-4704-b742-2d89c2384e82" class="bulleted-list"><li style="list-style-type:disc"><strong>&quot;직접 테스트&quot;</strong> → 완료 선언 전 자가 검증 강제</li></ul></div><div style="display:contents" dir="auto"><ul id="5a35c70d-04a6-45c1-af8e-fecf44145522" class="bulleted-list"><li style="list-style-type:disc"><strong>&quot;Anti-Patterns 체크 보고&quot;</strong> → 알려진 버그 사전 방지 확인</li></ul></div><div style="display:contents" dir="auto"><hr id="10839a55-6e7a-422a-a28c-8431228297fd"/></div><div style="display:contents" dir="auto"><h2 id="fd28ff3d-f2ad-4bb3-9d45-2b4b390b3774" class="">4. 품질 체크리스트</h2></div><div style="display:contents" dir="auto"><p id="980f0ea0-b40b-4ef4-9593-5463847667d4" class=""><a href="http://GAME.md">GAME.md</a> 작성 완료 후 아래 항목 확인:</p></div><div style="display:contents" dir="auto"><ul id="634d26ed-61bb-45ec-aeb2-f74aa156b19e" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked"><code>implementation</code> 섹션이 YAML 안에 있는가</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="1b658096-fbcd-40ee-aec1-8300351f71db" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked"><code>User Flow</code> 섹션이 있는가</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="d70afaac-f042-41e5-856a-aaf1561f16cb" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">각 User Flow 단계에 ANI ID가 명시됐는가</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="5f782858-795d-4885-a9d7-ac93c473e792" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">예외 흐름이 User Flow에 포함됐는가</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="172c04bb-5eea-4628-98a1-bbc6b43edd5a" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">AI가 임의로 만들 수 있는 항목(이모지 매핑 등)이 명시됐는가</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="721b80c3-739f-4a35-a93f-18cd60210a0d" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Anti-Patterns에 <code>[CRITICAL]</code> 항목이 4개 이상인가</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="0ee25af2-e51f-45de-8bbc-37622326feb4" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">수치값(색상코드, 좌표값 등)이 구체적으로 명시됐는가</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="0c3caaeb-755e-4478-be67-33bcad04ac66" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">모든 ANI에 지속 시간(ms)이 명시됐는가</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="b4525efe-25cb-4746-8931-c0fa14a50a8a" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">파티클/카메라 효과에 수치가 명시됐는가</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2292484e-3b5e-4c3e-9e66-4a666ef22196" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">DOM element ID 테이블이 있는가</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="52da9745-a10d-4dda-8f4b-3c15d666e599" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Animation Specifications 표가 있는가</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="81e15a60-40dc-4a97-b13c-c2a3ecc6f366" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">LocalStorage Schema가 있는가</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="d0eab4ff-0704-42de-b8a9-d03d8dcf6ae1" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">CSV 파싱 주의사항이 Content Guidelines에 있는가</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="d09b8290-ea5e-437e-b1f2-a30d1bd8e0bc" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">디버그 버튼(<code>#reset-btn</code> 등)이 명시됐는가</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="0fbabaaf-59af-4eca-8e07-6503ae4630d6" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">게임별 테스트 항목 5개가 명령에 포함됐는가</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><hr id="cc1afd5b-e77b-4f51-8d51-e0ffbd0991c9"/></div><div style="display:contents" dir="auto"><h2 id="dd628f26-baed-4cce-80fb-eb83464ffe1d" class="">5. 공통 버그 목록</h2></div><div style="display:contents" dir="auto"><p id="ec26c39f-dc54-4aa7-91a0-17d3b32c8576" class="">모든 게임에서 반복되는 버그들. Anti-Patterns에 반드시 포함:</p></div><div style="display:contents" dir="auto"><ul id="a490d0c8-e696-4b18-a2f7-9f7b594b8921" class="bulleted-list"><li style="list-style-type:disc"><strong>index.html에 게임 로직</strong> — 마운트 포인트만. 모든 로직은 <code>src/</code> 하위</li></ul></div><div style="display:contents" dir="auto"><ul id="441358cf-092f-4283-9d3d-efe59dd1e25b" class="bulleted-list"><li style="list-style-type:disc"><strong>단일 파일 구현</strong> — 절대 금지</li></ul></div><div style="display:contents" dir="auto"><ul id="bec0dbbd-9e4c-4145-be41-9045fb198353" class="bulleted-list"><li style="list-style-type:disc"><strong>자동 진행</strong> — 모달 + 플레이어 탭 필수</li></ul></div><div style="display:contents" dir="auto"><ul id="f16420aa-cd98-4252-94a1-092b51a03c34" class="bulleted-list"><li style="list-style-type:disc"><strong>모바일 viewport</strong> — <code>maximum-scale=1.0, user-scalable=no</code> + <code>touch-action: none</code></li></ul></div><div style="display:contents" dir="auto"><ul id="9464e3a0-a622-4061-8607-06ce44ce38ed" class="bulleted-list"><li style="list-style-type:disc"><strong>item_ids CSV 파싱</strong> — <code>&quot;1002,1003&quot;</code> RFC 4180 quoted field. <code>split(&#x27;,&#x27;)</code> 금지</li></ul></div><div style="display:contents" dir="auto"><ul id="cb1a3179-8317-441d-9be6-fae2af1af120" class="bulleted-list"><li style="list-style-type:disc"><strong>소진 시 리셋</strong> — 재화 소진은 진행 동결만. 상태 초기화 절대 금지</li></ul></div><div style="display:contents" dir="auto"><hr id="fb73c111-92ef-490a-b933-a20f18e292d8"/></div><div style="display:contents" dir="auto"><h2 id="d73013fa-3500-4cc0-8846-13f932ea6081" class="">6. 애니메이션 명세 작성 규칙</h2></div><div style="display:contents" dir="auto"><h3 id="dd71f163-9b9d-4288-8c5c-e58557187fbb" class="">왜 수치가 필요한가</h3></div><div style="display:contents" dir="auto"><p id="6ec4c589-5e56-49da-b434-c5d03d0d33d1" class="">추상적인 표현은 AI가 두 가지 방식으로 처리해:</p></div><div style="display:contents" dir="auto"><ul id="dabd1e34-224f-4c2d-8e61-13b1468488f9" class="bulleted-list"><li style="list-style-type:disc"><strong>생략</strong> — &quot;어떻게 구현할지 모르겠으니 일단 빼자&quot;</li></ul></div><div style="display:contents" dir="auto"><ul id="d45ac75a-6d70-4556-9d6e-92f75cdd43e6" class="bulleted-list"><li style="list-style-type:disc"><strong>지시 대기</strong> — &quot;기획서에 없으니 확인받겠다&quot;고 작업 중단</li></ul></div><div style="display:contents" dir="auto"><p id="49cf997c-12ed-4441-b004-25b53330402f" class="">둘 다 결과물 품질을 떨어뜨려.</p></div><div style="display:contents" dir="auto"><h3 id="33f3cabc-b9e4-406d-abae-4bb3b944094d" class="">나쁜 예시 vs 좋은 예시</h3></div><div style="display:contents" dir="auto"><p id="e25ee446-f1f9-4ff6-b4a2-386ef9b2e836" class="">나쁜 예시 (추상적):</p></div><div style="display:contents" dir="auto"><pre id="fc0cf93e-42d1-494e-bfb0-2e82b7b6c097" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">HT-ANI-002: tile crack and crumble with dust particles</code></pre></div><div style="display:contents" dir="auto"><p id="64bee8cb-8010-45d0-9ffe-ce579dd810a2" class="">좋은 예시 (수치 명시):</p></div><div style="display:contents" dir="auto"><pre id="42f34fb9-4df1-46e9-b1f7-d9d6d0055cb6" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">HT-ANI-002: 타일 파괴
+  - 타일 scale 1→0 + opacity 1→0, 300ms ease-out
+  - 파티클 8개: 반경 40px 사방으로 튀어나감, 중력 적용, 500ms 후 소멸
+  - 카메라 x/z ±2px 랜덤 진동, 6프레임, 200ms</code></pre></div><div style="display:contents" dir="auto"><h3 id="3196c0f8-71f9-44d0-97d6-38e8093d2066" class="">규칙</h3></div><div style="display:contents" dir="auto"><ul id="b3254570-2e29-41a6-ade2-c6be778ff3ca" class="bulleted-list"><li style="list-style-type:disc">모든 ANI에 <strong>지속 시간(ms)</strong> 필수</li></ul></div><div style="display:contents" dir="auto"><ul id="9ac52501-46e3-4775-87de-c5c3e3f96c72" class="bulleted-list"><li style="list-style-type:disc">파티클이 있으면 <strong>개수 + 범위 + 소멸 시간</strong> 명시</li></ul></div><div style="display:contents" dir="auto"><ul id="a474b2bd-6080-4170-9781-5e083e50d21f" class="bulleted-list"><li style="list-style-type:disc">이동 애니메이션은 <strong>시작점 → 끝점 + 이징</strong> 명시</li></ul></div><div style="display:contents" dir="auto"><ul id="f6aa79be-d5d5-4f79-ad44-083a99758c44" class="bulleted-list"><li style="list-style-type:disc">카메라 효과는 <strong>진폭 + 프레임 수 + 지속 시간</strong> 명시</li></ul></div><div style="display:contents" dir="auto"><hr id="01a73efe-62a3-4377-9cdb-aaa5d1e70980"/></div><div style="display:contents" dir="auto"><h2 id="c92888a2-3f27-40aa-9bda-1d65b518c25a" class="">7. 구현 검증 (테스트) 규칙</h2></div><div style="display:contents" dir="auto"><h3 id="a9b289e9-d393-408e-9f50-f83348bb483d" class="">왜 필요한가</h3></div><div style="display:contents" dir="auto"><p id="960658b6-05e3-4a08-b81b-cf74cd691516" class="">AI가 게임이 실제로 동작하지 않는데도 &quot;완성&quot;이라고 선언하는 경우가 있어.</p></div><div style="display:contents" dir="auto"><p id="31309028-11fb-4ab6-827d-a2ba62b10842" class="">명령에 테스트 항목을 명시하면 완료 선언 전 자가 검증을 강제할 수 있어.</p></div><div style="display:contents" dir="auto"><h3 id="a9f4dfb7-aae5-4655-a5c1-45c2d5eaf229" class="">게임별 테스트 항목 예시</h3></div><div style="display:contents" dir="auto"><p id="95dce81e-7dfc-4261-9642-59d4909e9a39" class="">Hidden Temple:</p></div><div style="display:contents" dir="auto"><pre id="97c0df27-3203-4013-be89-6813edef9340" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">1. 게임 실행 → 5×5 보드가 표시되는가
+2. 타일 클릭 → 곡괭이가 소모되고 타일이 파괴되는가
+3. 아이템 발굴 → 슬롯으로 날아가는 애니메이션이 실행되는가
+4. 스테이지 클리어 → 모달이 뜨고 다음 스테이지로 넘어가는가
+5. 곡괭이 소진 → 진행이 동결되고 보드가 리셋되지 않는가</code></pre></div><div style="display:contents" dir="auto"><p id="63e33425-0f96-46a0-aff3-f44e5ce0f6b8" class="">Dragon Nest:</p></div><div style="display:contents" dir="auto"><pre id="c103e53a-1928-4d6f-80d0-2e86b9572df5" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">1. 게임 실행 → 핀볼 보드와 드래곤이 표시되는가
+2. 스프링 발사 → 공이 위로 날아가고 범퍼에 튕기는가
+3. 슬롯 착지 → 해당 슬롯이 점등되고 토큰이 계산되는가
+4. 게이지 업데이트 → 토큰이 드래곤 게이지에 반영되는가
+5. 구슬 소진 → 충전 유도 화면이 뜨고 진행 상태가 유지되는가</code></pre></div><div style="display:contents" dir="auto"><h3 id="c552eadc-4a29-4594-b772-0d0b34d2a87d" class="">규칙</h3></div><div style="display:contents" dir="auto"><ul id="a069d62c-d513-42a4-8e39-9fba7e2be61e" class="bulleted-list"><li style="list-style-type:disc">테스트 항목은 게임 핵심 루프 기준으로 5개</li></ul></div><div style="display:contents" dir="auto"><ul id="166fbc2c-4fec-46cd-81e2-6d2919bc7a32" class="bulleted-list"><li style="list-style-type:disc">항상 <strong>예외 처리 (소진/타임아웃)</strong> 포함</li></ul></div><div style="display:contents" dir="auto"><ul id="c5421cee-dd9f-4056-9c3f-0ed610be51e7" class="bulleted-list"><li style="list-style-type:disc">하나라도 실패하면 완료 선언 금지</li></ul></div><div style="display:contents" dir="auto"><hr id="41fb1cd7-3967-4f6b-86c0-b712caf5ccab"/></div><div style="display:contents" dir="auto"><h2 id="ec4407c8-c1fb-431d-a5c7-edfe123f6266" class="">8. 모듈 A: Three.js 기반 게임</h2></div><div style="display:contents" dir="auto"><p id="bb93adc4-cec9-4248-bacb-b55c30268f0e" class="">탐색형/퍼즐형 게임에 추가 적용 (Hidden Temple 등)</p></div><div style="display:contents" dir="auto"><h3 id="d11854dc-d769-464c-8bd7-29493d2c0cfe" class="">추가 Anti-Patterns</h3></div><div style="display:contents" dir="auto"><ul id="0a0ba8e6-d783-4b70-9303-f5a5a152fc0f" class="bulleted-list"><li style="list-style-type:disc"><strong>OrthographicCamera up vector</strong> — <code>camera.up.set(0, 0, -1)</code> before <code>lookAt</code>. 미설정 시 모든 클릭이 보드 중앙에만 등록</li></ul></div><div style="display:contents" dir="auto"><ul id="904806c9-ae75-4b34-a711-7b219a009373" class="bulleted-list"><li style="list-style-type:disc"><strong>씬 정리 누락</strong> — 스테이지 전환 시 모든 geometry/material dispose 필수. LineSegments 누락 시 유령 그리드 잔존</li></ul></div><div style="display:contents" dir="auto"><ul id="146e12ad-acd2-4261-8cfa-daa712091a9e" class="bulleted-list"><li style="list-style-type:disc"><strong>BoxGeometry 타일</strong> — 반드시 PlaneGeometry. 3D 깊이 절대 금지</li></ul></div><div style="display:contents" dir="auto"><ul id="3615971b-7b7f-4204-8a6a-7f514a7beb7e" class="bulleted-list"><li style="list-style-type:disc"><strong>Hidden 타일 색상 차별</strong> — 모든 hidden 타일은 동일 텍스처. content별 색상 구분 금지</li></ul></div><div style="display:contents" dir="auto"><h3 id="9a5c4e51-08e2-49d9-b615-efaa9176bc40" class="">3D 레이어 구조 명시 필수</h3></div><div style="display:contents" dir="auto"><pre id="c86424a9-e1ca-41d5-b196-79ea0f3e0d02" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">y =  0.000  Hidden 타일      PlaneGeometry
+y =  0.005  Hidden 엣지      EdgesGeometry (LineSegments)
+y = -0.005  아이템 텍스처    PlaneGeometry (CanvasTexture)
+y = -0.010  구멍 바닥        PlaneGeometry
+y = -0.009  구멍 엣지        EdgesGeometry (LineSegments)</code></pre></div><div style="display:contents" dir="auto"><hr id="cc066162-0c70-4c66-a5ac-85d67fdbb7a0"/></div><div style="display:contents" dir="auto"><h2 id="da024301-ecaa-4f32-a5fa-6d5fe7dcbbcc" class="">9. 모듈 B: 결과값 제어 파이프라인</h2></div><div style="display:contents" dir="auto"><p id="a68c36e9-6a9c-4e93-9225-13f03f97ccd7" class="">확률 기반 게임 (핀볼/룰렛/슬롯 등)에 적용.</p></div><div style="display:contents" dir="auto"><p id="64ee8027-bf5e-4530-bc4b-c7aa3d3c8380" class=""><strong>물리 시뮬레이션으로 연출하지만 결과는 기획자가 제어해야 할 때 사용.</strong></p></div><div style="display:contents" dir="auto"><p id="daf58d35-b58a-4fd7-9b2f-6b5b4e809e25" class="">패킷 해킹 방지, 확률 테이블 조정이 필요한 게임에 적용.</p></div><div style="display:contents" dir="auto"><h3 id="47d54226-bb08-418f-ac2a-ce55817ff4b4" class="">3단계 파이프라인</h3></div><div style="display:contents" dir="auto"><pre id="486b51ce-4ba0-4c88-a457-25434a54aa25" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">game_1.md          game_2.md              game_3.md
+순수 물리 엔진  →  헤드리스 시뮬레이터  →  확률 제어 + 플레이백
+(랜덤 물리)        (자동 N회 실행)         (probability_config로 제어)
+                        ↓
+                 simulation_log.json       ← game_3 궤적 재생용
+                 simulation_summary.csv    ← 확률 테이블 보정 참고</code></pre></div><div style="display:contents" dir="auto"><h3 id="85974c56-b105-4b4b-a098-38b72c8fbd92" class="">game_<a href="http://1.md">1.md</a> — 순수 물리 엔진</h3></div><div style="display:contents" dir="auto"><ul id="bbd8a927-10f5-4c0c-b3c5-b40ffec6316b" class="bulleted-list"><li style="list-style-type:disc">결과 선결정 없음. Lerp 없음. 완전 랜덤 물리</li></ul></div><div style="display:contents" dir="auto"><ul id="cd4c0242-db8d-42e0-8de2-824269443a07" class="bulleted-list"><li style="list-style-type:disc">모든 라운드를 <code>round_log</code>에 기록 (game_2 입력값)</li></ul></div><div style="display:contents" dir="auto"><ul id="a1e8257e-d44d-4fed-9268-11b579dd50cf" class="bulleted-list"><li style="list-style-type:disc">디버그 버튼 필수</li></ul></div><div style="display:contents" dir="auto"><h3 id="caff0243-0461-42e7-b3ac-85ba87b8d5a4" class="">game_<a href="http://2.md">2.md</a> — 헤드리스 시뮬레이터</h3></div><div style="display:contents" dir="auto"><ul id="b4ff3c95-d582-4a04-9bbe-820e0fefb8cb" class="bulleted-list"><li style="list-style-type:disc"><code>Matter.Render</code> 없이 headless 실행</li></ul></div><div style="display:contents" dir="auto"><ul id="41599708-607f-4b6f-8d50-bdf2e2c901eb" class="bulleted-list"><li style="list-style-type:disc">game_1과 <strong>동일한 물리 상수</strong> 사용 (다르면 데이터 무효)</li></ul></div><div style="display:contents" dir="auto"><ul id="129fa2de-73cc-4301-8450-d3ed13cce52b" class="bulleted-list"><li style="list-style-type:disc">슬롯별 목표 횟수 달성까지 자동 실행</li></ul></div><div style="display:contents" dir="auto"><ul id="0f887767-3666-4322-8be2-3f7235fad5f4" class="bulleted-list"><li style="list-style-type:disc"><code>simulation_log.json</code> + <code>simulation_summary.csv</code> 출력</li></ul></div><div style="display:contents" dir="auto"><h3 id="5089918f-d2ff-49e9-987b-439b38db2d4a" class="">game_<a href="http://3.md">3.md</a> — 확률 제어 + 플레이백</h3></div><div style="display:contents" dir="auto"><ul id="c83ded43-24f1-440d-8504-8108e8138dc9" class="bulleted-list"><li style="list-style-type:disc"><code>probability_config.csv</code>로 슬롯 가중치 제어</li></ul></div><div style="display:contents" dir="auto"><ul id="7f398486-45d0-449b-9670-3316564d1fc9" class="bulleted-list"><li style="list-style-type:disc">발사 전 <code>weighted_random()</code>으로 결과 선결정</li></ul></div><div style="display:contents" dir="auto"><ul id="af47211b-08f8-48b6-8fd7-3fd59c9fcec8" class="bulleted-list"><li style="list-style-type:disc">game_2 로그에서 매칭 궤적을 찾아 애니메이션 재생</li></ul></div><div style="display:contents" dir="auto"><ul id="bf9b11b3-2239-43b0-b01e-a589c073b1f4" class="bulleted-list"><li style="list-style-type:disc">Lerp 보정: <code>Body.applyForce()</code>만 허용</li></ul></div><div style="display:contents" dir="auto"><h3 id="8b4a2f7e-7def-4837-90e4-bf69287a3016" class="">추가 Anti-Patterns</h3></div><div style="display:contents" dir="auto"><ul id="d86cf897-104f-485f-9585-34e7db6aa05d" class="bulleted-list"><li style="list-style-type:disc"><strong>vy 양수 발사</strong> — Matter.js Y축은 아래가 양수. <code>vy = -speed</code></li></ul></div><div style="display:contents" dir="auto"><ul id="7cc404ae-6ede-42f7-9444-36fde9c1168b" class="bulleted-list"><li style="list-style-type:disc"><strong>물리로 결과 결정</strong> — 결과는 항상 <code>weighted_random()</code> 선결정</li></ul></div><div style="display:contents" dir="auto"><ul id="a037c132-83ca-4607-b84f-4e247c2f83b8" class="bulleted-list"><li style="list-style-type:disc"><strong>Lerp 스냅</strong> — <code>Body.setPosition()</code> 금지. <code>Body.applyForce()</code>만</li></ul></div><div style="display:contents" dir="auto"><ul id="908d4660-a563-4f40-9ec7-2cfc9a025f49" class="bulleted-list"><li style="list-style-type:disc"><strong>봇 고정 간격</strong> — <code>setInterval</code> 금지. 재귀 <code>setTimeout</code> + <code>random()</code></li></ul></div><div style="display:contents" dir="auto"><ul id="1c4a30e5-c507-49be-9ea6-aa9165a93c7d" class="bulleted-list"><li style="list-style-type:disc"><strong>probability_config 가중치 합계</strong> — 반드시 1000</li></ul></div><div style="display:contents" dir="auto"><hr id="bcdfbfd7-052b-4d41-8b0d-c6e654f8543c"/></div><div style="display:contents" dir="auto"><h2 id="fb623b03-7aa1-4894-ab98-f45158a4b84a" class="">10. 파일 명명 규칙</h2></div><div style="display:contents" dir="auto"><pre id="83935485-69d3-4935-88d5-9f7da6f1e7f0" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">GAME_[게임명].md           ← 게임 기획서
+[prefix]_stage_config.csv  ← 스테이지 설정
+[prefix]_item_config.csv   ← 아이템 설정
+[prefix]_event_config.csv  ← 이벤트 설정
+
+확률 기반 게임 추가:
+[prefix]_slot_config.csv        ← 슬롯 레이아웃
+probability_config.csv          ← 확률 가중치 (game_3)
+simulation_log.json             ← 시뮬레이터 출력 (game_2)
+simulation_summary.csv          ← 슬롯별 통계 (game_2)</code></pre></div><div style="display:contents" dir="auto"><p id="74085886-c657-47e8-be67-d0019cedd625" class="">예시:</p></div><div style="display:contents" dir="auto"><ul id="9e6c3f3f-cc82-4857-a2fe-ff3dd21e33d1" class="bulleted-list"><li style="list-style-type:disc"><code>GAME_hidden_temple.md</code> + <code>ht_stage_config.csv</code></li></ul></div><div style="display:contents" dir="auto"><ul id="34d50b5a-4291-4327-ac8f-71b23c79cf14" class="bulleted-list"><li style="list-style-type:disc"><code>GAME_dragon_nest.md</code> + <code>dn_slot_config.csv</code> + <code>probability_config.csv</code></li></ul></div><div style="display:contents" dir="auto"><hr id="2754291f-f2ad-4239-8f5e-70c5cbb8302d"/></div><div style="display:contents" dir="auto"><h2 id="4deb6a86-7799-4a22-a1d1-917a2c5dce57" class="">11. 표준 작업 순서</h2></div><div style="display:contents" dir="auto"><pre id="7ee4b19b-da89-48c7-931b-49a1e1ee75dc" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">1. 현중 + Claude 대화
+   → 게임 기획 상의
+   → GAME.md + CSV 파일 완성
+   → 이 가이드 체크리스트 확인
+
+2. GAME.md 노션 저장
+   → 제작중 게임 폴더에 보관
+
+3. Claude Code / Cursor / 안티그래비티에 전달
+   → 기본 명령 템플릿 사용 (테스트 항목 포함)
+   → GAME.md + CSV 파일 함께 전달
+
+4. 버그 발견
+   → Claude와 분석
+   → GAME.md Anti-Patterns 업데이트
+   → 재구현
+
+5. 완성
+   → 노션 GAME.md 최신 버전으로 업데이트</code></pre></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

@@ -1,0 +1,1193 @@
+{
+  "version": 1,
+  "designName": "타이쿤 이벤트 루프 v6_최신구조",
+  "exportedAt": "2026-04-29T04:30:42.056Z",
+  "nodes": [
+    {
+      "id": "n-entry",
+      "type": "entry",
+      "position": {
+        "x": 300,
+        "y": 0
+      },
+      "data": {
+        "label": "타이쿤 이벤트 시작",
+        "intensity": 5
+      },
+      "measured": {
+        "width": 220,
+        "height": 58
+      }
+    },
+    {
+      "id": "n-init",
+      "type": "trigger",
+      "position": {
+        "x": 300,
+        "y": 140
+      },
+      "data": {
+        "label": "초기화",
+        "intensity": 5,
+        "attributes": [
+          {
+            "key": "dice",
+            "type": "number",
+            "value": "50"
+          },
+          {
+            "key": "dice_count",
+            "type": "number",
+            "value": "1"
+          },
+          {
+            "key": "season_coin",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "score",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "motivation",
+            "type": "number",
+            "value": "100"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "초기화: dice=50 / season_coin=0"
+      },
+      "measured": {
+        "width": 280,
+        "height": 207
+      }
+    },
+    {
+      "id": "n-choice-main",
+      "type": "choice",
+      "position": {
+        "x": 300,
+        "y": 280
+      },
+      "data": {
+        "label": "메인 대시보드",
+        "mockSpec": {
+          "root": "screen",
+          "elements": {
+            "screen": {
+              "type": "Screen",
+              "props": { "title": "🎰 시즌 코인 축제" },
+              "children": ["header", "stats-card", "roll-section"]
+            },
+            "header": {
+              "type": "VStack",
+              "props": { "spacing": 4, "align": "center" },
+              "children": ["title", "subtitle"]
+            },
+            "title": {
+              "type": "Text",
+              "props": { "text": "🎲 주사위 토너먼트", "variant": "title" }
+            },
+            "subtitle": {
+              "type": "Text",
+              "props": { "text": "주사위를 굴려 시즌 코인을 싹쓸이하세요!", "variant": "muted" }
+            },
+            "stats-card": {
+              "type": "Card",
+              "props": { "title": "💰 현재 획득 현황" },
+              "children": ["stats-grid"]
+            },
+            "stats-grid": {
+              "type": "VStack",
+              "props": { "spacing": 12 },
+              "children": ["stat-dice", "stat-coin"]
+            },
+            "stat-dice": {
+              "type": "HStack",
+              "props": { "justify": "between" },
+              "children": ["dice-label", "dice-value"]
+            },
+            "dice-label": { "type": "Text", "props": { "text": "🎲 남은 주사위" } },
+            "dice-value": { "type": "Text", "props": { "text": "{{dice}}개", "variant": "bold" } },
+            "stat-coin": {
+              "type": "HStack",
+              "props": { "justify": "between" },
+              "children": ["coin-label", "coin-value"]
+            },
+            "coin-label": { "type": "Text", "props": { "text": "🌍 시즌 코인" } },
+            "coin-value": { "type": "Text", "props": { "text": "{{season_coin}}개", "variant": "bold", "color": "#00FF00" } },
+            "roll-section": {
+              "type": "VStack",
+              "props": { "spacing": 10, "align": "center" },
+              "children": ["btn-roll"]
+            },
+            "btn-roll": {
+              "type": "Button",
+              "props": {
+                "label": "🎲 주사위 굴리기! (x{{dice_count}})",
+                "variant": "primary",
+                "targetNodeId": "n-gate-dice"
+              }
+            }
+          }
+        }
+      },
+      "measured": { "width": 280, "height": 100 }
+    },
+    {
+      "id": "n-failure-dice",
+      "type": "success",
+      "position": {
+        "x": 700,
+        "y": 420
+      },
+      "data": {
+        "label": "이벤트 종료",
+        "mockSpec": {
+          "root": "screen",
+          "elements": {
+            "screen": {
+              "type": "Screen",
+              "props": { "title": "🏆 종료" },
+              "children": ["title", "result-card", "btn-restart"]
+            },
+            "title": {
+              "type": "Text",
+              "props": { "text": "축하합니다! 주사위를 모두 사용했습니다.", "variant": "title" }
+            },
+            "result-card": {
+              "type": "Card",
+              "props": { "title": "💰 최종 획득 결과" },
+              "children": ["result-list"]
+            },
+            "result-list": {
+              "type": "VStack",
+              "props": { "spacing": 10 },
+              "children": ["final-coin"]
+            },
+            "final-coin": { "type": "Text", "props": { "text": "🌍 총 시즌 코인: {{season_coin}}개", "variant": "bold" } },
+            "btn-restart": {
+              "type": "Button",
+              "props": {
+                "label": "🔄 다시 시작",
+                "variant": "secondary",
+                "targetNodeId": "n-init"
+              }
+            }
+          }
+        }
+      },
+      "measured": { "width": 280, "height": 100 }
+    },
+    {
+      "id": "n-disposal",
+      "type": "disposal",
+      "position": {
+        "x": 300,
+        "y": 560
+      },
+      "data": {
+        "label": "주사위 소비",
+        "intensity": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "disposalType": "optional",
+        "demandElasticity": 5
+      },
+      "measured": {
+        "width": 220,
+        "height": 77
+      }
+    },
+    {
+      "id": "n-dice-res",
+      "type": "resource",
+      "position": {
+        "x": 700,
+        "y": 560
+      },
+      "data": {
+        "label": "주사위",
+        "resourceId": "dlctHidqjrV5f1nSJngQ",
+        "resourceKey": "dice"
+      },
+      "measured": {
+        "width": 56,
+        "height": 56
+      }
+    },
+    {
+      "id": "n-trig-dice-minus",
+      "type": "trigger",
+      "position": {
+        "x": 300,
+        "y": 700
+      },
+      "data": {
+        "label": "dice -= dice_count",
+        "intensity": 5,
+        "attributes": [
+          {
+            "key": "dice",
+            "type": "number",
+            "value": "dice - dice_count"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 71
+      }
+    },
+    {
+      "id": "n-move",
+      "type": "staging",
+      "position": {
+        "x": 300,
+        "y": 840
+      },
+      "data": {
+        "label": "타일 이동",
+        "intensity": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 60
+      }
+    },
+    {
+      "id": "n-gate-event",
+      "type": "gate",
+      "position": {
+        "x": 300,
+        "y": 980
+      },
+      "data": {
+        "label": "정거장 착지?",
+        "condition": "rand.d10() <= 1",
+        "intensity": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "4/40 = 10% 확률",
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 87
+      }
+    },
+    {
+      "id": "n-non-event",
+      "type": "reward",
+      "position": {
+        "x": 700,
+        "y": 980
+      },
+      "data": {
+        "label": "일반 타일",
+        "intensity": 3,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 58
+      }
+    },
+    {
+      "id": "n-gate-station",
+      "type": "gate",
+      "position": {
+        "x": 300,
+        "y": 1120
+      },
+      "data": {
+        "label": "셧다운 / 은행강탈?",
+        "condition": "rand.d10() <= 3",
+        "intensity": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "셧다운 30% / 은행강탈 70%",
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 87
+      }
+    },
+    {
+      "id": "n-gate-shutdown",
+      "type": "gate",
+      "position": {
+        "x": 80,
+        "y": 1280
+      },
+      "data": {
+        "label": "막힘/성공?",
+        "condition": "rand.d6() <= 3",
+        "intensity": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "n-blocked",
+      "type": "reward",
+      "position": {
+        "x": -160,
+        "y": 1530
+      },
+      "data": {
+        "label": "셧다운 막힘 보상",
+        "attributes": [
+          {
+            "key": "season_coin",
+            "type": "number",
+            "value": "season_coin + (2 * dice_count)"
+          }
+        ],
+        "intensity": 4,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 5,
+          "relatedness": 0
+        },
+        "description": "시즌 코인 +2"
+      },
+      "measured": {
+        "width": 220,
+        "height": 71
+      }
+    },
+    {
+      "id": "n-success",
+      "type": "reward",
+      "position": {
+        "x": 80,
+        "y": 1530
+      },
+      "data": {
+        "label": "셧다운 성공 보상",
+        "attributes": [
+          {
+            "key": "season_coin",
+            "type": "number",
+            "value": "season_coin + (4 * dice_count)"
+          }
+        ],
+        "intensity": 7,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 3,
+          "motivation": 10,
+          "relatedness": 0
+        },
+        "description": "시즌 코인 +4"
+      },
+      "measured": {
+        "width": 220,
+        "height": 71
+      }
+    },
+    {
+      "id": "n-gate-bank1",
+      "type": "gate",
+      "position": {
+        "x": 520,
+        "y": 1280
+      },
+      "data": {
+        "label": "작음?",
+        "condition": "rand.d6() <= 2",
+        "intensity": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "n-small",
+      "type": "reward",
+      "position": {
+        "x": 400,
+        "y": 1530
+      },
+      "data": {
+        "label": "은행강탈 작음 보상",
+        "attributes": [
+          {
+            "key": "season_coin",
+            "type": "number",
+            "value": "season_coin + (2 * dice_count)"
+          }
+        ],
+        "intensity": 4,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 5,
+          "relatedness": 0
+        },
+        "description": "시즌 코인 +2"
+      },
+      "measured": {
+        "width": 220,
+        "height": 71
+      }
+    },
+    {
+      "id": "n-gate-bank2",
+      "type": "gate",
+      "position": {
+        "x": 680,
+        "y": 1400
+      },
+      "data": {
+        "label": "큼?",
+        "condition": "rand.d6() <= 4",
+        "intensity": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "n-big",
+      "type": "reward",
+      "position": {
+        "x": 620,
+        "y": 1660
+      },
+      "data": {
+        "label": "은행강탈 큼 보상",
+        "attributes": [
+          {
+            "key": "season_coin",
+            "type": "number",
+            "value": "season_coin + (4 * dice_count)"
+          }
+        ],
+        "intensity": 6,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 1,
+          "motivation": 8,
+          "relatedness": 0
+        },
+        "description": "시즌 코인 +4"
+      },
+      "measured": {
+        "width": 220,
+        "height": 71
+      }
+    },
+    {
+      "id": "n-huge",
+      "type": "reward",
+      "position": {
+        "x": 880,
+        "y": 1660
+      },
+      "data": {
+        "label": "은행강탈 매우큼 보상",
+        "attributes": [
+          {
+            "key": "season_coin",
+            "type": "number",
+            "value": "season_coin + (6 * dice_count)"
+          }
+        ],
+        "intensity": 9,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 4,
+          "motivation": 15,
+          "relatedness": 0
+        },
+        "description": "시즌 코인 +6"
+      },
+      "measured": {
+        "width": 220,
+        "height": 71
+      }
+    },
+    {
+      "id": "n-reward-hub",
+      "type": "reward",
+      "position": {
+        "x": 300,
+        "y": 1800
+      },
+      "data": {
+        "label": "타이쿤 이벤트 재화 획득",
+        "intensity": 6,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 2,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "point_gain × dice_count 만큼 지급"
+      },
+      "measured": {
+        "width": 257,
+        "height": 82
+      }
+    },
+    {
+      "id": "n-me1-res",
+      "type": "resource",
+      "position": {
+        "x": 700,
+        "y": 1800
+      },
+      "data": {
+        "label": "타이쿤 이벤트 재화",
+        "resourceId": "S0iJs8Mp3XUkMPrJD7kH",
+        "resourceKey": "me_1"
+      },
+      "measured": {
+        "width": 56,
+        "height": 56
+      }
+    },
+    {
+      "id": "n-tournament-end",
+      "type": "staging",
+      "position": {
+        "x": 1300,
+        "y": 420
+      },
+      "data": {
+        "label": "토너먼트 종료 / 순위 확정",
+        "intensity": 7,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 3
+        },
+        "description": "주사위 소진 = 토너먼트 종료. rank 값으로 순위 확정"
+      },
+      "measured": {
+        "width": 280,
+        "height": 100
+      }
+    },
+    {
+      "id": "n-gate-rank1",
+      "type": "gate",
+      "position": {
+        "x": 1300,
+        "y": 560
+      },
+      "data": {
+        "label": "1위?",
+        "condition": "rank == 1",
+        "intensity": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "n-gate-rank3",
+      "type": "gate",
+      "position": {
+        "x": 1300,
+        "y": 690
+      },
+      "data": {
+        "label": "2~3위?",
+        "condition": "rank <= 3",
+        "intensity": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "n-gate-rank10",
+      "type": "gate",
+      "position": {
+        "x": 1300,
+        "y": 820
+      },
+      "data": {
+        "label": "4~10위?",
+        "condition": "rank <= 10",
+        "intensity": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "n-gate-rank20",
+      "type": "gate",
+      "position": {
+        "x": 1300,
+        "y": 950
+      },
+      "data": {
+        "label": "11~20위?",
+        "condition": "rank <= 20",
+        "intensity": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "n-trig-coin8",
+      "type": "trigger",
+      "position": {
+        "x": 1600,
+        "y": 560
+      },
+      "data": {
+        "label": "시즌 코인 +8 (1위)",
+        "intensity": 5,
+        "attributes": [
+          {
+            "key": "season_coin",
+            "type": "number",
+            "value": "season_coin + 8"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 71
+      }
+    },
+    {
+      "id": "n-trig-coin5",
+      "type": "trigger",
+      "position": {
+        "x": 1600,
+        "y": 690
+      },
+      "data": {
+        "label": "시즌 코인 +5 (2~3위)",
+        "intensity": 5,
+        "attributes": [
+          {
+            "key": "season_coin",
+            "type": "number",
+            "value": "season_coin + 5"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 71
+      }
+    },
+    {
+      "id": "n-trig-coin3",
+      "type": "trigger",
+      "position": {
+        "x": 1600,
+        "y": 820
+      },
+      "data": {
+        "label": "시즌 코인 +3 (4~10위)",
+        "intensity": 5,
+        "attributes": [
+          {
+            "key": "season_coin",
+            "type": "number",
+            "value": "season_coin + 3"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 71
+      }
+    },
+    {
+      "id": "n-trig-coin2",
+      "type": "trigger",
+      "position": {
+        "x": 1600,
+        "y": 950
+      },
+      "data": {
+        "label": "시즌 코인 +2 (11~20위)",
+        "intensity": 5,
+        "attributes": [
+          {
+            "key": "season_coin",
+            "type": "number",
+            "value": "season_coin + 2"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 71
+      }
+    },
+    {
+      "id": "n-trig-coin1",
+      "type": "trigger",
+      "position": {
+        "x": 1300,
+        "y": 1080
+      },
+      "data": {
+        "label": "시즌 코인 +1 (21~35위)",
+        "intensity": 5,
+        "attributes": [
+          {
+            "key": "season_coin",
+            "type": "number",
+            "value": "season_coin + 1"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 71
+      }
+    },
+    {
+      "id": "n-result",
+      "type": "success",
+      "position": {
+        "x": 1300,
+        "y": 1260
+      },
+      "data": {
+        "label": "이벤트 종료 결과",
+        "intensity": 8,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 5,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "타이쿤 이벤트 재화 총합 = 토너먼트 점수. 시즌 코인 획득 완료."
+      },
+      "measured": {
+        "width": 280,
+        "height": 79
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "source": "n-entry",
+      "target": "n-init",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e_init_to_main",
+      "source": "n-init",
+      "target": "n-choice-main",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e_main_to_gate",
+      "source": "n-choice-main",
+      "target": "n-gate-dice",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e3",
+      "source": "n-gate-dice",
+      "target": "n-disposal",
+      "data": {
+        "gateBranch": "true"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e4",
+      "source": "n-gate-dice",
+      "target": "n-failure-dice",
+      "data": {
+        "gateBranch": "false"
+      },
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "id": "e5",
+      "source": "n-dice-res",
+      "target": "n-disposal",
+      "data": {
+        "amount": 1,
+        "resourceAmountExpression": "dice_count"
+      },
+      "type": "resource",
+      "sourceHandle": "left",
+      "targetHandle": "right"
+    },
+    {
+      "id": "e6",
+      "source": "n-disposal",
+      "target": "n-trig-dice-minus",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e7",
+      "source": "n-trig-dice-minus",
+      "target": "n-move",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e8",
+      "source": "n-move",
+      "target": "n-gate-event",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e9",
+      "source": "n-gate-event",
+      "target": "n-non-event",
+      "data": {
+        "gateBranch": "false"
+      },
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "id": "e10",
+      "source": "n-non-event",
+      "target": "n-choice-main",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e11",
+      "source": "n-gate-event",
+      "target": "n-gate-station",
+      "data": {
+        "gateBranch": "true"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e12",
+      "source": "n-gate-station",
+      "target": "n-gate-shutdown",
+      "data": {
+        "gateBranch": "true"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e13",
+      "source": "n-gate-station",
+      "target": "n-gate-bank1",
+      "data": {
+        "gateBranch": "false"
+      },
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e14",
+      "source": "n-gate-shutdown",
+      "target": "n-blocked",
+      "data": {
+        "gateBranch": "true"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e15",
+      "source": "n-gate-shutdown",
+      "target": "n-success",
+      "data": {
+        "gateBranch": "false"
+      },
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+
+    {
+      "id": "e18",
+      "source": "n-gate-bank1",
+      "target": "n-small",
+      "data": {
+        "gateBranch": "true"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e20",
+      "source": "n-gate-bank2",
+      "target": "n-big",
+      "data": {
+        "gateBranch": "true"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e21_huge",
+      "source": "n-gate-bank2",
+      "target": "n-huge",
+      "data": {
+        "gateBranch": "false"
+      },
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "id": "e25",
+      "source": "n-blocked",
+      "target": "n-reward-hub",
+      "data": {},
+      "t    {
+      "id": "e25_main",
+      "source": "n-blocked",
+      "target": "n-choice-main",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e26_main",
+      "source": "n-success",
+      "target": "n-choice-main",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e27_main",
+      "source": "n-small",
+      "target": "n-choice-main",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e28_main",
+      "source": "n-big",
+      "target": "n-choice-main",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e29_main",
+      "source": "n-huge",
+      "target": "n-choice-main",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e32_final",
+      "source": "n-failure-dice",
+      "target": "n-tournament-end",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e33_final",
+      "source": "n-tournament-end",
+      "target": "n-result",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    }
+  ],
+  "resources": [
+    {
+      "id": "dlctHidqjrV5f1nSJngQ",
+      "key": "dice",
+      "name": "주사위",
+      "color": "marigold",
+      "icon": "box"
+    },
+    {
+      "id": "OoNsKZ4ZaaOlE4b9BzV6",
+      "key": "season_coin",
+      "name": "시즌 코인",
+      "color": "jade",
+      "icon": "earth"
+    },
+    {
+      "id": "S0iJs8Mp3XUkMPrJD7kH",
+      "key": "me_1",
+      "name": "타이쿤 이벤트 재화",
+      "color": "salmon",
+      "icon": "car"
+    }
+  ]
+}

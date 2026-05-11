@@ -1,0 +1,980 @@
+{
+  "version": 1,
+  "designName": "주사위_게임_1차_(0429)",
+  "exportedAt": "2026-04-29T10:06:28.458Z",
+  "nodes": [
+    {
+      "id": "n_entry",
+      "type": "entry",
+      "position": {
+        "x": 410.0368368149485,
+        "y": -56.48023009342823
+      },
+      "data": {
+        "label": "진입"
+      },
+      "measured": {
+        "width": 220,
+        "height": 58
+      }
+    },
+    {
+      "id": "n_init",
+      "type": "trigger",
+      "position": {
+        "x": 400,
+        "y": 120.5
+      },
+      "data": {
+        "label": "게임 설정",
+        "attributes": [
+          {
+            "key": "gold",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "dice",
+            "type": "number",
+            "value": "10"
+          },
+          {
+            "key": "bet_high",
+            "type": "number",
+            "value": "-1"
+          },
+          {
+            "key": "roll",
+            "type": "number",
+            "value": "0"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "게임 시작 시 모든 변수를 초기화합니다.\n수치를 바꾸고 싶으면 여기서 변경하세요."
+      },
+      "measured": {
+        "width": 280,
+        "height": 183
+      }
+    },
+    {
+      "id": "n_lobby",
+      "type": "choice",
+      "position": {
+        "x": 384.8904679061194,
+        "y": 340
+      },
+      "data": {
+        "label": "로비",
+        "mockSpec": {
+          "root": "screen",
+          "elements": {
+            "s1": {
+              "type": "Spacer",
+              "props": {}
+            },
+            "s2": {
+              "type": "Spacer",
+              "props": {}
+            },
+            "body": {
+              "type": "VStack",
+              "props": {
+                "spacing": 20
+              },
+              "children": [
+                "s1",
+                "title",
+                "dice_info",
+                "btn_start",
+                "btn_refill",
+                "s2"
+              ]
+            },
+            "title": {
+              "type": "Text",
+              "props": {
+                "text": "주사위 예측 게임",
+                "variant": "title"
+              }
+            },
+            "screen": {
+              "type": "Screen",
+              "props": {},
+              "children": [
+                "body"
+              ]
+            },
+            "btn_start": {
+              "type": "Button",
+              "props": {
+                "label": "게임 시작",
+                "variant": "secondary",
+                "targetNodeId": "n_gate_dice"
+              }
+            },
+            "dice_info": {
+              "type": "Text",
+              "props": {
+                "text": "주사위: {{dice}}개",
+                "variant": "subtitle"
+              }
+            },
+            "btn_refill": {
+              "type": "Button",
+              "props": {
+                "label": "주사위 충전 (+10)",
+                "variant": "secondary",
+                "targetNodeId": "n_refill"
+              }
+            }
+          }
+        },
+        "sdtEffects": {
+          "autonomy": 3,
+          "competence": 0,
+          "motivation": 10,
+          "relatedness": 0
+        },
+        "description": "게임 시작 또는 주사위 충전을 선택합니다.",
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 271,
+        "height": 87
+      }
+    },
+    {
+      "id": "n_refill",
+      "type": "trigger",
+      "position": {
+        "x": 750,
+        "y": 358.8869151173508
+      },
+      "data": {
+        "label": "주사위 충전",
+        "attributes": [
+          {
+            "key": "dice",
+            "type": "number",
+            "value": "dice + 10"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 71
+      }
+    },
+    {
+      "id": "n_gate_dice",
+      "type": "gate",
+      "position": {
+        "x": 410.0368368149485,
+        "y": 518.5274661676218
+      },
+      "data": {
+        "label": "주사위 있나?",
+        "condition": "dice > 0",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "n_end",
+      "type": "success",
+      "position": {
+        "x": 733.8021278438396,
+        "y": 518.5274661676218
+      },
+      "data": {
+        "label": "게임 종료",
+        "mockSpec": {
+          "root": "",
+          "elements": {}
+        },
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 5,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "주사위가 없으면 게임 종료",
+        "mockInitialState": {}
+      },
+      "measured": {
+        "width": 220,
+        "height": 61
+      }
+    },
+    {
+      "id": "n_disposal",
+      "type": "disposal",
+      "position": {
+        "x": 410.0368368149485,
+        "y": 658.639322338659
+      },
+      "data": {
+        "label": "주사위 소비",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "disposalType": "optional",
+        "demandElasticity": 5
+      },
+      "measured": {
+        "width": 220,
+        "height": 77
+      }
+    },
+    {
+      "id": "n_res_dice",
+      "type": "resource",
+      "position": {
+        "x": 683.8021278438396,
+        "y": 648.5274661676218
+      },
+      "data": {
+        "label": "주사위",
+        "resourceId": "p8F8F8IgosHL1aPu3Kyq",
+        "resourceKey": "dice"
+      },
+      "measured": {
+        "width": 56,
+        "height": 56
+      }
+    },
+    {
+      "id": "n_bet",
+      "type": "choice",
+      "position": {
+        "x": 384.8904679061194,
+        "y": 804.4704750153
+      },
+      "data": {
+        "label": "베팅 선택",
+        "mockSpec": {
+          "root": "screen",
+          "elements": {
+            "s1": {
+              "type": "Spacer",
+              "props": {}
+            },
+            "s2": {
+              "type": "Spacer",
+              "props": {}
+            },
+            "body": {
+              "type": "VStack",
+              "props": {
+                "spacing": 20
+              },
+              "children": [
+                "s1",
+                "title",
+                "btn_high",
+                "btn_low",
+                "s2"
+              ]
+            },
+            "title": {
+              "type": "Text",
+              "props": {
+                "text": "높을까요? 낮을까요?",
+                "variant": "title"
+              }
+            },
+            "screen": {
+              "type": "Screen",
+              "props": {},
+              "children": [
+                "body"
+              ]
+            },
+            "btn_low": {
+              "type": "Button",
+              "props": {
+                "label": "낮음 (1,2,3)",
+                "variant": "secondary",
+                "targetNodeId": "n_low"
+              }
+            },
+            "btn_high": {
+              "type": "Button",
+              "props": {
+                "label": "높음 (4,5,6)",
+                "variant": "secondary",
+                "targetNodeId": "n_high"
+              }
+            }
+          }
+        },
+        "sdtEffects": {
+          "autonomy": 5,
+          "competence": 0,
+          "motivation": 20,
+          "relatedness": 0
+        },
+        "description": "높음(4~6) 또는 낮음(1~3)을 선택합니다.",
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 273,
+        "height": 87
+      }
+    },
+    {
+      "id": "n_high",
+      "type": "trigger",
+      "position": {
+        "x": 254.51784492253006,
+        "y": 988.5274661676218
+      },
+      "data": {
+        "label": "높음 선택",
+        "attributes": [
+          {
+            "key": "bet_high",
+            "type": "number",
+            "value": "1"
+          },
+          {
+            "key": "roll",
+            "type": "number",
+            "value": "rand.d6()"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 95
+      }
+    },
+    {
+      "id": "n_low",
+      "type": "trigger",
+      "position": {
+        "x": 563.8021278438396,
+        "y": 988.5274661676218
+      },
+      "data": {
+        "label": "낮음 선택",
+        "attributes": [
+          {
+            "key": "bet_high",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "roll",
+            "type": "number",
+            "value": "rand.d6()"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 95
+      }
+    },
+    {
+      "id": "n_judge",
+      "type": "gate",
+      "position": {
+        "x": 384.8904679061194,
+        "y": 1158.5274661676217
+      },
+      "data": {
+        "label": "판정",
+        "condition": "(bet_high == 1 && roll >= 4) || (bet_high == 0 && roll <= 3)",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 280,
+        "height": 65
+      }
+    },
+    {
+      "id": "n_win",
+      "type": "reward",
+      "position": {
+        "x": 183.80212784383963,
+        "y": 1571.4614424445563
+      },
+      "data": {
+        "label": "승리! 골드 +1",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 20,
+          "motivation": 30,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 60
+      }
+    },
+    {
+      "id": "n_gold",
+      "type": "trigger",
+      "position": {
+        "x": 183.80212784383963,
+        "y": 1698.3442328047154
+      },
+      "data": {
+        "label": "골드 +1",
+        "attributes": [
+          {
+            "key": "gold",
+            "type": "number",
+            "value": "gold + 1"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 71
+      }
+    },
+    {
+      "id": "n_lose",
+      "type": "failure",
+      "position": {
+        "x": 683.8021278438396,
+        "y": 1571.4614424445563
+      },
+      "data": {
+        "label": "패배",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 58
+      }
+    },
+    {
+      "id": "n_next",
+      "type": "choice",
+      "position": {
+        "x": 183,
+        "y": 1914.9426877396008
+      },
+      "data": {
+        "label": "다음 라운드",
+        "mockSpec": {
+          "root": "screen",
+          "elements": {
+            "s1": {
+              "type": "Spacer",
+              "props": {}
+            },
+            "s2": {
+              "type": "Spacer",
+              "props": {}
+            },
+            "body": {
+              "type": "VStack",
+              "props": {
+                "spacing": 20
+              },
+              "children": [
+                "s1",
+                "gold_txt",
+                "btn_next",
+                "s2"
+              ]
+            },
+            "screen": {
+              "type": "Screen",
+              "props": {},
+              "children": [
+                "body"
+              ]
+            },
+            "btn_next": {
+              "type": "Button",
+              "props": {
+                "label": "계속하기",
+                "variant": "secondary",
+                "targetNodeId": "n_gate_dice"
+              }
+            },
+            "gold_txt": {
+              "type": "Text",
+              "props": {
+                "text": "보유 골드: {{gold}}",
+                "variant": "title"
+              }
+            }
+          }
+        },
+        "sdtEffects": {
+          "autonomy": 2,
+          "competence": 0,
+          "motivation": 10,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "memo_intro",
+      "type": "memo",
+      "position": {
+        "x": 805.3530790339385,
+        "y": 142.71168993933304
+      },
+      "data": {
+        "label": "쉬운 버전 — 이 템플릿은 무엇인가요?",
+        "description": "주사위 예측 게임의 가장 단순한 형태입니다.\n처음 LLE를 배우는 분들을 위한 입문 템플릿입니다.\n\n게임 흐름:\n진입 > 설정 > 로비 > 주사위 소비 > 베팅 > 판정 > 보상/패배 > 반복\n\n어려운 버전과의 차이:\n- 통계 없음 (승률 계산 없음)\n- 연출 팝업 없음\n- 충전 모달 없음\n간단하게 핵심 구조만 담았습니다.   "
+      },
+      "width": 451,
+      "height": 206,
+      "measured": {
+        "width": 451,
+        "height": 206
+      },
+      "resizing": false
+    },
+    {
+      "id": "memo_roll",
+      "type": "memo",
+      "position": {
+        "x": -269.30294027960474,
+        "y": 1068.7096621413925
+      },
+      "data": {
+        "label": "roll 변수가 왜 필요한가요?",
+        "description": "주사위를 굴린 결과를 기억하기 위한 변수입니다.\n\n플레이어가 높음/낮음을 선택하면\nroll = rand.d6() 으로 1~6 사이 숫자를 뽑습니다.\n이 숫자를 판정 게이트에서 비교해 승패를 결정합니다.\n\n판정 기준:\n높음 성공: roll이 4 이상 (4,5,6 = 50% 확률)\n낮음 성공: roll이 3 이하 (1,2,3 = 50% 확률)\n\n주의: 게임 설정 노드에서 roll=0 으로 미리 선언하지 않으면\n판정 시 알 수 없는 변수 오류가 발생합니다."
+      },
+      "width": 313,
+      "height": 285,
+      "measured": {
+        "width": 313,
+        "height": 285
+      },
+      "resizing": false
+    },
+    {
+      "id": "memo_disposal",
+      "type": "memo",
+      "position": {
+        "x": 915.8054536844725,
+        "y": 759.493629514508
+      },
+      "data": {
+        "label": "주사위를 어떻게 소비하나요?",
+        "description": "라운드를 시작할 때 주사위 1개를 소비합니다.\n\n처분(disposal) 노드와 자원(resource) 노드를 함께 사용합니다.\n처분 노드가 실제 차감을 담당하고,\n자원 노드는 화면 우측 패널의 주사위 게이지를 업데이트합니다.\n\n주의: 트리거에서 dice-1 로 직접 차감하면\n게이지가 시각적으로 업데이트되지 않습니다.\n반드시 이 구조를 사용하세요."
+      },
+      "width": 297,
+      "height": 276,
+      "measured": {
+        "width": 297,
+        "height": 276
+      },
+      "resizing": false
+    },
+    {
+      "id": "memo_gate",
+      "type": "memo",
+      "position": {
+        "x": 1047.3003538956277,
+        "y": 424.3697769359044
+      },
+      "data": {
+        "label": "주사위 잔량 확인은 왜 하나요?",
+        "description": "주사위가 없는데 게임을 계속하면 오류가 발생합니다.\n라운드 시작 전 잔량을 먼저 확인합니다.\n\n조건: dice > 0\n주사위가 있으면 → 게임 계속\n주사위가 없으면 → 게임 종료\n\n주의: 게이트 노드는 반드시 참/거짓\n두 방향 모두 연결해야 합니다.\n한쪽만 연결하면 오류가 발생합니다.\n해당 방법은 보상으로 진행해도 됩니다."
+      },
+      "width": 296,
+      "height": 266,
+      "measured": {
+        "width": 296,
+        "height": 266
+      },
+      "resizing": false
+    },
+    {
+      "id": "n_7Sh8pLXfHq",
+      "type": "resource",
+      "position": {
+        "x": 505.21042764489613,
+        "y": 1536.1408476814722
+      },
+      "data": {
+        "tags": [],
+        "label": "자원",
+        "resourceId": "B0ubePt85yGolsY5SBRa",
+        "description": "",
+        "resourceKey": "gold"
+      },
+      "measured": {
+        "width": 56,
+        "height": 56
+      }
+    },
+    {
+      "id": "n_emo_anticipation",
+      "type": "emotion",
+      "position": {
+        "x": 843.146849122745,
+        "y": 1139.9760783242784
+      },
+      "data": {
+        "tags": [],
+        "label": "감정 (두근두근)",
+        "arousal": "high",
+        "needState": "satisfied",
+        "needSource": "competence",
+        "description": "과연 결과는?!",
+        "emotionType": "성취감",
+        "frictionScore": 1,
+        "playerSegment": []
+      },
+      "measured": {
+        "width": 220,
+        "height": 111
+      }
+    },
+    {
+      "id": "n_emo_success",
+      "type": "emotion",
+      "position": {
+        "x": 183,
+        "y": 1390.0543885639795
+      },
+      "data": {
+        "tags": [],
+        "label": "감정 (성공의 기쁨)",
+        "arousal": "high",
+        "needState": "satisfied",
+        "needSource": "competence",
+        "sdtEffects": {
+          "autonomy": 5,
+          "competence": 10,
+          "motivation": 15,
+          "relatedness": 0
+        },
+        "description": "예측이 적중했습니다!",
+        "emotionType": "성취감",
+        "playerSegment": []
+      },
+      "measured": {
+        "width": 220,
+        "height": 111
+      }
+    },
+    {
+      "id": "n_emo_fail",
+      "type": "emotion",
+      "position": {
+        "x": 683.8021278438396,
+        "y": 1400.8760314725964
+      },
+      "data": {
+        "tags": [],
+        "label": "감정 (아쉬운 빗나감)",
+        "arousal": "high",
+        "needState": "frustrated",
+        "needSource": "competence",
+        "description": "다음에 다시 도전해봐요.",
+        "emotionType": "좌절감",
+        "frictionScore": 3,
+        "playerSegment": []
+      },
+      "measured": {
+        "width": 220,
+        "height": 111
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "xy-edge__n_entrybottom-n_inittop",
+      "source": "n_entry",
+      "target": "n_init",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__n_initbottom-n_lobbytop",
+      "source": "n_init",
+      "target": "n_lobby",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__n_lobbyright-n_refilleft",
+      "source": "n_lobby",
+      "target": "n_refill",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "id": "xy-edge__n_refillbottom-n_lobbyright",
+      "source": "n_refill",
+      "target": "n_lobby",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "bottom"
+    },
+    {
+      "id": "xy-edge__n_lobbybottom-n_gate_dicetop",
+      "source": "n_lobby",
+      "target": "n_gate_dice",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__n_gate_dicebottom-n_disposaltop-true",
+      "source": "n_gate_dice",
+      "target": "n_disposal",
+      "data": {
+        "gateBranch": "true"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__n_gate_diceright-n_endleft-false",
+      "source": "n_gate_dice",
+      "target": "n_end",
+      "data": {
+        "gateBranch": "false"
+      },
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "id": "xy-edge__n_res_diceleft-n_disposalright",
+      "source": "n_res_dice",
+      "target": "n_disposal",
+      "data": {
+        "amount": 1,
+        "resourceAmountExpression": "1"
+      },
+      "type": "resource",
+      "sourceHandle": "left",
+      "targetHandle": "right"
+    },
+    {
+      "id": "xy-edge__n_disposalbottom-n_bettop",
+      "source": "n_disposal",
+      "target": "n_bet",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__n_betbottom-n_hightop",
+      "source": "n_bet",
+      "target": "n_high",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__n_betbottom-n_lowtop",
+      "source": "n_bet",
+      "target": "n_low",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__n_judgebottom-n_wintop-true",
+      "source": "n_judge",
+      "target": "n_emo_success",
+      "data": {
+        "gateBranch": "true"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__n_judgeright-n_loseleft-false",
+      "source": "n_judge",
+      "target": "n_emo_fail",
+      "data": {
+        "gateBranch": "false"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__n_winbottom-n_goldtop",
+      "source": "n_win",
+      "target": "n_gold",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__n_goldbottom-n_nexttop",
+      "source": "n_gold",
+      "target": "n_next",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__n_losebottom-n_nexttop",
+      "source": "n_lose",
+      "target": "n_next",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "right"
+    },
+    {
+      "id": "xy-edge__n_nextbottom-n_gate_diceleft",
+      "source": "n_next",
+      "target": "n_gate_dice",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "left",
+      "targetHandle": "left"
+    },
+    {
+      "id": "xy-edge__n_winright-n_7Sh8pLXfHqleft",
+      "source": "n_win",
+      "target": "n_7Sh8pLXfHq",
+      "data": {
+        "amount": 1,
+        "resourceAmountExpression": "1"
+      },
+      "type": "resource",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "id": "e_high_to_tension",
+      "source": "n_high",
+      "target": "n_emo_anticipation",
+      "data": {},
+      "type": "exec"
+    },
+    {
+      "id": "e_low_to_tension",
+      "source": "n_low",
+      "target": "n_emo_anticipation",
+      "data": {},
+      "type": "exec"
+    },
+    {
+      "id": "e_tension_to_judge",
+      "source": "n_emo_anticipation",
+      "target": "n_judge",
+      "data": {},
+      "type": "exec"
+    },
+    {
+      "id": "e_emo_win_to_win",
+      "source": "n_emo_success",
+      "target": "n_win",
+      "data": {},
+      "type": "exec"
+    },
+    {
+      "id": "e_eObZ8GFgTW",
+      "source": "n_emo_fail",
+      "target": "n_lose",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    }
+  ],
+  "resources": [
+    {
+      "id": "B0ubePt85yGolsY5SBRa",
+      "key": "gold",
+      "name": "골드",
+      "color": "#FFD700",
+      "icon": "coin",
+      "order": 0
+    },
+    {
+      "id": "XQecVcGX0EJpSXKSzXs5",
+      "key": "dice",
+      "name": "주사위",
+      "color": "marigold",
+      "icon": "box",
+      "order": 0
+    }
+  ]
+}

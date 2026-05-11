@@ -1,0 +1,11 @@
+class_config_id,season_id,class_level,class_name,required_coins,tournament_reward_rate,instant_bundle_id
+1,season_001,1,타이쿤 클래스,0,1.0,null
+2,season_001,2,퍼스트 클래스,15,1.05,1002
+3,season_001,3,프리미어 클래스,35,1.10,1003
+4,season_001,4,모노폴리 클래스 I,60,1.15,1002
+5,season_001,5,모노폴리 클래스 II,90,1.20,1003
+6,season_001,6,모노폴리 클래스 III,125,1.25,1002
+7,season_001,7,모노폴리 클래스 IV,165,1.30,1003
+8,season_001,8,모노폴리 클래스 V,210,1.35,1002
+9,season_001,9,모노폴리 클래스 VI,260,1.40,1003
+10,season_001,10,모노폴리 클래스 VII,315,1.50,1004

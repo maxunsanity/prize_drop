@@ -1,0 +1,41 @@
+tile_id,stage_id,tile_index,tile_type,field_group,display_name,multiplier_apply,color_group_id,base_reward,pass_reward,land_bonus,visit_reward,rest_reward,event_linked,target_tile_index,card_pool_id,tax_formula_type,tax_ratio,tax_fixed_value,action_pool_id,fund_pool_id,facility_icon_id,dice_formula_type,reward_multiplier
+1001,1,1,CORNER_GO,CORNER_GO,시작,true,null,100,200,400,null,null,null,null,null,null,null,null,null,null,null,null,null
+1002,1,2,LAND,LAND,1단계 지역,true,1,50,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null
+1003,1,3,COMMUNITY,COMMUNITY,사회사업기금,true,null,100,null,null,null,null,null,null,null,null,null,null,null,1,null,null,null
+1004,1,4,LAND,LAND,1단계 지역,true,1,50,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null
+1005,1,5,TAX,TAX,세금 낮음,true,null,null,null,null,null,null,null,null,null,FIXED,null,5,null,null,null,null,null
+1006,1,6,STATION,STATION,정거장 ACTION,true,null,null,null,null,null,null,null,null,null,null,null,null,1,null,null,null,null
+1007,1,7,LAND,LAND,2단계 지역,true,2,80,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null
+1008,1,8,CHANCE,CHANCE,복불복,true,null,200,null,null,null,null,null,null,1,null,null,null,null,null,null,null,null
+1009,1,9,LAND,LAND,2단계 지역,true,2,80,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null
+1010,1,10,LAND,LAND,2단계 지역,true,2,80,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null
+1011,1,11,CORNER_VISIT,CORNER_VISIT,일반방문/이벤트,true,null,50,null,null,0,null,null,null,null,null,null,null,null,null,null,null,null
+1012,1,12,LAND,LAND,3단계 지역,true,3,110,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null
+1013,1,13,UTILITY,UTILITY,전력 공사,true,null,null,null,null,null,null,null,null,null,null,null,null,null,null,icon_electric,DICE_SUM,1.0
+1014,1,14,LAND,LAND,3단계 지역,true,3,110,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null
+1015,1,15,LAND,LAND,3단계 지역,true,3,110,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null
+1016,1,16,STATION,STATION,정거장 ACTION,true,null,null,null,null,null,null,null,null,null,null,null,null,1,null,null,null,null
+1017,1,17,LAND,LAND,4단계 지역,true,4,140,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null
+1018,1,18,COMMUNITY,COMMUNITY,사회사업기금,true,null,100,null,null,null,null,null,null,null,null,null,null,null,1,null,null,null
+1019,1,19,LAND,LAND,4단계 지역,true,4,140,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null
+1020,1,20,LAND,LAND,4단계 지역,true,4,140,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null
+1021,1,21,CORNER_PARK,CORNER_PARK,주차장/이벤트,true,null,null,null,null,null,0,false,null,null,null,null,null,null,null,null,null,null
+1022,1,22,LAND,LAND,5단계 지역,true,5,170,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null
+1023,1,23,CHANCE,CHANCE,복불복,true,null,200,null,null,null,null,null,null,1,null,null,null,null,null,null,null,null
+1024,1,24,LAND,LAND,5단계 지역,true,5,170,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null
+1025,1,25,LAND,LAND,5단계 지역,true,5,170,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null
+1026,1,26,STATION,STATION,정거장 ACTION,true,null,null,null,null,null,null,null,null,null,null,null,null,1,null,null,null,null
+1027,1,27,LAND,LAND,6단계 지역,true,6,200,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null
+1028,1,28,LAND,LAND,6단계 지역,true,6,200,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null
+1029,1,29,UTILITY,UTILITY,수자원 공사,true,null,null,null,null,null,null,null,null,null,null,null,null,null,null,icon_electric,DICE_SUM,1.0
+1030,1,30,LAND,LAND,6단계 지역,true,6,200,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null
+1031,1,31,CORNER_JAIL,CORNER_JAIL,감옥,false,null,null,null,null,null,null,null,11,null,FIXED,null,4,null,null,null,null,null
+1032,1,32,LAND,LAND,7단계 지역,true,7,230,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null
+1033,1,33,LAND,LAND,7단계 지역,true,7,230,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null
+1034,1,34,COMMUNITY,COMMUNITY,사회사업기금,true,null,100,null,null,null,null,null,null,null,null,null,null,null,1,null,null,null
+1035,1,35,LAND,LAND,7단계 지역,true,7,230,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null
+1036,1,36,STATION,STATION,정거장 ACTION,true,null,null,null,null,null,null,null,null,null,null,null,null,1,null,null,null,null
+1037,1,37,CHANCE,CHANCE,복불복,true,null,200,null,null,null,null,null,null,1,null,null,null,null,null,null,null,null
+1038,1,38,LAND,LAND,8단계 지역,true,8,260,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null
+1039,1,39,TAX,TAX,세금 높음,true,null,null,null,null,null,null,null,null,null,FIXED,null,10,null,null,null,null,null
+1040,1,40,LAND,LAND,8단계 지역,true,8,260,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null

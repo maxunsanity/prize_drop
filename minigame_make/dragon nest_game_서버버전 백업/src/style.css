@@ -1,0 +1,276 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 100%; height: 100%; overflow: hidden;
+  background: #888; /* gray outside the 390×844 app */
+  font-family: 'Courier New', monospace;
+  user-select: none; -webkit-user-select: none;
+}
+
+/* Fixed 390×844 app container — centered on screen */
+#app {
+  width: 390px;
+  height: 844px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+  background: #faf8f5;
+  color: #222;
+}
+
+/* Screens */
+#lobby-screen, #pinball-screen {
+  position: absolute;
+  inset: 0;
+  width: 390px;
+  height: 844px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ===== SHARED COMPONENTS ===== */
+
+.top-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 12px;
+  border-bottom: 2px solid #222;
+  background: #faf8f5;
+  flex-shrink: 0;
+  height: 56px;
+}
+.title-badge { font-size: 16px; font-weight: bold; }
+.top-right { display: flex; align-items: center; gap: 6px; }
+.ball-badge {
+  font-size: 13px; font-weight: bold;
+  border: 2px solid #222; padding: 3px 8px;
+  box-shadow: 2px 2px 0 #222; background: #fff;
+}
+
+.sketch-btn {
+  background: #fff; border: 2px solid #222; color: #222;
+  font-family: inherit; font-weight: bold;
+  padding: 6px 14px; cursor: pointer;
+  box-shadow: 2px 2px 0 #222; font-size: 13px;
+}
+.sketch-btn.sm { padding: 4px 9px; font-size: 11px; }
+.sketch-btn:active { transform: translate(2px,2px); box-shadow: none; }
+
+.modal-overlay {
+  position: absolute; inset: 0;
+  background: rgba(250,248,245,0.92);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 200;
+}
+.modal-box {
+  background: #fff; border: 3px solid #222;
+  box-shadow: 6px 6px 0 #222; padding: 24px 20px;
+  text-align: center; display: flex; flex-direction: column;
+  align-items: center; gap: 10px; max-width: 280px; width: 90%;
+}
+.modal-box h2 { font-size: 20px; }
+.modal-box p { font-size: 13px; color: #555; }
+
+/* ===== LOBBY ===== */
+
+#grand-prize-section {
+  padding: 10px 12px;
+  border-bottom: 2px solid #222;
+  flex-shrink: 0;
+}
+#grand-prize-chest {
+  display: flex; align-items: center; gap: 10px;
+  border: 2px solid #aaa; padding: 8px 12px;
+  background: #f5f5f5;
+}
+#grand-prize-chest.unlocked {
+  border-color: #f5c518; background: #fffde7;
+  box-shadow: 2px 2px 0 #f5c518;
+}
+#grand-prize-icon { font-size: 28px; }
+.gp-label { font-weight: bold; font-size: 14px; }
+.gp-status { font-size: 11px; color: #888; }
+
+#dragon-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 12px;
+  overflow-y: auto;
+}
+.dragon-card {
+  border: 2px solid #222; background: #fff;
+  box-shadow: 3px 3px 0 #222; padding: 12px;
+  display: flex; flex-direction: column; gap: 6px;
+  cursor: pointer;
+}
+.dragon-card:active { transform: translate(2px,2px); box-shadow: none; }
+.dragon-card.completed { background: #fffde7; border-color: #f5c518; cursor: default; }
+.dragon-emoji { font-size: 36px; text-align: center; }
+.dragon-name { font-size: 12px; font-weight: bold; text-align: center; }
+.dragon-stage { font-size: 11px; color: #666; text-align: center; }
+.dragon-gauge-mini {
+  height: 8px; background: #eceae3;
+  border: 1px solid #ccc; overflow: hidden; display: flex;
+}
+.dgm-my { background: #EF9F27; height: 100%; transition: width 0.5s; }
+.dgm-partner { background: #1A6FD4; height: 100%; transition: width 0.5s; }
+.dragon-play-btn {
+  font-size: 11px; text-align: center; padding: 4px;
+  border: 1px dashed #888; color: #666; margin-top: 2px;
+}
+
+/* ===== PINBALL SCREEN ===== */
+
+#pinball-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 10px;
+  border-bottom: 2px solid #222;
+  background: #faf8f5;
+  flex-shrink: 0;
+  height: 52px;
+}
+#ui-dragon-header {
+  font-size: 13px; font-weight: bold; text-align: center; flex: 1;
+}
+.header-right { display: flex; align-items: center; gap: 6px; }
+
+.debug-btn {
+  font-size: 10px; padding: 2px 6px;
+  border: 1px dashed #aaa; background: rgba(255,255,255,0.8);
+  color: #888; cursor: pointer; font-family: inherit;
+}
+.debug-btn:active { opacity: 0.6; }
+
+/* Partner gauge row — 36px */
+#ui-partner-gauge {
+  display: flex; align-items: center; gap: 6px;
+  padding: 0 10px;
+  border-bottom: 2px solid #222;
+  flex-shrink: 0;
+  height: 36px;
+}
+.gauge-score {
+  font-size: 11px; font-weight: bold;
+  min-width: 36px; text-align: center;
+}
+.my-score { color: #EF9F27; }
+.partner-score { color: #1A6FD4; }
+.gauge-track {
+  flex: 1; height: 14px;
+  background: #eceae3; border: 2px solid #222;
+  display: flex; overflow: hidden;
+}
+.gauge-fill { height: 100%; transition: width 0.6s ease; width: 0%; }
+.gf-my { background: #EF9F27; }
+.gf-partner { background: #1A6FD4; }
+
+/* Stage gauge — 28px */
+#ui-stage-gauge {
+  display: flex; align-items: center; gap: 6px;
+  padding: 0 10px;
+  border-bottom: 2px solid #222;
+  flex-shrink: 0;
+  height: 28px;
+}
+.stage-icon { font-size: 14px; }
+.stage-bar-wrap {
+  flex: 1; height: 8px;
+  background: #eceae3; border: 1px solid #ccc;
+  position: relative; overflow: visible;
+}
+#stage-bar-fill {
+  height: 100%; background: #EF9F27;
+  transition: width 0.5s ease; width: 0%;
+}
+.stage-mark {
+  position: absolute; top: -4px;
+  width: 2px; height: 16px;
+  background: #222;
+}
+#stage-mark-50 { left: 50%; transform: translateX(-50%); }
+.stage-label { font-size: 10px; color: #888; white-space: nowrap; }
+
+/* Canvas wrap — 420px fixed */
+#canvas-wrap {
+  width: 390px;
+  height: 420px;
+  position: relative;
+  flex-shrink: 0;
+  /* overflow visible so float text can animate above/below canvas edge */
+}
+#canvas-pinball {
+  display: block;
+  width: 390px;
+  height: 420px;
+}
+#float-layer {
+  position: absolute; inset: 0; pointer-events: none;
+}
+
+/* Multiplier + Spring row — 72px */
+#ui-multiplier-btns {
+  display: flex; align-items: stretch;
+  border-top: 2px solid #222;
+  flex-shrink: 0;
+  height: 72px;
+  background: #faf8f5;
+}
+.mult-btn {
+  flex: 1; background: #fff;
+  border: none; border-right: 1px solid #ccc;
+  font-family: inherit; font-size: 13px; font-weight: bold;
+  cursor: pointer; padding: 4px 2px; line-height: 1.4;
+  color: #222;
+}
+.mult-btn:last-of-type { border-right: 1px solid #ccc; }
+.mult-btn.active { background: #222; color: #fff; }
+.mult-btn.unavailable { color: #bbb; }
+.mult-btn small { font-size: 10px; font-weight: normal; display: block; }
+
+/* Spring button */
+#spring-btn {
+  width: 72px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 4px; cursor: pointer;
+  border-left: 2px solid #222;
+  padding: 6px 8px;
+  background: #f0ede6;
+  touch-action: none;
+  user-select: none;
+}
+#spring-btn.charging { background: #fff8ec; }
+
+#spring-thermometer {
+  width: 14px; height: 38px;
+  border: 2px solid #222;
+  position: relative; overflow: hidden;
+  background: #eceae3;
+  display: flex; align-items: flex-end;
+}
+#spring-fill {
+  width: 100%; height: 0%;
+  background: #EF9F27;
+  transition: height 0.05s linear;
+}
+#spring-label {
+  font-size: 11px; font-weight: bold; color: #222;
+  text-align: center; line-height: 1.2;
+}
+
+/* Float text animations */
+.float-text {
+  position: absolute; font-size: 15px; font-weight: bold;
+  pointer-events: none; animation: floatUp 0.9s ease forwards;
+  white-space: nowrap; color: #222;
+}
+@keyframes floatUp {
+  0% { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(-50px) scale(1.15); }
+}
+.float-bonus { color: #EF9F27; font-size: 18px; }
+.float-token { color: #1A6FD4; }

@@ -1,0 +1,631 @@
+{
+  "version": 1,
+  "designName": "게임1_구글_공룡_v6_비주얼분기",
+  "exportedAt": "2026-04-27T03:26:02.147444Z",
+  "resources": [
+    {
+      "id": "res-gold-dino",
+      "key": "gold",
+      "name": "골드",
+      "color": "#FFD700",
+      "icon": "coin"
+    }
+  ],
+  "attributes": [
+    {
+      "key": "survival_score",
+      "type": "number",
+      "value": "0"
+    },
+    {
+      "key": "hurdle_type",
+      "type": "number",
+      "value": "0"
+    },
+    {
+      "key": "money_gain",
+      "type": "number",
+      "value": "0"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "n-entry",
+      "type": "entry",
+      "position": {
+        "x": 400,
+        "y": 0
+      },
+      "data": {
+        "label": "진입",
+        "mockSpec": {
+          "root": "root",
+          "elements": {
+            "root": {
+              "type": "Screen",
+              "props": {},
+              "children": [
+                "title",
+                "btn"
+              ]
+            },
+            "title": {
+              "type": "Text",
+              "props": {
+                "text": "🦖 공룡 v6 (비주얼 분기)",
+                "variant": "title"
+              },
+              "children": []
+            },
+            "btn": {
+              "type": "Button",
+              "props": {
+                "label": "게임 시작",
+                "variant": "primary",
+                "targetNodeId": "n-init"
+              },
+              "children": []
+            }
+          }
+        },
+        "mockInitialState": {
+          "gold": 0,
+          "survival_score": 0,
+          "money_gain": 0,
+          "hurdle_type": 0,
+          "sdt.autonomy": 50,
+          "sdt.competence": 50,
+          "sdt.motivation": 50,
+          "sdt.relatedness": 50,
+          "sim.activeModal": "",
+          "sim.activeScene": "",
+          "sim.currentStep": 0,
+          "sim.activeScreen": ""
+        }
+      }
+    },
+    {
+      "id": "n-init",
+      "type": "trigger",
+      "position": {
+        "x": 400,
+        "y": 150
+      },
+      "data": {
+        "label": "초기화",
+        "attributes": [
+          {
+            "key": "survival_score",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "hurdle_type",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "money_gain",
+            "type": "number",
+            "value": "0"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "relatedness": 0,
+          "motivation": 0
+        }
+      }
+    },
+    {
+      "id": "n-goal-gate",
+      "type": "gate",
+      "position": {
+        "x": 400,
+        "y": 300
+      },
+      "data": {
+        "label": "미션 중?",
+        "condition": "survival_score < 100",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "relatedness": 0,
+          "motivation": 0
+        }
+      }
+    },
+    {
+      "id": "n-spawn-hurdle",
+      "type": "trigger",
+      "position": {
+        "x": 400,
+        "y": 450
+      },
+      "data": {
+        "label": "장애물 결정",
+        "attributes": [
+          {
+            "key": "hurdle_type",
+            "type": "number",
+            "value": "rand.d6() % 2 + 1"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "relatedness": 0,
+          "motivation": 0
+        }
+      }
+    },
+    {
+      "id": "n-type-gate",
+      "type": "gate",
+      "position": {
+        "x": 400,
+        "y": 600
+      },
+      "data": {
+        "label": "지상 장애물?",
+        "condition": "hurdle_type == 1",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "relatedness": 0,
+          "motivation": 0
+        }
+      }
+    },
+    {
+      "id": "n-scene-cactus",
+      "type": "choice",
+      "position": {
+        "x": 200,
+        "y": 750
+      },
+      "data": {
+        "label": "🌵 지상 선인장!",
+        "mockSpec": {
+          "root": "screen",
+          "elements": {
+            "screen": {
+              "type": "Screen",
+              "props": {},
+              "children": [
+                "body"
+              ]
+            },
+            "body": {
+              "type": "VStack",
+              "props": {},
+              "children": [
+                "t",
+                "desc",
+                "btn-j",
+                "btn-d"
+              ]
+            },
+            "t": {
+              "type": "Text",
+              "props": {
+                "text": "🌵 선인장 출현!",
+                "variant": "title"
+              },
+              "children": []
+            },
+            "desc": {
+              "type": "Text",
+              "props": {
+                "text": "점프해서 피하세요!",
+                "variant": "subtitle"
+              },
+              "children": []
+            },
+            "btn-j": {
+              "type": "Button",
+              "props": {
+                "label": "🦘 점프 (성공)",
+                "variant": "primary",
+                "targetNodeId": "n-success-step"
+              },
+              "children": []
+            },
+            "btn-d": {
+              "type": "Button",
+              "props": {
+                "label": "📉 숙이기 (실패)",
+                "variant": "secondary",
+                "targetNodeId": "n-fail-trigger"
+              },
+              "children": []
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "n-scene-bird",
+      "type": "choice",
+      "position": {
+        "x": 600,
+        "y": 750
+      },
+      "data": {
+        "label": "🐦‍ 공중 익룡!",
+        "mockSpec": {
+          "root": "screen",
+          "elements": {
+            "screen": {
+              "type": "Screen",
+              "props": {},
+              "children": [
+                "body"
+              ]
+            },
+            "body": {
+              "type": "VStack",
+              "props": {},
+              "children": [
+                "t",
+                "desc",
+                "btn-d",
+                "btn-j"
+              ]
+            },
+            "t": {
+              "type": "Text",
+              "props": {
+                "text": "🐦‍ 익룡 출현!",
+                "variant": "title"
+              },
+              "children": []
+            },
+            "desc": {
+              "type": "Text",
+              "props": {
+                "text": "숙여서 피하세요!",
+                "variant": "subtitle"
+              },
+              "children": []
+            },
+            "btn-d": {
+              "type": "Button",
+              "props": {
+                "label": "📉 숙이기 (성공)",
+                "variant": "primary",
+                "targetNodeId": "n-success-step"
+              },
+              "children": []
+            },
+            "btn-j": {
+              "type": "Button",
+              "props": {
+                "label": "🦘 점프 (실패)",
+                "variant": "secondary",
+                "targetNodeId": "n-fail-trigger"
+              },
+              "children": []
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "n-success-step",
+      "type": "trigger",
+      "position": {
+        "x": 400,
+        "y": 950
+      },
+      "data": {
+        "label": "회피 성공!",
+        "attributes": [
+          {
+            "key": "survival_score",
+            "type": "number",
+            "value": "survival_score + 10"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 1,
+          "relatedness": 0,
+          "motivation": 0
+        }
+      }
+    },
+    {
+      "id": "n-fail-trigger",
+      "type": "trigger",
+      "position": {
+        "x": 800,
+        "y": 950
+      },
+      "data": {
+        "label": "충돌 발생",
+        "attributes": [
+          {
+            "key": "money_gain",
+            "type": "number",
+            "value": "0"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "relatedness": 0,
+          "motivation": 0
+        }
+      }
+    },
+    {
+      "id": "n-gameover-scene",
+      "type": "scene",
+      "position": {
+        "x": 1000,
+        "y": 950
+      },
+      "data": {
+        "label": "게임 오버",
+        "mockSpec": {
+          "root": "root",
+          "elements": {
+            "root": {
+              "type": "Screen",
+              "props": {},
+              "children": [
+                "t",
+                "s",
+                "btn"
+              ]
+            },
+            "t": {
+              "type": "Text",
+              "props": {
+                "text": "💀 GAME OVER",
+                "variant": "title"
+              },
+              "children": []
+            },
+            "s": {
+              "type": "Text",
+              "props": {
+                "text": "점수: {{survival_score}}",
+                "variant": "subtitle"
+              },
+              "children": []
+            },
+            "btn": {
+              "type": "Button",
+              "props": {
+                "label": "다시 하기",
+                "variant": "primary",
+                "targetNodeId": "n-init"
+              },
+              "children": []
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "n-calc-success",
+      "type": "trigger",
+      "position": {
+        "x": 600,
+        "y": 300
+      },
+      "data": {
+        "label": "성공 보상",
+        "attributes": [
+          {
+            "key": "money_gain",
+            "type": "number",
+            "value": "500"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 3,
+          "relatedness": 0,
+          "motivation": 0
+        }
+      }
+    },
+    {
+      "id": "n-reward-hub",
+      "type": "reward",
+      "position": {
+        "x": 800,
+        "y": 300
+      },
+      "data": {
+        "label": "보상 허브",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 1,
+          "relatedness": 0,
+          "motivation": 0
+        }
+      }
+    },
+    {
+      "id": "n-res-gold",
+      "type": "resource",
+      "position": {
+        "x": 1000,
+        "y": 300
+      },
+      "data": {
+        "label": "골드 지급",
+        "resourceId": "res-gold-dino",
+        "resourceKey": "gold"
+      }
+    },
+    {
+      "id": "n-success-scene",
+      "type": "success",
+      "position": {
+        "x": 1200,
+        "y": 300
+      },
+      "data": {
+        "label": "미션 성공!",
+        "mockSpec": {
+          "root": "root",
+          "elements": {
+            "root": {
+              "type": "Screen",
+              "props": {},
+              "children": [
+                "t",
+                "g",
+                "btn"
+              ]
+            },
+            "t": {
+              "type": "Text",
+              "props": {
+                "text": "🏆 MISSION COMPLETE!",
+                "variant": "title"
+              },
+              "children": []
+            },
+            "g": {
+              "type": "Text",
+              "props": {
+                "text": "보상: 500G",
+                "variant": "subtitle"
+              },
+              "children": []
+            },
+            "btn": {
+              "type": "Button",
+              "props": {
+                "label": "다시 하기",
+                "variant": "primary",
+                "targetNodeId": "n-init"
+              },
+              "children": []
+            }
+          }
+        }
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "source": "n-entry",
+      "target": "n-init",
+      "type": "exec"
+    },
+    {
+      "id": "e2",
+      "source": "n-init",
+      "target": "n-goal-gate",
+      "type": "exec"
+    },
+    {
+      "id": "e3",
+      "source": "n-goal-gate",
+      "target": "n-spawn-hurdle",
+      "type": "exec",
+      "data": {
+        "gateBranch": "true"
+      }
+    },
+    {
+      "id": "e4",
+      "source": "n-goal-gate",
+      "target": "n-calc-success",
+      "type": "exec",
+      "data": {
+        "gateBranch": "false"
+      }
+    },
+    {
+      "id": "e5",
+      "source": "n-spawn-hurdle",
+      "target": "n-type-gate",
+      "type": "exec"
+    },
+    {
+      "id": "e6",
+      "source": "n-type-gate",
+      "target": "n-scene-cactus",
+      "type": "exec",
+      "data": {
+        "gateBranch": "true"
+      }
+    },
+    {
+      "id": "e7",
+      "source": "n-type-gate",
+      "target": "n-scene-bird",
+      "type": "exec",
+      "data": {
+        "gateBranch": "false"
+      }
+    },
+    {
+      "id": "e8",
+      "source": "n-scene-cactus",
+      "target": "n-success-step",
+      "type": "exec"
+    },
+    {
+      "id": "e9",
+      "source": "n-scene-cactus",
+      "target": "n-fail-trigger",
+      "type": "exec"
+    },
+    {
+      "id": "e10",
+      "source": "n-scene-bird",
+      "target": "n-success-step",
+      "type": "exec"
+    },
+    {
+      "id": "e11",
+      "source": "n-scene-bird",
+      "target": "n-fail-trigger",
+      "type": "exec"
+    },
+    {
+      "id": "e12",
+      "source": "n-success-step",
+      "target": "n-goal-gate",
+      "type": "exec"
+    },
+    {
+      "id": "e13",
+      "source": "n-fail-trigger",
+      "target": "n-gameover-scene",
+      "type": "exec"
+    },
+    {
+      "id": "e14",
+      "source": "n-calc-success",
+      "target": "n-reward-hub",
+      "type": "exec"
+    },
+    {
+      "id": "e15",
+      "source": "n-reward-hub",
+      "target": "n-res-gold",
+      "type": "resource",
+      "data": {
+        "resourceAmountExpression": "money_gain"
+      }
+    },
+    {
+      "id": "e16",
+      "source": "n-res-gold",
+      "target": "n-success-scene",
+      "type": "exec"
+    }
+  ]
+}

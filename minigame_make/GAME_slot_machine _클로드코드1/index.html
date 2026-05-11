@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>LUCKY DOG SLOT</title>
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+  <div id="app">
+    <div class="machine-frame">
+      <div id="mascot">🐶</div>
+      <div id="machine-title">LUCKY DOG</div>
+
+      <div id="reel-container-wrapper">
+        <div class="payline-marker left">▶</div>
+        <div id="reel-container">
+          <div class="reel" id="reel-0"><canvas></canvas></div>
+          <div class="reel" id="reel-1"><canvas></canvas></div>
+          <div class="reel" id="reel-2"><canvas></canvas></div>
+        </div>
+        <div class="payline-marker right">◀</div>
+      </div>
+
+      <div id="ui-bottom">
+        <button id="btn-spin">SPIN</button>
+        <button id="btn-bet">BET: 1</button>
+        <button id="btn-add-coins" class="debug">+50코인</button>
+      </div>
+      <div id="ui-coins">💰 50</div>
+    </div>
+
+    <div id="ui-result"></div>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

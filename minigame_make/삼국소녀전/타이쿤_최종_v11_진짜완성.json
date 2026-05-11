@@ -1,0 +1,3369 @@
+{
+  "version": 1,
+  "designName": "타이쿤_진짜최종_v9",
+  "exportedAt": "2026-04-23T08:28:09.796Z",
+  "nodes": [
+    {
+      "id": "n-entry",
+      "type": "entry",
+      "position": {
+        "x": -229.93275952617608,
+        "y": -199.84920659736
+      },
+      "data": {
+        "label": "시즌 시작",
+        "intensity": 5
+      },
+      "measured": {
+        "width": 220,
+        "height": 58
+      }
+    },
+    {
+      "id": "n-init",
+      "type": "trigger",
+      "position": {
+        "x": -229.93275952617608,
+        "y": 54.08202956377703
+      },
+      "data": {
+        "label": "초기화",
+        "intensity": 5,
+        "attributes": [
+          {
+            "key": "dice",
+            "type": "number",
+            "value": "tycoon_event_1.init_dice"
+          },
+          {
+            "key": "dice_count",
+            "type": "number",
+            "value": "tycoon_event_1.dice_multiplier"
+          },
+          {
+            "key": "rank",
+            "type": "number",
+            "value": "rand.d10() + 5"
+          },
+          {
+            "key": "tournament_count",
+            "type": "number",
+            "value": "15"
+          },
+          {
+            "key": "season_coin",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "point_gain",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "pos",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "lap_total",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "pos_old",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "99999",
+            "type": "number",
+            "value": "0"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "★ 트리거에 테이블 엔티티 값 참조 적용 완료!\ndice = event_99999.init_dice\npos = 현재 타일 위치 (0-39)"
+      },
+      "measured": {
+        "width": 280,
+        "height": 399
+      }
+    },
+    {
+      "id": "n-gate-dice",
+      "type": "gate",
+      "position": {
+        "x": 300,
+        "y": 460
+      },
+      "data": {
+        "label": "주사위 충분?",
+        "condition": "dice >= dice_count",
+        "intensity": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "n-failure-dice",
+      "type": "failure",
+      "position": {
+        "x": 700,
+        "y": 460
+      },
+      "data": {
+        "label": "주사위 소진 → 토너먼트 종료",
+        "intensity": 7,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 58
+      }
+    },
+    {
+      "id": "n-disposal",
+      "type": "disposal",
+      "position": {
+        "x": 300,
+        "y": 600
+      },
+      "data": {
+        "label": "주사위 소비",
+        "intensity": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "disposalType": "optional",
+        "demandElasticity": 5
+      },
+      "measured": {
+        "width": 220,
+        "height": 77
+      }
+    },
+    {
+      "id": "n-dice-res",
+      "type": "resource",
+      "position": {
+        "x": 700,
+        "y": 600
+      },
+      "data": {
+        "label": "주사위",
+        "resourceId": "dlctHidqjrV5f1nSJngQ",
+        "resourceKey": "dice"
+      },
+      "measured": {
+        "width": 56,
+        "height": 56
+      }
+    },
+
+    {
+      "id": "n-move",
+      "type": "staging",
+      "position": {
+        "x": 300,
+        "y": 880
+      },
+      "data": {
+        "label": "타일 이동",
+        "intensity": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 60
+      }
+    },
+    {
+      "id": "n-gate-event",
+      "type": "gate",
+      "position": {
+        "x": 300,
+        "y": 1020
+      },
+      "data": {
+        "label": "타일 체크 (정거장?)",
+        "condition": "(pos == 5 || pos == 15 || pos == 25 || pos == 35) || ((pos == 2 || pos == 12 || pos == 22 || pos == 32) && rand.d100() <= board_config.lucky_to_station_chance)",
+        "intensity": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "보드 설정 노드의 lucky_to_station_chance 수치를 100% 참조합니다!",
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 87
+      }
+    },
+    {
+      "id": "n-non-event",
+      "type": "reward",
+      "position": {
+        "x": 700,
+        "y": 1020
+      },
+      "data": {
+        "label": "일반 타일",
+        "intensity": 3,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 58
+      }
+    },
+    {
+      "id": "n-gate-station",
+      "type": "gate",
+      "position": {
+        "x": 300,
+        "y": 1160
+      },
+      "data": {
+        "label": "셧다운/은행강탈?",
+        "condition": "rand.d100() <= minigame_1.trigger_weight",
+        "intensity": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "테이블 참조 70 vs 30 분기!\nrand.d100() <= minigame_1.trigger_weight (70%)",
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 280,
+        "height": 105
+      }
+    },
+    {
+      "id": "n-gate-shutdown",
+      "type": "gate",
+      "position": {
+        "x": -76.39655342636968,
+        "y": 1267.372786081642
+      },
+      "data": {
+        "label": "막힘/성공?",
+        "condition": "rand.d100() <= res_success.weight",
+        "intensity": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "테이블 참조: 50%",
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 280,
+        "height": 87
+      }
+    },
+    {
+      "id": "n-trig-blocked",
+      "type": "trigger",
+      "position": {
+        "x": -160,
+        "y": 1440
+      },
+      "data": {
+        "label": "point_gain=2×dice_count",
+        "intensity": 5,
+        "attributes": [
+          {
+            "key": "point_gain",
+            "type": "number",
+            "value": "res_blocked.base_point * dice_count"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "테이블 보상 참조!"
+      },
+      "measured": {
+        "width": 221,
+        "height": 93
+      }
+    },
+    {
+      "id": "n-blocked",
+      "type": "reward",
+      "position": {
+        "x": -160,
+        "y": 1570
+      },
+      "data": {
+        "label": "셧다운 막힘 +2",
+        "intensity": 4,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 58
+      }
+    },
+    {
+      "id": "n-trig-success",
+      "type": "trigger",
+      "position": {
+        "x": 80,
+        "y": 1440
+      },
+      "data": {
+        "label": "point_gain=4×dice_count",
+        "intensity": 5,
+        "attributes": [
+          {
+            "key": "point_gain",
+            "type": "number",
+            "value": "res_success.base_point * dice_count"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "테이블 보상 참조!"
+      },
+      "measured": {
+        "width": 222,
+        "height": 93
+      }
+    },
+    {
+      "id": "n-success",
+      "type": "reward",
+      "position": {
+        "x": 168.08056734951492,
+        "y": 1598
+      },
+      "data": {
+        "label": "셧다운 성공 +4",
+        "intensity": 7,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 2,
+          "motivation": 0,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 58
+      }
+    },
+    {
+      "id": "n-gate-bank1",
+      "type": "gate",
+      "position": {
+        "x": 606.5805673495149,
+        "y": 1285.367773060194
+      },
+      "data": {
+        "label": "작음?",
+        "condition": "rand.d100() <= res_small.weight",
+        "intensity": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "테이블 참조: 33%",
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 280,
+        "height": 87
+      }
+    },
+    {
+      "id": "n-trig-small",
+      "type": "trigger",
+      "position": {
+        "x": 400,
+        "y": 1440
+      },
+      "data": {
+        "label": "point_gain=2×dice_count",
+        "intensity": 5,
+        "attributes": [
+          {
+            "key": "point_gain",
+            "type": "number",
+            "value": "res_small.base_point * dice_count"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "테이블 보상 참조!"
+      },
+      "measured": {
+        "width": 221,
+        "height": 93
+      }
+    },
+    {
+      "id": "n-small",
+      "type": "reward",
+      "position": {
+        "x": 400,
+        "y": 1570
+      },
+      "data": {
+        "label": "은행강탈 작음 +2",
+        "intensity": 4,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 58
+      }
+    },
+    {
+      "id": "n-gate-bank2",
+      "type": "gate",
+      "position": {
+        "x": 909.3901586741508,
+        "y": 1380.7677994033882
+      },
+      "data": {
+        "label": "큼?",
+        "condition": "rand.d100() <= (res_medium.weight / (res_medium.weight + res_large.weight)) * 100",
+        "intensity": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "테이블 참조 동적 굴림\n남은 풀에서 중간강탈 비율",
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 280,
+        "height": 105
+      }
+    },
+    {
+      "id": "n-trig-big",
+      "type": "trigger",
+      "position": {
+        "x": 670.616607782559,
+        "y": 1522.6142395227107
+      },
+      "data": {
+        "label": "point_gain=4×dice_count",
+        "intensity": 5,
+        "attributes": [
+          {
+            "key": "point_gain",
+            "type": "number",
+            "value": "res_medium.base_point * dice_count"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "테이블 보상 참조!"
+      },
+      "measured": {
+        "width": 222,
+        "height": 93
+      }
+    },
+    {
+      "id": "n-big",
+      "type": "reward",
+      "position": {
+        "x": 700,
+        "y": 1700
+      },
+      "data": {
+        "label": "은행강탈 큼 +4",
+        "intensity": 6,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 1,
+          "motivation": 0,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 58
+      }
+    },
+    {
+      "id": "n-trig-huge",
+      "type": "trigger",
+      "position": {
+        "x": 920.9240658667499,
+        "y": 1522.6142395227107
+      },
+      "data": {
+        "label": "point_gain=6×dice_count",
+        "intensity": 5,
+        "attributes": [
+          {
+            "key": "point_gain",
+            "type": "number",
+            "value": "res_large.base_point * dice_count"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "테이블 보상 참조!"
+      },
+      "measured": {
+        "width": 221,
+        "height": 93
+      }
+    },
+    {
+      "id": "n-huge",
+      "type": "reward",
+      "position": {
+        "x": 972.6176227510656,
+        "y": 1700
+      },
+      "data": {
+        "label": "은행강탈 매우큼 +6",
+        "intensity": 9,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 3,
+          "motivation": 0,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 58
+      }
+    },
+    {
+      "id": "n-reward-hub",
+      "type": "reward",
+      "position": {
+        "x": -1230.9436761652823,
+        "y": 1902.444680672144
+      },
+      "data": {
+        "label": "★ 타이쿤 재화(99999) 획득!",
+        "intensity": 6,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 2,
+          "motivation": 0,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 60
+      }
+    },
+    {
+      "id": "n-me1-res",
+      "type": "resource",
+      "position": {
+        "x": -1042.8278717329526,
+        "y": 1902.444680672144
+      },
+      "data": {
+        "label": "타이쿤 이벤트 재화",
+        "resourceId": "S0iJs8Mp3XUkMPrJD7kH",
+        "resourceKey": "99999"
+      },
+      "measured": {
+        "width": 56,
+        "height": 56
+      }
+    },
+    {
+      "id": "n-tournament-end",
+      "type": "staging",
+      "position": {
+        "x": 1300,
+        "y": 460
+      },
+      "data": {
+        "label": "토너먼트 종료 / 순위 확정",
+        "intensity": 7,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 3
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 60
+      }
+    },
+    {
+      "id": "n-gate-c2",
+      "type": "gate",
+      "position": {
+        "x": 1300,
+        "y": 1300
+      },
+      "data": {
+        "label": "클래스 2 (15)?",
+        "condition": "season_coin >= 15",
+        "intensity": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "n-gate-c3",
+      "type": "gate",
+      "position": {
+        "x": 1300,
+        "y": 1440
+      },
+      "data": {
+        "label": "클래스 3 (35)?",
+        "condition": "season_coin >= 35",
+        "intensity": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "n-gate-c4",
+      "type": "gate",
+      "position": {
+        "x": 1300,
+        "y": 1580
+      },
+      "data": {
+        "label": "클래스 4 (60)?",
+        "condition": "season_coin >= 60",
+        "intensity": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "n-gate-c5",
+      "type": "gate",
+      "position": {
+        "x": 1300,
+        "y": 1720
+      },
+      "data": {
+        "label": "클래스 5 (90)?",
+        "condition": "season_coin >= 90",
+        "intensity": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "n-gate-c6",
+      "type": "gate",
+      "position": {
+        "x": 1300,
+        "y": 1860
+      },
+      "data": {
+        "label": "클래스 6 (125)?",
+        "condition": "season_coin >= 125",
+        "intensity": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "n-gate-c7",
+      "type": "gate",
+      "position": {
+        "x": 1300,
+        "y": 2000
+      },
+      "data": {
+        "label": "클래스 7 (165)?",
+        "condition": "season_coin >= 165",
+        "intensity": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "n-gate-c8",
+      "type": "gate",
+      "position": {
+        "x": 1300,
+        "y": 2140
+      },
+      "data": {
+        "label": "클래스 8 (210)?",
+        "condition": "season_coin >= 210",
+        "intensity": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "n-gate-c9",
+      "type": "gate",
+      "position": {
+        "x": 1300,
+        "y": 2280
+      },
+      "data": {
+        "label": "클래스 9 (260)?",
+        "condition": "season_coin >= 260",
+        "intensity": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "n-gate-c10",
+      "type": "gate",
+      "position": {
+        "x": 1300,
+        "y": 2420
+      },
+      "data": {
+        "label": "클래스 10 (315)?",
+        "condition": "season_coin >= 315",
+        "intensity": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "n-class-reward",
+      "type": "reward",
+      "position": {
+        "x": 1700,
+        "y": 1860
+      },
+      "data": {
+        "label": "클래스 달성 → 시즌 아이템 +1",
+        "intensity": 9,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 5,
+          "motivation": 0,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 60
+      }
+    },
+    {
+      "id": "n-session-res",
+      "type": "resource",
+      "position": {
+        "x": 2020,
+        "y": 1860
+      },
+      "data": {
+        "label": "시즌 아이템",
+        "resourceId": "DQmUJRNdcPHmAgDbiSqo",
+        "resourceKey": "session_item"
+      },
+      "measured": {
+        "width": 56,
+        "height": 56
+      }
+    },
+    {
+      "id": "n-trig-reset",
+      "type": "trigger",
+      "position": {
+        "x": 1300,
+        "y": 2580
+      },
+      "data": {
+        "label": "주사위 리셋",
+        "intensity": 5,
+        "attributes": [
+          {
+            "key": "dice",
+            "type": "number",
+            "value": "50"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "다음 토너먼트 주사위 충전. dice 값 = 초기화의 dice 값과 동일하게"
+      },
+      "measured": {
+        "width": 280,
+        "height": 111
+      }
+    },
+    {
+      "id": "n-countdown",
+      "type": "trigger",
+      "position": {
+        "x": 1300,
+        "y": 2740
+      },
+      "data": {
+        "label": "이벤트 횟수 -1",
+        "intensity": 5,
+        "attributes": [
+          {
+            "key": "tournament_count",
+            "type": "number",
+            "value": "tournament_count - 1"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 90
+      }
+    },
+    {
+      "id": "n-gate-loop",
+      "type": "gate",
+      "position": {
+        "x": 1300,
+        "y": 2880
+      },
+      "data": {
+        "label": "이벤트 남았나?",
+        "condition": "tournament_count > 0",
+        "intensity": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "n-season-end",
+      "type": "success",
+      "position": {
+        "x": 1700,
+        "y": 2880
+      },
+      "data": {
+        "label": "시즌 종료",
+        "intensity": 10,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 10,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "★ 우측 패널 확인\n타이쿤 이벤트 재화 = 1회 토너먼트 포인트\n시즌 아이템 = 최종 시즌 성적 (최대 9개)"
+      },
+      "measured": {
+        "width": 280,
+        "height": 79
+      }
+    },
+    {
+      "id": "n-gate-r1",
+      "type": "gate",
+      "position": {
+        "x": 1300,
+        "y": 600
+      },
+      "data": {
+        "label": "1위?",
+        "condition": "rank == 1",
+        "intensity": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "n-coin-r1",
+      "type": "trigger",
+      "position": {
+        "x": 1600,
+        "y": 600
+      },
+      "data": {
+        "label": "시즌 코인 +20",
+        "intensity": 5,
+        "attributes": [
+          {
+            "key": "season_coin",
+            "type": "number",
+            "value": "season_coin + 20"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 90
+      }
+    },
+    {
+      "id": "n-gate-r2",
+      "type": "gate",
+      "position": {
+        "x": 1300,
+        "y": 690
+      },
+      "data": {
+        "label": "2위?",
+        "condition": "rank <= 2",
+        "intensity": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "n-coin-r2",
+      "type": "trigger",
+      "position": {
+        "x": 1600,
+        "y": 690
+      },
+      "data": {
+        "label": "시즌 코인 +18",
+        "intensity": 5,
+        "attributes": [
+          {
+            "key": "season_coin",
+            "type": "number",
+            "value": "season_coin + 18"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 90
+      }
+    },
+    {
+      "id": "n-gate-r3",
+      "type": "gate",
+      "position": {
+        "x": 1300,
+        "y": 780
+      },
+      "data": {
+        "label": "3위?",
+        "condition": "rank <= 3",
+        "intensity": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "n-coin-r3",
+      "type": "trigger",
+      "position": {
+        "x": 1600,
+        "y": 780
+      },
+      "data": {
+        "label": "시즌 코인 +16",
+        "intensity": 5,
+        "attributes": [
+          {
+            "key": "season_coin",
+            "type": "number",
+            "value": "season_coin + 16"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 90
+      }
+    },
+    {
+      "id": "n-gate-r4",
+      "type": "gate",
+      "position": {
+        "x": 1300,
+        "y": 870
+      },
+      "data": {
+        "label": "4위?",
+        "condition": "rank <= 4",
+        "intensity": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "n-coin-r4",
+      "type": "trigger",
+      "position": {
+        "x": 1600,
+        "y": 870
+      },
+      "data": {
+        "label": "시즌 코인 +14",
+        "intensity": 5,
+        "attributes": [
+          {
+            "key": "season_coin",
+            "type": "number",
+            "value": "season_coin + 14"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 90
+      }
+    },
+    {
+      "id": "n-gate-r5",
+      "type": "gate",
+      "position": {
+        "x": 1300,
+        "y": 960
+      },
+      "data": {
+        "label": "5위?",
+        "condition": "rank <= 5",
+        "intensity": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "n-coin-r5",
+      "type": "trigger",
+      "position": {
+        "x": 1600,
+        "y": 960
+      },
+      "data": {
+        "label": "시즌 코인 +12",
+        "intensity": 5,
+        "attributes": [
+          {
+            "key": "season_coin",
+            "type": "number",
+            "value": "season_coin + 12"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 90
+      }
+    },
+    {
+      "id": "n-gate-r6",
+      "type": "gate",
+      "position": {
+        "x": 1300,
+        "y": 1050
+      },
+      "data": {
+        "label": "6위?",
+        "condition": "rank <= 6",
+        "intensity": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "n-coin-r6",
+      "type": "trigger",
+      "position": {
+        "x": 1600,
+        "y": 1050
+      },
+      "data": {
+        "label": "시즌 코인 +10",
+        "intensity": 5,
+        "attributes": [
+          {
+            "key": "season_coin",
+            "type": "number",
+            "value": "season_coin + 10"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 90
+      }
+    },
+    {
+      "id": "n-gate-r7",
+      "type": "gate",
+      "position": {
+        "x": 1300,
+        "y": 1140
+      },
+      "data": {
+        "label": "7위?",
+        "condition": "rank <= 7",
+        "intensity": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "n-coin-r7",
+      "type": "trigger",
+      "position": {
+        "x": 1600,
+        "y": 1140
+      },
+      "data": {
+        "label": "시즌 코인 +8",
+        "intensity": 5,
+        "attributes": [
+          {
+            "key": "season_coin",
+            "type": "number",
+            "value": "season_coin + 8"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 90
+      }
+    },
+    {
+      "id": "n-gate-r8",
+      "type": "gate",
+      "position": {
+        "x": 1300,
+        "y": 1230
+      },
+      "data": {
+        "label": "8위?",
+        "condition": "rank <= 8",
+        "intensity": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "n-coin-r8",
+      "type": "trigger",
+      "position": {
+        "x": 1600,
+        "y": 1230
+      },
+      "data": {
+        "label": "시즌 코인 +6",
+        "intensity": 5,
+        "attributes": [
+          {
+            "key": "season_coin",
+            "type": "number",
+            "value": "season_coin + 6"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 90
+      }
+    },
+    {
+      "id": "n-gate-r9",
+      "type": "gate",
+      "position": {
+        "x": 1300,
+        "y": 1320
+      },
+      "data": {
+        "label": "9위?",
+        "condition": "rank <= 9",
+        "intensity": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "n-coin-r9",
+      "type": "trigger",
+      "position": {
+        "x": 1600,
+        "y": 1320
+      },
+      "data": {
+        "label": "시즌 코인 +4",
+        "intensity": 5,
+        "attributes": [
+          {
+            "key": "season_coin",
+            "type": "number",
+            "value": "season_coin + 4"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 90
+      }
+    },
+    {
+      "id": "n-gate-r10",
+      "type": "gate",
+      "position": {
+        "x": 1300,
+        "y": 1410
+      },
+      "data": {
+        "label": "10위?",
+        "condition": "rank <= 10",
+        "intensity": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "n-coin-r10",
+      "type": "trigger",
+      "position": {
+        "x": 1600,
+        "y": 1410
+      },
+      "data": {
+        "label": "시즌 코인 +2",
+        "intensity": 5,
+        "attributes": [
+          {
+            "key": "season_coin",
+            "type": "number",
+            "value": "season_coin + 2"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 90
+      }
+    },
+    {
+      "id": "n-coin-r11",
+      "type": "trigger",
+      "position": {
+        "x": 1600,
+        "y": 1500
+      },
+      "data": {
+        "label": "시즌 코인 +1",
+        "intensity": 5,
+        "attributes": [
+          {
+            "key": "season_coin",
+            "type": "number",
+            "value": "season_coin + 1"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 90
+      }
+    },
+    {
+      "id": "node-entity-event-99999",
+      "type": "entity",
+      "position": {
+        "x": -600,
+        "y": 50
+      },
+      "data": {
+        "label": "타이쿤 이벤트 1",
+        "entityKey": "tycoon_event_1",
+        "attributes": [
+          {
+            "key": "group_size",
+            "type": "number",
+            "value": "35"
+          },
+          {
+            "key": "init_dice",
+            "type": "number",
+            "value": "5000"
+          },
+          {
+            "key": "dice_multiplier",
+            "type": "number",
+            "value": "100"
+          }
+        ],
+        "description": "event_board_config 참조용"
+      },
+      "measured": {
+        "width": 196,
+        "height": 162
+      }
+    },
+    {
+      "id": "node-entity-mg-1",
+      "type": "entity",
+      "position": {
+        "x": -600,
+        "y": 633.2588691576683
+      },
+      "data": {
+        "label": "미니게임 1 (셧다운)",
+        "entityKey": "minigame_1",
+        "attributes": [
+          {
+            "key": "trigger_weight",
+            "type": "number",
+            "value": "70"
+          }
+        ]
+      },
+      "measured": {
+        "width": 160,
+        "height": 98
+      }
+    },
+    {
+      "id": "node-entity-mg-2",
+      "type": "entity",
+      "position": {
+        "x": -614.8365804761182,
+        "y": 759.1038903867951
+      },
+      "data": {
+        "label": "미니게임 2 (은행강탈)",
+        "entityKey": "minigame_2",
+        "attributes": [
+          {
+            "key": "trigger_weight",
+            "type": "number",
+            "value": "30"
+          }
+        ]
+      },
+      "measured": {
+        "width": 171,
+        "height": 98
+      }
+    },
+    {
+      "id": "node-ent-sh-success",
+      "type": "entity",
+      "position": {
+        "x": -627.1774897182315,
+        "y": 992.9011522054527
+      },
+      "data": {
+        "label": "결과: 셧다운 성공",
+        "entityKey": "res_success",
+        "attributes": [
+          {
+            "key": "weight",
+            "type": "number",
+            "value": "50"
+          },
+          {
+            "key": "base_point",
+            "type": "number",
+            "value": "4"
+          }
+        ]
+      },
+      "measured": {
+        "width": 160,
+        "height": 130
+      }
+    },
+    {
+      "id": "node-ent-sh-blocked",
+      "type": "entity",
+      "position": {
+        "x": -627.1774897182315,
+        "y": 1149.645357520136
+      },
+      "data": {
+        "label": "결과: 셧다운 막힘",
+        "entityKey": "res_blocked",
+        "attributes": [
+          {
+            "key": "weight",
+            "type": "number",
+            "value": "50"
+          },
+          {
+            "key": "base_point",
+            "type": "number",
+            "value": "2"
+          }
+        ]
+      },
+      "measured": {
+        "width": 160,
+        "height": 130
+      }
+    },
+    {
+      "id": "node-ent-bh-small",
+      "type": "entity",
+      "position": {
+        "x": -627.1774897182315,
+        "y": 1300
+      },
+      "data": {
+        "label": "결과: 강탈 작음",
+        "entityKey": "res_small",
+        "attributes": [
+          {
+            "key": "weight",
+            "type": "number",
+            "value": "33"
+          },
+          {
+            "key": "base_point",
+            "type": "number",
+            "value": "2"
+          }
+        ]
+      },
+      "measured": {
+        "width": 160,
+        "height": 130
+      }
+    },
+    {
+      "id": "node-ent-bh-medium",
+      "type": "entity",
+      "position": {
+        "x": -627.1774897182315,
+        "y": 1463.9929430211369
+      },
+      "data": {
+        "label": "결과: 강탈 중간",
+        "entityKey": "res_medium",
+        "attributes": [
+          {
+            "key": "weight",
+            "type": "number",
+            "value": "34"
+          },
+          {
+            "key": "base_point",
+            "type": "number",
+            "value": "4"
+          }
+        ]
+      },
+      "measured": {
+        "width": 160,
+        "height": 130
+      }
+    },
+    {
+      "id": "node-ent-bh-large",
+      "type": "entity",
+      "position": {
+        "x": -627.1774897182315,
+        "y": 1630.1284681721654
+      },
+      "data": {
+        "label": "결과: 강탈 큼",
+        "entityKey": "res_large",
+        "attributes": [
+          {
+            "key": "weight",
+            "type": "number",
+            "value": "33"
+          },
+          {
+            "key": "base_point",
+            "type": "number",
+            "value": "6"
+          }
+        ]
+      },
+      "measured": {
+        "width": 160,
+        "height": 130
+      }
+    },
+    {
+      "id": "i8agg62JY6USALyt2y7u",
+      "type": "table",
+      "position": {
+        "x": -917.1483794965351,
+        "y": 653.8763819067644
+      },
+      "data": {
+        "tags": [],
+        "label": "",
+        "sheetId": "",
+        "description": "",
+        "dataTableKey": "table_mob0gs71"
+      },
+      "measured": {
+        "width": 220,
+        "height": 61
+      }
+    },
+    {
+      "id": "7XtByj1bcvJ2LeHrhTmK",
+      "type": "table",
+      "position": {
+        "x": -1101.8535898421667,
+        "y": 1195.2933888135055
+      },
+      "data": {
+        "tags": [],
+        "label": "",
+        "sheetId": "",
+        "description": "",
+        "dataTableKey": "table_mob0g3ii"
+      },
+      "measured": {
+        "width": 241,
+        "height": 61
+      }
+    },
+    {
+      "id": "CvZOawF3UjuiOTggdl6O",
+      "type": "entity",
+      "position": {
+        "x": -896.480562470148,
+        "y": -258.79333950596174
+      },
+      "data": {
+        "label": "개체",
+        "entityKey": "",
+        "attributes": [
+          {
+            "key": "season_id",
+            "type": "string",
+            "value": "season_001"
+          },
+          {
+            "key": "season_name",
+            "type": "string",
+            "value": "동화 이야기"
+          },
+          {
+            "key": "theme_key",
+            "type": "string",
+            "value": "fairytale"
+          },
+          {
+            "key": "active_from",
+            "type": "string",
+            "value": "2026-05-01 00:00:00"
+          },
+          {
+            "key": "active_until",
+            "type": "string",
+            "value": "2026-06-15 23:59:59"
+          },
+          {
+            "key": "album_id",
+            "type": "string",
+            "value": "album_001"
+          },
+          {
+            "key": "tycoon_express_name",
+            "type": "string",
+            "value": "동화 이야기 익스프레스"
+          }
+        ],
+        "description": ""
+      },
+      "measured": {
+        "width": 240,
+        "height": 290
+      }
+    },
+    {
+      "id": "node-ent-board-config",
+      "type": "entity",
+      "position": {
+        "x": 50,
+        "y": 900
+      },
+      "data": {
+        "label": "보드 이벤트 확률 설정",
+        "entityKey": "board_config",
+        "attributes": [
+          {
+            "key": "station_tile_chance",
+            "type": "number",
+            "value": "10"
+          },
+          {
+            "key": "lucky_card_chance",
+            "type": "number",
+            "value": "15"
+          },
+          {
+            "key": "lucky_to_station_chance",
+            "type": "number",
+            "value": "30"
+          }
+        ]
+      },
+      "measured": {
+        "width": 240,
+        "height": 180
+      }
+    },
+    {
+      "id": "n-dice-move",
+      "type": "trigger",
+      "position": {
+        "x": 300,
+        "y": 800
+      },
+      "data": {
+        "label": "주사위 이동",
+        "attributes": [
+          {
+            "key": "pos_old",
+            "type": "number",
+            "value": "pos"
+          },
+          {
+            "key": "pos",
+            "type": "number",
+            "value": "(pos + rand.d6() + rand.d6()) % 40"
+          }
+        ],
+        "description": "2~12칸 이동 후 40칸 보드 순환 (0-39)"
+      },
+      "measured": {
+        "width": 240,
+        "height": 100
+      }
+    },
+    {
+      "id": "node-ent-board-map",
+      "type": "entity",
+      "position": {
+        "x": -300,
+        "y": 900
+      },
+      "data": {
+        "label": "보드판 타일 맵",
+        "entityKey": "board_map",
+        "attributes": [
+          {
+            "key": "stations",
+            "type": "string",
+            "value": "[5, 15, 25, 35]"
+          },
+          {
+            "key": "lucky_tiles",
+            "type": "string",
+            "value": "[2, 7, 12, 17, 22, 27, 32, 37]"
+          }
+        ]
+      },
+      "measured": {
+        "width": 220,
+        "height": 130
+      }
+    },
+    {
+      "id": "n-gate-lap-check",
+      "type": "gate",
+      "position": {
+        "x": 600,
+        "y": 800
+      },
+      "data": {
+        "label": "한 바퀴 통과?",
+        "condition": "pos < pos_old",
+        "intensity": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "n-trig-lap-inc",
+      "type": "trigger",
+      "position": {
+        "x": 900,
+        "y": 700
+      },
+      "data": {
+        "label": "lap_total += 1",
+        "intensity": 5,
+        "attributes": [
+          {
+            "key": "lap_total",
+            "type": "number",
+            "value": "lap_total + 1"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 90
+      }
+    },
+    {
+      "id": "n-gate-10lap",
+      "type": "gate",
+      "position": {
+        "x": 1200,
+        "y": 700
+      },
+      "data": {
+        "label": "10바퀴 달성?",
+        "condition": "lap_total % 10 == 0",
+        "intensity": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "n-trig-dice-reward",
+      "type": "trigger",
+      "position": {
+        "x": 1500,
+        "y": 700
+      },
+      "data": {
+        "label": "★ 주사위 보너스!",
+        "intensity": 9,
+        "attributes": [
+          {
+            "key": "dice",
+            "type": "number",
+            "value": "dice + dice_count"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 3,
+          "motivation": 0,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 90
+      }
+    },
+    {
+      "id": "CgW8PMRh6vNCAuVVq0cv",
+      "type": "table",
+      "position": {
+        "x": -71.38214739747066,
+        "y": 2021.411435435741
+      },
+      "data": {
+        "label": "",
+        "description": "",
+        "tags": [],
+        "dataTableKey": "table_mo28kpfm",
+        "sheetId": ""
+      },
+      "measured": {
+        "width": 220,
+        "height": 61
+      }
+    },
+    {
+      "id": "8KkX5NP0QoGimdv5Qu6I",
+      "type": "entity",
+      "position": {
+        "x": -71.38214739747066,
+        "y": 2533.1999442319147
+      },
+      "data": {
+        "label": "개체",
+        "description": "",
+        "entityKey": "",
+        "attributes": [
+          {
+            "key": "item_id",
+            "type": "number",
+            "value": "999"
+          },
+          {
+            "key": "item_name",
+            "type": "string",
+            "value": "레벨 포인트"
+          },
+          {
+            "key": "item_category",
+            "type": "string",
+            "value": "LEVEL"
+          },
+          {
+            "key": "use_type",
+            "type": "string",
+            "value": "GENERAL"
+          },
+          {
+            "key": "skill_type",
+            "type": "string",
+            "value": "NONE"
+          },
+          {
+            "key": "skill_id",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "max_hold_count",
+            "type": "number",
+            "value": "-1"
+          },
+          {
+            "key": "is_stackable",
+            "type": "boolean",
+            "value": "true"
+          },
+          {
+            "key": "icon_id",
+            "type": "string",
+            "value": "icon_level_pt"
+          },
+          {
+            "key": "is_event_item",
+            "type": "boolean",
+            "value": "false"
+          },
+          {
+            "key": "expire_type",
+            "type": "string",
+            "value": "NONE"
+          },
+          {
+            "key": "expire_value",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "rarity",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "is_gold",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "sticker_set_id",
+            "type": "string",
+            "value": "null"
+          }
+        ]
+      },
+      "measured": {
+        "width": 196,
+        "height": 546
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "source": "n-entry",
+      "target": "n-init",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e2",
+      "source": "n-init",
+      "target": "n-gate-dice",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e3",
+      "source": "n-gate-dice",
+      "target": "n-disposal",
+      "data": {
+        "gateBranch": "true"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e4",
+      "source": "n-gate-dice",
+      "target": "n-failure-dice",
+      "data": {
+        "gateBranch": "false"
+      },
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "id": "e5",
+      "source": "n-dice-res",
+      "target": "n-disposal",
+      "data": {
+        "amount": 1,
+        "resourceAmountExpression": "dice_count"
+      },
+      "type": "resource",
+      "sourceHandle": "left",
+      "targetHandle": "right"
+    },
+    {
+      "id": "e6",
+      "source": "n-disposal",
+      "target": "n-dice-move",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e-move-check",
+      "source": "n-dice-move",
+      "target": "n-gate-lap-check"
+    },
+    {
+      "id": "e-check-true",
+      "source": "n-gate-lap-check",
+      "target": "n-trig-lap-inc",
+      "sourceHandle": "true"
+    },
+    {
+      "id": "e-check-false",
+      "source": "n-gate-lap-check",
+      "target": "n-move",
+      "sourceHandle": "false"
+    },
+    {
+      "id": "e-inc-10",
+      "source": "n-trig-lap-inc",
+      "target": "n-gate-10lap"
+    },
+    {
+      "id": "e-10-true",
+      "source": "n-gate-10lap",
+      "target": "n-trig-dice-reward",
+      "sourceHandle": "true"
+    },
+    {
+      "id": "e-10-false",
+      "source": "n-gate-10lap",
+      "target": "n-move",
+      "sourceHandle": "false"
+    },
+    {
+      "id": "e-reward-move",
+      "source": "n-trig-dice-reward",
+      "target": "n-move"
+    },
+    {
+      "id": "e8",
+      "source": "n-move",
+      "target": "n-gate-event",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e9",
+      "source": "n-gate-event",
+      "target": "n-non-event",
+      "data": {
+        "gateBranch": "false"
+      },
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "id": "e10",
+      "source": "n-non-event",
+      "target": "n-gate-dice",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e11",
+      "source": "n-gate-event",
+      "target": "n-gate-station",
+      "data": {
+        "gateBranch": "true"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e12",
+      "source": "n-gate-station",
+      "target": "n-gate-shutdown",
+      "data": {
+        "gateBranch": "true"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e13",
+      "source": "n-gate-station",
+      "target": "n-gate-bank1",
+      "data": {
+        "gateBranch": "false"
+      },
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e14",
+      "source": "n-gate-shutdown",
+      "target": "n-trig-blocked",
+      "data": {
+        "gateBranch": "true"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e15",
+      "source": "n-gate-shutdown",
+      "target": "n-trig-success",
+      "data": {
+        "gateBranch": "false"
+      },
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "id": "e16",
+      "source": "n-trig-blocked",
+      "target": "n-blocked",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e17",
+      "source": "n-trig-success",
+      "target": "n-success",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e18",
+      "source": "n-gate-bank1",
+      "target": "n-trig-small",
+      "data": {
+        "gateBranch": "true"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e19",
+      "source": "n-gate-bank1",
+      "target": "n-gate-bank2",
+      "data": {
+        "gateBranch": "false"
+      },
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e20",
+      "source": "n-trig-small",
+      "target": "n-small",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e21",
+      "source": "n-gate-bank2",
+      "target": "n-trig-big",
+      "data": {
+        "gateBranch": "true"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e22",
+      "source": "n-gate-bank2",
+      "target": "n-trig-huge",
+      "data": {
+        "gateBranch": "false"
+      },
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e23",
+      "source": "n-trig-big",
+      "target": "n-big",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e24",
+      "source": "n-trig-huge",
+      "target": "n-huge",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e25",
+      "source": "n-blocked",
+      "target": "n-reward-hub",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e26",
+      "source": "n-success",
+      "target": "n-reward-hub",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e27",
+      "source": "n-small",
+      "target": "n-reward-hub",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e28",
+      "source": "n-big",
+      "target": "n-reward-hub",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e29",
+      "source": "n-huge",
+      "target": "n-reward-hub",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e30",
+      "source": "n-reward-hub",
+      "target": "n-me1-res",
+      "data": {
+        "amount": 1,
+        "resourceAmountExpression": "point_gain"
+      },
+      "type": "resource",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "id": "e31",
+      "source": "n-reward-hub",
+      "target": "n-gate-dice",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e47",
+      "source": "n-gate-c2",
+      "target": "n-gate-c3",
+      "data": {
+        "gateBranch": "false"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e48",
+      "source": "n-gate-c3",
+      "target": "n-gate-c4",
+      "data": {
+        "gateBranch": "false"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e49",
+      "source": "n-gate-c4",
+      "target": "n-gate-c5",
+      "data": {
+        "gateBranch": "false"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e50",
+      "source": "n-gate-c5",
+      "target": "n-gate-c6",
+      "data": {
+        "gateBranch": "false"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e51",
+      "source": "n-gate-c6",
+      "target": "n-gate-c7",
+      "data": {
+        "gateBranch": "false"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e52",
+      "source": "n-gate-c7",
+      "target": "n-gate-c8",
+      "data": {
+        "gateBranch": "false"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e53",
+      "source": "n-gate-c8",
+      "target": "n-gate-c9",
+      "data": {
+        "gateBranch": "false"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e54",
+      "source": "n-gate-c9",
+      "target": "n-gate-c10",
+      "data": {
+        "gateBranch": "false"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e55",
+      "source": "n-gate-c10",
+      "target": "n-trig-reset",
+      "data": {
+        "gateBranch": "false"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e56",
+      "source": "n-gate-c2",
+      "target": "n-class-reward",
+      "data": {
+        "gateBranch": "true"
+      },
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "id": "e57",
+      "source": "n-gate-c3",
+      "target": "n-class-reward",
+      "data": {
+        "gateBranch": "true"
+      },
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "id": "e58",
+      "source": "n-gate-c4",
+      "target": "n-class-reward",
+      "data": {
+        "gateBranch": "true"
+      },
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "id": "e59",
+      "source": "n-gate-c5",
+      "target": "n-class-reward",
+      "data": {
+        "gateBranch": "true"
+      },
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "id": "e60",
+      "source": "n-gate-c6",
+      "target": "n-class-reward",
+      "data": {
+        "gateBranch": "true"
+      },
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "id": "e61",
+      "source": "n-gate-c7",
+      "target": "n-class-reward",
+      "data": {
+        "gateBranch": "true"
+      },
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "id": "e62",
+      "source": "n-gate-c8",
+      "target": "n-class-reward",
+      "data": {
+        "gateBranch": "true"
+      },
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "id": "e63",
+      "source": "n-gate-c9",
+      "target": "n-class-reward",
+      "data": {
+        "gateBranch": "true"
+      },
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "id": "e64",
+      "source": "n-gate-c10",
+      "target": "n-class-reward",
+      "data": {
+        "gateBranch": "true"
+      },
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "id": "e65",
+      "source": "n-class-reward",
+      "target": "n-session-res",
+      "data": {
+        "amount": 1
+      },
+      "type": "resource",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "id": "e66",
+      "source": "n-class-reward",
+      "target": "n-trig-reset",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e67",
+      "source": "n-trig-reset",
+      "target": "n-countdown",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e68",
+      "source": "n-countdown",
+      "target": "n-gate-loop",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e69",
+      "source": "n-gate-loop",
+      "target": "n-gate-dice",
+      "data": {
+        "gateBranch": "true"
+      },
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e70",
+      "source": "n-gate-loop",
+      "target": "n-season-end",
+      "data": {
+        "gateBranch": "false"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e-n-tournament-end-n-gate-r1",
+      "source": "n-tournament-end",
+      "target": "n-gate-r1",
+      "type": "exec",
+      "data": {}
+    },
+    {
+      "id": "e-n-gate-r1-n-coin-r1",
+      "source": "n-gate-r1",
+      "target": "n-coin-r1",
+      "sourceHandle": "true",
+      "type": "exec",
+      "data": {}
+    },
+    {
+      "id": "e-n-coin-r1-n-gate-c2",
+      "source": "n-coin-r1",
+      "target": "n-gate-c2",
+      "type": "exec",
+      "data": {}
+    },
+    {
+      "id": "e-n-gate-r1-n-gate-r2",
+      "source": "n-gate-r1",
+      "target": "n-gate-r2",
+      "sourceHandle": "false",
+      "type": "exec",
+      "data": {}
+    },
+    {
+      "id": "e-n-gate-r2-n-coin-r2",
+      "source": "n-gate-r2",
+      "target": "n-coin-r2",
+      "sourceHandle": "true",
+      "type": "exec",
+      "data": {}
+    },
+    {
+      "id": "e-n-coin-r2-n-gate-c2",
+      "source": "n-coin-r2",
+      "target": "n-gate-c2",
+      "type": "exec",
+      "data": {}
+    },
+    {
+      "id": "e-n-gate-r2-n-gate-r3",
+      "source": "n-gate-r2",
+      "target": "n-gate-r3",
+      "sourceHandle": "false",
+      "type": "exec",
+      "data": {}
+    },
+    {
+      "id": "e-n-gate-r3-n-coin-r3",
+      "source": "n-gate-r3",
+      "target": "n-coin-r3",
+      "sourceHandle": "true",
+      "type": "exec",
+      "data": {}
+    },
+    {
+      "id": "e-n-coin-r3-n-gate-c2",
+      "source": "n-coin-r3",
+      "target": "n-gate-c2",
+      "type": "exec",
+      "data": {}
+    },
+    {
+      "id": "e-n-gate-r3-n-gate-r4",
+      "source": "n-gate-r3",
+      "target": "n-gate-r4",
+      "sourceHandle": "false",
+      "type": "exec",
+      "data": {}
+    },
+    {
+      "id": "e-n-gate-r4-n-coin-r4",
+      "source": "n-gate-r4",
+      "target": "n-coin-r4",
+      "sourceHandle": "true",
+      "type": "exec",
+      "data": {}
+    },
+    {
+      "id": "e-n-coin-r4-n-gate-c2",
+      "source": "n-coin-r4",
+      "target": "n-gate-c2",
+      "type": "exec",
+      "data": {}
+    },
+    {
+      "id": "e-n-gate-r4-n-gate-r5",
+      "source": "n-gate-r4",
+      "target": "n-gate-r5",
+      "sourceHandle": "false",
+      "type": "exec",
+      "data": {}
+    },
+    {
+      "id": "e-n-gate-r5-n-coin-r5",
+      "source": "n-gate-r5",
+      "target": "n-coin-r5",
+      "sourceHandle": "true",
+      "type": "exec",
+      "data": {}
+    },
+    {
+      "id": "e-n-coin-r5-n-gate-c2",
+      "source": "n-coin-r5",
+      "target": "n-gate-c2",
+      "type": "exec",
+      "data": {}
+    },
+    {
+      "id": "e-n-gate-r5-n-gate-r6",
+      "source": "n-gate-r5",
+      "target": "n-gate-r6",
+      "sourceHandle": "false",
+      "type": "exec",
+      "data": {}
+    },
+    {
+      "id": "e-n-gate-r6-n-coin-r6",
+      "source": "n-gate-r6",
+      "target": "n-coin-r6",
+      "sourceHandle": "true",
+      "type": "exec",
+      "data": {}
+    },
+    {
+      "id": "e-n-coin-r6-n-gate-c2",
+      "source": "n-coin-r6",
+      "target": "n-gate-c2",
+      "type": "exec",
+      "data": {}
+    },
+    {
+      "id": "e-n-gate-r6-n-gate-r7",
+      "source": "n-gate-r6",
+      "target": "n-gate-r7",
+      "sourceHandle": "false",
+      "type": "exec",
+      "data": {}
+    },
+    {
+      "id": "e-n-gate-r7-n-coin-r7",
+      "source": "n-gate-r7",
+      "target": "n-coin-r7",
+      "sourceHandle": "true",
+      "type": "exec",
+      "data": {}
+    },
+    {
+      "id": "e-n-coin-r7-n-gate-c2",
+      "source": "n-coin-r7",
+      "target": "n-gate-c2",
+      "type": "exec",
+      "data": {}
+    },
+    {
+      "id": "e-n-gate-r7-n-gate-r8",
+      "source": "n-gate-r7",
+      "target": "n-gate-r8",
+      "sourceHandle": "false",
+      "type": "exec",
+      "data": {}
+    },
+    {
+      "id": "e-n-gate-r8-n-coin-r8",
+      "source": "n-gate-r8",
+      "target": "n-coin-r8",
+      "sourceHandle": "true",
+      "type": "exec",
+      "data": {}
+    },
+    {
+      "id": "e-n-coin-r8-n-gate-c2",
+      "source": "n-coin-r8",
+      "target": "n-gate-c2",
+      "type": "exec",
+      "data": {}
+    },
+    {
+      "id": "e-n-gate-r8-n-gate-r9",
+      "source": "n-gate-r8",
+      "target": "n-gate-r9",
+      "sourceHandle": "false",
+      "type": "exec",
+      "data": {}
+    },
+    {
+      "id": "e-n-gate-r9-n-coin-r9",
+      "source": "n-gate-r9",
+      "target": "n-coin-r9",
+      "sourceHandle": "true",
+      "type": "exec",
+      "data": {}
+    },
+    {
+      "id": "e-n-coin-r9-n-gate-c2",
+      "source": "n-coin-r9",
+      "target": "n-gate-c2",
+      "type": "exec",
+      "data": {}
+    },
+    {
+      "id": "e-n-gate-r9-n-gate-r10",
+      "source": "n-gate-r9",
+      "target": "n-gate-r10",
+      "sourceHandle": "false",
+      "type": "exec",
+      "data": {}
+    },
+    {
+      "id": "e-n-gate-r10-n-coin-r10",
+      "source": "n-gate-r10",
+      "target": "n-coin-r10",
+      "sourceHandle": "true",
+      "type": "exec",
+      "data": {}
+    },
+    {
+      "id": "e-n-coin-r10-n-gate-c2",
+      "source": "n-coin-r10",
+      "target": "n-gate-c2",
+      "type": "exec",
+      "data": {}
+    },
+    {
+      "id": "e-n-gate-r10-n-coin-r11",
+      "source": "n-gate-r10",
+      "target": "n-coin-r11",
+      "sourceHandle": "false",
+      "type": "exec",
+      "data": {}
+    },
+    {
+      "id": "e-n-coin-r11-n-gate-c2",
+      "source": "n-coin-r11",
+      "target": "n-gate-c2",
+      "type": "exec",
+      "data": {}
+    },
+    {
+      "id": "xy-edge__i8agg62JY6USALyt2y7uright-node-entity-mg-1left",
+      "source": "i8agg62JY6USALyt2y7u",
+      "target": "node-entity-mg-1",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 3,
+        "dataTableRowExpression": "3",
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "trigger_weight"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "id": "xy-edge__i8agg62JY6USALyt2y7uright-node-entity-mg-2left",
+      "source": "i8agg62JY6USALyt2y7u",
+      "target": "node-entity-mg-2",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 2,
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "trigger_weight"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "source": "7XtByj1bcvJ2LeHrhTmK",
+      "sourceHandle": "right",
+      "target": "node-ent-sh-success",
+      "targetHandle": "left",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 2,
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 6,
+            "targetKey": "base_point"
+          }
+        ]
+      },
+      "type": "data",
+      "id": "xy-edge__7XtByj1bcvJ2LeHrhTmKright-node-ent-sh-successleft"
+    },
+    {
+      "source": "7XtByj1bcvJ2LeHrhTmK",
+      "sourceHandle": "right",
+      "target": "node-ent-sh-blocked",
+      "targetHandle": "left",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 3,
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 6,
+            "targetKey": "base_point"
+          }
+        ],
+        "dataTableRowExpression": "3"
+      },
+      "type": "data",
+      "id": "xy-edge__7XtByj1bcvJ2LeHrhTmKright-node-ent-sh-blockedleft"
+    },
+    {
+      "source": "7XtByj1bcvJ2LeHrhTmK",
+      "sourceHandle": "right",
+      "target": "node-ent-bh-small",
+      "targetHandle": "left",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 4,
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 6,
+            "targetKey": "base_point"
+          }
+        ],
+        "dataTableRowExpression": "4"
+      },
+      "type": "data",
+      "id": "xy-edge__7XtByj1bcvJ2LeHrhTmKright-node-ent-bh-smallleft"
+    },
+    {
+      "source": "7XtByj1bcvJ2LeHrhTmK",
+      "sourceHandle": "right",
+      "target": "node-ent-bh-medium",
+      "targetHandle": "left",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 5,
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 6,
+            "targetKey": "base_point"
+          }
+        ],
+        "dataTableRowExpression": "5"
+      },
+      "type": "data",
+      "id": "xy-edge__7XtByj1bcvJ2LeHrhTmKright-node-ent-bh-mediumleft"
+    },
+    {
+      "source": "7XtByj1bcvJ2LeHrhTmK",
+      "sourceHandle": "right",
+      "target": "node-ent-bh-large",
+      "targetHandle": "left",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 6,
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 6,
+            "targetKey": "base_point"
+          }
+        ],
+        "dataTableRowExpression": "6"
+      },
+      "type": "data",
+      "id": "xy-edge__7XtByj1bcvJ2LeHrhTmKright-node-ent-bh-largeleft"
+    },
+    {
+      "id": "pFwNtafOqJm3FDAoqN2a",
+      "source": "CgW8PMRh6vNCAuVVq0cv",
+      "target": "8KkX5NP0QoGimdv5Qu6I",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "type": "data",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 81,
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "item_id"
+          },
+          {
+            "key": "item_name",
+            "sourceColumnIndex": 1,
+            "targetKey": "item_name"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "item_category"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "use_type"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "skill_type"
+          },
+          {
+            "sourceColumnIndex": 5,
+            "targetKey": "skill_id"
+          },
+          {
+            "sourceColumnIndex": 6,
+            "targetKey": "max_hold_count"
+          },
+          {
+            "sourceColumnIndex": 7,
+            "targetKey": "is_stackable"
+          },
+          {
+            "sourceColumnIndex": 8,
+            "targetKey": "icon_id"
+          },
+          {
+            "sourceColumnIndex": 9,
+            "targetKey": "is_event_item"
+          },
+          {
+            "sourceColumnIndex": 10,
+            "targetKey": "expire_type"
+          },
+          {
+            "sourceColumnIndex": 11,
+            "targetKey": "expire_value"
+          },
+          {
+            "sourceColumnIndex": 12,
+            "targetKey": "rarity"
+          },
+          {
+            "sourceColumnIndex": 13,
+            "targetKey": "is_gold"
+          },
+          {
+            "sourceColumnIndex": 14,
+            "targetKey": "sticker_set_id"
+          }
+        ],
+        "dataTableRowExpression": "81"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "id": "TQ69017d4lXmieRhQkyD",
+      "key": "exp",
+      "name": "경험치",
+      "color": "#0091ff",
+      "icon": "triangle",
+      "order": 0
+    },
+    {
+      "id": "4IrGgoV9zIhLJgDyMYc5",
+      "key": "gold",
+      "name": "골드",
+      "color": "#9a8e09",
+      "icon": "badge_dollar_sign",
+      "order": 0
+    },
+    {
+      "id": "RxSBA6AdAN6aw2A3HMuh",
+      "key": "season_coin",
+      "name": "시즌 코인",
+      "color": "jade",
+      "icon": "earth",
+      "order": 0
+    },
+    {
+      "id": "b9IIno96wHPlMOJpAYCt",
+      "key": "event_point",
+      "name": "이벤트 포인트",
+      "color": "salmon",
+      "icon": "beer",
+      "order": 0
+    },
+    {
+      "id": "fxSsNBrFWeGhOUnP3cEE",
+      "key": "apple",
+      "name": "apple",
+      "color": "#667727",
+      "icon": "apple",
+      "order": 0
+    },
+    {
+      "id": "GH3otoS69nSlQtU0sRBe",
+      "key": "LjFFeQfJibzToAWeOUs9",
+      "name": "무기",
+      "color": "#ffa424",
+      "icon": "sword",
+      "order": 1
+    },
+    {
+      "id": "fm49nJ85OAEh5K0BT1NB",
+      "key": "item",
+      "name": "아이템",
+      "color": "#b53ccd",
+      "icon": "sword",
+      "order": 1
+    },
+    {
+      "id": "dlctHidqjrV5f1nSJngQ",
+      "key": "dice",
+      "name": "주사위",
+      "description": "돌릴 수 있는 주사위",
+      "color": "#ff00a2",
+      "icon": "package",
+      "order": 2
+    },
+    {
+      "id": "PY0f9zbxUh4pFPedVs0k",
+      "key": "money",
+      "name": "돈",
+      "description": "건설에 사용되는 자원",
+      "color": "#ffe11f",
+      "icon": "dollar_sign",
+      "order": 3
+    },
+    {
+      "id": "zLKIdC5rLjeT1PaErh1Q",
+      "key": "event_count",
+      "name": "이벤트 카운트",
+      "description": "해당 자원이 소모되면 이벤트가 발동",
+      "color": "#09dffb",
+      "icon": "rocket",
+      "order": 7
+    },
+    {
+      "id": "S0iJs8Mp3XUkMPrJD7kH",
+      "key": "99999",
+      "name": "타이쿤 재화 아이템 (99999)",
+      "description": "정거장 보드에서 획득하는 타이쿤 재화 아이템 (ID: 99999)",
+      "color": "salmon",
+      "icon": "car",
+      "order": 8
+    },
+    {
+      "id": "DQmUJRNdcPHmAgDbiSqo",
+      "key": "session_item",
+      "name": "시즌 아이템",
+      "description": "시즌 토너먼트 재화",
+      "color": "jade",
+      "icon": "earth",
+      "order": 9
+    }
+  ]
+}

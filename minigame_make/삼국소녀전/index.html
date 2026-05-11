@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>삼국소녀전 GO - 주사위 대시보드</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff3e8d;
+            --secondary: #6e45e2;
+            --accent: #00f2fe;
+            --bg-dark: #0f0c29;
+            --card-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --text-main: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', 'Noto Sans KR', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-main);
+            overflow: hidden;
+        }
+
+        #app {
+            width: 90%;
+            max-width: 500px;
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 40px;
+            padding: 40px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            position: relative;
+            text-align: center;
+        }
+
+        .header {
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-weight: 800;
+            font-size: 1.8rem;
+            background: linear-gradient(to right, var(--accent), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 25px;
+            border: 1px solid var(--glass-border);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .stat-value {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .main-display {
+            background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 100%);
+            border-radius: 30px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .position-info {
+            margin-bottom: 20px;
+        }
+
+        .current-pos {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--accent);
+            text-shadow: 0 0 20px rgba(0, 242, 254, 0.5);
+            line-height: 1;
+        }
+
+        .pos-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+
+        .movement-history {
+            font-size: 0.9rem;
+            color: #ff3e8d;
+            font-weight: 600;
+            height: 20px;
+            margin-bottom: 10px;
+        }
+
+        .dice-result {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .die {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 12px;
+            color: var(--bg-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            font-weight: 800;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .die.rolling {
+            animation: roll 0.5s infinite;
+        }
+
+        @keyframes roll {
+            0% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(90deg) scale(1.1); }
+            50% { transform: rotate(180deg) scale(1); }
+            75% { transform: rotate(270deg) scale(1.1); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        .roll-btn {
+            width: 100%;
+            padding: 20px;
+            border: none;
+            border-radius: 20px;
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 15px 30px rgba(255, 62, 141, 0.3);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .roll-btn:hover {
+            transform: scale(1.02) translateY(-2px);
+            box-shadow: 0 20px 40px rgba(255, 62, 141, 0.5);
+        }
+
+        .roll-btn:active {
+            transform: scale(0.98);
+        }
+
+        .roll-btn:disabled {
+            background: #555;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .reward-popup {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            font-weight: 800;
+            color: #FFD700;
+            pointer-events: none;
+            opacity: 0;
+            z-index: 10;
+        }
+
+        .animate-reward {
+            animation: rewardFade 1s forwards;
+        }
+
+        @keyframes rewardFade {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+            50% { opacity: 1; transform: translate(-50%, -100%) scale(1.2); }
+            100% { opacity: 0; transform: translate(-50%, -150%) scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app">
+        <div class="header">
+            <h1>SAMGUK GIRLS GO</h1>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-label">💰 TOTAL MONEY</span>
+                <div class="stat-value" id="money">1,000,000</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">🎲 REMAINING DICE</span>
+                <div class="stat-value" id="dice">1,000</div>
+            </div>
+        </div>
+
+        <div class="main-display">
+            <div class="movement-history" id="history">준비되셨나요, 오빠?</div>
+            <div class="position-info">
+                <div class="current-pos" id="pos">0</div>
+                <div class="pos-label">CURRENT TILE POSITION</div>
+            </div>
+            
+            <div class="dice-result">
+                <div class="die" id="die1">?</div>
+                <div class="die" id="die2">?</div>
+            </div>
+        </div>
+
+        <button class="roll-btn" id="rollBtn" onclick="rollDice()">ROLL DICE</button>
+
+        <div class="reward-popup" id="rewardPopup">+100,000</div>
+    </div>
+
+    <script>
+        let state = {
+            money: 1000000,
+            dice: 1000,
+            pos: 0,
+            diceCount: 10,
+            isRolling: false
+        };
+
+        function formatNumber(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        function rollDice() {
+            if (state.isRolling || state.dice < state.diceCount) return;
+
+            state.isRolling = true;
+            const btn = document.getElementById('rollBtn');
+            const d1 = document.getElementById('die1');
+            const d2 = document.getElementById('die2');
+            const posEl = document.getElementById('pos');
+            const historyEl = document.getElementById('history');
+            
+            btn.disabled = true;
+            d1.classList.add('rolling');
+            d2.classList.add('rolling');
+            historyEl.innerText = "굴리는 중...";
+
+            setTimeout(() => {
+                const roll1 = Math.floor(Math.random() * 6) + 1;
+                const roll2 = Math.floor(Math.random() * 6) + 1;
+                const totalRoll = roll1 + roll2;
+                const oldPos = state.pos;
+                
+                // Update State
+                state.dice -= state.diceCount;
+                state.pos = (state.pos + totalRoll) % 40;
+                
+                // Reward Logic (Simplified from JSON)
+                let gain = 0;
+                if (state.pos === 0 || state.pos < oldPos) {
+                    gain = 200000; // Go Pass reward
+                } else if ([5, 15, 25, 35].includes(state.pos)) {
+                    gain = 500000; // Station reward
+                } else {
+                    gain = 50000; // Normal tile
+                }
+                state.money += gain;
+
+                // Update UI
+                d1.classList.remove('rolling');
+                d2.classList.remove('rolling');
+                d1.innerText = roll1;
+                d2.innerText = roll2;
+                
+                posEl.innerText = state.pos;
+                historyEl.innerText = `${oldPos}번 칸에서 ${totalRoll}칸 이동!`;
+                
+                document.getElementById('money').innerText = formatNumber(state.money);
+                document.getElementById('dice').innerText = formatNumber(state.dice);
+
+                // Reward Animation
+                const popup = document.getElementById('rewardPopup');
+                popup.innerText = `+${formatNumber(gain)}`;
+                popup.classList.add('animate-reward');
+                setTimeout(() => popup.classList.remove('animate-reward'), 1000);
+
+                state.isRolling = false;
+                btn.disabled = false;
+
+                if (state.dice < state.diceCount) {
+                    btn.innerText = "NO DICE";
+                    btn.disabled = true;
+                }
+            }, 600);
+        }
+
+        // Initial UI Update
+        document.getElementById('money').innerText = formatNumber(state.money);
+        document.getElementById('dice').innerText = formatNumber(state.dice);
+    </script>
+</body>
+</html>

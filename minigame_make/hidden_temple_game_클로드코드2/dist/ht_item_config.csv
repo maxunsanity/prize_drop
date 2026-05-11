@@ -1,0 +1,14 @@
+item_id,item_name,shape_type,tile_count,tile_index,offset_row,offset_col,reward_bundle_id,reward_type,reward_amount,anim_id,description
+1001,황금 항아리,SINGLE,1,1,0,0,201,currency,50,HT-ANI-004,단일 타일 - 스테이지 1 전용
+1002,황금 열쇠,HORIZONTAL,2,1,0,0,202,currency,100,HT-ANI-004,가로 2칸 - 좌측
+1002,황금 열쇠,HORIZONTAL,2,2,0,1,202,currency,100,HT-ANI-004,가로 2칸 - 우측
+1003,황금 검,VERTICAL,2,1,0,0,203,currency,100,HT-ANI-004,세로 2칸 - 상단
+1003,황금 검,VERTICAL,2,2,1,0,203,currency,100,HT-ANI-004,세로 2칸 - 하단
+1004,황금 투구,SQUARE,4,1,0,0,204,currency,200,HT-ANI-004,2x2 정사각형 - 좌상
+1004,황금 투구,SQUARE,4,2,0,1,204,currency,200,HT-ANI-004,2x2 정사각형 - 우상
+1004,황금 투구,SQUARE,4,3,1,0,204,currency,200,HT-ANI-004,2x2 정사각형 - 좌하
+1004,황금 투구,SQUARE,4,4,1,1,204,currency,200,HT-ANI-004,2x2 정사각형 - 우하
+1005,황금 왕관,HORIZONTAL,3,1,0,0,205,currency,150,HT-ANI-004,가로 3칸 - 좌
+1005,황금 왕관,HORIZONTAL,3,2,0,1,205,currency,150,HT-ANI-004,가로 3칸 - 중
+1005,황금 왕관,HORIZONTAL,3,3,0,2,205,currency,150,HT-ANI-004,가로 3칸 - 우
+1006,곡괭이 묶음,SINGLE,1,1,0,0,206,pickaxe,5,HT-ANI-004,단일 타일 - 발굴 시 곡괭이 5개 지급

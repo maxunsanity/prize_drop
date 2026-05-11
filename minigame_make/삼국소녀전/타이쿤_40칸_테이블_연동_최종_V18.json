@@ -1,0 +1,1537 @@
+{
+  "version": 1,
+  "designName": "타이쿤_40칸_테이블_연동_최종_V18",
+  "exportedAt": "2026-04-24T10:20:00.000Z",
+  "nodes": [
+    {
+      "id": "n-entry",
+      "type": "entry",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "data": {
+        "label": "시즌 시작"
+      }
+    },
+    {
+      "id": "n-init",
+      "type": "trigger",
+      "position": {
+        "x": 0,
+        "y": 150
+      },
+      "data": {
+        "label": "시뮬레이션 초기화",
+        "attributes": [
+          {
+            "key": "dice",
+            "type": "number",
+            "value": "1000"
+          },
+          {
+            "key": "dice_count",
+            "type": "number",
+            "value": "10"
+          },
+          {
+            "key": "pos",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "pos_old",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "money",
+            "type": "number",
+            "value": "1000000"
+          },
+          {
+            "key": "money_gain",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "roll",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "current_stage_index",
+            "type": "number",
+            "value": "1"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      }
+    },
+    {
+      "id": "n-loop-gate",
+      "type": "gate",
+      "position": {
+        "x": 400,
+        "y": 150
+      },
+      "data": {
+        "label": "주사위 체크",
+        "condition": "dice >= dice_count",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      }
+    },
+    {
+      "id": "n-consume-dice",
+      "type": "disposal",
+      "position": {
+        "x": 400,
+        "y": 300
+      },
+      "data": {
+        "label": "주사위 소비",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      }
+    },
+    {
+      "id": "n-roll",
+      "type": "trigger",
+      "position": {
+        "x": 400,
+        "y": 450
+      },
+      "data": {
+        "label": "주사위 굴리기",
+        "attributes": [
+          {
+            "key": "roll",
+            "type": "number",
+            "value": "rand.d6() + rand.d6()"
+          },
+          {
+            "key": "dice",
+            "type": "number",
+            "value": "dice - dice_count"
+          },
+          {
+            "key": "money_gain",
+            "type": "number",
+            "value": "0"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      }
+    },
+    {
+      "id": "n-move-logic",
+      "type": "trigger",
+      "position": {
+        "x": 400,
+        "y": 550
+      },
+      "data": {
+        "label": "이동 처리",
+        "attributes": [
+          {
+            "key": "pos_old",
+            "type": "number",
+            "value": "pos"
+          },
+          {
+            "key": "pos",
+            "type": "number",
+            "value": "(pos + roll) % 40"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      }
+    },
+    {
+      "id": "n-lap-check",
+      "type": "gate",
+      "position": {
+        "x": 400,
+        "y": 700
+      },
+      "data": {
+        "label": "GO 통과?",
+        "condition": "pos < pos_old",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      }
+    },
+    {
+      "id": "n-pass-go",
+      "type": "trigger",
+      "position": {
+        "x": 700,
+        "y": 700
+      },
+      "data": {
+        "label": "GO 보상",
+        "attributes": [
+          {
+            "key": "money_gain",
+            "type": "number",
+            "value": "tile.pass_reward * stage.reward_scale * dice_count"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      }
+    },
+    {
+      "id": "n-accumulate-go",
+      "type": "reward",
+      "position": {
+        "x": 900,
+        "y": 700
+      },
+      "data": {
+        "label": "통과 보상 누적",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      }
+    },
+    {
+      "id": "n-tile-dispatcher",
+      "type": "gate",
+      "position": {
+        "x": 400,
+        "y": 850
+      },
+      "data": {
+        "label": "타일 유형 분기",
+        "condition": "pos == 5 || pos == 15 || pos == 25 || pos == 35",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      }
+    },
+    {
+      "id": "n-station-logic",
+      "type": "gate",
+      "position": {
+        "x": 100,
+        "y": 1000
+      },
+      "data": {
+        "label": "셧다운 vs 강탈",
+        "condition": "rand.d100() <= 50",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      }
+    },
+    {
+      "id": "n-shutdown-gate",
+      "type": "gate",
+      "position": {
+        "x": -100,
+        "y": 1150
+      },
+      "data": {
+        "label": "방패 확률 (50%)",
+        "condition": "rand.d100() > 50",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      }
+    },
+    {
+      "id": "n-shutdown-success",
+      "type": "trigger",
+      "position": {
+        "x": -200,
+        "y": 1300
+      },
+      "data": {
+        "label": "셧다운 성공",
+        "attributes": [
+          {
+            "key": "money_gain",
+            "type": "number",
+            "value": "stage.shutdown_base_reward * stage.reward_scale * dice_count"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      }
+    },
+    {
+      "id": "n-shutdown-blocked",
+      "type": "trigger",
+      "position": {
+        "x": 0,
+        "y": 1300
+      },
+      "data": {
+        "label": "셧다운 막힘",
+        "attributes": [
+          {
+            "key": "money_gain",
+            "type": "number",
+            "value": "stage.shutdown_base_reward * 0.25 * stage.reward_scale * dice_count"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      }
+    },
+    {
+      "id": "n-robbery-selector",
+      "type": "gate",
+      "position": {
+        "x": 300,
+        "y": 1150
+      },
+      "data": {
+        "label": "강탈 등급",
+        "condition": "rand.d100() <= 60",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      }
+    },
+    {
+      "id": "n-robbery-small",
+      "type": "trigger",
+      "position": {
+        "x": 150,
+        "y": 1300
+      },
+      "data": {
+        "label": "강탈 작음",
+        "attributes": [
+          {
+            "key": "money_gain",
+            "type": "number",
+            "value": "stage.heist_reward_small * stage.reward_scale * dice_count"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      }
+    },
+    {
+      "id": "n-robbery-mid-gate",
+      "type": "gate",
+      "position": {
+        "x": 350,
+        "y": 1300
+      },
+      "data": {
+        "label": "중간 vs 큼",
+        "condition": "rand.d100() <= 75",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      }
+    },
+    {
+      "id": "n-robbery-medium",
+      "type": "trigger",
+      "position": {
+        "x": 300,
+        "y": 1450
+      },
+      "data": {
+        "label": "강탈 중간",
+        "attributes": [
+          {
+            "key": "money_gain",
+            "type": "number",
+            "value": "stage.heist_reward_medium * stage.reward_scale * dice_count"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      }
+    },
+    {
+      "id": "n-robbery-large",
+      "type": "trigger",
+      "position": {
+        "x": 400,
+        "y": 1450
+      },
+      "data": {
+        "label": "강탈 큼",
+        "attributes": [
+          {
+            "key": "money_gain",
+            "type": "number",
+            "value": "stage.heist_reward_large * stage.reward_scale * dice_count"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      }
+    },
+    {
+      "id": "n-tax-gate",
+      "type": "gate",
+      "position": {
+        "x": 600,
+        "y": 1000
+      },
+      "data": {
+        "label": "세금 타일?",
+        "condition": "pos == 4 || pos == 38",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      }
+    },
+    {
+      "id": "n-tax-logic",
+      "type": "trigger",
+      "position": {
+        "x": 600,
+        "y": 1150
+      },
+      "data": {
+        "label": "세금 징수 (10%)",
+        "attributes": [
+          {
+            "key": "money_gain",
+            "type": "number",
+            "value": "-(money * 0.1)"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      }
+    },
+    {
+      "id": "n-accumulate-tile",
+      "type": "reward",
+      "position": {
+        "x": 400,
+        "y": 1700
+      },
+      "data": {
+        "label": "보상 누적 Hub",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      }
+    },
+    {
+      "id": "n-me1-res",
+      "type": "resource",
+      "position": {
+        "x": 600,
+        "y": 1700
+      },
+      "data": {
+        "label": "돈 (Money)",
+        "resourceId": "PY0f9zbxUh4pFPedVs0k",
+        "resourceKey": "money"
+      }
+    },
+    {
+      "id": "n-simulation-end",
+      "type": "success",
+      "position": {
+        "x": 700,
+        "y": 150
+      },
+      "data": {
+        "label": "시뮬레이션 종료"
+      }
+    },
+    {
+      "id": "n-table-stage",
+      "type": "table",
+      "position": {
+        "x": -400,
+        "y": 150
+      },
+      "data": {
+        "label": "board_stage",
+        "dataTableKey": "table_mo0zm9n9"
+      }
+    },
+    {
+      "id": "n-table-tiles",
+      "type": "table",
+      "position": {
+        "x": -400,
+        "y": 650
+      },
+      "data": {
+        "label": "board_tile_config",
+        "dataTableKey": "table_mo10trl6"
+      }
+    },
+    {
+      "id": "node-entity-stage",
+      "type": "entity",
+      "position": {
+        "x": -200,
+        "y": 150
+      },
+      "data": {
+        "label": "스테이지 엔티티",
+        "entityKey": "stage",
+        "attributes": [
+          {
+            "key": "reward_scale",
+            "type": "number",
+            "value": "1"
+          },
+          {
+            "key": "shutdown_base_reward",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "shutdown_blocked_rate",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "heist_reward_small",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "heist_reward_medium",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "heist_reward_large",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "land_reward_1",
+            "type": "number",
+            "value": "50"
+          },
+          {
+            "key": "land_reward_2",
+            "type": "number",
+            "value": "80"
+          },
+          {
+            "key": "land_reward_3",
+            "type": "number",
+            "value": "110"
+          },
+          {
+            "key": "land_reward_4",
+            "type": "number",
+            "value": "140"
+          },
+          {
+            "key": "land_reward_5",
+            "type": "number",
+            "value": "170"
+          },
+          {
+            "key": "land_reward_6",
+            "type": "number",
+            "value": "200"
+          },
+          {
+            "key": "land_reward_7",
+            "type": "number",
+            "value": "230"
+          },
+          {
+            "key": "land_reward_8",
+            "type": "number",
+            "value": "260"
+          }
+        ]
+      }
+    },
+    {
+      "id": "node-entity-tile",
+      "type": "entity",
+      "position": {
+        "x": -200,
+        "y": 650
+      },
+      "data": {
+        "label": "타일 엔티티",
+        "entityKey": "tile",
+        "attributes": [
+          {
+            "key": "base_reward",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "pass_reward",
+            "type": "number",
+            "value": "0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "n-land-s1-gate",
+      "type": "gate",
+      "position": {
+        "x": 800,
+        "y": 1000
+      },
+      "data": {
+        "label": "대지 1단계?",
+        "condition": "pos == 1 || pos == 3",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      }
+    },
+    {
+      "id": "n-land-s1",
+      "type": "trigger",
+      "position": {
+        "x": 1000,
+        "y": 1000
+      },
+      "data": {
+        "label": "1단계 지역",
+        "attributes": [
+          {
+            "key": "money_gain",
+            "type": "number",
+            "value": "stage.land_reward_1 * stage.reward_scale * dice_count"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      }
+    },
+    {
+      "id": "n-land-s2-gate",
+      "type": "gate",
+      "position": {
+        "x": 800,
+        "y": 1150
+      },
+      "data": {
+        "label": "대지 2단계?",
+        "condition": "pos == 6 || pos == 8 || pos == 9",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      }
+    },
+    {
+      "id": "n-land-s2",
+      "type": "trigger",
+      "position": {
+        "x": 1000,
+        "y": 1150
+      },
+      "data": {
+        "label": "2단계 지역",
+        "attributes": [
+          {
+            "key": "money_gain",
+            "type": "number",
+            "value": "stage.land_reward_2 * stage.reward_scale * dice_count"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      }
+    },
+    {
+      "id": "n-land-s3-gate",
+      "type": "gate",
+      "position": {
+        "x": 800,
+        "y": 1300
+      },
+      "data": {
+        "label": "대지 3단계?",
+        "condition": "pos == 11 || pos == 13 || pos == 14",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      }
+    },
+    {
+      "id": "n-land-s3",
+      "type": "trigger",
+      "position": {
+        "x": 1000,
+        "y": 1300
+      },
+      "data": {
+        "label": "3단계 지역",
+        "attributes": [
+          {
+            "key": "money_gain",
+            "type": "number",
+            "value": "stage.land_reward_3 * stage.reward_scale * dice_count"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      }
+    },
+    {
+      "id": "n-land-s4-gate",
+      "type": "gate",
+      "position": {
+        "x": 800,
+        "y": 1450
+      },
+      "data": {
+        "label": "대지 4단계?",
+        "condition": "pos == 16 || pos == 18 || pos == 19",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      }
+    },
+    {
+      "id": "n-land-s4",
+      "type": "trigger",
+      "position": {
+        "x": 1000,
+        "y": 1450
+      },
+      "data": {
+        "label": "4단계 지역",
+        "attributes": [
+          {
+            "key": "money_gain",
+            "type": "number",
+            "value": "stage.land_reward_4 * stage.reward_scale * dice_count"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      }
+    },
+    {
+      "id": "n-land-s5-gate",
+      "type": "gate",
+      "position": {
+        "x": 800,
+        "y": 1600
+      },
+      "data": {
+        "label": "대지 5단계?",
+        "condition": "pos == 21 || pos == 23 || pos == 24",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      }
+    },
+    {
+      "id": "n-land-s5",
+      "type": "trigger",
+      "position": {
+        "x": 1000,
+        "y": 1600
+      },
+      "data": {
+        "label": "5단계 지역",
+        "attributes": [
+          {
+            "key": "money_gain",
+            "type": "number",
+            "value": "stage.land_reward_5 * stage.reward_scale * dice_count"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      }
+    },
+    {
+      "id": "n-land-s6-gate",
+      "type": "gate",
+      "position": {
+        "x": 800,
+        "y": 1750
+      },
+      "data": {
+        "label": "대지 6단계?",
+        "condition": "pos == 26 || pos == 27 || pos == 29",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      }
+    },
+    {
+      "id": "n-land-s6",
+      "type": "trigger",
+      "position": {
+        "x": 1000,
+        "y": 1750
+      },
+      "data": {
+        "label": "6단계 지역",
+        "attributes": [
+          {
+            "key": "money_gain",
+            "type": "number",
+            "value": "stage.land_reward_6 * stage.reward_scale * dice_count"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      }
+    },
+    {
+      "id": "n-land-s7-gate",
+      "type": "gate",
+      "position": {
+        "x": 800,
+        "y": 1900
+      },
+      "data": {
+        "label": "대지 7단계?",
+        "condition": "pos == 31 || pos == 32 || pos == 34",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      }
+    },
+    {
+      "id": "n-land-s7",
+      "type": "trigger",
+      "position": {
+        "x": 1000,
+        "y": 1900
+      },
+      "data": {
+        "label": "7단계 지역",
+        "attributes": [
+          {
+            "key": "money_gain",
+            "type": "number",
+            "value": "stage.land_reward_7 * stage.reward_scale * dice_count"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      }
+    },
+    {
+      "id": "n-land-s8-gate",
+      "type": "gate",
+      "position": {
+        "x": 800,
+        "y": 2050
+      },
+      "data": {
+        "label": "대지 8단계?",
+        "condition": "pos == 37 || pos == 39",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      }
+    },
+    {
+      "id": "n-land-s8",
+      "type": "trigger",
+      "position": {
+        "x": 1000,
+        "y": 2050
+      },
+      "data": {
+        "label": "8단계 지역",
+        "attributes": [
+          {
+            "key": "money_gain",
+            "type": "number",
+            "value": "stage.land_reward_8 * stage.reward_scale * dice_count"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "frictionScore": 0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "source": "n-entry",
+      "target": "n-init",
+      "type": "exec"
+    },
+    {
+      "id": "e2",
+      "source": "n-init",
+      "target": "n-loop-gate",
+      "type": "exec"
+    },
+    {
+      "id": "e-stage-data",
+      "source": "n-table-stage",
+      "target": "node-entity-stage",
+      "type": "data",
+      "data": {
+        "dataTableRowExpression": "2",
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "reward_scale"
+          },
+          {
+            "sourceColumnIndex": 7,
+            "targetKey": "shutdown_base_reward"
+          },
+          {
+            "sourceColumnIndex": 9,
+            "targetKey": "shutdown_blocked_rate"
+          },
+          {
+            "sourceColumnIndex": 13,
+            "targetKey": "heist_reward_small"
+          },
+          {
+            "sourceColumnIndex": 14,
+            "targetKey": "heist_reward_medium"
+          },
+          {
+            "sourceColumnIndex": 15,
+            "targetKey": "heist_reward_large"
+          }
+        ]
+      }
+    },
+    {
+      "id": "e-tile-data",
+      "source": "n-table-tiles",
+      "target": "node-entity-tile",
+      "type": "data",
+      "data": {
+        "dataTableRowExpression": "pos + 2",
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 8,
+            "targetKey": "base_reward"
+          },
+          {
+            "sourceColumnIndex": 9,
+            "targetKey": "pass_reward"
+          }
+        ]
+      }
+    },
+    {
+      "id": "e3",
+      "source": "n-loop-gate",
+      "target": "n-consume-dice",
+      "type": "exec",
+      "data": {
+        "gateBranch": "true"
+      }
+    },
+    {
+      "id": "e4",
+      "source": "n-loop-gate",
+      "target": "n-simulation-end",
+      "type": "exec",
+      "data": {
+        "gateBranch": "false"
+      }
+    },
+    {
+      "id": "e5",
+      "source": "n-consume-dice",
+      "target": "n-roll",
+      "type": "exec"
+    },
+    {
+      "id": "e6",
+      "source": "n-roll",
+      "target": "n-move-logic",
+      "type": "exec"
+    },
+    {
+      "id": "e7",
+      "source": "n-move-logic",
+      "target": "n-lap-check",
+      "type": "exec"
+    },
+    {
+      "id": "e8",
+      "source": "n-lap-check",
+      "target": "n-pass-go",
+      "type": "exec",
+      "data": {
+        "gateBranch": "true"
+      }
+    },
+    {
+      "id": "e9",
+      "source": "n-lap-check",
+      "target": "n-tile-dispatcher",
+      "type": "exec",
+      "data": {
+        "gateBranch": "false"
+      }
+    },
+    {
+      "id": "e10",
+      "source": "n-pass-go",
+      "target": "n-accumulate-go",
+      "type": "exec"
+    },
+    {
+      "id": "e11",
+      "source": "n-accumulate-go",
+      "target": "n-me1-res",
+      "type": "resource",
+      "data": {
+        "amount": 50000,
+        "resourceAmountExpression": "money_gain"
+      }
+    },
+    {
+      "id": "e12",
+      "source": "n-accumulate-go",
+      "target": "n-tile-dispatcher",
+      "type": "exec"
+    },
+    {
+      "id": "e13",
+      "source": "n-tile-dispatcher",
+      "target": "n-station-logic",
+      "type": "exec",
+      "data": {
+        "gateBranch": "true"
+      }
+    },
+    {
+      "id": "e14",
+      "source": "n-tile-dispatcher",
+      "target": "n-tax-gate",
+      "type": "exec",
+      "data": {
+        "gateBranch": "false"
+      }
+    },
+    {
+      "id": "e15",
+      "source": "n-station-logic",
+      "target": "n-shutdown-gate",
+      "type": "exec",
+      "data": {
+        "gateBranch": "true"
+      }
+    },
+    {
+      "id": "e16",
+      "source": "n-station-logic",
+      "target": "n-robbery-selector",
+      "type": "exec",
+      "data": {
+        "gateBranch": "false"
+      }
+    },
+    {
+      "id": "e17",
+      "source": "n-shutdown-gate",
+      "target": "n-shutdown-success",
+      "type": "exec",
+      "data": {
+        "gateBranch": "true"
+      }
+    },
+    {
+      "id": "e18",
+      "source": "n-shutdown-gate",
+      "target": "n-shutdown-blocked",
+      "type": "exec",
+      "data": {
+        "gateBranch": "false"
+      }
+    },
+    {
+      "id": "e19",
+      "source": "n-robbery-selector",
+      "target": "n-robbery-small",
+      "type": "exec",
+      "data": {
+        "gateBranch": "true"
+      }
+    },
+    {
+      "id": "e20",
+      "source": "n-robbery-selector",
+      "target": "n-robbery-mid-gate",
+      "type": "exec",
+      "data": {
+        "gateBranch": "false"
+      }
+    },
+    {
+      "id": "e21",
+      "source": "n-robbery-mid-gate",
+      "target": "n-robbery-medium",
+      "type": "exec",
+      "data": {
+        "gateBranch": "true"
+      }
+    },
+    {
+      "id": "e22",
+      "source": "n-robbery-mid-gate",
+      "target": "n-robbery-large",
+      "type": "exec",
+      "data": {
+        "gateBranch": "false"
+      }
+    },
+    {
+      "id": "e23",
+      "source": "n-tax-gate",
+      "target": "n-tax-logic",
+      "type": "exec",
+      "data": {
+        "gateBranch": "true"
+      }
+    },
+    {
+      "id": "e25",
+      "source": "n-shutdown-success",
+      "target": "n-accumulate-tile",
+      "type": "exec"
+    },
+    {
+      "id": "e26",
+      "source": "n-shutdown-blocked",
+      "target": "n-accumulate-tile",
+      "type": "exec"
+    },
+    {
+      "id": "e27",
+      "source": "n-robbery-small",
+      "target": "n-accumulate-tile",
+      "type": "exec"
+    },
+    {
+      "id": "e28",
+      "source": "n-robbery-medium",
+      "target": "n-accumulate-tile",
+      "type": "exec"
+    },
+    {
+      "id": "e29",
+      "source": "n-robbery-large",
+      "target": "n-accumulate-tile",
+      "type": "exec"
+    },
+    {
+      "id": "e30",
+      "source": "n-tax-logic",
+      "target": "n-accumulate-tile",
+      "type": "exec"
+    },
+    {
+      "id": "e32",
+      "source": "n-accumulate-tile",
+      "target": "n-me1-res",
+      "type": "resource",
+      "data": {
+        "amount": 50000,
+        "resourceAmountExpression": "money_gain"
+      }
+    },
+    {
+      "id": "e33",
+      "source": "n-accumulate-tile",
+      "target": "n-loop-gate",
+      "type": "exec"
+    },
+    {
+      "id": "e-tax-to-s1",
+      "source": "n-tax-gate",
+      "target": "n-land-s1-gate",
+      "type": "exec",
+      "data": {
+        "gateBranch": "false"
+      }
+    },
+    {
+      "id": "e-n-land-s1-gate-true",
+      "source": "n-land-s1-gate",
+      "target": "n-land-s1",
+      "type": "exec",
+      "data": {
+        "gateBranch": "true"
+      }
+    },
+    {
+      "id": "e-n-land-s1-out",
+      "source": "n-land-s1",
+      "target": "n-accumulate-tile",
+      "type": "exec"
+    },
+    {
+      "id": "e-n-land-s1-gate-false",
+      "source": "n-land-s1-gate",
+      "target": "n-land-s2-gate",
+      "type": "exec",
+      "data": {
+        "gateBranch": "false"
+      }
+    },
+    {
+      "id": "e-n-land-s2-gate-true",
+      "source": "n-land-s2-gate",
+      "target": "n-land-s2",
+      "type": "exec",
+      "data": {
+        "gateBranch": "true"
+      }
+    },
+    {
+      "id": "e-n-land-s2-out",
+      "source": "n-land-s2",
+      "target": "n-accumulate-tile",
+      "type": "exec"
+    },
+    {
+      "id": "e-n-land-s2-gate-false",
+      "source": "n-land-s2-gate",
+      "target": "n-land-s3-gate",
+      "type": "exec",
+      "data": {
+        "gateBranch": "false"
+      }
+    },
+    {
+      "id": "e-n-land-s3-gate-true",
+      "source": "n-land-s3-gate",
+      "target": "n-land-s3",
+      "type": "exec",
+      "data": {
+        "gateBranch": "true"
+      }
+    },
+    {
+      "id": "e-n-land-s3-out",
+      "source": "n-land-s3",
+      "target": "n-accumulate-tile",
+      "type": "exec"
+    },
+    {
+      "id": "e-n-land-s3-gate-false",
+      "source": "n-land-s3-gate",
+      "target": "n-land-s4-gate",
+      "type": "exec",
+      "data": {
+        "gateBranch": "false"
+      }
+    },
+    {
+      "id": "e-n-land-s4-gate-true",
+      "source": "n-land-s4-gate",
+      "target": "n-land-s4",
+      "type": "exec",
+      "data": {
+        "gateBranch": "true"
+      }
+    },
+    {
+      "id": "e-n-land-s4-out",
+      "source": "n-land-s4",
+      "target": "n-accumulate-tile",
+      "type": "exec"
+    },
+    {
+      "id": "e-n-land-s4-gate-false",
+      "source": "n-land-s4-gate",
+      "target": "n-land-s5-gate",
+      "type": "exec",
+      "data": {
+        "gateBranch": "false"
+      }
+    },
+    {
+      "id": "e-n-land-s5-gate-true",
+      "source": "n-land-s5-gate",
+      "target": "n-land-s5",
+      "type": "exec",
+      "data": {
+        "gateBranch": "true"
+      }
+    },
+    {
+      "id": "e-n-land-s5-out",
+      "source": "n-land-s5",
+      "target": "n-accumulate-tile",
+      "type": "exec"
+    },
+    {
+      "id": "e-n-land-s5-gate-false",
+      "source": "n-land-s5-gate",
+      "target": "n-land-s6-gate",
+      "type": "exec",
+      "data": {
+        "gateBranch": "false"
+      }
+    },
+    {
+      "id": "e-n-land-s6-gate-true",
+      "source": "n-land-s6-gate",
+      "target": "n-land-s6",
+      "type": "exec",
+      "data": {
+        "gateBranch": "true"
+      }
+    },
+    {
+      "id": "e-n-land-s6-out",
+      "source": "n-land-s6",
+      "target": "n-accumulate-tile",
+      "type": "exec"
+    },
+    {
+      "id": "e-n-land-s6-gate-false",
+      "source": "n-land-s6-gate",
+      "target": "n-land-s7-gate",
+      "type": "exec",
+      "data": {
+        "gateBranch": "false"
+      }
+    },
+    {
+      "id": "e-n-land-s7-gate-true",
+      "source": "n-land-s7-gate",
+      "target": "n-land-s7",
+      "type": "exec",
+      "data": {
+        "gateBranch": "true"
+      }
+    },
+    {
+      "id": "e-n-land-s7-out",
+      "source": "n-land-s7",
+      "target": "n-accumulate-tile",
+      "type": "exec"
+    },
+    {
+      "id": "e-n-land-s7-gate-false",
+      "source": "n-land-s7-gate",
+      "target": "n-land-s8-gate",
+      "type": "exec",
+      "data": {
+        "gateBranch": "false"
+      }
+    },
+    {
+      "id": "e-n-land-s8-gate-true",
+      "source": "n-land-s8-gate",
+      "target": "n-land-s8",
+      "type": "exec",
+      "data": {
+        "gateBranch": "true"
+      }
+    },
+    {
+      "id": "e-n-land-s8-out",
+      "source": "n-land-s8",
+      "target": "n-accumulate-tile",
+      "type": "exec"
+    },
+    {
+      "id": "e-n-land-s8-gate-false",
+      "source": "n-land-s8-gate",
+      "target": "n-accumulate-tile",
+      "type": "exec",
+      "data": {
+        "gateBranch": "false"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "id": "PY0f9zbxUh4pFPedVs0k",
+      "key": "money",
+      "name": "돈",
+      "color": "#ffe11f",
+      "icon": "dollar_sign"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+config_key,value,type,description
+event_duration_days,4,int,이벤트 총 기간 (일)
+pickaxe_event_start_bonus,10,int,이벤트 시작 시 지급 곡괭이
+pickaxe_normal_level,1,int,일반 레벨 클리어 시 곡괭이 획득
+pickaxe_hard_level,3,int,어려운 레벨 클리어 시 곡괭이 획득
+pickaxe_superhard_level,5,int,매우 어려운 레벨 클리어 시 곡괭이 획득
+pickaxe_debug_start,50,int,로컬 테스트용 시작 곡괭이 수
+empty_reward_min_ratio,0.10,float,EMPTY_REWARD 최소 비율
+empty_reward_default_ratio,0.15,float,EMPTY_REWARD 기본 비율
+max_stage,5,int,최대 스테이지 수
+board_cols,6,int,보드 열 수
+board_rows,6,int,보드 행 수
+generate_retry_limit,100,int,보드 생성 실패 시 최대 재시도 횟수

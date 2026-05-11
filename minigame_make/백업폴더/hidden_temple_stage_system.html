@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hidden Temple — 스테이지 맵 시스템 v2</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Apple SD Gothic Neo','Noto Sans KR',sans-serif;background:#EDEBE4;padding:48px 32px 80px;}
+  h1{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#888;text-align:center;margin-bottom:6px;}
+  .subtitle{font-size:12px;color:#AAA;text-align:center;margin-bottom:48px;}
+  .section{margin-bottom:72px;}
+  .section-title{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#999;margin-bottom:20px;border-left:3px solid #C8C5BC;padding-left:10px;}
+  .screen-row{display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start;}
+
+  /* 테이블 공통 */
+  .tbl-wrap{background:#fff;border-radius:16px;border:1px solid #D0CEC7;padding:20px;overflow-x:auto;}
+  .tbl-title{font-size:12px;font-weight:600;color:#1A1A18;margin-bottom:4px;}
+  .tbl-sub{font-size:10px;color:#AAA;margin-bottom:14px;line-height:1.5;}
+  table{border-collapse:collapse;font-size:10px;}
+  th{background:#1A1A18;color:#fff;padding:7px 10px;text-align:center;font-weight:600;white-space:nowrap;}
+  td{padding:6px 8px;text-align:center;border-bottom:.5px solid #ECEAE3;color:#1A1A18;white-space:nowrap;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:#FAFAF7;}
+
+  .chip{font-weight:600;border-radius:4px;padding:2px 7px;display:inline-block;font-size:9px;}
+  .chip-block{background:#2D2416;color:#fff;}
+  .chip-box{background:#8B7355;color:#fff;}
+  .chip-null{background:#EDEBE4;color:#AAA;border:.5px solid #D0CEC7;}
+  .chip-single{background:#DCEEFF;color:#0A3B7A;}
+  .chip-horiz{background:#FDECD8;color:#7A3A10;}
+  .chip-vert{background:#DFF5E4;color:#1A5E2A;}
+  .chip-square{background:#EDE8FD;color:#3A1C80;}
+  .chip-common{color:#888;}
+  .chip-rare{color:#1A6FD4;font-weight:600;}
+  .chip-epic{color:#C8410A;font-weight:600;}
+  .td-null-val{color:#CCC;font-size:9px;}
+
+  /* 그리드 */
+  .grid-section{background:#fff;border-radius:16px;border:1px solid #D0CEC7;padding:20px;}
+  .grid-title{font-size:12px;font-weight:600;color:#1A1A18;margin-bottom:4px;}
+  .grid-sub{font-size:10px;color:#AAA;margin-bottom:16px;line-height:1.6;}
+  .grids-row{display:flex;gap:28px;flex-wrap:wrap;align-items:flex-start;}
+  .grid-box{display:flex;flex-direction:column;align-items:center;gap:6px;}
+  .grid-label{font-size:11px;font-weight:600;color:#1A1A18;text-align:center;}
+  .grid-desc{font-size:9px;color:#AAA;text-align:center;max-width:180px;line-height:1.5;}
+
+  .grid{display:grid;gap:2px;}
+  .cell{width:22px;height:22px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:600;}
+  .c-null{background:transparent;}          /* NULL — 존재하지 않는 칸 */
+  .c-block{background:#2D2416;color:rgba(255,255,255,.4);}
+  .c-box{background:#C4A882;border:1px solid #A88A60;}
+  .c-gem{background:#FFE066;border:1px solid #EF9F27;color:#7A5A00;font-size:9px;}
+  .c-item-h{background:#FDECD8;border:1px solid #EF9F27;color:#7A3A10;}
+  .c-item-v{background:#DFF5E4;border:1px solid #5A9A20;color:#1A5E2A;}
+  .c-item-s{background:#EDE8FD;border:1px solid #7A4FD4;color:#3A1C80;}
+  .c-empty-r{background:#EAF3DE;border:1px solid #5A9A20;color:#3B6D11;font-size:9px;}
+  .c-empty{background:#EAE4D8;}
+
+  .legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;padding-top:14px;border-top:.5px solid #ECEAE3;}
+  .leg-item{display:flex;align-items:center;gap:5px;}
+  .leg-cell{width:18px;height:18px;border-radius:3px;flex-shrink:0;}
+  .leg-cell-null{width:18px;height:18px;border-radius:3px;border:1.5px dashed #D0CEC7;flex-shrink:0;}
+  .leg-lbl{font-size:9px;color:#555;}
+
+  /* 판정 규칙 박스 */
+  .rule-box{background:#FAFAF7;border:.5px solid #ECEAE3;border-radius:10px;padding:14px 16px;}
+  .rule-title{font-size:11px;font-weight:600;color:#1A1A18;margin-bottom:8px;}
+  .rule-row{display:flex;align-items:flex-start;gap:8px;padding:5px 0;border-bottom:.5px solid #ECEAE3;font-size:10px;color:#555;}
+  .rule-row:last-child{border-bottom:none;}
+  .rule-pri{width:18px;height:18px;border-radius:50%;background:#1A1A18;color:#fff;font-size:8px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+  .rule-text{flex:1;line-height:1.5;}
+  .rule-text strong{color:#1A1A18;}
+
+  /* 에러 박스 */
+  .error-box{background:#FCEBEB;border:.5px solid #F5C0C0;border-radius:10px;padding:14px 16px;}
+  .err-title{font-size:11px;font-weight:600;color:#791F1F;margin-bottom:8px;}
+  .err-row{display:flex;align-items:flex-start;gap:6px;padding:4px 0;border-bottom:.5px solid #F5C0C0;font-size:10px;color:#A32D2D;line-height:1.5;}
+  .err-row:last-child{border-bottom:none;}
+
+  .info-box{background:#EEF6FF;border:.5px solid #B5D4F4;border-radius:10px;padding:14px 16px;}
+  .info-title{font-size:11px;font-weight:600;color:#0A3B7A;margin-bottom:6px;}
+  .info-text{font-size:10px;color:#1A4A8A;line-height:1.7;}
+
+  /* shape 카드 */
+  .shape-cards{display:flex;gap:14px;flex-wrap:wrap;margin-top:4px;}
+  .shape-card{background:#FAFAF7;border:.5px solid #ECEAE3;border-radius:10px;padding:12px;text-align:center;min-width:90px;}
+  .shape-card-title{font-size:10px;font-weight:600;color:#1A1A18;margin-bottom:8px;}
+  .shape-grid{display:grid;gap:2px;width:fit-content;margin:0 auto 6px;}
+  .shape-card-desc{font-size:9px;color:#AAA;line-height:1.4;}
+
+  /* 플로우 */
+  .flow-box{background:#FAFAF7;border-radius:12px;border:.5px solid #ECEAE3;padding:16px 18px;}
+  .flow-title{font-size:11px;font-weight:600;color:#555;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px;}
+  .flow-step{display:flex;align-items:flex-start;gap:8px;padding:5px 0;border-bottom:.5px solid #ECEAE3;}
+  .flow-step:last-child{border-bottom:none;}
+  .flow-num{width:18px;height:18px;border-radius:50%;background:#1A1A18;color:#fff;font-size:9px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+  .flow-text{font-size:10px;color:#555;line-height:1.5;flex:1;}
+  .flow-text strong{color:#1A1A18;}
+</style>
+</head>
+<body>
+
+<h1>Hidden Temple — 스테이지 맵 시스템</h1>
+<div class="subtitle">BLOCK / BOX / NULL 3종 타입 | ht_stage_config + ht_item_config | 삼국소녀전 GO</div>
+
+
+<!-- ═══════════════════════════════════════ -->
+<div class="section">
+  <div class="section-title">타일 타입 3종 정의</div>
+  <div class="screen-row">
+
+    <div class="tbl-wrap" style="min-width:520px;">
+      <div class="tbl-title">col / row 필드 Enum 값</div>
+      <div class="tbl-sub">col_N과 row_N의 교차값으로 최종 타일 타입이 결정된다.</div>
+      <table>
+        <tr><th>값</th><th>의미</th><th>렌더링</th><th>발굴 가능</th></tr>
+        <tr>
+          <td><span class="chip chip-null">NULL</span></td>
+          <td style="text-align:left;">칸 자체가 없음 — 그리드 외부 영역</td>
+          <td>투명 (빈 공간)</td>
+          <td style="color:#CCC;">—</td>
+        </tr>
+        <tr>
+          <td><span class="chip chip-block">BLOCK</span></td>
+          <td style="text-align:left;">칸은 있지만 파괴 불가</td>
+          <td>진한 갈색 블록</td>
+          <td style="color:#C8410A;">✕</td>
+        </tr>
+        <tr>
+          <td><span class="chip chip-box">BOX</span></td>
+          <td style="text-align:left;">발굴 가능한 칸</td>
+          <td>중간 갈색 블록</td>
+          <td style="color:#5A9A20;">✓</td>
+        </tr>
+      </table>
+
+      <!-- 판정 규칙 -->
+      <div style="margin-top:14px;">
+        <div class="rule-box">
+          <div class="rule-title">그리드 최종 타입 판정 규칙 (우선순위 순)</div>
+          <div class="rule-row">
+            <div class="rule-pri">1</div>
+            <div class="rule-text">col 또는 row 중 하나라도 <strong>NULL</strong> → 해당 칸 없음 (렌더링 안 함)</div>
+          </div>
+          <div class="rule-row">
+            <div class="rule-pri">2</div>
+            <div class="rule-text">col 또는 row 중 하나라도 <strong>BLOCK</strong> → BLOCK (발굴 불가)</div>
+          </div>
+          <div class="rule-row">
+            <div class="rule-pri">3</div>
+            <div class="rule-text">col도 <strong>BOX</strong> AND row도 <strong>BOX</strong> → BOX (발굴 가능)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NULL 활용 예시 -->
+    <div class="grid-section" style="min-width:340px;">
+      <div class="grid-title">NULL로 만드는 맵 형태 예시</div>
+      <div class="grid-sub">col/row에 NULL을 넣으면 직사각형이 아닌 자유로운 형태 구성 가능</div>
+      <div class="grids-row">
+
+        <!-- 마름모 -->
+        <div class="grid-box">
+          <div class="grid-label">마름모</div>
+          <div class="grid-desc" style="font-size:8px;">col 1,2,9,10 = NULL<br>row 1,2,9,10 = NULL</div>
+          <div class="grid" style="grid-template-columns:repeat(10,18px);gap:1px;margin-top:6px;">
+            <!-- row1 NULL -->
+            <div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-block"></div><div class="cell c-block"></div><div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-null"></div>
+            <!-- row2 NULL -->
+            <div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-box"></div><div class="cell c-box"></div><div class="cell c-box"></div><div class="cell c-box"></div><div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-null"></div>
+            <!-- row3 -->
+            <div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-box"></div><div class="cell c-box"></div><div class="cell c-gem">💎</div><div class="cell c-box"></div><div class="cell c-box"></div><div class="cell c-box"></div><div class="cell c-null"></div><div class="cell c-null"></div>
+            <!-- row4 -->
+            <div class="cell c-null"></div><div class="cell c-box"></div><div class="cell c-box"></div><div class="cell c-box"></div><div class="cell c-box"></div><div class="cell c-item-h">②</div><div class="cell c-item-h">②</div><div class="cell c-box"></div><div class="cell c-box"></div><div class="cell c-null"></div>
+            <!-- row5 -->
+            <div class="cell c-block"></div><div class="cell c-box"></div><div class="cell c-box"></div><div class="cell c-gem">💎</div><div class="cell c-box"></div><div class="cell c-box"></div><div class="cell c-box"></div><div class="cell c-empty-r">$</div><div class="cell c-box"></div><div class="cell c-block"></div>
+            <!-- row6 -->
+            <div class="cell c-block"></div><div class="cell c-box"></div><div class="cell c-item-v">③</div><div class="cell c-box"></div><div class="cell c-box"></div><div class="cell c-gem">💎</div><div class="cell c-box"></div><div class="cell c-box"></div><div class="cell c-box"></div><div class="cell c-block"></div>
+            <!-- row7 -->
+            <div class="cell c-null"></div><div class="cell c-box"></div><div class="cell c-item-v">③</div><div class="cell c-box"></div><div class="cell c-empty-r">$</div><div class="cell c-box"></div><div class="cell c-box"></div><div class="cell c-box"></div><div class="cell c-box"></div><div class="cell c-null"></div>
+            <!-- row8 -->
+            <div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-box"></div><div class="cell c-box"></div><div class="cell c-box"></div><div class="cell c-box"></div><div class="cell c-box"></div><div class="cell c-box"></div><div class="cell c-null"></div><div class="cell c-null"></div>
+            <!-- row9 NULL -->
+            <div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-box"></div><div class="cell c-gem">💎</div><div class="cell c-box"></div><div class="cell c-box"></div><div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-null"></div>
+            <!-- row10 NULL -->
+            <div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-block"></div><div class="cell c-block"></div><div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-null"></div>
+          </div>
+        </div>
+
+        <!-- 십자 -->
+        <div class="grid-box">
+          <div class="grid-label">십자형</div>
+          <div class="grid-desc" style="font-size:8px;">col 1,2,9,10 = NULL<br>row 1,2,9,10 = NULL<br>+ 모서리 추가 NULL</div>
+          <div class="grid" style="grid-template-columns:repeat(10,18px);gap:1px;margin-top:6px;">
+            <!-- row1 NULL -->
+            <div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-block"></div><div class="cell c-block"></div><div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-null"></div>
+            <!-- row2 NULL -->
+            <div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-box"></div><div class="cell c-box"></div><div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-null"></div>
+            <!-- row3 -->
+            <div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-gem">💎</div><div class="cell c-box"></div><div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-null"></div>
+            <!-- row4 -->
+            <div class="cell c-block"></div><div class="cell c-box"></div><div class="cell c-box"></div><div class="cell c-box"></div><div class="cell c-box"></div><div class="cell c-item-h">②</div><div class="cell c-item-h">②</div><div class="cell c-box"></div><div class="cell c-box"></div><div class="cell c-block"></div>
+            <!-- row5 -->
+            <div class="cell c-block"></div><div class="cell c-box"></div><div class="cell c-item-v">③</div><div class="cell c-gem">💎</div><div class="cell c-box"></div><div class="cell c-box"></div><div class="cell c-box"></div><div class="cell c-empty-r">$</div><div class="cell c-box"></div><div class="cell c-block"></div>
+            <!-- row6 -->
+            <div class="cell c-block"></div><div class="cell c-box"></div><div class="cell c-item-v">③</div><div class="cell c-box"></div><div class="cell c-gem">💎</div><div class="cell c-box"></div><div class="cell c-box"></div><div class="cell c-box"></div><div class="cell c-box"></div><div class="cell c-block"></div>
+            <!-- row7 -->
+            <div class="cell c-block"></div><div class="cell c-box"></div><div class="cell c-box"></div><div class="cell c-box"></div><div class="cell c-box"></div><div class="cell c-box"></div><div class="cell c-box"></div><div class="cell c-box"></div><div class="cell c-box"></div><div class="cell c-block"></div>
+            <!-- row8 NULL 좌우 -->
+            <div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-box"></div><div class="cell c-gem">💎</div><div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-null"></div>
+            <!-- row9 NULL -->
+            <div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-box"></div><div class="cell c-box"></div><div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-null"></div>
+            <!-- row10 NULL -->
+            <div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-block"></div><div class="cell c-block"></div><div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-null"></div><div class="cell c-null"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 범례 -->
+      <div class="legend">
+        <div class="leg-item"><div class="leg-cell-null"></div><div class="leg-lbl">NULL (칸 없음)</div></div>
+        <div class="leg-item"><div class="leg-cell c-block"></div><div class="leg-lbl">BLOCK (파괴 불가)</div></div>
+        <div class="leg-item"><div class="leg-cell c-box"></div><div class="leg-lbl">BOX (발굴 가능)</div></div>
+        <div class="leg-item"><div class="leg-cell c-gem"></div><div class="leg-lbl">💎 GEM (런타임 랜덤)</div></div>
+        <div class="leg-item"><div class="leg-cell c-item-h"></div><div class="leg-lbl">② HORIZ 아이템</div></div>
+        <div class="leg-item"><div class="leg-cell c-item-v"></div><div class="leg-lbl">③ VERT 아이템</div></div>
+        <div class="leg-item"><div class="leg-cell c-empty-r"></div><div class="leg-lbl">$ EMPTY_REWARD</div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════ -->
+<div class="section">
+  <div class="section-title">테이블 정의 — ht_stage_config / ht_item_config</div>
+  <div class="screen-row">
+
+    <!-- ht_stage_config -->
+    <div class="tbl-wrap" style="max-width:100%;overflow-x:auto;">
+      <div class="tbl-title">ht_stage_config — 샘플 데이터</div>
+      <div class="tbl-sub">
+        스테이지 1개 = 레코드 1개. col_1~10 / row_1~10 교차값으로 그리드 정의.<br>
+        NULL = 칸 없음 (맵 모양 자유 구성) / BLOCK = 파괴 불가 / BOX = 발굴 가능
+      </div>
+      <table>
+        <tr>
+          <th>stage</th>
+          <th>col1</th><th>col2</th><th>col3</th><th>col4</th><th>col5</th>
+          <th>col6</th><th>col7</th><th>col8</th><th>col9</th><th>col10</th>
+          <th>row1</th><th>row2</th><th>row3</th><th>row4</th><th>row5</th>
+          <th>row6</th><th>row7</th><th>row8</th><th>row9</th><th>row10</th>
+          <th>gem</th><th>slot1</th><th>slot2</th><th>slot3</th>
+        </tr>
+        <!-- Stage 1: 마름모형 — col 1,10 NULL / row 1,10 NULL -->
+        <tr>
+          <td><strong>1</strong></td>
+          <td><span class="chip chip-null">NULL</span></td>
+          <td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td>
+          <td><span class="chip chip-null">NULL</span></td>
+          <td><span class="chip chip-null">NULL</span></td>
+          <td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td>
+          <td><span class="chip chip-null">NULL</span></td>
+          <td><strong>3</strong></td>
+          <td>2</td><td class="td-null-val">null</td><td class="td-null-val">null</td>
+        </tr>
+        <!-- Stage 2: 외곽 BLOCK 사각형 -->
+        <tr>
+          <td><strong>2</strong></td>
+          <td><span class="chip chip-block">BLK</span></td>
+          <td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td>
+          <td><span class="chip chip-block">BLK</span></td>
+          <td><span class="chip chip-block">BLK</span></td>
+          <td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td>
+          <td><span class="chip chip-block">BLK</span></td>
+          <td><strong>4</strong></td>
+          <td>2</td><td>3</td><td class="td-null-val">null</td>
+        </tr>
+        <!-- Stage 3: 외곽+중간 가로줄 BLOCK -->
+        <tr>
+          <td><strong>3</strong></td>
+          <td><span class="chip chip-block">BLK</span></td>
+          <td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td>
+          <td><span class="chip chip-block">BLK</span></td>
+          <td><span class="chip chip-block">BLK</span></td>
+          <td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td>
+          <td><span class="chip chip-block">BLK</span></td>
+          <td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td>
+          <td><span class="chip chip-block">BLK</span></td>
+          <td><strong>5</strong></td>
+          <td>2</td><td>3</td><td class="td-null-val">null</td>
+        </tr>
+        <!-- Stage 4: 십자형 -->
+        <tr>
+          <td><strong>4</strong></td>
+          <td><span class="chip chip-null">NULL</span></td><td><span class="chip chip-null">NULL</span></td>
+          <td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td>
+          <td><span class="chip chip-null">NULL</span></td><td><span class="chip chip-null">NULL</span></td>
+          <td><span class="chip chip-null">NULL</span></td><td><span class="chip chip-null">NULL</span></td>
+          <td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td>
+          <td><span class="chip chip-null">NULL</span></td><td><span class="chip chip-null">NULL</span></td>
+          <td><strong>6</strong></td>
+          <td>2</td><td>3</td><td>4</td>
+        </tr>
+        <!-- Stage 5: 전체 BOX -->
+        <tr>
+          <td><strong>5</strong></td>
+          <td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td>
+          <td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td><td><span class="chip chip-box">BOX</span></td>
+          <td><strong>8</strong></td>
+          <td>2</td><td>3</td><td>4</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- ht_item_config -->
+    <div class="tbl-wrap" style="min-width:460px;">
+      <div class="tbl-title">ht_item_config — 발굴 아이템 4종</div>
+      <div class="tbl-sub">shape_type 4종 고정. 기존 item_config와 완전 분리.</div>
+      <table>
+        <tr><th>item_id</th><th>item_name</th><th>shape_type</th><th>cols</th><th>rows</th><th>tiles</th><th>rarity</th></tr>
+        <tr><td>1</td><td>동전 주머니</td><td><span class="chip chip-single">SINGLE</span></td><td>1</td><td>1</td><td>1</td><td><span class="chip-common">COMMON</span></td></tr>
+        <tr><td>2</td><td>관우의 청룡언월도</td><td><span class="chip chip-horiz">HORIZONTAL</span></td><td>2</td><td>1</td><td>2</td><td><span class="chip-rare">RARE</span></td></tr>
+        <tr><td>3</td><td>조자룡의 방패</td><td><span class="chip chip-vert">VERTICAL</span></td><td>1</td><td>2</td><td>2</td><td><span class="chip-common">COMMON</span></td></tr>
+        <tr><td>4</td><td>옥새</td><td><span class="chip chip-square">SQUARE</span></td><td>2</td><td>2</td><td>4</td><td><span class="chip-epic">EPIC</span></td></tr>
+      </table>
+
+      <!-- shape 시각화 -->
+      <div style="margin-top:14px;">
+        <div style="font-size:10px;font-weight:600;color:#555;margin-bottom:8px;">shape_type 시각화</div>
+        <div class="shape-cards">
+          <div class="shape-card">
+            <div class="shape-card-title">SINGLE<br><span style="font-size:9px;font-weight:400;color:#888;">1×1</span></div>
+            <div class="shape-grid" style="grid-template-columns:1fr;">
+              <div class="cell c-item-h" style="background:#DCEEFF;border-color:#1A6FD4;color:#0A3B7A;">①</div>
+            </div>
+            <div class="shape-card-desc">1칸</div>
+          </div>
+          <div class="shape-card">
+            <div class="shape-card-title">HORIZONTAL<br><span style="font-size:9px;font-weight:400;color:#888;">2×1</span></div>
+            <div class="shape-grid" style="grid-template-columns:repeat(2,22px);">
+              <div class="cell c-item-h">②</div><div class="cell c-item-h">②</div>
+            </div>
+            <div class="shape-card-desc">좌우 2칸</div>
+          </div>
+          <div class="shape-card">
+            <div class="shape-card-title">VERTICAL<br><span style="font-size:9px;font-weight:400;color:#888;">1×2</span></div>
+            <div class="shape-grid" style="grid-template-columns:1fr;">
+              <div class="cell c-item-v">③</div><div class="cell c-item-v">③</div>
+            </div>
+            <div class="shape-card-desc">상하 2칸</div>
+          </div>
+          <div class="shape-card">
+            <div class="shape-card-title">SQUARE<br><span style="font-size:9px;font-weight:400;color:#888;">2×2</span></div>
+            <div class="shape-grid" style="grid-template-columns:repeat(2,22px);">
+              <div class="cell c-item-s">④</div><div class="cell c-item-s">④</div>
+              <div class="cell c-item-s">④</div><div class="cell c-item-s">④</div>
+            </div>
+            <div class="shape-card-desc">2×2 네모</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════ -->
+<div class="section">
+  <div class="section-title">런타임 흐름 + 에러 처리</div>
+  <div class="screen-row">
+
+    <div class="flow-box" style="min-width:320px;">
+      <div class="flow-title">서버 런타임 배치 흐름</div>
+      <div class="flow-step"><div class="flow-num">1</div><div class="flow-text"><strong>스테이지 진입</strong> — ht_stage_config 로드. col/row 교차 판정으로 NULL/BLOCK/BOX 결정</div></div>
+      <div class="flow-step"><div class="flow-num">2</div><div class="flow-text"><strong>아이템 배치</strong> — item_slot_1~3 shape 확인. BOX 공간 내 충돌 없이 랜덤 배치 (개발팀 구현)</div></div>
+      <div class="flow-step"><div class="flow-num">3</div><div class="flow-text"><strong>GEM 배치</strong> — 남은 BOX 칸 중 gem_count개 랜덤 선택 → GEM 지정</div></div>
+      <div class="flow-step"><div class="flow-num">4</div><div class="flow-text"><strong>EMPTY_REWARD 배치</strong> — 남은 BOX 칸 중 15% 랜덤 → EMPTY_REWARD 지정</div></div>
+      <div class="flow-step"><div class="flow-num">5</div><div class="flow-text"><strong>EMPTY 처리</strong> — 나머지 BOX 칸 전부 → EMPTY</div></div>
+      <div class="flow-step"><div class="flow-num">6</div><div class="flow-text"><strong>board_state 저장</strong> — 완성 배치 서버 저장. 플레이어 탭 시 서버 요청 → 결과 수신</div></div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:12px;min-width:300px;">
+      <div class="error-box">
+        <div class="err-title">⚠️ 에러 처리 조건 (개발팀 전달)</div>
+        <div class="err-row">❶ BOX 칸 수 &lt; 아이템 점유 칸 합 → 배치 불가 에러. 스테이지 진입 차단</div>
+        <div class="err-row">❷ gem_count &gt; 남은 BOX 칸 수 → 배치 불가 에러</div>
+        <div class="err-row">❸ 아이템 겹침 / BLOCK·NULL 칸 침범 → 재시도 (최대 100회)</div>
+        <div class="err-row">❹ 100회 초과 실패 → config 오류 로그 + 기획팀 Slack 알림</div>
+      </div>
+      <div class="info-box">
+        <div class="info-title">💡 기획자 작성 시 주의사항</div>
+        <div class="info-text">
+          BOX 칸 수 ≥ (아이템 점유 합 + gem_count) 확인 필요<br>
+          NULL 활용 시 아이템이 NULL 칸에 걸치지 않도록 BOX 구역 연속성 확인<br>
+          엑셀 작성 후 컨버터 스크립트 사전 검증 권장
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+</body>
+</html>

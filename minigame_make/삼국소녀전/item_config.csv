@@ -1,0 +1,81 @@
+item_id,item_name,item_category,use_type,skill_type,skill_id,max_hold_count,is_stackable,icon_id,is_event_item,expire_type,expire_value,rarity,is_gold,sticker_set_id
+999,레벨 포인트,LEVEL,GENERAL,NONE,null,-1,true,icon_level_pt,false,NONE,null,null,null,null
+1001,주사위,DICE,GENERAL,NONE,null,-1,true,icon_dice_1,false,NONE,null,null,null,null
+2001,엽전,CURRENCY,GENERAL,NONE,null,-1,true,icon_coin_s,false,NONE,null,null,null,null
+3001,방패,SHIELD,GENERAL,NONE,null,3,false,icon_shield,false,NONE,null,null,null,null
+4001,배수 부스터 x3,SPECIAL,ACTION,BUFF,SK170,5,true,icon_boost_3,false,NONE,null,null,null,null
+4002,배수 부스터 x5,SPECIAL,ACTION,BUFF,SK171,3,true,icon_boost_5,false,NONE,null,null,null,null
+4003,배수 부스터 x10,SPECIAL,ACTION,BUFF,SK172,3,true,icon_boost_10,false,NONE,null,null,null,null
+5001,초선 토큰,TOKEN,GENERAL,NONE,null,-1,false,icon_token_cs,false,NONE,null,null,null,null
+5002,조조 토큰,TOKEN,GENERAL,NONE,null,-1,false,icon_token_cc,false,NONE,null,null,null,null
+5003,여포 토큰,TOKEN,GENERAL,NONE,null,-1,false,icon_token_yb,false,NONE,null,null,null,null
+5004,손상향 토큰,TOKEN,GENERAL,NONE,null,-1,false,icon_token_ssh,true,SEASON,season_001,null,null,null
+5101,홍륙 프레임 (파츠),TOKEN_PARTS,GENERAL,NONE,null,-1,false,icon_parts_frame_hl,false,NONE,null,null,null,null
+5102,보람 프레임 (파츠),TOKEN_PARTS,GENERAL,NONE,null,-1,false,icon_parts_frame_bl,false,NONE,null,null,null,null
+5201,치선 아이콘 (파츠),TOKEN_PARTS,GENERAL,NONE,null,-1,false,icon_parts_icon_cs,false,NONE,null,null,null,null
+5301,화염 이펙트 (파츠),TOKEN_PARTS,GENERAL,NONE,null,-1,false,icon_parts_fx_fire,false,NONE,null,null,null,null
+5302,번개 이펙트 (파츠),TOKEN_PARTS,GENERAL,NONE,null,-1,false,icon_parts_fx_thunder,false,NONE,null,null,null,null
+6001,홍등 조각,EVENT,GENERAL,NONE,null,999,true,icon_evt_lantern,true,DATE,2026-05-10,null,null,null
+6002,봉황 깃털,EVENT,GENERAL,NONE,null,999,true,icon_evt_feather,true,SEASON,season_001,null,null,null
+6003,용의 비늘 묶음,EVENT,GENERAL,NONE,null,99,true,icon_evt_scale,true,SEASON,season_001,null,null,null
+70101,유비 — 쌍고검,STICKER,GENERAL,NONE,null,-1,true,icon_stk_liubei_001,true,SEASON,season_001,COMMON,false,101
+70102,관우 — 청룡언월도,STICKER,GENERAL,NONE,null,-1,true,icon_stk_guanyu_001,true,SEASON,season_001,COMMON,false,101
+70103,장비 — 장팔사모,STICKER,GENERAL,NONE,null,-1,true,icon_stk_zhangfei_001,true,SEASON,season_001,COMMON,false,101
+70104,조조 — 의천검,STICKER,GENERAL,NONE,null,-1,true,icon_stk_caocao_001,true,SEASON,season_001,UNCOMMON,false,101
+70105,순욱 — 전략서,STICKER,GENERAL,NONE,null,-1,true,icon_stk_xunyu_001,true,SEASON,season_001,UNCOMMON,false,101
+70106,하후돈 — 철가면,STICKER,GENERAL,NONE,null,-1,true,icon_stk_xiahodon_001,true,SEASON,season_001,UNCOMMON,false,101
+70107,손권 — 비호창,STICKER,GENERAL,NONE,null,-1,true,icon_stk_sunquan_001,true,SEASON,season_001,RARE,false,101
+70108,주유 — 동작대,STICKER,GENERAL,NONE,null,-1,true,icon_stk_zhouyu_001,true,SEASON,season_001,RARE,false,101
+70109,여포 — 방천화극,STICKER,GENERAL,NONE,null,-1,true,icon_stk_lvbu_001,true,SEASON,season_001,EPIC,false,101
+70110,조조 — 황금 갑옷,STICKER,GENERAL,NONE,null,-1,true,icon_stk_caocao_gold,true,SEASON,season_001,LEGENDARY,true,101
+70201,초선 — 봉황관,STICKER,GENERAL,NONE,null,-1,true,icon_stk_diaochan_001,true,SEASON,season_001,COMMON,false,102
+70202,손상향 — 궁시,STICKER,GENERAL,NONE,null,-1,true,icon_stk_sunshangxiang_001,true,SEASON,season_001,COMMON,false,102
+70203,대교 — 부채,STICKER,GENERAL,NONE,null,-1,true,icon_stk_daqiao_001,true,SEASON,season_001,COMMON,false,102
+70204,소교 — 금비파,STICKER,GENERAL,NONE,null,-1,true,icon_stk_xiaoqiao_001,true,SEASON,season_001,UNCOMMON,false,102
+70205,채문희 — 붓과 서책,STICKER,GENERAL,NONE,null,-1,true,icon_stk_caiwenji_001,true,SEASON,season_001,UNCOMMON,false,102
+70206,관은병 — 청룡검,STICKER,GENERAL,NONE,null,-1,true,icon_stk_guanyinping_001,true,SEASON,season_001,UNCOMMON,false,102
+70207,축융 — 비표창,STICKER,GENERAL,NONE,null,-1,true,icon_stk_zhurong_001,true,SEASON,season_001,RARE,false,102
+70208,손노반 — 목우,STICKER,GENERAL,NONE,null,-1,true,icon_stk_sunluban_001,true,SEASON,season_001,RARE,false,102
+70209,초선 — 월하미인도,STICKER,GENERAL,NONE,null,-1,true,icon_stk_diaochan_002,true,SEASON,season_001,EPIC,false,102
+70210,초선 — 황금 봉황,STICKER,GENERAL,NONE,null,-1,true,icon_stk_diaochan_gold,true,SEASON,season_001,LEGENDARY,true,102
+70301,제갈량 — 우선,STICKER,GENERAL,NONE,null,-1,true,icon_stk_zhugeliang_001,true,SEASON,season_001,COMMON,false,103
+70302,방통 — 봉추,STICKER,GENERAL,NONE,null,-1,true,icon_stk_pangtong_001,true,SEASON,season_001,COMMON,false,103
+70303,사마의 — 낙엽,STICKER,GENERAL,NONE,null,-1,true,icon_stk_simayi_001,true,SEASON,season_001,COMMON,false,103
+70304,순욱 — 백우선,STICKER,GENERAL,NONE,null,-1,true,icon_stk_xunyu_002,true,SEASON,season_001,UNCOMMON,false,103
+70305,가후 — 독화살,STICKER,GENERAL,NONE,null,-1,true,icon_stk_jiaxu_001,true,SEASON,season_001,UNCOMMON,false,103
+70306,육손 — 화공도,STICKER,GENERAL,NONE,null,-1,true,icon_stk_luxun_001,true,SEASON,season_001,UNCOMMON,false,103
+70307,제갈량 — 팔진도,STICKER,GENERAL,NONE,null,-1,true,icon_stk_zhugeliang_002,true,SEASON,season_001,RARE,false,103
+70308,사마의 — 낙엽천진,STICKER,GENERAL,NONE,null,-1,true,icon_stk_simayi_002,true,SEASON,season_001,RARE,false,103
+70309,제갈량 — 공성계,STICKER,GENERAL,NONE,null,-1,true,icon_stk_zhugeliang_003,true,SEASON,season_001,EPIC,false,103
+70310,제갈량 — 황금 우선,STICKER,GENERAL,NONE,null,-1,true,icon_stk_zhugeliang_gold,true,SEASON,season_001,LEGENDARY,true,103
+70401,화타 — 약초 바구니,STICKER,GENERAL,NONE,null,-1,true,icon_stk_huatuo_001,true,SEASON,season_001,COMMON,false,104
+70402,좌자 — 술병,STICKER,GENERAL,NONE,null,-1,true,icon_stk_zuoci_001,true,SEASON,season_001,COMMON,false,104
+70403,우길 — 주문서,STICKER,GENERAL,NONE,null,-1,true,icon_stk_yugil_001,true,SEASON,season_001,COMMON,false,104
+70404,동탁 — 금인,STICKER,GENERAL,NONE,null,-1,true,icon_stk_dongzhuo_001,true,SEASON,season_001,UNCOMMON,false,104
+70405,원소 — 봉황 깃털,STICKER,GENERAL,NONE,null,-1,true,icon_stk_yuanshao_001,true,SEASON,season_001,UNCOMMON,false,104
+70406,공손찬 — 백마,STICKER,GENERAL,NONE,null,-1,true,icon_stk_gongsunzan_001,true,SEASON,season_001,UNCOMMON,false,104
+70407,황충 — 화살통,STICKER,GENERAL,NONE,null,-1,true,icon_stk_huangzhong_001,true,SEASON,season_001,RARE,false,104
+70408,마초 — 서량 갑옷,STICKER,GENERAL,NONE,null,-1,true,icon_stk_machao_001,true,SEASON,season_001,RARE,false,104
+70409,화타 — 불로초,STICKER,GENERAL,NONE,null,-1,true,icon_stk_huatuo_002,true,SEASON,season_001,EPIC,false,104
+70410,여포 — 황금 방천화극,STICKER,GENERAL,NONE,null,-1,true,icon_stk_lvbu_gold,true,SEASON,season_001,LEGENDARY,true,104
+70501,관우의 청룡언월도,STICKER,GENERAL,NONE,null,-1,true,icon_stk_weapon_guandao,true,SEASON,season_001,COMMON,false,105
+70502,장비의 장팔사모,STICKER,GENERAL,NONE,null,-1,true,icon_stk_weapon_serpentspear,true,SEASON,season_001,COMMON,false,105
+70503,여포의 방천화극,STICKER,GENERAL,NONE,null,-1,true,icon_stk_weapon_halberd,true,SEASON,season_001,COMMON,false,105
+70504,조조의 의천검,STICKER,GENERAL,NONE,null,-1,true,icon_stk_weapon_sword,true,SEASON,season_001,UNCOMMON,false,105
+70505,손책의 고정창,STICKER,GENERAL,NONE,null,-1,true,icon_stk_weapon_lance,true,SEASON,season_001,UNCOMMON,false,105
+70506,황충의 강궁,STICKER,GENERAL,NONE,null,-1,true,icon_stk_weapon_bow,true,SEASON,season_001,UNCOMMON,false,105
+70507,제갈량의 연노,STICKER,GENERAL,NONE,null,-1,true,icon_stk_weapon_crossbow,true,SEASON,season_001,RARE,false,105
+70508,화타의 금침,STICKER,GENERAL,NONE,null,-1,true,icon_stk_weapon_needle,true,SEASON,season_001,RARE,false,105
+70509,칠성보도,STICKER,GENERAL,NONE,null,-1,true,icon_stk_weapon_sevendagger,true,SEASON,season_001,EPIC,false,105
+70510,의천검 황금판,STICKER,GENERAL,NONE,null,-1,true,icon_stk_weapon_gold,true,SEASON,season_001,LEGENDARY,true,105
+70601,낙양 성문,STICKER,GENERAL,NONE,null,-1,true,icon_stk_place_luoyang,true,SEASON,season_001,COMMON,false,106
+70602,형주 수로,STICKER,GENERAL,NONE,null,-1,true,icon_stk_place_jingzhou,true,SEASON,season_001,COMMON,false,106
+70603,성도 왕궁,STICKER,GENERAL,NONE,null,-1,true,icon_stk_place_chengdu,true,SEASON,season_001,COMMON,false,106
+70604,관도 전장,STICKER,GENERAL,NONE,null,-1,true,icon_stk_place_guandu,true,SEASON,season_001,UNCOMMON,false,106
+70605,적벽 화공,STICKER,GENERAL,NONE,null,-1,true,icon_stk_place_redcliff,true,SEASON,season_001,UNCOMMON,false,106
+70606,오장원 영채,STICKER,GENERAL,NONE,null,-1,true,icon_stk_place_wuzhang,true,SEASON,season_001,UNCOMMON,false,106
+70607,장판파 다리,STICKER,GENERAL,NONE,null,-1,true,icon_stk_place_changban,true,SEASON,season_001,RARE,false,106
+70608,화용도 협곡,STICKER,GENERAL,NONE,null,-1,true,icon_stk_place_huarong,true,SEASON,season_001,RARE,false,106
+70609,오봉루 천하도,STICKER,GENERAL,NONE,null,-1,true,icon_stk_place_wufeng,true,SEASON,season_001,EPIC,false,106
+70610,적벽 황금 화염,STICKER,GENERAL,NONE,null,-1,true,icon_stk_place_redcliff_gold,true,SEASON,season_001,LEGENDARY,true,106
+99999,타이쿤 재화 1,EVENT,GENERAL,NONE,null,999,true,icon_evt_feather,true,SEASON,season_001,null,null,null

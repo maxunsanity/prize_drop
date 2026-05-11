@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Hidden Temple</title>
+  <script type="module" crossorigin src="./assets/index-P_ePgxKP.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-D0Pcexh6.css">
+</head>
+<body>
+  <div id="ui-layer">
+    <!-- Custom Mouse Cursor -->
+    <div id="custom-cursor" style="display:none; position:fixed; pointer-events:none; z-index:9999; font-size:50px; transform-origin: bottom left; filter: drop-shadow(2px 2px 0px #222); transition: transform 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);">⛏️</div>
+
+    <!-- Stage Clear Modal -->
+    <div id="stage-clear-modal">
+      <h2>🎉 관문 클리어!</h2>
+      <p>모든 목표 아이템을 발굴했습니다!</p>
+      <button id="next-stage-btn" class="sketch-btn">다음 관문으로</button>
+    </div>
+
+    <!-- Top Area -->
+    <div class="top-section">
+      <!-- Top buttons row -->
+      <div class="top-bar">
+          <button id="cheat-btn" class="sketch-btn">+100 ⛏️</button>
+          <div class="timer-badge">⏳ 숨겨진 사원</div>
+          <button id="reset-btn" class="sketch-btn">리셋</button>
+      </div>
+
+      <!-- Door -->
+      <div class="door-container">
+        <div class="door-circle">
+          <div class="door-inner">🚪</div>
+        </div>
+      </div>
+      
+      <!-- Stage Progress -->
+      <div class="stage-progress">
+        <div class="chest" id="chest-1">I</div><div class="line" id="line-1"></div>
+        <div class="chest" id="chest-2">II</div><div class="line" id="line-2"></div>
+        <div class="chest" id="chest-3">III</div><div class="line" id="line-3"></div>
+        <div class="chest" id="chest-4">IV</div><div class="line" id="line-4"></div>
+        <div class="chest" id="chest-5">V</div>
+      </div>
+
+      <!-- Counters -->
+      <div class="counter-container">
+        <div class="pickaxe-counter" id="ui-pickaxe">⛏️ 50</div>
+        <div class="gem-counter" id="ui-gem-counter">💎 0 / 2</div>
+      </div>
+    </div>
+
+    <!-- Main Area for Canvas -->
+    <div class="main-area">
+      <!-- Three.js Canvas Container -->
+      <div id="canvas-container">
+        <canvas id="game-canvas"></canvas>
+      </div>
+      <!-- Bottom Item Slot Bar -->
+      <div class="item-slot-bar" id="ui-item-slots">
+        <!-- Slots injected by JS -->
+      </div>
+    </div>
+  </div>
+</body>
+</html>

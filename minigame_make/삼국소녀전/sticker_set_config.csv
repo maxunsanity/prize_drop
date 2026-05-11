@@ -1,0 +1,7 @@
+set_id,album_id,set_name,set_order,sticker_count,complete_bundle_id
+101,album_001,삼국의 영웅들,1,10,6001
+102,album_001,전장의 여신들,2,10,6001
+103,album_001,왕도의 책략가,3,10,6002
+104,album_001,강호의 이인들,4,10,6002
+105,album_001,비전의 무기들,5,10,6001
+106,album_001,전설의 전장,6,10,6003

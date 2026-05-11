@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>회전판 룰렛 — Roulette Wheel</title>
+  <meta name="description" content="손그림 스케치 스타일의 캐주얼 룰렛 휠 게임. 토큰을 베팅하고 행운을 시험해보세요!" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./src/style.css" />
+</head>
+<body>
+  <div id="app">
+    <div id="ui-top">
+      <span id="ui-tokens">🪙 50</span>
+      <span id="ui-bet">BET: 1</span>
+    </div>
+    <div id="wheel-container">
+      <canvas id="wheel-canvas"></canvas>
+      <div id="pointer">▼</div>
+    </div>
+    <div id="ui-result" style="pointer-events:none"></div>
+    <div id="ui-bottom">
+      <button id="btn-bet">BET: 1</button>
+      <button id="btn-spin">SPIN</button>
+      <button id="btn-add-tokens" class="debug">+50토큰</button>
+    </div>
+  </div>
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>

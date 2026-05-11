@@ -1,0 +1,204 @@
+/* src/index.css */
+:root {
+  --bg-color: #faf8f5;
+  --ink-color: #222222;
+  --shadow: 2px 2px 0 #222;
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* Anti-pattern fix: Mobile viewport breakage */
+  touch-action: none; /* Anti-pattern fix: Prevent pull-to-refresh and swipe navigation */
+  background-color: var(--bg-color);
+  color: var(--ink-color);
+  font-family: var(--font-family);
+  font-weight: 900;
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+/* Sketch Styling */
+.sketch-btn {
+  border: 2px solid var(--ink-color);
+  box-shadow: var(--shadow);
+  border-radius: 4px;
+  background: #fff;
+  padding: 4px 8px;
+  font-weight: 900;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.sketch-btn:active {
+  box-shadow: 0 0 0 var(--ink-color);
+  transform: translate(2px, 2px);
+}
+
+.timer-badge {
+  font-weight: 900;
+  font-size: 16px;
+  padding: 4px 0;
+}
+
+.door-container {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.door-circle {
+  width: 60px;
+  height: 60px;
+  border: 2px solid var(--ink-color);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: var(--shadow);
+  background: #fff;
+}
+
+.door-inner {
+  font-size: 32px;
+}
+
+.stage-progress {
+  margin: 10px 0;
+}
+
+.chest {
+  width: 30px;
+  height: 30px;
+  border: 2px solid var(--ink-color);
+  background: #fff;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  box-shadow: var(--shadow);
+}
+
+.chest.active {
+  background: var(--ink-color);
+  color: #fff;
+}
+
+.chest.cleared {
+  background: #ffd700;
+  color: var(--ink-color);
+}
+
+.line {
+  width: 20px;
+  height: 4px;
+  background: var(--ink-color);
+  margin: 0 4px;
+}
+
+.counter-container {
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.item-slot {
+  width: 52px;
+  height: 52px;
+  border: 2px dashed #aaa;
+  border-radius: 4px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+  background: transparent;
+  transition: all 0.2s;
+}
+
+.item-slot.filled {
+  border: 2px solid var(--ink-color);
+  box-shadow: 3px 3px 0 var(--ink-color);
+  background: #fff;
+}
+
+/* Custom cursor for dig animation */
+.custom-cursor {
+  position: absolute;
+  pointer-events: none;
+  font-size: 32px;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  display: none;
+  transition: transform 0.1s;
+}
+
+.custom-cursor.digging {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+/* Animations and Overlays */
+.emoji-element {
+  position: absolute;
+  font-size: 24px;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  pointer-events: none;
+}
+
+@keyframes popIn {
+  0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+  70% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+.pop-in {
+  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  20% { transform: translate(-1px, -2px) rotate(-1deg); }
+  40% { transform: translate(-3px, 0px) rotate(1deg); }
+  60% { transform: translate(3px, 2px) rotate(0deg); }
+  80% { transform: translate(1px, -1px) rotate(1deg); }
+  100% { transform: translate(0px, 0px) rotate(0deg); }
+}
+
+.shake {
+  animation: shake 0.2s;
+}
+
+.flying-item {
+  position: absolute;
+  font-size: 40px;
+  z-index: 300;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+
+.popup-anim {
+  position: absolute;
+  font-weight: bold;
+  font-size: 24px;
+  pointer-events: none;
+  z-index: 1000;
+  transform: translate(-50%, -50%);
+  animation: floatUp 0.8s ease-out forwards;
+}
+
+@keyframes floatUp {
+  0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+  20% { transform: translate(-50%, -100%) scale(1.2); opacity: 1; }
+  100% { transform: translate(-50%, -250%) scale(1); opacity: 0; }
+}
+
+.text-green {
+  color: #2ecc71;
+  text-shadow: 1px 1px 2px #000;
+}

@@ -1,0 +1,789 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>🛕 Hidden Temple — 숨겨진 사원 (Royal Match) - 폭탄 상세 진행</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="35531009-efac-81ab-b79d-e67c333cdcac" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🛕</span></div><h1 class="page-title" dir="auto">🛕 Hidden Temple — 숨겨진 사원 (Royal Match) - 폭탄 상세 진행</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><blockquote id="4abbd449-c63c-4c5f-89fd-95bd27925c44" class="">미니게임 이벤트 상세 기획서 | 유형: 솔로 발굴형 | 핵심 메커닉: 곡괭이 소모 → 타일 공개 → 보석 + 아이템 수집 → 5단계 클리어</blockquote></div><div style="display:contents" dir="auto"><h1 id="f9c5a84b-cb77-4e28-bc65-323de7cc6e46" class="">📺 레퍼런스 영상</h1></div><div style="display:contents" dir="auto"><p id="e56651ad-03a9-40d9-a44c-51a03fcf818d" class=""><a href="https://www.youtube.com/shorts/CI3Tj9bjrVg">https://www.youtube.com/shorts/CI3Tj9bjrVg</a></p></div><div style="display:contents" dir="auto"><hr id="cd6e5ddc-d208-4cc9-b17c-68532a5c53cb"/></div><div style="display:contents" dir="auto"><h1 id="c0df2799-aa4b-4821-a904-4f8f378551ba" class="">1. 이벤트 개요</h1></div><div style="display:contents" dir="auto"><h2 id="1cd685a7-df1f-4847-a4e4-c9686614ccda" class="">기본 정보</h2></div><div style="display:contents" dir="ltr"><table id="72b24344-a28d-4581-a3c5-b1775e2f3603" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="072541f7-5057-4f3c-9fc5-ce6448455fdf"><th id="_lHH" class="simple-table-header-color simple-table-header">항목</th><th id="~MU_" class="simple-table-header-color simple-table-header">내용</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="35c2bdbb-a6cf-4ea5-9dbf-bef1c79d777c"><td id="_lHH" class="">이벤트명</td><td id="~MU_" class="">숨겨진 사원 (Hidden Temple)</td></tr></div><div style="display:contents" dir="ltr"><tr id="b3076072-5da1-4542-841b-56020da47476"><td id="_lHH" class="">이벤트 분류</td><td id="~MU_" class="">독립 미니게임 이벤트 (메인 보드와 병행)</td></tr></div><div style="display:contents" dir="ltr"><tr id="8f57af80-aab2-4f49-8563-da4a185b4809"><td id="_lHH" class="">참여 구조</td><td id="~MU_" class="">솔로</td></tr></div><div style="display:contents" dir="ltr"><tr id="f9d6e9ae-221f-4822-bc55-05f6bcfd75b0"><td id="_lHH" class="">이벤트 기간</td><td id="~MU_" class="">주중 4일 (월~목)</td></tr></div><div style="display:contents" dir="ltr"><tr id="dacf437f-ab1f-49f8-b11b-c42782023675"><td id="_lHH" class="">진입 경로</td><td id="~MU_" class="">메인 보드 플로팅 배너 → 이벤트 메인 화면</td></tr></div><div style="display:contents" dir="ltr"><tr id="dd233622-00a8-4aae-8b3c-77825418131f"><td id="_lHH" class="">핵심 재화 흐름</td><td id="~MU_" class="">레벨 클리어 → 곡괭이 획득 → 타일 발굴 → 보석/아이템 수집 → 단계 클리어 → 보상</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><h2 id="00055c2a-1fda-4aa7-9f0a-7264812f80e5" class="">이벤트 구조</h2></div><div style="display:contents" dir="auto"><p id="ce9bf294-d8c3-4de0-9888-37393abbf32a" class="">5단계로 구성된 발굴형 솔로 이벤트다. 각 단계마다 새로운 게임판(그리드)이 주어지며, 곡괭이를 소모해 타일을 하나씩 공개한다. 숨겨진 보석을 모두 찾으면 단계 클리어 보상이 지급되고 다음 단계로 진행한다. 5단계를 모두 클리어하면 All-Star 최종 보상이 지급되고 이벤트가 종료된다.</p></div><div style="display:contents" dir="auto"><p id="5485645e-97a4-4cc9-80e7-4b1aaffd943c" class="">지뢰찾기와 구조는 유사하지만 <strong>&quot;패배&quot; 개념이 없다</strong> — 곡괭이가 소진되면 플레이가 멈추고 레벨 클리어로 곡괭이를 보충하면 이어서 진행할 수 있다. 단계가 올라갈수록 그리드가 커지고 보석 수가 늘어나며 맵 형태도 다양해진다.</p></div><div style="display:contents" dir="ltr"><table id="a6f040f9-bd7c-46bb-b856-3bc116bbfca3" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="1c0ad2a5-ec9c-4a28-ba11-7206cbf13919"><th id="FvGK" class="simple-table-header-color simple-table-header">구분</th><th id="CxoF" class="simple-table-header-color simple-table-header">내용</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="4ea70b24-cf38-4235-afc3-d2349b46c5b6"><td id="FvGK" class="">단계 수</td><td id="CxoF" class="">5단계</td></tr></div><div style="display:contents" dir="ltr"><tr id="b6894f2e-3d9f-4caf-bddd-06de4a8c0a23"><td id="FvGK" class="">단계 클리어 조건</td><td id="CxoF" class="">해당 단계의 보석 전부 수집</td></tr></div><div style="display:contents" dir="ltr"><tr id="1fab7d0a-23a1-4181-a6ba-44cccaec8bc9"><td id="FvGK" class="">최종 보상</td><td id="CxoF" class="">5단계 전부 클리어 시 All-Star 보상 지급</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><h2 id="3debcc39-e467-48f3-86ac-9634936b80ee" class="">코어 펀</h2></div><div style="display:contents" dir="auto"><p id="80ea6124-bd71-400c-b737-84b700dcdeec" class="">무엇이 숨어 있는지 모르는 <strong>탐색의 긴장감</strong>이 핵심이다. 곡괭이를 탭할 때마다 보석이 나올지 빈칸일지 알 수 없는 불확실성이 반복 플레이를 유도한다. 빈칸에서도 소량 보상이 나올 수 있어 <strong>&quot;어디서든 뭔가 나온다&quot;는 기대감</strong>을 유지한다. 발굴 아이템이 여러 칸을 차지하고 있어 인접 칸을 팔 때의 연결 발견 재미도 있다. 단계가 올라갈수록 맵 형태가 바뀌는 <strong>점진적 볼거리</strong>가 완주 동기를 만든다.</p></div><div style="display:contents" dir="auto"><hr id="47498540-3564-4274-b5bb-2262ab3f23bb"/></div><div style="display:contents" dir="auto"><h1 id="8d33ef32-b9a9-4b34-acec-bbddd6879e2c" class="">2. 타일 타입 정의</h1></div><div style="display:contents" dir="auto"><p id="e009d886-e0d8-41cd-bffe-0fb8a15cee37" class="">Hidden Temple의 런타임 타일은 5종류다. TRAP은 없다 — Royal Match 레퍼런스 기준으로 트랩/페널티 타일은 존재하지 않으며, 삼국소녀전 GO에서도 동일하게 적용한다.</p></div><div style="display:contents" dir="ltr"><table id="51abf51f-10d6-410f-b847-9eb30c7cb2ff" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="c9e8e9c8-510b-43dc-a039-4b9074248aeb"><th id="VHPM" class="simple-table-header-color simple-table-header">타입</th><th id="Qr&lt;L" class="simple-table-header-color simple-table-header">Enum</th><th id="bq[C" class="simple-table-header-color simple-table-header">배치 주체</th><th id="g:Yd" class="simple-table-header-color simple-table-header">설명</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="155992d9-e4ca-40f0-b4d9-a58adca3b281"><td id="VHPM" class="">보석</td><td id="Qr&lt;L" class="">GEM</td><td id="bq[C" class="">서버 런타임 랜덤</td><td id="g:Yd" class="">수집 목표. 발굴 시 collected_gems +1</td></tr></div><div style="display:contents" dir="ltr"><tr id="e80ff287-24e7-4dc4-8701-91d079aab0e9"><td id="VHPM" class="">발굴 아이템</td><td id="Qr&lt;L" class="">ITEM</td><td id="bq[C" class="">서버 런타임 랜덤</td><td id="g:Yd" class="">멀티칸 아이템. 같은 item_instance_id 칸 전부 공개 시 보상 지급</td></tr></div><div style="display:contents" dir="ltr"><tr id="f01ad88b-7803-4601-9d0f-1b762b268d1a"><td id="VHPM" class="">소량 보상 빈칸</td><td id="Qr&lt;L" class="">EMPTY_REWARD</td><td id="bq[C" class="">서버 런타임 랜덤</td><td id="g:Yd" class="">소량 엽전/주사위 즉시 지급. 허탈감 방지</td></tr></div><div style="display:contents" dir="ltr"><tr id="0e9d2050-9851-444c-920b-b38b3426a162"><td id="VHPM" class="">순수 빈칸</td><td id="Qr&lt;L" class="">EMPTY</td><td id="bq[C" class="">서버 런타임 (나머지)</td><td id="g:Yd" class="">아무것도 없음. 먼지 이펙트만 재생</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><blockquote id="7dfa7d22-4d20-4fbd-b73e-bc58b0805213" class=""><strong>설계 의도:</strong> 빈칸을 파도 15% 확률로 소량 보상이 나오게 해 곡괭이를 쓰는 행위 자체에 부정적 경험이 쌓이지 않도록 한다. 발굴 아이템은 인접 칸이 연결될 때의 발견 재미를 주는 중간 목표 역할을 한다.</blockquote></div><div style="display:contents" dir="auto"><h2 id="df0687e2-3770-4d95-82e6-1c4ff4837977" class="">타일 배치 원칙</h2></div><div style="display:contents" dir="auto"><ul id="eee59f06-2ee8-4cb5-a1d1-ef13d443d6ba" class="bulleted-list"><li style="list-style-type:disc">게임판 전체 타일 배치는 <strong>서버에서 스테이지 진입 시 런타임 생성</strong> (기획자 정의 BLOCK/BOX 구조 기반)</li></ul></div><div style="display:contents" dir="auto"><ul id="8612b0d5-9b7e-4e9e-878e-b41924012537" class="bulleted-list"><li style="list-style-type:disc">클라이언트는 타일 탭 시 서버에 요청 → 서버가 해당 타일 결과 반환</li></ul></div><div style="display:contents" dir="auto"><ul id="f4512a07-b926-4dcd-9aa3-a49f755aa823" class="bulleted-list"><li style="list-style-type:disc">치팅 방지: 클라이언트는 공개된 타일 결과만 알 수 있으며 미공개 타일 정보는 서버에서만 보유</li></ul></div><div style="display:contents" dir="auto"><hr id="95fe5bf4-0641-4f42-8e8e-d02478a81b5b"/></div><div style="display:contents" dir="auto"><h1 id="72f77266-6d2d-422d-8552-7f5d2b44c18b" class="">3. 게임 진행 구조</h1></div><div style="display:contents" dir="auto"><h2 id="28cb4971-045f-4e09-b748-27491163a0da" class="">3-1. 전체 플로우</h2></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js" integrity="sha512-m3JYEI6gx5fh9jF10FjGoMzVKcV2N6nchcDcqPCdI1L3R2WQV7br2XVNR8iTLb2daOMRl3zldbcfT40xU2ntVw==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><pre id="3411263c-cb17-46ce-aa97-a02e47471e26" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">[진입]
+이벤트 메인 → 현재 단계 게임판 로드 (서버 런타임 배치 생성)
+→ 보유 곡괭이 수 확인
+→ 그리드 표시 (전체 타일 미공개 상태)
+
+[타일 발굴]
+그리드 칸 탭
+→ 전제 조건: pickaxe_count &gt; 0
+   True  → pickaxe_count -= 1 → 서버에 tile_index 전송
+           → 서버: tile_content 반환
+           → GEM          : collected_gems += 1 → 보석 등장 연출
+           → ITEM         : 해당 item_instance_id 칸 전부 공개 여부 확인
+                            전부 공개 → 아이템 획득 + reward_bundle_id 보상 지급
+                            미완료   → 부분 공개 상태 유지
+           → EMPTY_REWARD : 소량 재화 즉시 지급 → 보상 팝업
+           → EMPTY        : 먼지 이펙트
+   False → 곡괭이 부족 안내 → 레벨 플레이 유도
+
+[단계 클리어 판정]
+collected_gems &gt;= gem_count
+→ True : 단계 완료 연출 → 단계 보상 팝업 → 다음 단계 로드
+→ False: 계속 탐색
+
+[최종 클리어]
+ht_stage &gt; 5
+→ All-Star 최종 보상 지급 → 이벤트 종료 → 아이콘 소멸
+
+[곡괭이 소진]
+pickaxe_count == 0
+→ 현재 진행도 유지 (board_state 서버 보존)
+→ 레벨 클리어 유도 → 곡괭이 획득 후 재진입 시 이어서 진행
+
+[이벤트 기간 종료]
+4일 경과 → 현재 진행 단계 기준 부분 보상 지급 → 강제 종료</code></pre></div><div style="display:contents" dir="auto"><h2 id="562c2e3b-80a0-428b-909c-a8c982fc6cb2" class="">3-2. 곡괭이 획득 방법</h2></div><div style="display:contents" dir="ltr"><table id="2f70b1e4-c1db-43c4-88ec-0ef5b6a8e322" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="33e2b618-19da-44d5-961e-77aeac38ab4b"><th id="D_\T" class="simple-table-header-color simple-table-header">획득 경로</th><th id="GC&gt;F" class="simple-table-header-color simple-table-header">지급량</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="f09b0cde-0e3c-4056-8ba6-9b10864e6877"><td id="D_\T" class="">일반 레벨 클리어</td><td id="GC&gt;F" class="">1개</td></tr></div><div style="display:contents" dir="ltr"><tr id="10c33273-ceb6-403f-820f-591423b64874"><td id="D_\T" class="">하드 레벨 클리어</td><td id="GC&gt;F" class="">3개</td></tr></div><div style="display:contents" dir="ltr"><tr id="e4f73698-2618-4743-b98d-f52b93cd95bf"><td id="D_\T" class="">슈퍼하드 레벨 클리어</td><td id="GC&gt;F" class="">5개</td></tr></div><div style="display:contents" dir="ltr"><tr id="717bbf22-5253-45dc-8a5b-6a510cc7d6a8"><td id="D_\T" class="">이벤트 시작 보너스</td><td id="GC&gt;F" class="">Config 설정</td></tr></div><div style="display:contents" dir="ltr"><tr id="881cbf5f-ef4d-495c-a69d-8af009d96414"><td id="D_\T" class="">병행 이벤트 보상</td><td id="GC&gt;F" class="">변동</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="fabefd47-5537-489c-8a9b-01e7c9b1d6d0"/></div><div style="display:contents" dir="auto"><h1 id="35631009-efac-8005-99c1-cfbd15551615" class="">4. 보상 구조</h1></div><div style="display:contents" dir="auto"><h2 id="35631009-efac-8034-8a8d-d50f8fddfc8d" class="">4-1. 단계 완료 보상 (stage_reward_config) — Config</h2></div><div style="display:contents" dir="ltr"><table id="901aa353-f8a8-41f7-8881-b5c8be85485c" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="3d02b129-5e6e-450b-a2ef-7f7377de3c33"><th id="J@j;" class="simple-table-header-color simple-table-header">단계</th><th id="GeFa" class="simple-table-header-color simple-table-header">보상 내용</th><th id="Ae[X" class="simple-table-header-color simple-table-header">비고</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="db536bd1-25ad-47d0-94ad-6221b08b80fe"><td id="J@j;" class="">1단계</td><td id="GeFa" class="">소량 엽전 + 주사위</td><td id="Ae[X" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="64b967be-de44-419d-9dc0-38b2ef1b34db"><td id="J@j;" class="">2단계</td><td id="GeFa" class="">중량 엽전</td><td id="Ae[X" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="1f1d3ade-9632-4929-86e8-68ce5affaf91"><td id="J@j;" class="">3단계</td><td id="GeFa" class="">중량 엽전 + 부스터</td><td id="Ae[X" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="d2a5ede3-3cdc-4729-9651-96bfcc8f4c1a"><td id="J@j;" class="">4단계</td><td id="GeFa" class="">대량 엽전 + 부스터</td><td id="Ae[X" class=""></td></tr></div><div style="display:contents" dir="ltr"><tr id="452900b1-ef9d-4e7c-8330-ac127d8ac0f3"><td id="J@j;" class="">5단계 (All-Star)</td><td id="GeFa" class="">최대 보상 번들</td><td id="Ae[X" class="">이벤트 완주 보상</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><h2 id="35631009-efac-8068-b5e9-c04af69d3951" class="">4-2. EMPTY_REWARD 보상 (empty_reward_config) — Config</h2></div><div style="display:contents" dir="ltr"><table id="61efa85f-7133-43a0-8b0c-cc1d4bf462ba" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="04b7b12a-e656-47c7-8583-37948c4efe6e"><th id="bVth" class="simple-table-header-color simple-table-header">보상 타입</th><th id="fs;&gt;" class="simple-table-header-color simple-table-header">지급량</th><th id="PT@z" class="simple-table-header-color simple-table-header">비고</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2bea0019-fcc8-438d-98d8-a817401c7b4d"><td id="bVth" class="">엽전</td><td id="fs;&gt;" class="">소량</td><td id="PT@z" class="">기본 빈칸 보상</td></tr></div><div style="display:contents" dir="ltr"><tr id="43bd9ea1-c4c0-4be9-85c9-98d7d8660b0a"><td id="bVth" class="">주사위</td><td id="fs;&gt;" class="">1~2개</td><td id="PT@z" class="">낮은 확률로 지급</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="dc01624d-630d-4f6b-b9d1-580a1684c292"/></div><div style="display:contents" dir="auto"><h1 id="35631009-efac-804d-affc-ebbe33600696" class="">5. 연출 정의</h1></div><div style="display:contents" dir="ltr"><table id="bd7054aa-8739-43bd-8ddc-4df1eba9cc9c" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="06f0841c-6974-48c9-a6e4-45a7f560a988"><th id="XlGj" class="simple-table-header-color simple-table-header">연출 ID</th><th id="[X|P" class="simple-table-header-color simple-table-header">트리거</th><th id="ZajQ" class="simple-table-header-color simple-table-header">내용</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="06d088e7-3ab2-44ec-b0b9-32a18769923b"><td id="XlGj" class="">HT-ANI-001</td><td id="[X|P" class="">타일 탭</td><td id="ZajQ" class="">곡괭이 타격 이펙트 + 돌 부서지는 연출</td></tr></div><div style="display:contents" dir="ltr"><tr id="99fc7423-816b-40b1-b417-74b27a9904d1"><td id="XlGj" class="">HT-ANI-002</td><td id="[X|P" class="">GEM 발굴</td><td id="ZajQ" class="">돌 부서짐 → 보석 출현 → 수집 궤적</td></tr></div><div style="display:contents" dir="ltr"><tr id="a4d441c7-4bd7-4bf7-9a47-f3f3e4dc9853"><td id="XlGj" class="">HT-ANI-003</td><td id="[X|P" class="">ITEM 칸 공개 (부분)</td><td id="ZajQ" class="">아이템 윤곽 일부 노출 연출</td></tr></div><div style="display:contents" dir="ltr"><tr id="5445c666-c71b-409d-b06e-8bca849d08a5"><td id="XlGj" class="">HT-ANI-004</td><td id="[X|P" class="">ITEM 전체 공개</td><td id="ZajQ" class="">아이템 완전 출현 → 수집 연출 + 보상 팝업</td></tr></div><div style="display:contents" dir="ltr"><tr id="c634cb58-0cc8-4696-aa96-8957f56a0f9c"><td id="XlGj" class="">HT-ANI-005</td><td id="[X|P" class="">EMPTY_REWARD 발굴</td><td id="ZajQ" class="">돌 부서짐 → 소량 재화 팝업 → 인벤토리 흡수</td></tr></div><div style="display:contents" dir="ltr"><tr id="5446081a-3a71-4ff0-8035-dca64a8be07c"><td id="XlGj" class="">HT-ANI-006</td><td id="[X|P" class="">EMPTY 발굴</td><td id="ZajQ" class="">먼지 이펙트 (짧게 처리)</td></tr></div><div style="display:contents" dir="ltr"><tr id="2ece412f-ffbe-496e-b52c-7851f72fe789"><td id="XlGj" class="">HT-ANI-007</td><td id="[X|P" class="">단계 완료</td><td id="ZajQ" class="">전체 판 클리어 팡파르 + 보상 팝업</td></tr></div><div style="display:contents" dir="ltr"><tr id="dcda37ae-e533-4b93-8f2a-2c37a9976a6e"><td id="XlGj" class="">HT-ANI-008</td><td id="[X|P" class="">다음 단계 진입</td><td id="ZajQ" class="">신규 사원 게임판 등장 트랜지션</td></tr></div><div style="display:contents" dir="ltr"><tr id="120c9259-8239-495f-a11a-dab3e3f1fac8"><td id="XlGj" class="">HT-ANI-009</td><td id="[X|P" class="">All-Star (5단계 완료)</td><td id="ZajQ" class="">전체 화면 특수 이펙트 + 최종 보상 연출</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="0518f761-fc9e-4348-b5c1-47b9f6fe84dc"/></div><div style="display:contents" dir="auto"><h1 id="9ce4e131-0a3e-4a03-9fbf-f9549e3d24e1" class="">6. 시스템 설계</h1></div><div style="display:contents" dir="auto"><h2 id="35631009-efac-806f-964c-ee7a3f388d74" class="">6-1. Config 테이블</h2></div><div style="display:contents" dir="ltr"><table id="2d323f84-d321-4b2c-8290-cea0f231d70b" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="52fb0ea1-cd7b-40da-8738-90beea16a2e7"><th id="@Idl" class="simple-table-header-color simple-table-header">변수명</th><th id="hZ|C" class="simple-table-header-color simple-table-header">설명</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="1eac9631-9790-402d-9e2a-30efa8f4d631"><td id="@Idl" class="">ht_max_stage</td><td id="hZ|C" class="">전체 단계 수 (기본 5)</td></tr></div><div style="display:contents" dir="ltr"><tr id="b6f72900-595b-4b1e-980b-747c511ce90c"><td id="@Idl" class="">empty_reward_ratio</td><td id="hZ|C" class="">BOX 빈칸 중 EMPTY_REWARD 비율 (기본 0.15)</td></tr></div><div style="display:contents" dir="ltr"><tr id="6edbb15c-6ca9-4b45-ad88-a0aa8f1a9ce3"><td id="@Idl" class="">empty_reward_bundle_id</td><td id="hZ|C" class="">EMPTY_REWARD 타일 지급 보상 번들 ID</td></tr></div><div style="display:contents" dir="ltr"><tr id="e300efa1-65d6-42d9-8bd9-9d53483a07fc"><td id="@Idl" class="">pickaxe_per_normal</td><td id="hZ|C" class="">일반 레벨 클리어 시 곡괭이 지급량</td></tr></div><div style="display:contents" dir="ltr"><tr id="cb928c95-b425-4d91-8dda-764b5dfb4da9"><td id="@Idl" class="">pickaxe_per_hard</td><td id="hZ|C" class="">하드 레벨 클리어 시 곡괭이 지급량</td></tr></div><div style="display:contents" dir="ltr"><tr id="ae3d5d50-df28-437a-b9dc-8f2614a193da"><td id="@Idl" class="">pickaxe_per_superhard</td><td id="hZ|C" class="">슈퍼하드 레벨 클리어 시 곡괭이 지급량</td></tr></div><div style="display:contents" dir="ltr"><tr id="4f7830a0-c538-4ad3-b715-3e3b04f66619"><td id="@Idl" class="">event_start_bonus</td><td id="hZ|C" class="">이벤트 시작 보너스 곡괭이 수</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><h2 id="35631009-efac-80c9-a233-e73904f89f46" class="">6-2. Player 테이블</h2></div><div style="display:contents" dir="ltr"><table id="c083194d-55cf-4cd1-ac54-4feb5c6e8b14" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="548418e1-ec34-4871-be07-c6587b925224"><th id="utUm" class="simple-table-header-color simple-table-header">변수명</th><th id="k]&lt;r" class="simple-table-header-color simple-table-header">설명</th><th id="jEZc" class="simple-table-header-color simple-table-header">초기값</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="a045d33d-84f0-45f9-84de-24012a43769f"><td id="utUm" class="">pickaxe_count</td><td id="k]&lt;r" class="">보유 곡괭이 수</td><td id="jEZc" class="">0</td></tr></div><div style="display:contents" dir="ltr"><tr id="d4f2f1b3-ad37-494e-9943-0b12790c9c6b"><td id="utUm" class="">ht_stage</td><td id="k]&lt;r" class="">현재 진행 단계 (1~5)</td><td id="jEZc" class="">1</td></tr></div><div style="display:contents" dir="ltr"><tr id="2deff48f-e126-4d41-b611-c8c4e8a7dd30"><td id="utUm" class="">collected_gems</td><td id="k]&lt;r" class="">현재 단계 수집 보석 수</td><td id="jEZc" class="">0</td></tr></div><div style="display:contents" dir="ltr"><tr id="1ef35772-e00e-4cac-b3e1-5c753d45be92"><td id="utUm" class="">board_state</td><td id="k]&lt;r" class="">현재 게임판 타일 공개 상태 배열 (서버 저장)</td><td id="jEZc" class="">전체 미공개</td></tr></div><div style="display:contents" dir="ltr"><tr id="f7daf615-8b96-4687-91c2-c253dd0c3f8e"><td id="utUm" class="">event_completed</td><td id="k]&lt;r" class="">5단계 완료 여부</td><td id="jEZc" class="">false</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><h2 id="35631009-efac-800f-a15a-fc69661c61e2" class="">6-3. 서버 / 클라이언트 역할 분리</h2></div><div style="display:contents" dir="ltr"><table id="96cbddee-3cc7-4c25-99ac-231150fc2fd7" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="beb8f13a-a789-4e62-808b-fafc0667a8ff"><th id="B&gt;ja" class="simple-table-header-color simple-table-header">처리</th><th id="blhR" class="simple-table-header-color simple-table-header">담당</th><th id=";g=H" class="simple-table-header-color simple-table-header">상세</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="0b20b321-3a7a-4465-9ffd-c621d9df3445"><td id="B&gt;ja" class="">게임판 런타임 생성</td><td id="blhR" class="">서버</td><td id=";g=H" class="">진입 시 ht_stage_config 기반 타일 배치 생성 및 저장</td></tr></div><div style="display:contents" dir="ltr"><tr id="aaa63aaf-f6ad-41bc-a42a-4eafbed987cf"><td id="B&gt;ja" class="">타일 결과 반환</td><td id="blhR" class="">서버</td><td id=";g=H" class="">클라이언트 tile_index 요청 → tile_content 응답</td></tr></div><div style="display:contents" dir="ltr"><tr id="e4cec1f2-f006-4c94-97ac-f99e765bd42d"><td id="B&gt;ja" class="">pickaxe_count 차감</td><td id="blhR" class="">서버</td><td id=";g=H" class="">타일 탭 시 서버에서 차감 처리</td></tr></div><div style="display:contents" dir="ltr"><tr id="90516c36-c181-41d4-be68-31c3a5e0ce9e"><td id="B&gt;ja" class="">단계 클리어 판정</td><td id="blhR" class="">서버</td><td id=";g=H" class="">collected_gems &gt;= gem_count</td></tr></div><div style="display:contents" dir="ltr"><tr id="d7d42796-e757-4b2c-8a6e-406ab4df6019"><td id="B&gt;ja" class="">아이템 완성 판정</td><td id="blhR" class="">서버</td><td id=";g=H" class="">item_instance_id 동일 칸 전부 공개 여부 확인</td></tr></div><div style="display:contents" dir="ltr"><tr id="8fa59853-9c22-4370-8dc1-addc274df0fe"><td id="B&gt;ja" class="">보상 지급</td><td id="blhR" class="">서버</td><td id=";g=H" class="">즉시 지급 (GENERAL 재화 인벤토리 저장 없음)</td></tr></div><div style="display:contents" dir="ltr"><tr id="3427e42b-cecf-4c13-b1ea-48e05f483f22"><td id="B&gt;ja" class="">board_state 저장</td><td id="blhR" class="">서버</td><td id=";g=H" class="">곡괭이 소진 후 재진입 시 이어서 진행 가능하도록 보존</td></tr></div><div style="display:contents" dir="ltr"><tr id="b36be016-f2d6-454b-b4bc-210bd117e8fd"><td id="B&gt;ja" class="">타일 발굴 연출</td><td id="blhR" class="">클라이언트</td><td id=";g=H" class="">서버 결과 수신 후 타입별 애니메이션 재생</td></tr></div><div style="display:contents" dir="ltr"><tr id="5ee9675b-b6f9-4153-9a06-013e4bfcc543"><td id="B&gt;ja" class="">그리드 UI 렌더링</td><td id="blhR" class="">클라이언트</td><td id=";g=H" class="">NULL 칸 미표시, 공개/미공개 상태 표시</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="c64e4b46-b9a3-4c04-a464-6ecce259686f"/></div><div style="display:contents" dir="auto"><h1 id="3c85bafe-8b79-46af-bd0a-c0eebe3a28d6" class="">7. 분기 조건 요약 (LLE 변환 준비)</h1></div><div style="display:contents" dir="ltr"><table id="5ebe84d9-6fae-48eb-b68d-22a689252a2f" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="5cd7b9d7-ec53-4a65-8e74-38539c848e35"><th id="JfXW" class="simple-table-header-color simple-table-header">조건</th><th id="@l{f" class="simple-table-header-color simple-table-header">판정</th><th id="QZdf" class="simple-table-header-color simple-table-header">처리</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="5cfeec55-dc43-4248-99bd-3f5445fd42f4"><td id="JfXW" class="">pickaxe_count &gt; 0</td><td id="@l{f" class="">True</td><td id="QZdf" class="">타일 발굴 실행</td></tr></div><div style="display:contents" dir="ltr"><tr id="d8e2c557-62a7-4dd9-b84c-1fa14e3d038b"><td id="JfXW" class="">pickaxe_count == 0</td><td id="@l{f" class="">False</td><td id="QZdf" class="">곡괭이 부족 안내 → 레벨 플레이 유도</td></tr></div><div style="display:contents" dir="ltr"><tr id="4122fcb1-1f46-4df6-b26c-00b5c7933710"><td id="JfXW" class="">tile_content == GEM</td><td id="@l{f" class="">True</td><td id="QZdf" class="">collected_gems += 1, 보석 연출</td></tr></div><div style="display:contents" dir="ltr"><tr id="eea5b7ea-2da7-4bd1-8acf-60d9ac7eedc2"><td id="JfXW" class="">tile_content == ITEM (부분 공개)</td><td id="@l{f" class="">True</td><td id="QZdf" class="">아이템 윤곽 노출 연출</td></tr></div><div style="display:contents" dir="ltr"><tr id="64657a0f-284e-45c3-9926-037a6b87e7e4"><td id="JfXW" class="">tile_content == ITEM (전부 공개)</td><td id="@l{f" class="">True</td><td id="QZdf" class="">아이템 보상 즉시 지급</td></tr></div><div style="display:contents" dir="ltr"><tr id="2f286d01-3316-431d-9d3c-57dcd80afc30"><td id="JfXW" class="">tile_content == EMPTY_REWARD</td><td id="@l{f" class="">True</td><td id="QZdf" class="">소량 재화 즉시 지급</td></tr></div><div style="display:contents" dir="ltr"><tr id="92648f4d-ac1a-4dfb-8983-a74e206185ef"><td id="JfXW" class="">tile_content == EMPTY</td><td id="@l{f" class="">True</td><td id="QZdf" class="">먼지 이펙트 (보상 없음)</td></tr></div><div style="display:contents" dir="ltr"><tr id="11f499ec-811d-448f-9e53-7fdc16687b4f"><td id="JfXW" class="">collected_gems &gt;= gem_count</td><td id="@l{f" class="">True</td><td id="QZdf" class="">단계 클리어 → 보상 지급 → 다음 단계 로드</td></tr></div><div style="display:contents" dir="ltr"><tr id="ccc9ecba-77af-4019-9645-7c33ad6bf62b"><td id="JfXW" class="">ht_stage &gt; ht_max_stage</td><td id="@l{f" class="">True</td><td id="QZdf" class="">All-Star 최종 보상 지급 → 이벤트 종료</td></tr></div><div style="display:contents" dir="ltr"><tr id="668ff80b-acad-4870-a72d-fdcf9c519841"><td id="JfXW" class="">이벤트 기간 만료</td><td id="@l{f" class="">True</td><td id="QZdf" class="">현재 단계 기준 부분 보상 → 강제 종료</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><blockquote id="748b54f5-8184-4bca-a321-c97b69c4c1f0" class="">LLE 범위 외: 게임판 서버 런타임 생성, board_state 서버 저장/복원, 아이템 멀티칸 완성 판정, 치팅 방지 타일 결과 서버 관리</blockquote></div><div style="display:contents" dir="auto"><hr id="71064bda-4fb2-47c5-961d-2d9dfb5ce8ef"/></div><div style="display:contents" dir="auto"><h1 id="34cebfe4-b696-48c4-ae6d-220785a9d73b" class="">8. 스테이지 맵 시스템</h1></div><div style="display:contents" dir="auto"><h2 id="c96a351f-3f80-4d74-89ab-b4e125bf5fa1" class="">8-1. 설계 원칙</h2></div><div style="display:contents" dir="auto"><h3 id="d9187513-500c-4114-9c5e-0d920a87baff" class="">기획자 / 서버 역할 분리</h3></div><div style="display:contents" dir="ltr"><table id="50b8e4f3-5704-4b22-ab76-ac7b1acba7d9" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="b026b874-6e8a-4264-a93f-73a11b1da3be"><th id="\&gt;`D" class="simple-table-header-color simple-table-header">구분</th><th id="j`pR" class="simple-table-header-color simple-table-header">담당</th><th id="H[gS" class="simple-table-header-color simple-table-header">내용</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="7da7a6a7-c4b8-4296-a6b0-ee4b8a6266e1"><td id="\&gt;`D" class="">기획자</td><td id="j`pR" class="">엑셀 작성</td><td id="H[gS" class="">BLOCK / BOX / NULL 배치 정의, 발굴 아이템 슬롯 지정</td></tr></div><div style="display:contents" dir="ltr"><tr id="544414ca-4129-4413-831d-b881392a4452"><td id="\&gt;`D" class="">서버 런타임</td><td id="j`pR" class="">개발팀 구현</td><td id="H[gS" class="">발굴 아이템 랜덤 배치, GEM 랜덤 배치, EMPTY_REWARD 랜덤 배치</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><p id="4a18b709-9b28-44c8-bdee-9a48b0c14758" class="">기획자는 <strong>맵의 형태(BLOCK/BOX/NULL)</strong>와 <strong>어떤 아이템이 숨겨지는지</strong>만 정의한다. 실제 배치 위치는 서버가 매 진입 시 랜덤으로 결정한다. 플레이어가 스테이지를 외울 수 없는 구조가 된다.</p></div><div style="display:contents" dir="auto"><h3 id="42781a33-f124-4d0e-b826-c4e4742dc3d1" class="">그리드 판정 규칙 (우선순위 순)</h3></div><div style="display:contents" dir="auto"><ol type="1" id="63cc8119-10a2-4ea4-bb9e-5a564aee44fb" class="numbered-list" start="1"><li>col 또는 row 중 하나라도 <strong>NULL</strong> → 해당 칸은 존재하지 않음 (렌더링 안 함)</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="7571195a-8bc6-4614-9f7a-357aa78a982f" class="numbered-list" start="2"><li>col 또는 row 중 하나라도 <strong>BLOCK</strong> → BLOCK (발굴 불가)</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="946e07b7-794f-485b-9891-e7161c1a3527" class="numbered-list" start="3"><li>col도 <strong>BOX</strong> AND row도 <strong>BOX</strong> → BOX (발굴 가능)</li></ol></div><div style="display:contents" dir="auto"><p id="963a5cbb-54fc-49c2-abd3-f33d044e427c" class="">NULL을 활용하면 직사각형이 아닌 마름모, 십자, ㄷ자 등 자유로운 맵 형태 구성이 가능하다.</p></div><div style="display:contents" dir="auto"><h3 id="8b754007-4e5f-4271-af24-48d04a937f12" class="">런타임 배치 흐름</h3></div><div style="display:contents" dir="auto"><pre id="1943dfd7-3d94-4cae-bef0-7fca6fe6a27e" class="code code-wrap"><code class="language-jsx" style="white-space:pre-wrap;word-break:break-all">[스테이지 진입]
+ht_stage_config 로드
+→ col_1~10 / row_1~10 교차 판정으로 BOX 칸 목록 추출
+→ item_slot_1~3에 지정된 아이템 shape 확인
+→ BOX 공간 내 충돌 없이 아이템 랜덤 배치 (개발팀 구현)
+→ 남은 BOX 칸 중 gem_count개 랜덤 GEM 배치
+→ 남은 BOX 칸 중 empty_reward_ratio(15%) EMPTY_REWARD 배치
+→ 나머지 → EMPTY
+
+[배치 불가 에러 처리 — 개발팀 구현]
+- BOX 칸 수 &lt; 아이템 전체 점유 칸 합산 → 배치 불가 에러 반환
+- 아이템 겹침 / BLOCK·NULL 칸 침범 시 → 재시도 (최대 100회)
+- 100회 초과 실패 시 → config 오류 로그 + 기획팀 Slack 알림
+- gem_count &gt; 남은 BOX 칸 수 → 배치 불가 에러</code></pre></div><div style="display:contents" dir="auto"><hr id="8fee6a50-8e68-4d75-afd3-6a4b0fde7da1"/></div><div style="display:contents" dir="auto"><h2 id="3a526817-92a0-45f8-b7f1-ec446f398299" class="">8-2. 테이블 정의</h2></div><div style="display:contents" dir="auto"><h3 id="2e73ad3e-7924-481d-bb7b-df144c228433" class="">ht_stage_config — 스테이지 맵 정의 (Config)</h3></div><div style="display:contents" dir="auto"><p id="82364d18-88af-4c84-95e0-e69fb9ee9ee1" class="">스테이지 하나 = 레코드 하나. col_1~10 / row_1~10 교차값으로 그리드 형태를 정의한다.</p></div><div style="display:contents" dir="ltr"><table id="3f6ad34a-3196-4300-9a8c-88228c5f4498" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="004a938d-458e-4952-ad93-5e9323b2022c"><th id="qDSP" class="simple-table-header-color simple-table-header">필드명</th><th id="`lQQ" class="simple-table-header-color simple-table-header">타입</th><th id="Ej]v" class="simple-table-header-color simple-table-header">설명</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="cff33fc5-3c04-4c77-9628-5971b37fa6cc"><td id="qDSP" class="">stage_id</td><td id="`lQQ" class="">int</td><td id="Ej]v" class="">스테이지 번호 (1~5)</td></tr></div><div style="display:contents" dir="ltr"><tr id="88b0467b-6d52-42c8-b76c-e4b4a4ad3c20"><td id="qDSP" class="">col_1 ~ col_10</td><td id="`lQQ" class="">enum</td><td id="Ej]v" class="">해당 열 전체 타입: NULL / BLOCK / BOX</td></tr></div><div style="display:contents" dir="ltr"><tr id="02beff9a-9f77-4982-8135-daa42353eced"><td id="qDSP" class="">row_1 ~ row_10</td><td id="`lQQ" class="">enum</td><td id="Ej]v" class="">해당 행 전체 타입: NULL / BLOCK / BOX</td></tr></div><div style="display:contents" dir="ltr"><tr id="d0d5b37d-7ee3-4305-bdcf-a0481f34fe84"><td id="qDSP" class="">gem_count</td><td id="`lQQ" class="">int</td><td id="Ej]v" class="">해당 스테이지 보석 수</td></tr></div><div style="display:contents" dir="ltr"><tr id="8d1181ba-9282-4445-b495-b4dfdf8707dd"><td id="qDSP" class="">item_slot_1</td><td id="`lQQ" class="">int</td><td id="Ej]v" class="">발굴 아이템 ID (null 가능)</td></tr></div><div style="display:contents" dir="ltr"><tr id="3ff91b87-9d57-44a7-a741-9f027a795f74"><td id="qDSP" class="">item_slot_2</td><td id="`lQQ" class="">int</td><td id="Ej]v" class="">발굴 아이템 ID (null 가능)</td></tr></div><div style="display:contents" dir="ltr"><tr id="a20ea7cc-3195-44c6-815d-882ad3ef8a7b"><td id="qDSP" class="">item_slot_3</td><td id="`lQQ" class="">int</td><td id="Ej]v" class="">발굴 아이템 ID (null 가능)</td></tr></div><div style="display:contents" dir="ltr"><tr id="23ba94e0-8556-4a8c-97d4-b9659034ee04"><td id="qDSP" class="">empty_reward_ratio</td><td id="`lQQ" class="">float</td><td id="Ej]v" class="">EMPTY_REWARD 비율 (기본 0.15)</td></tr></div><div style="display:contents" dir="ltr"><tr id="02d30a2d-8e9e-41f4-b5a8-eb190f07d935"><td id="qDSP" class="">stage_reward_bundle_id</td><td id="`lQQ" class="">int</td><td id="Ej]v" class="">단계 완료 보상 번들 ID</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><h3 id="4b3f9726-e72d-4178-b165-815eace95264" class="">ht_item_config — 발굴 아이템 정의 (Config)</h3></div><div style="display:contents" dir="auto"><p id="8c99a2a1-1155-466c-ad1e-5afaacf4cc29" class="">기존 item_config와 완전 분리. 이벤트 전용 발굴 아이템만 관리.</p></div><div style="display:contents" dir="ltr"><table id="b7e1c10e-423e-445c-b84a-dadee8ccdf19" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="7cdc43a5-1912-4417-9cd6-6eb8799b75dd"><th id="&lt;Y`o" class="simple-table-header-color simple-table-header">필드명</th><th id="N[`U" class="simple-table-header-color simple-table-header">타입</th><th id="BB&gt;{" class="simple-table-header-color simple-table-header">설명</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="ada146c2-a1d6-4a65-8d6b-1282c6784bc9"><td id="&lt;Y`o" class="">item_id</td><td id="N[`U" class="">int</td><td id="BB&gt;{" class="">아이템 고유 번호</td></tr></div><div style="display:contents" dir="ltr"><tr id="44073b5b-b1fa-4c0d-985d-c14eb04e02c0"><td id="&lt;Y`o" class="">item_name</td><td id="N[`U" class="">string</td><td id="BB&gt;{" class="">아이템명 (삼국 테마)</td></tr></div><div style="display:contents" dir="ltr"><tr id="68a4b3b3-7ff5-459b-a448-d37ab460f2d5"><td id="&lt;Y`o" class="">shape_type</td><td id="N[`U" class="">enum</td><td id="BB&gt;{" class="">SINGLE / VERTICAL / HORIZONTAL / SQUARE</td></tr></div><div style="display:contents" dir="ltr"><tr id="428a73f7-b988-4abd-a627-8d6f3306068a"><td id="&lt;Y`o" class="">size_cols</td><td id="N[`U" class="">int</td><td id="BB&gt;{" class="">가로 점유 칸 수</td></tr></div><div style="display:contents" dir="ltr"><tr id="5a43dd5e-cf0e-440b-86cc-18caa6a8c9a4"><td id="&lt;Y`o" class="">size_rows</td><td id="N[`U" class="">int</td><td id="BB&gt;{" class="">세로 점유 칸 수</td></tr></div><div style="display:contents" dir="ltr"><tr id="d159ea9a-1053-4a8b-9721-e2c121c7da13"><td id="&lt;Y`o" class="">total_tiles</td><td id="N[`U" class="">int</td><td id="BB&gt;{" class="">전체 점유 칸 수 (size_cols × size_rows)</td></tr></div><div style="display:contents" dir="ltr"><tr id="de03bb6d-e9e3-496d-a39d-0b2bee9f73da"><td id="&lt;Y`o" class="">reward_bundle_id</td><td id="N[`U" class="">int</td><td id="BB&gt;{" class="">발굴 완료 시 지급 보상 번들 ID</td></tr></div><div style="display:contents" dir="ltr"><tr id="8718a2f8-ff8d-43bd-878e-cf7a43212056"><td id="&lt;Y`o" class="">rarity</td><td id="N[`U" class="">enum</td><td id="BB&gt;{" class="">COMMON / RARE / EPIC</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><h3 id="4b8aa2da-75f0-4944-9755-7ce95eff34df" class="">shape_type 4종 정의</h3></div><div style="display:contents" dir="ltr"><table id="f4d34599-75f7-444c-baf2-c02889b61abb" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="f7910942-3df0-4851-87d4-bd3c8560869c"><th id="RN&gt;O" class="simple-table-header-color simple-table-header">shape_type</th><th id="shON" class="simple-table-header-color simple-table-header">size_cols</th><th id="?]Vi" class="simple-table-header-color simple-table-header">size_rows</th><th id="Z:HQ" class="simple-table-header-color simple-table-header">total_tiles</th><th id="NEbM" class="simple-table-header-color simple-table-header">설명</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="692975eb-057f-4226-b2b0-bcaa1d6b2cd3"><td id="RN&gt;O" class="">SINGLE</td><td id="shON" class="">1</td><td id="?]Vi" class="">1</td><td id="Z:HQ" class="">1</td><td id="NEbM" class="">1칸 단독</td></tr></div><div style="display:contents" dir="ltr"><tr id="3ce48ea1-c45c-4396-b4d3-674ea8758651"><td id="RN&gt;O" class="">HORIZONTAL</td><td id="shON" class="">2</td><td id="?]Vi" class="">1</td><td id="Z:HQ" class="">2</td><td id="NEbM" class="">좌우 2칸</td></tr></div><div style="display:contents" dir="ltr"><tr id="b07be19b-8bdf-4c63-a2f5-57c48abeed91"><td id="RN&gt;O" class="">VERTICAL</td><td id="shON" class="">1</td><td id="?]Vi" class="">2</td><td id="Z:HQ" class="">2</td><td id="NEbM" class="">상하 2칸</td></tr></div><div style="display:contents" dir="ltr"><tr id="78c028a8-f317-4400-b86b-81165e96c303"><td id="RN&gt;O" class="">SQUARE</td><td id="shON" class="">2</td><td id="?]Vi" class="">2</td><td id="Z:HQ" class="">4</td><td id="NEbM" class="">2×2 네모 4칸</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="6aa7d39e-7536-430d-bbc4-1d906dda0b26"/></div><div style="display:contents" dir="auto"><h2 id="ca5c7a98-0347-4aa4-978d-ab815fbc4970" class="">8-3. 샘플 데이터</h2></div><div style="display:contents" dir="auto"><h3 id="753d0ffc-ded2-49e2-a16e-993af041fc33" class="">ht_item_config 샘플</h3></div><div style="display:contents" dir="ltr"><table id="db1cc240-0a96-4116-94c0-fbe4cc051c36" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="fc7bb256-5616-4099-96d2-435490538d12"><th id="vvvQ" class="simple-table-header-color simple-table-header">item_id</th><th id="Vx=L" class="simple-table-header-color simple-table-header">item_name</th><th id="OUgT" class="simple-table-header-color simple-table-header">shape_type</th><th id="P~:G" class="simple-table-header-color simple-table-header">size_cols</th><th id="LCmL" class="simple-table-header-color simple-table-header">size_rows</th><th id="u&lt;iW" class="simple-table-header-color simple-table-header">total_tiles</th><th id="wvw&gt;" class="simple-table-header-color simple-table-header">rarity</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="55cf86fe-c23a-4896-95d2-26b03a8ede4b"><td id="vvvQ" class="">1</td><td id="Vx=L" class="">동전 주머니</td><td id="OUgT" class="">SINGLE</td><td id="P~:G" class="">1</td><td id="LCmL" class="">1</td><td id="u&lt;iW" class="">1</td><td id="wvw&gt;" class="">COMMON</td></tr></div><div style="display:contents" dir="ltr"><tr id="9680b5c9-c841-44bd-bc81-e22a7a12cfa6"><td id="vvvQ" class="">2</td><td id="Vx=L" class="">관우의 청룡언월도</td><td id="OUgT" class="">HORIZONTAL</td><td id="P~:G" class="">2</td><td id="LCmL" class="">1</td><td id="u&lt;iW" class="">2</td><td id="wvw&gt;" class="">RARE</td></tr></div><div style="display:contents" dir="ltr"><tr id="cab5186c-7714-4758-9ebf-71e1404fb598"><td id="vvvQ" class="">3</td><td id="Vx=L" class="">조자룡의 방패</td><td id="OUgT" class="">VERTICAL</td><td id="P~:G" class="">1</td><td id="LCmL" class="">2</td><td id="u&lt;iW" class="">2</td><td id="wvw&gt;" class="">COMMON</td></tr></div><div style="display:contents" dir="ltr"><tr id="807342d6-248f-4512-bc89-83ddbd1e03a5"><td id="vvvQ" class="">4</td><td id="Vx=L" class="">옥새</td><td id="OUgT" class="">SQUARE</td><td id="P~:G" class="">2</td><td id="LCmL" class="">2</td><td id="u&lt;iW" class="">4</td><td id="wvw&gt;" class="">EPIC</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><h3 id="7ed2eab4-2e0d-4346-9763-dd78d7c3ee32" class="">ht_stage_config 샘플</h3></div><div style="display:contents" dir="ltr"><table id="995b96b0-27df-422b-8816-c6bccca62353" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="6f4c8676-c4d1-428d-a54d-369e0fcf1bc1"><th id="E&gt;&lt;u" class="simple-table-header-color simple-table-header">stage_id</th><th id="Sz~&lt;" class="simple-table-header-color simple-table-header">col_1</th><th id="JdYf" class="simple-table-header-color simple-table-header">col_2</th><th id="L&lt;Dl" class="simple-table-header-color simple-table-header">col_3</th><th id="gg]q" class="simple-table-header-color simple-table-header">col_4</th><th id="EeaB" class="simple-table-header-color simple-table-header">col_5</th><th id="Nhfa" class="simple-table-header-color simple-table-header">col_6</th><th id="}A~_" class="simple-table-header-color simple-table-header">col_7</th><th id="mai^" class="simple-table-header-color simple-table-header">col_8</th><th id="QOtq" class="simple-table-header-color simple-table-header">col_9</th><th id="xf@;" class="simple-table-header-color simple-table-header">col_10</th><th id="tlBS" class="simple-table-header-color simple-table-header">row_1</th><th id="Oj}M" class="simple-table-header-color simple-table-header">row_2</th><th id="{T;&lt;" class="simple-table-header-color simple-table-header">row_3</th><th id="KvYj" class="simple-table-header-color simple-table-header">row_4</th><th id=";gI@" class="simple-table-header-color simple-table-header">row_5</th><th id="SKHA" class="simple-table-header-color simple-table-header">row_6</th><th id="bA&lt;m" class="simple-table-header-color simple-table-header">row_7</th><th id="B&lt;IZ" class="simple-table-header-color simple-table-header">row_8</th><th id="~OdN" class="simple-table-header-color simple-table-header">row_9</th><th id="ewg?" class="simple-table-header-color simple-table-header">row_10</th><th id="}ZvJ" class="simple-table-header-color simple-table-header">gem_count</th><th id=":ANV" class="simple-table-header-color simple-table-header">item_slot_1</th><th id="QF;g" class="simple-table-header-color simple-table-header">item_slot_2</th><th id="}y:L" class="simple-table-header-color simple-table-header">item_slot_3</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="81e11a86-8fef-4533-9a37-26d19d132f2e"><td id="E&gt;&lt;u" class="">1</td><td id="Sz~&lt;" class="">NULL</td><td id="JdYf" class="">BOX</td><td id="L&lt;Dl" class="">BOX</td><td id="gg]q" class="">BOX</td><td id="EeaB" class="">BOX</td><td id="Nhfa" class="">BOX</td><td id="}A~_" class="">BOX</td><td id="mai^" class="">BOX</td><td id="QOtq" class="">BOX</td><td id="xf@;" class="">NULL</td><td id="tlBS" class="">NULL</td><td id="Oj}M" class="">BOX</td><td id="{T;&lt;" class="">BOX</td><td id="KvYj" class="">BOX</td><td id=";gI@" class="">BOX</td><td id="SKHA" class="">BOX</td><td id="bA&lt;m" class="">BOX</td><td id="B&lt;IZ" class="">BOX</td><td id="~OdN" class="">BOX</td><td id="ewg?" class="">NULL</td><td id="}ZvJ" class="">3</td><td id=":ANV" class="">2</td><td id="QF;g" class="">null</td><td id="}y:L" class="">null</td></tr></div><div style="display:contents" dir="ltr"><tr id="c5b6a9e4-378f-47e0-ac79-cbd1214e5e13"><td id="E&gt;&lt;u" class="">2</td><td id="Sz~&lt;" class="">BLOCK</td><td id="JdYf" class="">BOX</td><td id="L&lt;Dl" class="">BOX</td><td id="gg]q" class="">BOX</td><td id="EeaB" class="">BOX</td><td id="Nhfa" class="">BOX</td><td id="}A~_" class="">BOX</td><td id="mai^" class="">BOX</td><td id="QOtq" class="">BOX</td><td id="xf@;" class="">BLOCK</td><td id="tlBS" class="">BLOCK</td><td id="Oj}M" class="">BOX</td><td id="{T;&lt;" class="">BOX</td><td id="KvYj" class="">BOX</td><td id=";gI@" class="">BOX</td><td id="SKHA" class="">BOX</td><td id="bA&lt;m" class="">BOX</td><td id="B&lt;IZ" class="">BOX</td><td id="~OdN" class="">BOX</td><td id="ewg?" class="">BLOCK</td><td id="}ZvJ" class="">4</td><td id=":ANV" class="">2</td><td id="QF;g" class="">3</td><td id="}y:L" class="">null</td></tr></div><div style="display:contents" dir="ltr"><tr id="18fadbe7-1a21-4a1a-86cb-a070a5c8316f"><td id="E&gt;&lt;u" class="">3</td><td id="Sz~&lt;" class="">BLOCK</td><td id="JdYf" class="">BOX</td><td id="L&lt;Dl" class="">BOX</td><td id="gg]q" class="">BOX</td><td id="EeaB" class="">BOX</td><td id="Nhfa" class="">BOX</td><td id="}A~_" class="">BOX</td><td id="mai^" class="">BOX</td><td id="QOtq" class="">BOX</td><td id="xf@;" class="">BLOCK</td><td id="tlBS" class="">BLOCK</td><td id="Oj}M" class="">BOX</td><td id="{T;&lt;" class="">BOX</td><td id="KvYj" class="">BOX</td><td id=";gI@" class="">BLOCK</td><td id="SKHA" class="">BOX</td><td id="bA&lt;m" class="">BOX</td><td id="B&lt;IZ" class="">BOX</td><td id="~OdN" class="">BOX</td><td id="ewg?" class="">BLOCK</td><td id="}ZvJ" class="">5</td><td id=":ANV" class="">2</td><td id="QF;g" class="">3</td><td id="}y:L" class="">null</td></tr></div><div style="display:contents" dir="ltr"><tr id="450727f2-1ce8-44b1-841c-0b625bfb4c5b"><td id="E&gt;&lt;u" class="">4</td><td id="Sz~&lt;" class="">NULL</td><td id="JdYf" class="">NULL</td><td id="L&lt;Dl" class="">BOX</td><td id="gg]q" class="">BOX</td><td id="EeaB" class="">BOX</td><td id="Nhfa" class="">BOX</td><td id="}A~_" class="">BOX</td><td id="mai^" class="">BOX</td><td id="QOtq" class="">NULL</td><td id="xf@;" class="">NULL</td><td id="tlBS" class="">NULL</td><td id="Oj}M" class="">NULL</td><td id="{T;&lt;" class="">BOX</td><td id="KvYj" class="">BOX</td><td id=";gI@" class="">BOX</td><td id="SKHA" class="">BOX</td><td id="bA&lt;m" class="">BOX</td><td id="B&lt;IZ" class="">BOX</td><td id="~OdN" class="">NULL</td><td id="ewg?" class="">NULL</td><td id="}ZvJ" class="">6</td><td id=":ANV" class="">2</td><td id="QF;g" class="">3</td><td id="}y:L" class="">4</td></tr></div><div style="display:contents" dir="ltr"><tr id="6c2f834b-c2fd-4f80-b93b-3939cc780dc5"><td id="E&gt;&lt;u" class="">5</td><td id="Sz~&lt;" class="">BOX</td><td id="JdYf" class="">BOX</td><td id="L&lt;Dl" class="">BOX</td><td id="gg]q" class="">BOX</td><td id="EeaB" class="">BOX</td><td id="Nhfa" class="">BOX</td><td id="}A~_" class="">BOX</td><td id="mai^" class="">BOX</td><td id="QOtq" class="">BOX</td><td id="xf@;" class="">BOX</td><td id="tlBS" class="">BOX</td><td id="Oj}M" class="">BOX</td><td id="{T;&lt;" class="">BOX</td><td id="KvYj" class="">BOX</td><td id=";gI@" class="">BOX</td><td id="SKHA" class="">BOX</td><td id="bA&lt;m" class="">BOX</td><td id="B&lt;IZ" class="">BOX</td><td id="~OdN" class="">BOX</td><td id="ewg?" class="">BOX</td><td id="}ZvJ" class="">8</td><td id=":ANV" class="">2</td><td id="QF;g" class="">3</td><td id="}y:L" class="">4</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><blockquote id="0a642814-781b-4c4f-9168-83bed1c6e212" class="">Stage 1: col/row 1,10 = NULL → 모서리 제거 마름모형</blockquote></div><div style="display:contents" dir="auto"><blockquote id="11e27d56-7375-4624-885f-8179b7ce1aee" class="">Stage 3: row 5 = BLOCK → 가로 구분선이 생기는 두 구역 분리형</blockquote></div><div style="display:contents" dir="auto"><blockquote id="fe8d6af3-742d-486a-a703-cb85caec05a4" class="">Stage 4: col/row 1,2,9,10 = NULL → 십자형</blockquote></div><div style="display:contents" dir="auto"><blockquote id="9dd9f55b-da6c-4dbf-8d97-ec8904726b4f" class="">Stage 5: 전체 BOX → 10×10 완전 개방형 (최고 난이도)</blockquote></div><div style="display:contents" dir="auto"><hr id="7d87e7a2-e616-4bf7-9ba2-bc33a9860020"/></div><div style="display:contents" dir="auto"><h2 id="b675e189-2e69-4400-b8ff-4dcecab16838" class="">8-4. 에러 처리 조건 (개발팀 전달)</h2></div><div style="display:contents" dir="ltr"><table id="eb16e799-ca54-409b-a039-e33ff6a0501c" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="6515df1a-e564-4c1f-aa78-31868df656e0"><th id="cAFm" class="simple-table-header-color simple-table-header">조건</th><th id="Y_i[" class="simple-table-header-color simple-table-header">처리</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="c933ee58-3f2c-4720-a474-ad8ae0a7fb13"><td id="cAFm" class="">BOX 칸 수 &lt; 아이템 전체 점유 칸 합산</td><td id="Y_i[" class="">배치 불가 에러 반환. 스테이지 진입 차단</td></tr></div><div style="display:contents" dir="ltr"><tr id="a4f6a0c6-c11b-4d22-91e5-317ed07389d5"><td id="cAFm" class="">아이템끼리 겹침</td><td id="Y_i[" class="">재시도 (최대 100회)</td></tr></div><div style="display:contents" dir="ltr"><tr id="9e4ab942-9415-49fa-a823-602754790ee3"><td id="cAFm" class="">BLOCK / NULL 칸에 아이템 침범</td><td id="Y_i[" class="">재시도 (최대 100회)</td></tr></div><div style="display:contents" dir="ltr"><tr id="7bb050a0-e1e2-4558-ac3f-16c8056b759c"><td id="cAFm" class="">100회 초과 실패</td><td id="Y_i[" class="">config 오류 로그 기록 + 기획팀 Slack 알림</td></tr></div><div style="display:contents" dir="ltr"><tr id="116795d7-2b77-4c25-b2eb-c14d551f202f"><td id="cAFm" class="">gem_count &gt; 남은 BOX 칸 수</td><td id="Y_i[" class="">배치 불가 에러. gem_count 재조정 필요</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><blockquote id="c79159b2-f694-4603-bfb8-3e59cabfb1e1" class="">기획자 작성 시 BOX 칸 수가 (아이템 점유 합 + gem_count) 보다 충분히 많은지 확인 필요. 엑셀 컨버터에 사전 검증 로직 포함 권장.</blockquote></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

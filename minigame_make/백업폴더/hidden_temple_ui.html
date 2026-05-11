@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hidden Temple — UI 와이어프레임</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Apple SD Gothic Neo','Noto Sans KR',sans-serif;background:#EDEBE4;padding:48px 32px 80px;}
+  h1{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#888;text-align:center;margin-bottom:6px;}
+  .subtitle{font-size:12px;color:#AAA;text-align:center;margin-bottom:48px;}
+  .section{margin-bottom:72px;}
+  .section-title{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#999;margin-bottom:20px;border-left:3px solid #C8C5BC;padding-left:10px;}
+  .screen-row{display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start;}
+  .device{width:280px;flex-shrink:0;background:#fff;border-radius:24px;border:1px solid #D0CEC7;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.06);}
+  .device-label{font-size:10px;font-weight:500;color:#AAA;text-align:center;padding:8px 0 6px;border-bottom:.5px solid #ECEAE3;background:#F9F8F5;letter-spacing:.04em;}
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:10px 14px 8px;border-bottom:.5px solid #ECEAE3;}
+  .topbar-title{font-size:14px;font-weight:600;color:#1A1A18;}
+  .close-btn{width:24px;height:24px;border-radius:50%;border:.5px solid #D0CEC7;background:#F5F5F0;display:flex;align-items:center;justify-content:center;font-size:10px;color:#888;}
+  .btn{display:block;width:calc(100% - 28px);margin:0 14px;padding:10px;border-radius:10px;font-size:13px;font-weight:600;text-align:center;border:none;cursor:pointer;}
+  .btn-primary{background:#1A1A18;color:#fff;}
+  .btn-ghost{background:#F5F5F0;color:#555;border:.5px solid #D0CEC7;}
+  .btn-warn{background:#C8410A;color:#fff;}
+
+  /* 이벤트 배너 */
+  .event-banner{background:linear-gradient(160deg,#1A1208,#2A1F08);padding:16px 14px 14px;position:relative;overflow:hidden;}
+  .event-banner::before{content:'';position:absolute;right:-20px;bottom:-20px;width:100px;height:100px;border-radius:50%;background:radial-gradient(circle,rgba(239,159,39,.12),transparent 70%);}
+  .ev-tag{font-size:9px;font-weight:600;letter-spacing:.1em;color:#EF9F27;text-transform:uppercase;margin-bottom:3px;}
+  .ev-name{font-size:18px;font-weight:700;color:#fff;line-height:1.2;}
+  .ev-sub{font-size:10px;color:rgba(255,255,255,.4);margin-top:3px;}
+  .ev-period{display:inline-block;margin-top:8px;font-size:9px;color:rgba(255,255,255,.3);background:rgba(255,255,255,.06);border-radius:4px;padding:2px 8px;}
+
+  /* 단계 진행 트랙 */
+  .stage-track{padding:8px 14px;border-bottom:.5px solid #ECEAE3;background:#FAFAF7;}
+  .st-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;}
+  .st-label{font-size:9px;font-weight:600;color:#AAA;letter-spacing:.06em;text-transform:uppercase;}
+  .st-step{font-size:9px;color:#888;}
+  .st-nodes{display:flex;align-items:center;}
+  .st-node-col{display:flex;flex-direction:column;align-items:center;flex:1;}
+  .st-node{width:22px;height:22px;border-radius:50%;border:1.5px solid #D0CEC7;background:#fff;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:600;color:#888;}
+  .st-node-done{background:#5A9A20;border-color:#5A9A20;color:#fff;}
+  .st-node-active{background:#EF9F27;border-color:#EF9F27;color:#fff;box-shadow:0 0 6px rgba(239,159,39,.4);}
+  .st-line{flex:1;height:2px;background:#ECEAE3;border-radius:1px;}
+  .st-line-done{background:#5A9A20;}
+  .st-reward{font-size:7px;color:#AAA;text-align:center;margin-top:2px;white-space:nowrap;}
+
+  /* 곡괭이 바 */
+  .pick-bar{display:flex;align-items:center;justify-content:space-between;padding:7px 14px;border-bottom:.5px solid #ECEAE3;background:#FAFAF7;}
+  .pick-row{display:flex;align-items:center;gap:5px;}
+  .pick-icon{font-size:14px;}
+  .pick-val{font-size:13px;font-weight:600;color:#1A1A18;}
+  .pick-lbl{font-size:9px;color:#AAA;}
+  .pick-add{padding:4px 10px;border-radius:7px;font-size:10px;font-weight:500;background:#F5F5F0;color:#555;border:.5px solid #D0CEC7;cursor:pointer;}
+
+  /* 그리드 게임판 */
+  .grid-wrap{padding:10px 12px 12px;background:#F9F8F5;}
+  .grid-info{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;}
+  .grid-stage-label{font-size:10px;font-weight:600;color:#1A1A18;}
+  .gem-counter{display:flex;align-items:center;gap:4px;}
+  .gem-found{font-size:11px;font-weight:600;color:#EF9F27;}
+  .gem-total{font-size:11px;color:#AAA;}
+  .gem-icon{font-size:12px;}
+
+  /* 그리드 */
+  .grid{display:grid;gap:4px;width:100%;}
+  .grid-4col{grid-template-columns:repeat(4,1fr);}
+  .grid-5col{grid-template-columns:repeat(5,1fr);}
+
+  .tile{
+    aspect-ratio:1;border-radius:6px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:14px;cursor:pointer;position:relative;
+    border:.5px solid transparent;
+  }
+  /* 미공개 타일 */
+  .tile-hidden{
+    background:linear-gradient(145deg,#8B7355,#6B5A42);
+    border-color:#7A6348;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 1px 2px rgba(0,0,0,.2);
+  }
+  .tile-hidden::after{
+    content:'';position:absolute;inset:2px;border-radius:4px;
+    background:linear-gradient(145deg,rgba(255,255,255,.06),transparent);
+  }
+  /* 공개된 타일들 */
+  .tile-empty{background:#EAE4D8;border-color:#D8D0C0;}
+  .tile-gem{background:linear-gradient(135deg,#FFF3D0,#FFE066);border-color:#EF9F27;box-shadow:0 0 6px rgba(239,159,39,.3);}
+  .tile-reward{background:#EAF3DE;border-color:#5A9A20;}
+  .tile-gem-collected{background:#FAEEDA;border-color:#EF9F27;opacity:.5;}
+
+  /* 보석 진행 바 */
+  .gem-progress{margin-top:6px;}
+  .gem-prog-track{height:4px;background:#ECEAE3;border-radius:2px;overflow:hidden;}
+  .gem-prog-fill{height:100%;background:#EF9F27;border-radius:2px;}
+
+  /* 결과 블록 */
+  .rb{margin:10px 14px;border-radius:10px;padding:11px 13px;}
+  .rb-success{background:#EAF3DE;}
+  .rb-warn{background:#FAEEDA;}
+  .rb-fail{background:#FCEBEB;}
+  .rb-title-s{font-size:13px;font-weight:700;color:#3B6D11;margin-bottom:3px;}
+  .rb-title-w{font-size:13px;font-weight:700;color:#7A3A10;margin-bottom:3px;}
+  .rb-title-f{font-size:13px;font-weight:700;color:#791F1F;margin-bottom:3px;}
+  .rb-desc{font-size:10px;line-height:1.5;}
+  .rb-desc-s{color:#5A9A20;}
+  .rb-desc-w{color:#A05A10;}
+  .rb-desc-f{color:#A32D2D;}
+
+  /* 보상 목록 */
+  .reward-list{padding:8px 14px 4px;}
+  .reward-row{display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:.5px solid #ECEAE3;}
+  .reward-row:last-child{border-bottom:none;}
+  .rw-icon{width:26px;height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;}
+  .ri-coin{background:#FFF3D0;}
+  .ri-dice{background:#DCEEFF;}
+  .ri-boost{background:#EDE8FD;}
+  .ri-star{background:#FAEEDA;}
+  .rw-name{font-size:11px;color:#1A1A18;flex:1;margin-left:8px;}
+  .rw-amt{font-size:11px;font-weight:600;color:#1A1A18;}
+
+  /* 단계 완료 배너 */
+  .stage-clear-banner{background:linear-gradient(160deg,#1A1208,#1A2A08);padding:18px 14px;text-align:center;position:relative;overflow:hidden;}
+  .sc-tag{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px;}
+  .sc-icon{font-size:44px;margin:4px 0;}
+  .sc-desc{font-size:11px;color:rgba(255,255,255,.45);}
+
+  /* All-Star 배너 */
+  .allstar-banner{background:linear-gradient(160deg,#1A1208,#2A1A08 50%,#1A0808);padding:22px 14px 16px;text-align:center;position:relative;overflow:hidden;}
+
+  /* 타일 발굴 팝업 */
+  .reveal-popup{
+    margin:8px 14px;border-radius:10px;padding:10px 12px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .rp-gem{background:#FAEEDA;border:.5px solid #EF9F27;}
+  .rp-reward{background:#EAF3DE;border:.5px solid #5A9A20;}
+  .rp-empty{background:#F5F5F0;border:.5px solid #D0CEC7;}
+  .rp-icon{font-size:20px;flex-shrink:0;}
+  .rp-title{font-size:11px;font-weight:600;color:#1A1A18;}
+  .rp-desc{font-size:9px;color:#888;margin-top:1px;}
+
+  /* 범례 */
+  .legend-box{background:#fff;border-radius:16px;border:1px solid #D0CEC7;padding:18px;min-width:240px;}
+  .legend-title{font-size:11px;font-weight:600;color:#555;letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px;}
+  .leg-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+  .leg-row:last-child{margin-bottom:0;}
+  .leg-tile{width:32px;height:32px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
+  .leg-desc-t{font-size:11px;font-weight:500;color:#1A1A18;}
+  .leg-desc-s{font-size:10px;color:#AAA;margin-top:2px;line-height:1.4;}
+
+  .spec-table{background:#fff;border-radius:16px;border:1px solid #D0CEC7;padding:18px;min-width:480px;}
+  .st-head{display:flex;padding:0 0 6px;border-bottom:.5px solid #1A1A18;margin-bottom:4px;}
+  .st-row{display:flex;padding:6px 0;border-bottom:.5px solid #ECEAE3;align-items:flex-start;}
+  .st-row:last-child{border-bottom:none;}
+  .col-a{font-size:10px;font-weight:600;color:#1A1A18;width:170px;flex-shrink:0;}
+  .col-b{font-size:10px;width:100px;flex-shrink:0;}
+  .col-c{font-size:10px;color:#555;flex:1;line-height:1.4;}
+  .cfg{color:#3B6D11;} .plr{color:#0A3B7A;}
+
+  .flow-note{background:#fff;border-radius:14px;border:1px solid #D0CEC7;padding:16px 18px;min-width:300px;max-width:400px;}
+  .fn-title{font-size:11px;font-weight:600;color:#555;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px;}
+  .fn-step{display:flex;align-items:flex-start;gap:8px;padding:5px 0;border-bottom:.5px solid #ECEAE3;}
+  .fn-step:last-child{border-bottom:none;}
+  .fn-num{width:18px;height:18px;border-radius:50%;background:#1A1A18;color:#fff;font-size:9px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+  .fn-text{font-size:10px;color:#555;line-height:1.5;flex:1;}
+  .fn-text strong{color:#1A1A18;}
+</style>
+</head>
+<body>
+
+<h1>숨겨진 사원 (Hidden Temple) — UI 와이어프레임</h1>
+<div class="subtitle">솔로 발굴형 | 곡괭이 → 타일 공개 → 보석 수집 → 5단계 클리어 | 삼국소녀전 GO</div>
+
+
+<!-- ═══════════════════════════════════════ -->
+<div class="section">
+  <div class="section-title">HT-UI-001 — 이벤트 메인 / 진입 화면</div>
+  <div class="screen-row">
+
+    <!-- 이벤트 메인 -->
+    <div class="device">
+      <div class="device-label">이벤트 메인</div>
+      <div class="event-banner">
+        <div class="ev-tag">🛕 한정 이벤트</div>
+        <div class="ev-name">숨겨진 사원</div>
+        <div class="ev-sub">Hidden Temple — 보석을 발굴하라</div>
+        <div class="ev-period">월~목 4일 한정</div>
+      </div>
+
+      <!-- 단계 진행 트랙 -->
+      <div class="stage-track">
+        <div class="st-header">
+          <div class="st-label">진행 단계</div>
+          <div class="st-step">2단계 진행중</div>
+        </div>
+        <div class="st-nodes">
+          <div class="st-node-col">
+            <div class="st-node st-node-done">✓</div>
+            <div class="st-reward">1단계</div>
+          </div>
+          <div class="st-line st-line-done"></div>
+          <div class="st-node-col">
+            <div class="st-node st-node-active">2</div>
+            <div class="st-reward">2단계</div>
+          </div>
+          <div class="st-line"></div>
+          <div class="st-node-col">
+            <div class="st-node">3</div>
+            <div class="st-reward">3단계</div>
+          </div>
+          <div class="st-line"></div>
+          <div class="st-node-col">
+            <div class="st-node">4</div>
+            <div class="st-reward">4단계</div>
+          </div>
+          <div class="st-line"></div>
+          <div class="st-node-col">
+            <div class="st-node">⭐</div>
+            <div class="st-reward">완주</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 곡괭이 현황 -->
+      <div class="pick-bar">
+        <div class="pick-row">
+          <div class="pick-icon">⛏️</div>
+          <div class="pick-val">× 14</div>
+        </div>
+        <div class="pick-lbl">보유 곡괭이</div>
+        <div class="pick-add">충전</div>
+      </div>
+
+      <!-- 현재 판 미리보기 -->
+      <div style="padding:10px 14px 14px;">
+        <div style="font-size:9px;color:#AAA;margin-bottom:6px;">2단계 현황 · 4×4 그리드 · 보석 4개</div>
+        <div style="background:#FAFAF7;border:.5px solid #ECEAE3;border-radius:8px;padding:8px 10px;margin-bottom:10px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+            <div style="font-size:10px;font-weight:600;color:#1A1A18;">보석 수집 현황</div>
+            <div style="font-size:11px;font-weight:600;color:#EF9F27;">1 / 4 💎</div>
+          </div>
+          <div style="height:5px;background:#ECEAE3;border-radius:3px;overflow:hidden;">
+            <div style="width:25%;height:100%;background:#EF9F27;border-radius:3px;"></div>
+          </div>
+        </div>
+        <button class="btn btn-primary">발굴 계속하기</button>
+      </div>
+    </div>
+
+    <!-- 초기 상태 (이벤트 시작) -->
+    <div class="device">
+      <div class="device-label">이벤트 시작 — 1단계</div>
+      <div class="event-banner">
+        <div class="ev-tag">🛕 한정 이벤트</div>
+        <div class="ev-name">숨겨진 사원</div>
+        <div class="ev-sub">사원에 숨겨진 보석을 발굴하세요</div>
+        <div class="ev-period">월~목 4일 한정</div>
+      </div>
+
+      <div class="stage-track">
+        <div class="st-header">
+          <div class="st-label">진행 단계</div>
+          <div class="st-step">1단계 시작</div>
+        </div>
+        <div class="st-nodes">
+          <div class="st-node-col"><div class="st-node st-node-active">1</div><div class="st-reward">1단계</div></div>
+          <div class="st-line"></div>
+          <div class="st-node-col"><div class="st-node">2</div><div class="st-reward">2단계</div></div>
+          <div class="st-line"></div>
+          <div class="st-node-col"><div class="st-node">3</div><div class="st-reward">3단계</div></div>
+          <div class="st-line"></div>
+          <div class="st-node-col"><div class="st-node">4</div><div class="st-reward">4단계</div></div>
+          <div class="st-line"></div>
+          <div class="st-node-col"><div class="st-node">⭐</div><div class="st-reward">완주</div></div>
+        </div>
+      </div>
+
+      <div class="pick-bar">
+        <div class="pick-row"><div class="pick-icon">⛏️</div><div class="pick-val">× 6</div></div>
+        <div class="pick-lbl">시작 보너스 곡괭이</div>
+      </div>
+
+      <div style="padding:10px 14px;">
+        <div style="background:#FAEEDA;border-radius:8px;padding:8px 10px;margin-bottom:10px;">
+          <div style="font-size:10px;font-weight:600;color:#7A3A10;margin-bottom:2px;">💡 탐색 방법</div>
+          <div style="font-size:9px;color:#A05A10;line-height:1.6;">타일을 탭하면 곡괭이 1개 소모<br>보석 3개를 모두 찾으면 1단계 클리어<br>빈칸에서도 소량 보상이 나올 수 있어요!</div>
+        </div>
+      </div>
+      <button class="btn btn-primary" style="margin-bottom:14px;">발굴 시작!</button>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════ -->
+<div class="section">
+  <div class="section-title">HT-UI-002 — 게임판 플레이 화면</div>
+  <div class="screen-row">
+
+    <!-- 2단계 플레이 중 (4×4) -->
+    <div class="device">
+      <div class="device-label">2단계 — 4×4 그리드 플레이 중</div>
+
+      <div class="pick-bar">
+        <div class="pick-row"><div class="pick-icon">⛏️</div><div class="pick-val">× 11</div></div>
+        <div class="pick-lbl">곡괭이</div>
+        <div style="font-size:11px;font-weight:600;color:#EF9F27;">💎 1 / 4</div>
+      </div>
+
+      <div class="grid-wrap">
+        <div class="grid-info">
+          <div class="grid-stage-label">🛕 2단계 · 사원의 문</div>
+          <div class="gem-counter">
+            <div class="gem-icon">💎</div>
+            <div class="gem-found">1</div>
+            <div class="gem-total"> / 4</div>
+          </div>
+        </div>
+
+        <!-- 4×4 그리드 -->
+        <div class="grid grid-4col">
+          <!-- 공개된 보석 -->
+          <div class="tile tile-gem">💎</div>
+          <!-- 미공개 -->
+          <div class="tile tile-hidden"></div>
+          <div class="tile tile-hidden"></div>
+          <div class="tile tile-hidden"></div>
+          <!-- 빈칸 보상 공개 -->
+          <div class="tile tile-reward">🪙</div>
+          <!-- 미공개 -->
+          <div class="tile tile-hidden"></div>
+          <div class="tile tile-hidden"></div>
+          <div class="tile tile-hidden"></div>
+          <!-- 순수 빈칸 -->
+          <div class="tile tile-empty"></div>
+          <!-- 미공개 -->
+          <div class="tile tile-hidden"></div>
+          <div class="tile tile-hidden"></div>
+          <div class="tile tile-hidden"></div>
+          <!-- 미공개 -->
+          <div class="tile tile-hidden"></div>
+          <div class="tile tile-hidden"></div>
+          <div class="tile tile-hidden"></div>
+          <div class="tile tile-hidden"></div>
+        </div>
+
+        <!-- 진행 바 -->
+        <div class="gem-progress">
+          <div style="display:flex;justify-content:space-between;font-size:8px;color:#AAA;margin-bottom:2px;">
+            <span>보석 수집</span><span>25%</span>
+          </div>
+          <div class="gem-prog-track"><div class="gem-prog-fill" style="width:25%;"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 보석 발굴 순간 -->
+    <div class="device">
+      <div class="device-label">보석 발굴!</div>
+
+      <div class="pick-bar">
+        <div class="pick-row"><div class="pick-icon">⛏️</div><div class="pick-val">× 9</div></div>
+        <div class="pick-lbl">곡괭이</div>
+        <div style="font-size:11px;font-weight:600;color:#EF9F27;">💎 2 / 4</div>
+      </div>
+
+      <!-- 발굴 결과 팝업 -->
+      <div class="reveal-popup rp-gem">
+        <div class="rp-icon">💎</div>
+        <div>
+          <div class="rp-title">보석 발굴!</div>
+          <div class="rp-desc">2 / 4 수집 완료 · 2개 더 찾으면 단계 클리어</div>
+        </div>
+      </div>
+
+      <div class="grid-wrap">
+        <div class="grid-info">
+          <div class="grid-stage-label">🛕 2단계</div>
+          <div class="gem-counter"><div class="gem-icon">💎</div><div class="gem-found">2</div><div class="gem-total"> / 4</div></div>
+        </div>
+        <div class="grid grid-4col">
+          <div class="tile tile-gem">💎</div>
+          <div class="tile tile-hidden"></div>
+          <div class="tile tile-hidden"></div>
+          <div class="tile tile-hidden"></div>
+          <div class="tile tile-reward">🪙</div>
+          <div class="tile tile-gem" style="animation:none;">💎</div><!-- 방금 발굴 -->
+          <div class="tile tile-hidden"></div>
+          <div class="tile tile-hidden"></div>
+          <div class="tile tile-empty"></div>
+          <div class="tile tile-hidden"></div>
+          <div class="tile tile-hidden"></div>
+          <div class="tile tile-hidden"></div>
+          <div class="tile tile-hidden"></div>
+          <div class="tile tile-empty"></div>
+          <div class="tile tile-hidden"></div>
+          <div class="tile tile-hidden"></div>
+        </div>
+        <div class="gem-progress">
+          <div style="display:flex;justify-content:space-between;font-size:8px;color:#AAA;margin-bottom:2px;"><span>보석 수집</span><span>50%</span></div>
+          <div class="gem-prog-track"><div class="gem-prog-fill" style="width:50%;"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EMPTY_REWARD 발굴 -->
+    <div class="device">
+      <div class="device-label">빈칸 — 소량 보상 획득</div>
+
+      <div class="pick-bar">
+        <div class="pick-row"><div class="pick-icon">⛏️</div><div class="pick-val">× 8</div></div>
+        <div class="pick-lbl">곡괭이</div>
+        <div style="font-size:11px;font-weight:600;color:#EF9F27;">💎 2 / 4</div>
+      </div>
+
+      <!-- 소량 보상 팝업 -->
+      <div class="reveal-popup rp-reward">
+        <div class="rp-icon">🪙</div>
+        <div>
+          <div class="rp-title">엽전 획득!</div>
+          <div class="rp-desc">빈칸이지만 소량 보상이 숨겨져 있었어요</div>
+        </div>
+      </div>
+
+      <div class="grid-wrap">
+        <div class="grid-info">
+          <div class="grid-stage-label">🛕 2단계</div>
+          <div class="gem-counter"><div class="gem-icon">💎</div><div class="gem-found">2</div><div class="gem-total"> / 4</div></div>
+        </div>
+        <div class="grid grid-4col">
+          <div class="tile tile-gem">💎</div>
+          <div class="tile tile-hidden"></div>
+          <div class="tile tile-hidden"></div>
+          <div class="tile tile-hidden"></div>
+          <div class="tile tile-reward">🪙</div>
+          <div class="tile tile-gem">💎</div>
+          <div class="tile tile-hidden"></div>
+          <div class="tile tile-hidden"></div>
+          <div class="tile tile-empty"></div>
+          <div class="tile tile-reward" style="border-color:#EF9F27;background:#FAEEDA;">🪙</div><!-- 방금 -->
+          <div class="tile tile-hidden"></div>
+          <div class="tile tile-hidden"></div>
+          <div class="tile tile-hidden"></div>
+          <div class="tile tile-empty"></div>
+          <div class="tile tile-hidden"></div>
+          <div class="tile tile-hidden"></div>
+        </div>
+        <div class="gem-progress">
+          <div style="display:flex;justify-content:space-between;font-size:8px;color:#AAA;margin-bottom:2px;"><span>보석 수집</span><span>50%</span></div>
+          <div class="gem-prog-track"><div class="gem-prog-fill" style="width:50%;"></div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════ -->
+<div class="section">
+  <div class="section-title">HT-UI-003 — 단계 완료 / All-Star / 곡괭이 소진</div>
+  <div class="screen-row">
+
+    <!-- 단계 완료 -->
+    <div class="device">
+      <div class="device-label">2단계 완료!</div>
+      <div class="stage-clear-banner">
+        <div style="position:absolute;top:8px;left:12px;font-size:14px;opacity:.4;">✨</div>
+        <div style="position:absolute;top:12px;right:16px;font-size:12px;opacity:.35;">🌟</div>
+        <div class="sc-tag" style="color:#9FE1CB;">단계 클리어!</div>
+        <div class="sc-icon">🏛️</div>
+        <div class="sc-desc">2단계 · 사원의 문 완료<br>보석 4개 전부 발굴!</div>
+      </div>
+
+      <div style="padding:10px 14px 4px;"><div style="font-size:9px;color:#AAA;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px;">2단계 완료 보상</div></div>
+      <div class="reward-list">
+        <div class="reward-row"><div class="rw-icon ri-coin">🪙</div><div class="rw-name">엽전</div><div class="rw-amt">+80,000</div></div>
+        <div class="reward-row"><div class="rw-icon ri-dice">🎲</div><div class="rw-name">주사위</div><div class="rw-amt">+5</div></div>
+      </div>
+
+      <!-- 다음 단계 안내 -->
+      <div style="margin:8px 14px 14px;background:#FAFAF7;border:.5px solid #ECEAE3;border-radius:8px;padding:8px 10px;">
+        <div style="font-size:9px;color:#AAA;margin-bottom:3px;">다음 · 3단계</div>
+        <div style="font-size:10px;color:#1A1A18;font-weight:600;margin-bottom:3px;">5×4 그리드 · 보석 5개</div>
+        <div style="height:4px;background:#ECEAE3;border-radius:2px;"></div>
+      </div>
+      <button class="btn btn-primary" style="margin-bottom:14px;">3단계 진입!</button>
+    </div>
+
+    <!-- All-Star (5단계 완료) -->
+    <div class="device">
+      <div class="device-label">All-Star — 이벤트 완주!</div>
+      <div class="allstar-banner">
+        <div style="position:absolute;top:8px;left:10px;font-size:16px;opacity:.4;">🔥</div>
+        <div style="position:absolute;top:6px;right:12px;font-size:14px;opacity:.35;">⚡</div>
+        <div style="position:absolute;bottom:8px;left:18px;font-size:12px;opacity:.3;">✨</div>
+        <div style="position:absolute;bottom:10px;right:16px;font-size:11px;opacity:.35;">🌟</div>
+        <div style="font-size:10px;font-weight:600;color:#EF9F27;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;">🎊 ALL-STAR 달성! 🎊</div>
+        <div style="font-size:40px;margin-bottom:6px;">⭐🛕⭐</div>
+        <div style="font-size:15px;font-weight:700;color:#fff;margin-bottom:3px;">숨겨진 사원 완전 정복!</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.35);">5단계 · 보석 26개 전부 발굴</div>
+      </div>
+
+      <div style="padding:10px 14px 4px;"><div style="font-size:9px;color:#AAA;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px;">All-Star 최종 보상</div></div>
+      <div class="reward-list">
+        <div class="reward-row"><div class="rw-icon ri-star">🎁</div><div class="rw-name">최종 보상 상자</div><div class="rw-amt">× 1</div></div>
+        <div class="reward-row"><div class="rw-icon ri-coin">🪙</div><div class="rw-name">엽전</div><div class="rw-amt">+500,000</div></div>
+        <div class="reward-row"><div class="rw-icon ri-dice">🎲</div><div class="rw-name">주사위</div><div class="rw-amt">+50</div></div>
+        <div class="reward-row"><div class="rw-icon ri-boost">⚡</div><div class="rw-name">부스터</div><div class="rw-amt">×3</div></div>
+      </div>
+      <button class="btn btn-primary" style="margin-top:4px;margin-bottom:14px;">보상 수령</button>
+    </div>
+
+    <!-- 곡괭이 소진 -->
+    <div class="device">
+      <div class="device-label">곡괭이 소진</div>
+      <div class="topbar"><div class="topbar-title">숨겨진 사원</div><div class="close-btn">✕</div></div>
+
+      <div class="rb rb-warn" style="margin-top:10px;">
+        <div class="rb-title-w">곡괭이가 모두 소진됐어요!</div>
+        <div class="rb-desc rb-desc-w">레벨을 클리어하면 곡괭이를 더 모을 수 있어요.<br>현재 진행도는 그대로 유지됩니다.</div>
+      </div>
+
+      <div style="padding:0 14px;margin-bottom:10px;">
+        <div style="background:#FAFAF7;border:.5px solid #ECEAE3;border-radius:8px;padding:10px;">
+          <div style="font-size:10px;color:#555;line-height:1.8;">
+            📌 3단계 진행도 <strong style="color:#1A1A18;">60%</strong> 보존<br>
+            💎 보석 <strong style="color:#EF9F27;">3 / 5</strong> 수집 완료<br>
+            ⏱ 이벤트 종료까지 <strong style="color:#1A1A18;">2일 8시간</strong>
+          </div>
+        </div>
+      </div>
+      <div style="padding:0 14px;margin-bottom:10px;">
+        <div style="font-size:9px;color:#AAA;margin-bottom:6px;">곡괭이 획득 방법</div>
+        <div style="display:flex;flex-direction:column;gap:4px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:5px 8px;background:#FAFAF7;border:.5px solid #ECEAE3;border-radius:6px;">
+            <div style="font-size:10px;color:#1A1A18;">일반 레벨 클리어</div>
+            <div style="font-size:10px;font-weight:600;color:#EF9F27;">+1개</div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:5px 8px;background:#FAFAF7;border:.5px solid #ECEAE3;border-radius:6px;">
+            <div style="font-size:10px;color:#1A1A18;">하드 레벨 클리어</div>
+            <div style="font-size:10px;font-weight:600;color:#EF9F27;">+3개</div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:5px 8px;background:#FAFAF7;border:.5px solid #ECEAE3;border-radius:6px;">
+            <div style="font-size:10px;color:#1A1A18;">슈퍼하드 레벨 클리어</div>
+            <div style="font-size:10px;font-weight:600;color:#EF9F27;">+5개</div>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-primary" style="margin-bottom:8px;">레벨 클리어하러 가기</button>
+      <button class="btn btn-ghost" style="margin-bottom:14px;">이벤트 메인으로</button>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════ -->
+<div class="section">
+  <div class="section-title">HT-UI-004 — 3단계 예시 (5×4) + 범례</div>
+  <div class="screen-row">
+
+    <!-- 3단계 플레이 (5×4) -->
+    <div class="device">
+      <div class="device-label">3단계 — 5×4 그리드</div>
+
+      <div class="pick-bar">
+        <div class="pick-row"><div class="pick-icon">⛏️</div><div class="pick-val">× 18</div></div>
+        <div class="pick-lbl">곡괭이</div>
+        <div style="font-size:11px;font-weight:600;color:#EF9F27;">💎 3 / 5</div>
+      </div>
+
+      <div class="grid-wrap">
+        <div class="grid-info">
+          <div class="grid-stage-label">🛕 3단계 · 사원의 심장</div>
+          <div class="gem-counter"><div class="gem-icon">💎</div><div class="gem-found">3</div><div class="gem-total"> / 5</div></div>
+        </div>
+
+        <!-- 5×4 그리드 (20칸) -->
+        <div class="grid grid-5col">
+          <div class="tile tile-gem">💎</div>
+          <div class="tile tile-hidden"></div>
+          <div class="tile tile-hidden"></div>
+          <div class="tile tile-empty"></div>
+          <div class="tile tile-hidden"></div>
+
+          <div class="tile tile-reward">🪙</div>
+          <div class="tile tile-hidden"></div>
+          <div class="tile tile-gem">💎</div>
+          <div class="tile tile-hidden"></div>
+          <div class="tile tile-hidden"></div>
+
+          <div class="tile tile-hidden"></div>
+          <div class="tile tile-empty"></div>
+          <div class="tile tile-hidden"></div>
+          <div class="tile tile-gem">💎</div>
+          <div class="tile tile-hidden"></div>
+
+          <div class="tile tile-hidden"></div>
+          <div class="tile tile-hidden"></div>
+          <div class="tile tile-reward">🪙</div>
+          <div class="tile tile-hidden"></div>
+          <div class="tile tile-hidden"></div>
+        </div>
+
+        <div class="gem-progress">
+          <div style="display:flex;justify-content:space-between;font-size:8px;color:#AAA;margin-bottom:2px;"><span>보석 수집</span><span>60%</span></div>
+          <div class="gem-prog-track"><div class="gem-prog-fill" style="width:60%;"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 타일 타입 범례 -->
+    <div class="legend-box">
+      <div class="legend-title">타일 타입 정의</div>
+      <div class="leg-row">
+        <div class="leg-tile tile-hidden" style="width:32px;height:32px;border-radius:6px;background:linear-gradient(145deg,#8B7355,#6B5A42);border:.5px solid #7A6348;"></div>
+        <div>
+          <div class="leg-desc-t">미공개 타일</div>
+          <div class="leg-desc-s">발굴 전 상태. 탭하면 곡괭이 1개 소모</div>
+        </div>
+      </div>
+      <div class="leg-row">
+        <div class="leg-tile tile-gem" style="width:32px;height:32px;border-radius:6px;">💎</div>
+        <div>
+          <div class="leg-desc-t">GEM — 보석</div>
+          <div class="leg-desc-s">수집 목표. collected_gems +1<br>단계 목표 달성 시 클리어</div>
+        </div>
+      </div>
+      <div class="leg-row">
+        <div class="leg-tile tile-reward" style="width:32px;height:32px;border-radius:6px;">🪙</div>
+        <div>
+          <div class="leg-desc-t">EMPTY_REWARD — 소량 보상 빈칸</div>
+          <div class="leg-desc-s">빈칸이지만 소량 재화 즉시 지급<br>전체 빈칸의 약 15% 배치<br>허탈감 방지 설계 요소</div>
+        </div>
+      </div>
+      <div class="leg-row">
+        <div class="leg-tile tile-empty" style="width:32px;height:32px;border-radius:6px;"></div>
+        <div>
+          <div class="leg-desc-t">EMPTY — 순수 빈칸</div>
+          <div class="leg-desc-s">아무것도 없음. 먼지 이펙트만 재생<br>나머지 빈칸 전부</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 게임 루프 + 변수 테이블 -->
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div class="flow-note">
+        <div class="fn-title">Hidden Temple 게임 루프</div>
+        <div class="fn-step"><div class="fn-num">1</div><div class="fn-text"><strong>진입</strong> — 현재 단계 게임판 로드. 곡괭이 수 확인</div></div>
+        <div class="fn-step"><div class="fn-num">2</div><div class="fn-text"><strong>타일 탭</strong> — 곡괭이 1개 소모 → 서버에 tile_index 전송 → 타입(GEM/EMPTY_REWARD/EMPTY) 반환</div></div>
+        <div class="fn-step"><div class="fn-num">3</div><div class="fn-text"><strong>결과 처리</strong> — GEM: 수집 +1 / EMPTY_REWARD: 소량 재화 즉시 지급 / EMPTY: 먼지 이펙트</div></div>
+        <div class="fn-step"><div class="fn-num">4</div><div class="fn-text"><strong>클리어 판정</strong> — collected_gems >= stage_gem_target → 단계 보상 지급 → 다음 단계</div></div>
+        <div class="fn-step"><div class="fn-num">5</div><div class="fn-text"><strong>5단계 완료</strong> — All-Star 최종 보상 지급 → 이벤트 종료 (아이콘 소멸)</div></div>
+        <div class="fn-step"><div class="fn-num">6</div><div class="fn-text"><strong>곡괭이 소진</strong> — 진행도 서버 보존 → 레벨 클리어로 충전 후 이어서 진행</div></div>
+      </div>
+
+      <div class="spec-table" style="min-width:380px;">
+        <div class="legend-title">핵심 변수 — Config / Player</div>
+        <div class="st-head">
+          <div class="col-a" style="font-size:9px;color:#888;">변수명</div>
+          <div class="col-b" style="font-size:9px;color:#888;">구분</div>
+          <div class="col-c" style="font-size:9px;color:#888;">설명</div>
+        </div>
+        <div class="st-row"><div class="col-a">ht_max_stage</div><div class="col-b cfg">Config</div><div class="col-c">전체 단계 수 (기본 5)</div></div>
+        <div class="st-row"><div class="col-a">grid_size_per_stage</div><div class="col-b cfg">Config</div><div class="col-c">단계별 그리드 칸 수 [12,16,20,25,30]</div></div>
+        <div class="st-row"><div class="col-a">gem_count_per_stage</div><div class="col-b cfg">Config</div><div class="col-c">단계별 보석 수 [3,4,5,6,8]</div></div>
+        <div class="st-row"><div class="col-a">empty_reward_ratio</div><div class="col-b cfg">Config</div><div class="col-c">빈칸 중 EMPTY_REWARD 비율 (기본 0.15)</div></div>
+        <div class="st-row"><div class="col-a">empty_reward_bundle_id</div><div class="col-b cfg">Config</div><div class="col-c">소량 보상 빈칸 지급 번들 ID</div></div>
+        <div class="st-row"><div class="col-a">stage_reward_bundle_id</div><div class="col-b cfg">Config</div><div class="col-c">단계별 완료 보상 번들 ID</div></div>
+        <div class="st-row"><div class="col-a">pickaxe_count</div><div class="col-b plr">Player</div><div class="col-c">보유 곡괭이 수</div></div>
+        <div class="st-row"><div class="col-a">ht_stage</div><div class="col-b plr">Player</div><div class="col-c">현재 진행 단계 (1~5)</div></div>
+        <div class="st-row"><div class="col-a">collected_gems</div><div class="col-b plr">Player</div><div class="col-c">현재 단계 수집 보석 수</div></div>
+        <div class="st-row"><div class="col-a">board_state</div><div class="col-b plr">Player</div><div class="col-c">타일 공개 상태 배열 (서버 저장)</div></div>
+        <div class="st-row"><div class="col-a">event_completed</div><div class="col-b plr">Player</div><div class="col-c">5단계 완료 여부</div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+</body>
+</html>

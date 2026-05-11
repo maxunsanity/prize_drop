@@ -1,0 +1,8 @@
+event_id,event_name,event_type,active_from,active_until,is_pickup_type,pickup_point,milestone_group_id,mission_slot_1,mission_slot_2,mission_slot_3,is_tournament,group_size
+10001,콩나무 노다지,TILE_POINT,2026-05-01 13:00:00,2026-05-04 13:00:00,false,null,2010,null,null,null,false,null
+10002,모서리 대행진,TILE_POINT,2026-05-04 13:00:00,2026-05-06 13:00:00,false,null,2011,null,null,null,false,null
+10003,황금 픽업,TILE_POINT,2026-05-06 13:00:00,2026-05-09 13:00:00,true,2,2012,3001,null,null,false,null
+10004,세금 회수,TILE_POINT,2026-05-09 13:00:00,2026-05-11 13:00:00,false,null,2013,3002,3003,null,false,null
+20001,동화 이야기 토너먼트,TILE_POINT,2026-05-01 13:00:00,2026-05-03 13:00:00,false,null,2020,null,null,null,true,35
+20002,주간 대토너먼트,TILE_POINT,2026-05-05 13:00:00,2026-05-07 13:00:00,false,null,2021,null,null,null,true,50
+99999,타이쿤 이벤트 토너먼트 1단계,TYCOON_POINT,2026-05-01 13:00:00,2026-05-03 13:00:00,false,null,null,99999,null,null,true,35

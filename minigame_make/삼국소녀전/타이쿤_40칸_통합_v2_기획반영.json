@@ -1,0 +1,363 @@
+{
+  "version": 1,
+  "designName": "타이쿤_40칸_통합_v2_기획반영",
+  "exportedAt": "2026-04-24T01:00:00.000Z",
+  "nodes": [
+    {
+      "id": "n-entry",
+      "type": "entry",
+      "position": { "x": 0, "y": 0 },
+      "data": { "label": "시즌 시작" }
+    },
+    {
+      "id": "n-init",
+      "type": "trigger",
+      "position": { "x": 0, "y": 150 },
+      "data": {
+        "label": "시뮬레이션 초기화",
+        "attributes": [
+          { "key": "dice", "type": "number", "value": "tycoon_event_1.init_dice" },
+          { "key": "dice_count", "type": "number", "value": "tycoon_event_1.dice_multiplier" },
+          { "key": "pos", "type": "number", "value": "0" },
+          { "key": "pos_old", "type": "number", "value": "0" },
+          { "key": "money", "type": "number", "value": "1000" },
+          { "key": "point_gain", "type": "number", "value": "0" },
+          { "key": "lap_count", "type": "number", "value": "0" },
+          { "key": "roll", "type": "number", "value": "0" }
+        ],
+        "description": "돈(money) 자원으로 시작"
+      }
+    },
+    {
+      "id": "n-loop-gate",
+      "type": "gate",
+      "position": { "x": 400, "y": 150 },
+      "data": {
+        "label": "주사위 체크",
+        "condition": "dice >= dice_count"
+      }
+    },
+    {
+      "id": "n-consume-dice",
+      "type": "disposal",
+      "position": { "x": 400, "y": 300 },
+      "data": { "label": "주사위 소비" }
+    },
+    {
+      "id": "n-roll",
+      "type": "trigger",
+      "position": { "x": 400, "y": 450 },
+      "data": {
+        "label": "주사위 굴리기 (2d6)",
+        "attributes": [
+          { "key": "roll", "type": "number", "value": "rand.d6() + rand.d6()" },
+          { "key": "dice", "type": "number", "value": "dice - dice_count" },
+          { "key": "point_gain", "type": "number", "value": "0" }
+        ]
+      }
+    },
+    {
+      "id": "n-move-logic",
+      "type": "trigger",
+      "position": { "x": 400, "y": 550 },
+      "data": {
+        "label": "이동 처리",
+        "attributes": [
+          { "key": "pos_old", "type": "number", "value": "pos" },
+          { "key": "pos", "type": "number", "value": "(pos + roll) % 40" }
+        ]
+      }
+    },
+    {
+      "id": "n-lap-check",
+      "type": "gate",
+      "position": { "x": 400, "y": 650 },
+      "data": {
+        "label": "한 바퀴 통과?",
+        "condition": "pos < pos_old"
+      }
+    },
+    {
+      "id": "n-pass-go",
+      "type": "trigger",
+      "position": { "x": 700, "y": 650 },
+      "data": {
+        "label": "GO 통과 보상",
+        "attributes": [
+          { "key": "point_gain", "type": "number", "value": "200 * board_stage.reward_scale * dice_count" },
+          { "key": "lap_count", "type": "number", "value": "lap_count + 1" }
+        ]
+      }
+    },
+    {
+      "id": "n-accumulate-go",
+      "type": "reward",
+      "position": { "x": 900, "y": 650 },
+      "data": { "label": "통과 보상 누적" }
+    },
+    {
+      "id": "n-tile-dispatcher",
+      "type": "gate",
+      "position": { "x": 400, "y": 800 },
+      "data": {
+        "label": "정거장 판별",
+        "condition": "pos == 5 || pos == 15 || pos == 25 || pos == 35"
+      }
+    },
+    {
+      "id": "n-station-selector",
+      "type": "gate",
+      "position": { "x": 100, "y": 950 },
+      "data": {
+        "label": "셧다운 vs 강탈 (50/50)",
+        "condition": "rand.d100() <= 50"
+      }
+    },
+    {
+      "id": "n-shutdown-gate",
+      "type": "gate",
+      "position": { "x": -100, "y": 1100 },
+      "data": {
+        "label": "방패 확률 (50%)",
+        "condition": "rand.d100() > 50"
+      }
+    },
+    {
+      "id": "n-shutdown-success",
+      "type": "trigger",
+      "position": { "x": -200, "y": 1250 },
+      "data": {
+        "label": "셧다운 성공 (+10)",
+        "attributes": [ { "key": "point_gain", "type": "number", "value": "10 * board_stage.reward_scale * dice_count" } ]
+      }
+    },
+    {
+      "id": "n-shutdown-blocked",
+      "type": "trigger",
+      "position": { "x": 0, "y": 1250 },
+      "data": {
+        "label": "셧다운 막힘 (+4)",
+        "attributes": [ { "key": "point_gain", "type": "number", "value": "4 * board_stage.reward_scale * dice_count" } ]
+      }
+    },
+    {
+      "id": "n-robbery-selector",
+      "type": "gate",
+      "position": { "x": 300, "y": 1100 },
+      "data": {
+        "label": "강탈 등급 (33%씩)",
+        "condition": "rand.d100() <= 33"
+      }
+    },
+    {
+      "id": "n-robbery-small",
+      "type": "trigger",
+      "position": { "x": 150, "y": 1250 },
+      "data": {
+        "label": "강탈 작음 (+5)",
+        "attributes": [ { "key": "point_gain", "type": "number", "value": "5 * board_stage.reward_scale * dice_count" } ]
+      }
+    },
+    {
+      "id": "n-robbery-mid-gate",
+      "type": "gate",
+      "position": { "x": 350, "y": 1250 },
+      "data": {
+        "label": "나머지 50/50",
+        "condition": "rand.d100() <= 50"
+      }
+    },
+    {
+      "id": "n-robbery-big",
+      "type": "trigger",
+      "position": { "x": 300, "y": 1400 },
+      "data": {
+        "label": "강탈 큼 (+15)",
+        "attributes": [ { "key": "point_gain", "type": "number", "value": "15 * board_stage.reward_scale * dice_count" } ]
+      }
+    },
+    {
+      "id": "n-robbery-huge",
+      "type": "trigger",
+      "position": { "x": 450, "y": 1400 },
+      "data": {
+        "label": "강탈 매우큼 (+30)",
+        "attributes": [ { "key": "point_gain", "type": "number", "value": "30 * board_stage.reward_scale * dice_count" } ]
+      }
+    },
+    {
+      "id": "n-special-gate",
+      "type": "gate",
+      "position": { "x": 600, "y": 950 },
+      "data": {
+        "label": "특수 타일 판별",
+        "condition": "pos == 7 || pos == 22 || pos == 36",
+        "description": "복불복 타일"
+      }
+    },
+    {
+      "id": "n-chance-logic",
+      "type": "gate",
+      "position": { "x": 500, "y": 1100 },
+      "data": {
+        "label": "복불복 (30%)",
+        "condition": "rand.d100() <= 30"
+      }
+    },
+    {
+      "id": "n-chance-success",
+      "type": "trigger",
+      "position": { "x": 500, "y": 1250 },
+      "data": {
+        "label": "복불복 당첨 (+20)",
+        "attributes": [ { "key": "point_gain", "type": "number", "value": "20 * board_stage.reward_scale * dice_count" } ]
+      }
+    },
+    {
+      "id": "n-other-gate",
+      "type": "gate",
+      "position": { "x": 800, "y": 1100 },
+      "data": {
+        "label": "나머지 판별",
+        "condition": "pos == 2 || pos == 17 || pos == 33",
+        "description": "사회기금 타일"
+      }
+    },
+    {
+      "id": "n-community-logic",
+      "type": "trigger",
+      "position": { "x": 700, "y": 1250 },
+      "data": {
+        "label": "사회기금 (+10)",
+        "attributes": [ { "key": "point_gain", "type": "number", "value": "10 * board_stage.reward_scale * dice_count" } ]
+      }
+    },
+    {
+      "id": "n-tax-gate",
+      "type": "gate",
+      "position": { "x": 900, "y": 1250 },
+      "data": {
+        "label": "세금 타일?",
+        "condition": "pos == 4 || pos == 38"
+      }
+    },
+    {
+      "id": "n-tax-logic",
+      "type": "trigger",
+      "position": { "x": 850, "y": 1400 },
+      "data": {
+        "label": "세금 징수 (-10%)",
+        "attributes": [ { "key": "point_gain", "type": "number", "value": "-(money * 0.1)" } ]
+      }
+    },
+    {
+      "id": "n-land-logic",
+      "type": "trigger",
+      "position": { "x": 1050, "y": 1400 },
+      "data": {
+        "label": "대지 보상 (그룹별)",
+        "attributes": [
+          { "key": "point_gain", "type": "number", "value": "(5 + (pos / 5) * 5) * board_stage.reward_scale * dice_count" }
+        ],
+        "description": "8개 그룹 배율을 Index 기반 수식으로 단순화"
+      }
+    },
+    {
+      "id": "n-accumulate-tile",
+      "type": "reward",
+      "position": { "x": 400, "y": 1650 },
+      "data": { "label": "최종 보상 누적 Hub" }
+    },
+    {
+      "id": "n-me1-res",
+      "type": "resource",
+      "position": { "x": 600, "y": 1650 },
+      "data": { "label": "돈 (Money)", "resourceId": "PY0f9zbxUh4pFPedVs0k", "resourceKey": "money" }
+    },
+    {
+      "id": "n-simulation-end",
+      "type": "success",
+      "position": { "x": 700, "y": 150 },
+      "data": { "label": "시뮬레이션 종료" }
+    },
+    {
+      "id": "node-entity-tycoon-event-1",
+      "type": "entity",
+      "position": { "x": -300, "y": 400 },
+      "data": {
+        "label": "타이쿤 이벤트 설정",
+        "entityKey": "tycoon_event_1",
+        "attributes": [
+          { "key": "init_dice", "type": "number", "value": "1000" },
+          { "key": "dice_multiplier", "type": "number", "value": "10" }
+        ]
+      }
+    },
+    {
+      "id": "node-entity-board-stage",
+      "type": "entity",
+      "position": { "x": -300, "y": 600 },
+      "data": {
+        "label": "스테이지 발란스",
+        "entityKey": "board_stage",
+        "attributes": [
+          { "key": "reward_scale", "type": "number", "value": "1.0" }
+        ]
+      }
+    }
+  ],
+  "edges": [
+    { "id": "e1", "source": "n-entry", "target": "n-init", "type": "exec" },
+    { "id": "e2", "source": "n-init", "target": "n-loop-gate", "type": "exec" },
+    { "id": "e3", "source": "n-loop-gate", "target": "n-consume-dice", "type": "exec", "data": { "gateBranch": "true" } },
+    { "id": "e4", "source": "n-loop-gate", "target": "n-simulation-end", "type": "exec", "data": { "gateBranch": "false" } },
+    { "id": "e5", "source": "n-consume-dice", "target": "n-roll", "type": "exec" },
+    { "id": "e6", "source": "n-roll", "target": "n-move-logic", "type": "exec" },
+    { "id": "e7", "source": "n-move-logic", "target": "n-lap-check", "type": "exec" },
+    { "id": "e8", "source": "n-lap-check", "target": "n-pass-go", "type": "exec", "data": { "gateBranch": "true" } },
+    { "id": "e9", "source": "n-lap-check", "target": "n-tile-dispatcher", "type": "exec", "data": { "gateBranch": "false" } },
+    { "id": "e10", "source": "n-pass-go", "target": "n-accumulate-go", "type": "exec" },
+    { "id": "e11", "source": "n-accumulate-go", "target": "n-me1-res", "type": "resource", "data": { "amount": 1, "resourceAmountExpression": "point_gain" } },
+    { "id": "e12", "source": "n-accumulate-go", "target": "n-tile-dispatcher", "type": "exec" },
+    { "id": "e13", "source": "n-tile-dispatcher", "target": "n-station-selector", "type": "exec", "data": { "gateBranch": "true" } },
+    { "id": "e14", "source": "n-tile-dispatcher", "target": "n-special-gate", "type": "exec", "data": { "gateBranch": "false" } },
+    { "id": "e15", "source": "n-station-selector", "target": "n-shutdown-gate", "type": "exec", "data": { "gateBranch": "true" } },
+    { "id": "e16", "source": "n-station-selector", "target": "n-robbery-selector", "type": "exec", "data": { "gateBranch": "false" } },
+    { "id": "e17", "source": "n-shutdown-gate", "target": "n-shutdown-success", "type": "exec", "data": { "gateBranch": "true" } },
+    { "id": "e18", "source": "n-shutdown-gate", "target": "n-shutdown-blocked", "type": "exec", "data": { "gateBranch": "false" } },
+    { "id": "e19", "source": "n-robbery-selector", "target": "n-robbery-small", "type": "exec", "data": { "gateBranch": "true" } },
+    { "id": "e20", "source": "n-robbery-selector", "target": "n-robbery-mid-gate", "type": "exec", "data": { "gateBranch": "false" } },
+    { "id": "e21", "source": "n-robbery-mid-gate", "target": "n-robbery-big", "type": "exec", "data": { "gateBranch": "true" } },
+    { "id": "e22", "source": "n-robbery-mid-gate", "target": "n-robbery-huge", "type": "exec", "data": { "gateBranch": "false" } },
+    { "id": "e23", "source": "n-special-gate", "target": "n-chance-logic", "type": "exec", "data": { "gateBranch": "true" } },
+    { "id": "e24", "source": "n-special-gate", "target": "n-other-gate", "type": "exec", "data": { "gateBranch": "false" } },
+    { "id": "e25", "source": "n-chance-logic", "target": "n-chance-success", "type": "exec", "data": { "gateBranch": "true" } },
+    { "id": "e26", "source": "n-chance-logic", "target": "n-accumulate-tile", "type": "exec", "data": { "gateBranch": "false" } },
+    { "id": "e27", "source": "n-other-gate", "target": "n-community-logic", "type": "exec", "data": { "gateBranch": "true" } },
+    { "id": "e28", "source": "n-other-gate", "target": "n-tax-gate", "type": "exec", "data": { "gateBranch": "false" } },
+    { "id": "e29", "source": "n-tax-gate", "target": "n-tax-logic", "type": "exec", "data": { "gateBranch": "true" } },
+    { "id": "e30", "source": "n-tax-gate", "target": "n-land-logic", "type": "exec", "data": { "gateBranch": "false" } },
+    { "id": "e31", "source": "n-shutdown-success", "target": "n-accumulate-tile", "type": "exec" },
+    { "id": "e32", "source": "n-shutdown-blocked", "target": "n-accumulate-tile", "type": "exec" },
+    { "id": "e33", "source": "n-robbery-small", "target": "n-accumulate-tile", "type": "exec" },
+    { "id": "e34", "source": "n-robbery-big", "target": "n-accumulate-tile", "type": "exec" },
+    { "id": "e35", "source": "n-robbery-huge", "target": "n-accumulate-tile", "type": "exec" },
+    { "id": "e36", "source": "n-chance-success", "target": "n-accumulate-tile", "type": "exec" },
+    { "id": "e37", "source": "n-community-logic", "target": "n-accumulate-tile", "type": "exec" },
+    { "id": "e38", "source": "n-tax-logic", "target": "n-accumulate-tile", "type": "exec" },
+    { "id": "e39", "source": "n-land-logic", "target": "n-accumulate-tile", "type": "exec" },
+    { "id": "e40", "source": "n-accumulate-tile", "target": "n-me1-res", "type": "resource", "data": { "amount": 1, "resourceAmountExpression": "point_gain" } },
+    { "id": "e41", "source": "n-accumulate-tile", "target": "n-loop-gate", "type": "exec" }
+  ],
+  "resources": [
+    {
+      "id": "PY0f9zbxUh4pFPedVs0k",
+      "key": "money",
+      "name": "돈",
+      "description": "건설에 사용되는 자원",
+      "color": "#ffe11f",
+      "icon": "dollar_sign",
+      "order": 3
+    }
+  ]
+}

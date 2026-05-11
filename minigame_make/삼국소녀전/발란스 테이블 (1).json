@@ -1,0 +1,7631 @@
+{
+  "version": 1,
+  "designName": "발란스 테이블",
+  "exportedAt": "2026-04-23T05:00:45.996Z",
+  "nodes": [
+    {
+      "id": "Ta8X09mNIHFHLPSczGjL",
+      "type": "group",
+      "position": {
+        "x": 4318.512262282996,
+        "y": -2825.4872164536087
+      },
+      "data": {
+        "label": "시즌",
+        "color": "flamingo"
+      },
+      "width": 895.9252287189738,
+      "height": 1218,
+      "style": {
+        "width": 895.9252287189738,
+        "height": 1218
+      },
+      "zIndex": -1,
+      "measured": {
+        "width": 896,
+        "height": 1218
+      },
+      "resizing": false
+    },
+    {
+      "id": "fCQbcim0pjn4WQW1uLn4",
+      "type": "group",
+      "position": {
+        "x": 2589.446146135563,
+        "y": -2824.4298299501015
+      },
+      "data": {
+        "label": "이벤트",
+        "color": "royal"
+      },
+      "width": 793.9236341394353,
+      "height": 1246.712912405405,
+      "style": {
+        "width": 793.9236341394353,
+        "height": 1246.712912405405
+      },
+      "zIndex": -1,
+      "measured": {
+        "width": 794,
+        "height": 1247
+      }
+    },
+    {
+      "id": "gbDmjKaUGhe2B9okvsmn",
+      "type": "group",
+      "position": {
+        "x": 3428.1681057594383,
+        "y": -2824.4298299501015
+      },
+      "data": {
+        "label": "스티커",
+        "color": "denim"
+      },
+      "width": 775.5090167029302,
+      "height": 1224.2913255988865,
+      "style": {
+        "width": 775.5090167029302,
+        "height": 1224.2913255988865
+      },
+      "zIndex": -1,
+      "measured": {
+        "width": 776,
+        "height": 1224
+      }
+    },
+    {
+      "id": "mz2vSeYHTVF2d8ipmF6W",
+      "type": "group",
+      "position": {
+        "x": 6456.668101972309,
+        "y": -707.7458187073566
+      },
+      "data": {
+        "color": "rose",
+        "label": "정거장"
+      },
+      "style": {
+        "width": 604.3808179767566,
+        "height": 505.1033773125213
+      },
+      "width": 604.3808179767566,
+      "height": 505.1033773125213,
+      "zIndex": -1,
+      "measured": {
+        "width": 604,
+        "height": 505
+      }
+    },
+    {
+      "id": "X9RmjUvhJyVDqZju2G5t",
+      "type": "group",
+      "position": {
+        "x": 5480.108830234531,
+        "y": -295.4080088561925
+      },
+      "data": {
+        "color": "violet",
+        "label": "커뮤니티"
+      },
+      "style": {
+        "width": 1258.965828014716,
+        "height": 1295.566495541237
+      },
+      "width": 1258.965828014716,
+      "height": 1295.566495541237,
+      "zIndex": -1,
+      "measured": {
+        "width": 1259,
+        "height": 1296
+      }
+    },
+    {
+      "id": "yD0S3r3loDRfR8QINciw",
+      "type": "group",
+      "position": {
+        "x": 636.180604891897,
+        "y": -806.6521081019246
+      },
+      "data": {
+        "color": "sky",
+        "label": "대지 타일 보드"
+      },
+      "style": {
+        "width": 1627.4084185748636,
+        "height": 2311.7244066592916
+      },
+      "width": 1660,
+      "height": 2440,
+      "zIndex": -1,
+      "measured": {
+        "width": 1660,
+        "height": 2440
+      },
+      "resizing": false
+    },
+    {
+      "id": "DbIZMCmuqJ4PFOMatfgj",
+      "type": "group",
+      "position": {
+        "x": 2240.154816387706,
+        "y": -1261.6324052080506
+      },
+      "data": {
+        "color": "lime",
+        "label": "건설"
+      },
+      "style": {
+        "width": 845.1100952780562,
+        "height": 1135.2707350259766
+      },
+      "width": 1293,
+      "height": 1547,
+      "zIndex": -1,
+      "measured": {
+        "width": 1293,
+        "height": 1547
+      },
+      "resizing": false
+    },
+    {
+      "id": "5DllhpAfuMnWrh6G9OIh",
+      "type": "group",
+      "position": {
+        "x": 2593.952747317977,
+        "y": -6.585506316099384
+      },
+      "data": {
+        "color": "flamingo",
+        "label": "스킬"
+      },
+      "style": {
+        "width": 1988.416359873806,
+        "height": 766.0808022984227
+      },
+      "width": 2050,
+      "height": 859,
+      "zIndex": -1,
+      "measured": {
+        "width": 2050,
+        "height": 859
+      },
+      "resizing": false
+    },
+    {
+      "id": "SzOxOKs37pknZ1jKLON6",
+      "type": "group",
+      "position": {
+        "x": 3728.4135974079727,
+        "y": -1067.4664200081488
+      },
+      "data": {
+        "color": "marigold",
+        "label": "아이템"
+      },
+      "style": {
+        "width": 1589.9344468238946,
+        "height": 1151.4988871740593
+      },
+      "width": 1589.9344468238946,
+      "height": 1151.4988871740593,
+      "zIndex": -1,
+      "measured": {
+        "width": 1590,
+        "height": 1151
+      }
+    },
+    {
+      "id": "8SzHSgAxstJLtcmNZ4qw",
+      "type": "group",
+      "position": {
+        "x": 4147.024406121963,
+        "y": 161.53923441951423
+      },
+      "data": {
+        "color": "citrus",
+        "label": "미션"
+      },
+      "style": {
+        "width": 970.0768982509117,
+        "height": 1190.9486825471722
+      },
+      "width": 1025,
+      "height": 1191,
+      "zIndex": -1,
+      "measured": {
+        "width": 1025,
+        "height": 1191
+      },
+      "resizing": false
+    },
+    {
+      "id": "ODau2ATsSm1BIZoXVvKs",
+      "type": "group",
+      "position": {
+        "x": 5349.3873757986585,
+        "y": -1896.8336297247515
+      },
+      "data": {
+        "color": "jade",
+        "label": "레벨 및 마일리지"
+      },
+      "style": {
+        "width": 691.8444186518009,
+        "height": 719.4364894608645
+      },
+      "width": 1001,
+      "height": 726,
+      "zIndex": -1,
+      "measured": {
+        "width": 1001,
+        "height": 726
+      },
+      "resizing": false
+    },
+    {
+      "id": "g0keHxuvyI9J7tFcbwem",
+      "type": "group",
+      "position": {
+        "x": 5369.369220999355,
+        "y": -1261.6324052080506
+      },
+      "data": {
+        "color": "cerulean",
+        "label": "아이템 묶음 지급"
+      },
+      "style": {
+        "width": 1036.9799628646479,
+        "height": 679.0650688643991
+      },
+      "width": 1026,
+      "height": 442,
+      "zIndex": -1,
+      "measured": {
+        "width": 1026,
+        "height": 442
+      },
+      "resizing": false
+    },
+    {
+      "id": "28LWitcRycj71r7QfhPr",
+      "type": "table",
+      "position": {
+        "x": 168,
+        "y": 79.5
+      },
+      "data": {
+        "tags": [],
+        "label": "",
+        "sheetId": "",
+        "intensity": 5,
+        "description": "",
+        "dataTableKey": "table_mo0zm9n9"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 220,
+        "height": 61
+      },
+      "parentId": "yD0S3r3loDRfR8QINciw"
+    },
+    {
+      "id": "FVDZ7cTwyfszCfQIkfXI",
+      "type": "table",
+      "position": {
+        "x": 1160.402781409422,
+        "y": 79.5
+      },
+      "data": {
+        "tags": [],
+        "label": "",
+        "sheetId": "",
+        "intensity": 5,
+        "description": "",
+        "dataTableKey": "table_mo101y9p"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 220,
+        "height": 61
+      },
+      "parentId": "yD0S3r3loDRfR8QINciw"
+    },
+    {
+      "id": "sdG5vZfg3NkoSQgA2s2Y",
+      "type": "table",
+      "position": {
+        "x": 854.938006202765,
+        "y": 79.5
+      },
+      "data": {
+        "tags": [],
+        "label": "",
+        "sheetId": "",
+        "intensity": 5,
+        "description": "",
+        "dataTableKey": "table_mo10onq3"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 220,
+        "height": 61
+      },
+      "parentId": "yD0S3r3loDRfR8QINciw"
+    },
+    {
+      "id": "vzjQBxNyuSW1tE9zmLBZ",
+      "type": "table",
+      "position": {
+        "x": 528.2538044824372,
+        "y": 79.5
+      },
+      "data": {
+        "tags": [],
+        "label": "",
+        "sheetId": "",
+        "intensity": 5,
+        "description": "",
+        "dataTableKey": "table_mo10trl6"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 220,
+        "height": 61
+      },
+      "parentId": "yD0S3r3loDRfR8QINciw"
+    },
+    {
+      "id": "iBd78W0Zd2ADwjyF9Hdy",
+      "type": "resource",
+      "position": {
+        "x": 1003.6080516705533,
+        "y": 2244.422623042534
+      },
+      "data": {
+        "tags": [],
+        "label": "자원",
+        "intensity": 5,
+        "description": "",
+        "resourceKey": "dice"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 56,
+        "height": 56
+      },
+      "parentId": "yD0S3r3loDRfR8QINciw"
+    },
+    {
+      "id": "9s3igIkjGp4YHwHTpEu8",
+      "type": "resource",
+      "position": {
+        "x": 707.0683276876507,
+        "y": 2235.7244066592916
+      },
+      "data": {
+        "tags": [],
+        "label": "자원",
+        "intensity": 5,
+        "description": "",
+        "resourceKey": "money"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 56,
+        "height": 56
+      },
+      "parentId": "yD0S3r3loDRfR8QINciw"
+    },
+    {
+      "id": "7mKOR05XVitozhYgjwXr",
+      "type": "table",
+      "position": {
+        "x": 1469.4084185748636,
+        "y": 79.5
+      },
+      "data": {
+        "tags": [],
+        "label": "",
+        "sheetId": "",
+        "intensity": 5,
+        "description": "",
+        "dataTableKey": "table_mo121clz"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 220,
+        "height": 61
+      },
+      "parentId": "yD0S3r3loDRfR8QINciw"
+    },
+    {
+      "id": "9AvGqusINN81kRUnPTKe",
+      "type": "entity",
+      "position": {
+        "x": 168,
+        "y": 460.92029079784743
+      },
+      "data": {
+        "label": "스테이지 테이블",
+        "entityKey": "",
+        "attributes": [
+          {
+            "key": "stage_id",
+            "type": "number",
+            "value": "1"
+          },
+          {
+            "key": "stage_name",
+            "type": "string",
+            "value": "한양"
+          },
+          {
+            "key": "stage_order",
+            "type": "number",
+            "value": "1"
+          },
+          {
+            "key": "reward_scale",
+            "type": "number",
+            "value": "1"
+          },
+          {
+            "key": "unlock_condition",
+            "type": "string",
+            "value": "default"
+          },
+          {
+            "key": "theme_asset_id",
+            "type": "string",
+            "value": "theme_hanyang"
+          },
+          {
+            "key": "tile_config_stage_id",
+            "type": "number",
+            "value": "1"
+          },
+          {
+            "key": "shutdown_base_reward",
+            "type": "string",
+            "value": "100,000"
+          },
+          {
+            "key": "shutdown_hit_rate",
+            "type": "number",
+            "value": "1"
+          },
+          {
+            "key": "shutdown_blocked_rate",
+            "type": "number",
+            "value": "0.25"
+          },
+          {
+            "key": "heist_rate_small",
+            "type": "number",
+            "value": "0.6"
+          },
+          {
+            "key": "heist_rate_medium",
+            "type": "number",
+            "value": "0.3"
+          },
+          {
+            "key": "heist_rate_large",
+            "type": "number",
+            "value": "0.1"
+          },
+          {
+            "key": "heist_reward_small",
+            "type": "string",
+            "value": "50,000"
+          },
+          {
+            "key": "heist_reward_medium",
+            "type": "string",
+            "value": "150,000"
+          },
+          {
+            "key": "heist_reward_large",
+            "type": "string",
+            "value": "500,000"
+          }
+        ],
+        "description": ""
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 220,
+        "height": 578
+      },
+      "parentId": "yD0S3r3loDRfR8QINciw"
+    },
+    {
+      "id": "GemAp3lQpMnlvfWt9EUQ",
+      "type": "entity",
+      "position": {
+        "x": 1160.402781409422,
+        "y": 313.3329859681339
+      },
+      "data": {
+        "label": "대지 타일 색상 정의 테이블",
+        "entityKey": "",
+        "attributes": [
+          {
+            "key": "color_group_id",
+            "type": "number",
+            "value": "1"
+          },
+          {
+            "key": "stage_id",
+            "type": "number",
+            "value": "1"
+          },
+          {
+            "key": "color_name",
+            "type": "string",
+            "value": "보라"
+          },
+          {
+            "key": "color_hex",
+            "type": "string",
+            "value": "#8B008B"
+          },
+          {
+            "key": "color_asset_id",
+            "type": "string",
+            "value": "color_band_01"
+          },
+          {
+            "key": "set_bonus_type",
+            "type": "string",
+            "value": "DICE"
+          },
+          {
+            "key": "set_bonus_value",
+            "type": "number",
+            "value": "5"
+          }
+        ],
+        "description": ""
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 212,
+        "height": 290
+      },
+      "parentId": "yD0S3r3loDRfR8QINciw"
+    },
+    {
+      "id": "P7QK1rBynz8NFagg6Bs6",
+      "type": "entity",
+      "position": {
+        "x": 1469.4084185748636,
+        "y": 313.3329859681339
+      },
+      "data": {
+        "label": "보드 타일 건설 완료 보상 테이블",
+        "entityKey": "",
+        "attributes": [
+          {
+            "key": "set_goal_id",
+            "type": "number",
+            "value": "1001"
+          },
+          {
+            "key": "color_group_id",
+            "type": "number",
+            "value": "1"
+          },
+          {
+            "key": "completion_type",
+            "type": "string",
+            "value": "OCCUPY_ALL"
+          },
+          {
+            "key": "required_tile_count",
+            "type": "number",
+            "value": "2"
+          },
+          {
+            "key": "required_tile_ids",
+            "type": "string",
+            "value": "TBD"
+          },
+          {
+            "key": "reward_type",
+            "type": "string",
+            "value": "DICE"
+          },
+          {
+            "key": "reward_value",
+            "type": "number",
+            "value": "5"
+          }
+        ],
+        "description": ""
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 212,
+        "height": 290
+      },
+      "parentId": "yD0S3r3loDRfR8QINciw"
+    },
+    {
+      "id": "XCJIgspaYBuc3oXO7FF5",
+      "type": "entity",
+      "position": {
+        "x": 168,
+        "y": 1190.3528145549762
+      },
+      "data": {
+        "label": "board_stage",
+        "entityKey": "stage",
+        "attributes": [
+          {
+            "key": "stage_id",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "reward_scale",
+            "type": "number",
+            "value": "0"
+          }
+        ],
+        "description": "현재 스테이지 정보. board_stage 테이블에서 주입"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 240,
+        "height": 130
+      },
+      "parentId": "yD0S3r3loDRfR8QINciw"
+    },
+    {
+      "id": "AJNyvyIZI1j2Su49bxD9",
+      "type": "entity",
+      "position": {
+        "x": 528.2538044824372,
+        "y": 1239.7142120733129
+      },
+      "data": {
+        "label": "board_tile_config",
+        "entityKey": "tile",
+        "attributes": [
+          {
+            "key": "tile_id",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "base_reward",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "pass_reward",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "land_bonus",
+            "type": "number",
+            "value": "0"
+          }
+        ],
+        "description": "착지한 타일 정보. board_tile_config 테이블에서 주입"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 240,
+        "height": 194
+      },
+      "parentId": "yD0S3r3loDRfR8QINciw"
+    },
+    {
+      "id": "VItXLy9gQ60X3aHqLEsY",
+      "type": "entity",
+      "position": {
+        "x": 1142.2082516329933,
+        "y": 1215.2062805842247
+      },
+      "data": {
+        "label": "land_color_group",
+        "entityKey": "",
+        "attributes": [
+          {
+            "key": "color_group_id",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "set_bonus_value",
+            "type": "number",
+            "value": "0"
+          }
+        ],
+        "description": "색상 그룹 정보. land_color_group 테이블에서 주입"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 240,
+        "height": 130
+      },
+      "parentId": "yD0S3r3loDRfR8QINciw"
+    },
+    {
+      "id": "ajprwvGQ7k2CK0vJJ5HU",
+      "type": "entity",
+      "position": {
+        "x": 1422.0354916518804,
+        "y": 1190.3528145549762
+      },
+      "data": {
+        "label": "land_set_goal",
+        "entityKey": "landset",
+        "attributes": [
+          {
+            "key": "land_set",
+            "type": "number",
+            "value": "0"
+          }
+        ],
+        "description": "대지 타일에 건설된 건물이 셋트가 되었을 경우 획득하는 보상으로 land_set_goal 조건을 받고 land_color_group에 보상 값을 받는다\n"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 240,
+        "height": 98
+      },
+      "parentId": "yD0S3r3loDRfR8QINciw"
+    },
+    {
+      "id": "weQSBPtbMjRU8q9nvGKs",
+      "type": "entity",
+      "position": {
+        "x": 728.2491600526704,
+        "y": 1652.3912526960044
+      },
+      "data": {
+        "label": "돈 보상 계산",
+        "entityKey": "money_reward",
+        "attributes": [
+          {
+            "key": "reward_scale",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "base_reward",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "pass_reward",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "land_bonus",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "set_bonus_value",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "flat_bonus",
+            "type": "number",
+            "value": "0"
+          }
+        ],
+        "description": "최종 보상 계산용. 공식: base_reward × reward_multiplier × reward_scale × 주사위배수"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 240,
+        "height": 258
+      },
+      "parentId": "yD0S3r3loDRfR8QINciw"
+    },
+    {
+      "id": "zELV9vnAS43zj1184G8d",
+      "type": "entity",
+      "position": {
+        "x": 1091.4880811264543,
+        "y": 1604.4972346479285
+      },
+      "data": {
+        "label": "주사위 보상 계산",
+        "entityKey": "dice_reward",
+        "attributes": [
+          {
+            "key": "set_bonus_value",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "set_bonus_value",
+            "type": "number",
+            "value": "0"
+          }
+        ],
+        "description": ""
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 160,
+        "height": 130
+      },
+      "parentId": "yD0S3r3loDRfR8QINciw"
+    },
+    {
+      "id": "P2N9ojz7CKbRYlFGWFT1",
+      "type": "entity",
+      "position": {
+        "x": 528.2538044824372,
+        "y": 606.6935218479082
+      },
+      "data": {
+        "label": "보드 타일 통합 테이블",
+        "entityKey": "",
+        "attributes": [
+          {
+            "key": "tile_id",
+            "type": "number",
+            "value": "1001"
+          },
+          {
+            "key": "stage_id",
+            "type": "number",
+            "value": "1"
+          },
+          {
+            "key": "tile_index",
+            "type": "number",
+            "value": "1"
+          },
+          {
+            "key": "tile_type",
+            "type": "string",
+            "value": "CORNER_GO"
+          },
+          {
+            "key": "field_group",
+            "type": "string",
+            "value": "CORNER_GO"
+          },
+          {
+            "key": "display_name",
+            "type": "string",
+            "value": "시작"
+          },
+          {
+            "key": "multiplier_apply",
+            "type": "boolean",
+            "value": "true"
+          },
+          {
+            "key": "color_group_id",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "base_reward",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "pass_reward",
+            "type": "number",
+            "value": "200"
+          },
+          {
+            "key": "land_bonus",
+            "type": "number",
+            "value": "400"
+          },
+          {
+            "key": "visit_reward",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "rest_reward",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "event_linked",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "target_tile_index",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "card_pool_id",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "tax_formula_type",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "tax_ratio",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "tax_fixed_value",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "action_pool_id",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "fund_pool_id",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "facility_icon_id",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "dice_formula_type",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "reward_multiplier",
+            "type": "string",
+            "value": "null"
+          }
+        ],
+        "description": "착지한 타일 정보. board_tile_config 테이블에서 주입"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 240,
+        "height": 834
+      },
+      "parentId": "yD0S3r3loDRfR8QINciw"
+    },
+    {
+      "id": "KUsSzK6nifQ4THoiOmCX",
+      "type": "entity",
+      "position": {
+        "x": 854.938006202765,
+        "y": 279.5
+      },
+      "data": {
+        "label": "보드별 보상 마스터 테이블",
+        "entityKey": "",
+        "attributes": [
+          {
+            "key": "reward_id",
+            "type": "number",
+            "value": "1001"
+          },
+          {
+            "key": "color_group_id",
+            "type": "number",
+            "value": "1"
+          },
+          {
+            "key": "build_stage",
+            "type": "number",
+            "value": "1"
+          },
+          {
+            "key": "flat_bonus",
+            "type": "number",
+            "value": "100"
+          },
+          {
+            "key": "final_reward_formula",
+            "type": "string",
+            "value": "(base_reward + 100) × reward_scale × 주사위배수"
+          }
+        ],
+        "description": "대지 타일 도착 시 지급되는 추가 보상(flat_bonus)을 정의한다. 기존 배율 곱셈 구조에서 절대값 덧셈 구조로 변경하여 스테이지 간 보상 폭발적 증가를 억제한다."
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 240,
+        "height": 226
+      },
+      "parentId": "yD0S3r3loDRfR8QINciw"
+    },
+    {
+      "id": "50PY7Ro2jRZ63Ai3Hcuq",
+      "type": "entity",
+      "position": {
+        "x": 837.1008161322853,
+        "y": 1215.2062805842247
+      },
+      "data": {
+        "label": "land_build_reward",
+        "entityKey": "build_reward",
+        "attributes": [
+          {
+            "key": "reward_id",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "color_group_id",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "flat_bonus",
+            "type": "number",
+            "value": "0"
+          }
+        ],
+        "description": "대지 타일 도착 시 지급되는 추가 보상(flat_bonus)을 정의한다. 기존 배율 곱셈 구조에서 절대값 덧셈 구조로 변경하여 스테이지 간 보상 폭발적 증가를 억제한다."
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 240,
+        "height": 162
+      },
+      "parentId": "yD0S3r3loDRfR8QINciw"
+    },
+    {
+      "id": "P1O93MepN665CgWwZuzq",
+      "type": "table",
+      "position": {
+        "x": 410.3327677853438,
+        "y": 79.5
+      },
+      "data": {
+        "tags": [],
+        "label": "",
+        "sheetId": "",
+        "intensity": 5,
+        "description": "",
+        "dataTableKey": "table_mo278e3n"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 237,
+        "height": 61
+      },
+      "parentId": "DbIZMCmuqJ4PFOMatfgj"
+    },
+    {
+      "id": "QBcSyBBx2kIpccogv6v9",
+      "type": "entity",
+      "position": {
+        "x": 410.3327677853438,
+        "y": 440.648220827336
+      },
+      "data": {
+        "label": "짓기 테이블",
+        "entityKey": "",
+        "attributes": [
+          {
+            "key": "config_id",
+            "type": "number",
+            "value": "10101"
+          },
+          {
+            "key": "landmark_id",
+            "type": "number",
+            "value": "10001"
+          },
+          {
+            "key": "stage_id",
+            "type": "number",
+            "value": "1"
+          },
+          {
+            "key": "slot_index",
+            "type": "number",
+            "value": "1"
+          },
+          {
+            "key": "step_index",
+            "type": "number",
+            "value": "1"
+          },
+          {
+            "key": "display_name",
+            "type": "string",
+            "value": "주성(기초)"
+          },
+          {
+            "key": "build_cost",
+            "type": "number",
+            "value": "100000"
+          },
+          {
+            "key": "repair_cost",
+            "type": "number",
+            "value": "50000"
+          },
+          {
+            "key": "level_point",
+            "type": "number",
+            "value": "10"
+          },
+          {
+            "key": "house_count",
+            "type": "number",
+            "value": "1"
+          },
+          {
+            "key": "prefab_id",
+            "type": "string",
+            "value": "pf_p_1"
+          }
+        ],
+        "description": ""
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 176,
+        "height": 418
+      },
+      "parentId": "DbIZMCmuqJ4PFOMatfgj"
+    },
+    {
+      "id": "LpCpHZMB5D5YOmRBJVGD",
+      "type": "entity",
+      "position": {
+        "x": 168.00000000000023,
+        "y": 941.2707350259766
+      },
+      "data": {
+        "color": "crimson",
+        "label": "유저 건설 진행 상태",
+        "entityKey": "construction",
+        "attributes": [
+          {
+            "key": "stage_id",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "slot_1_step",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "slot_2_step",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "slot_3_step",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "slot_4_step",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "slot_5_step",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "total_count",
+            "type": "number",
+            "value": "0"
+          }
+        ],
+        "description": "플레이어의 현재 스테이지 건설 진행 상태를 저장한다."
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 240,
+        "height": 290
+      },
+      "parentId": "DbIZMCmuqJ4PFOMatfgj"
+    },
+    {
+      "id": "IFF40UB3OjZwsFR5w4Ll",
+      "type": "entity",
+      "position": {
+        "x": 677.1100952780564,
+        "y": 908.9730617358068
+      },
+      "data": {
+        "color": "crimson",
+        "label": "타일별 건물 상태",
+        "entityKey": "construction_tile",
+        "attributes": [
+          {
+            "key": "user_id",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "tile_index",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "house_count",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "is_hotel",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "is_damaged",
+            "type": "number",
+            "value": "0"
+          }
+        ],
+        "description": "현재 진행되는 스테이지 보드 타일 위의 집/호텔 상태를 저장한다."
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 240,
+        "height": 226
+      },
+      "parentId": "DbIZMCmuqJ4PFOMatfgj"
+    },
+    {
+      "id": "iS9Da2FTwCIm5XtiMDNg",
+      "type": "table",
+      "position": {
+        "x": 371.97240880559184,
+        "y": 79.5
+      },
+      "data": {
+        "tags": [],
+        "label": "",
+        "sheetId": "",
+        "intensity": 5,
+        "description": "",
+        "dataTableKey": "table_mo28kpfm"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 220,
+        "height": 61
+      },
+      "parentId": "SzOxOKs37pknZ1jKLON6"
+    },
+    {
+      "id": "G0wUJgr3XSwkohuYVTAA",
+      "type": "entity",
+      "position": {
+        "x": 131.99999999999955,
+        "y": 566.6139339036179
+      },
+      "data": {
+        "label": "주사위",
+        "entityKey": "item_dice",
+        "attributes": [
+          {
+            "key": "item_id",
+            "type": "number",
+            "value": "1001"
+          },
+          {
+            "key": "item_name",
+            "type": "string",
+            "value": "주사위"
+          },
+          {
+            "key": "item_category",
+            "type": "string",
+            "value": "DICE"
+          },
+          {
+            "key": "use_type",
+            "type": "string",
+            "value": "GENERAL"
+          },
+          {
+            "key": "skill_type",
+            "type": "string",
+            "value": "NONE"
+          },
+          {
+            "key": "skill_id",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "max_hold_count",
+            "type": "number",
+            "value": "-1"
+          },
+          {
+            "key": "is_stackable",
+            "type": "boolean",
+            "value": "true"
+          },
+          {
+            "key": "icon_id",
+            "type": "string",
+            "value": "icon_dice_1"
+          },
+          {
+            "key": "is_event_item",
+            "type": "boolean",
+            "value": "false"
+          },
+          {
+            "key": "expire_type",
+            "type": "string",
+            "value": "NONE"
+          },
+          {
+            "key": "expire_value",
+            "type": "string",
+            "value": "null"
+          }
+        ],
+        "description": "주사위 정보"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 166,
+        "height": 450
+      },
+      "parentId": "SzOxOKs37pknZ1jKLON6"
+    },
+    {
+      "id": "lCKc80wM4TwC3ev6nxz3",
+      "type": "entity",
+      "position": {
+        "x": 371.97240880559184,
+        "y": 566.6139339036179
+      },
+      "data": {
+        "label": "돈",
+        "entityKey": "item_money",
+        "attributes": [
+          {
+            "key": "item_id",
+            "type": "number",
+            "value": "1001"
+          },
+          {
+            "key": "item_name",
+            "type": "string",
+            "value": "주사위"
+          },
+          {
+            "key": "item_category",
+            "type": "string",
+            "value": "DICE"
+          },
+          {
+            "key": "use_type",
+            "type": "string",
+            "value": "GENERAL"
+          },
+          {
+            "key": "skill_type",
+            "type": "string",
+            "value": "NONE"
+          },
+          {
+            "key": "skill_id",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "max_hold_count",
+            "type": "number",
+            "value": "-1"
+          },
+          {
+            "key": "is_stackable",
+            "type": "boolean",
+            "value": "true"
+          },
+          {
+            "key": "icon_id",
+            "type": "string",
+            "value": "icon_dice_1"
+          },
+          {
+            "key": "is_event_item",
+            "type": "boolean",
+            "value": "false"
+          },
+          {
+            "key": "expire_type",
+            "type": "string",
+            "value": "NONE"
+          },
+          {
+            "key": "expire_value",
+            "type": "string",
+            "value": "null"
+          }
+        ],
+        "description": "돈 정보"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 181,
+        "height": 450
+      },
+      "parentId": "SzOxOKs37pknZ1jKLON6"
+    },
+    {
+      "id": "oyP2CkxCJlxbZJuMUe8y",
+      "type": "entity",
+      "position": {
+        "x": 655.1489180940275,
+        "y": 566.6139339036179
+      },
+      "data": {
+        "label": "방패",
+        "entityKey": "item_SHIELD",
+        "attributes": [
+          {
+            "key": "item_id",
+            "type": "number",
+            "value": "1001"
+          },
+          {
+            "key": "item_name",
+            "type": "string",
+            "value": "주사위"
+          },
+          {
+            "key": "item_category",
+            "type": "string",
+            "value": "DICE"
+          },
+          {
+            "key": "use_type",
+            "type": "string",
+            "value": "GENERAL"
+          },
+          {
+            "key": "skill_type",
+            "type": "string",
+            "value": "NONE"
+          },
+          {
+            "key": "skill_id",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "max_hold_count",
+            "type": "number",
+            "value": "-1"
+          },
+          {
+            "key": "is_stackable",
+            "type": "boolean",
+            "value": "true"
+          },
+          {
+            "key": "icon_id",
+            "type": "string",
+            "value": "icon_dice_1"
+          },
+          {
+            "key": "is_event_item",
+            "type": "boolean",
+            "value": "false"
+          },
+          {
+            "key": "expire_type",
+            "type": "string",
+            "value": "NONE"
+          },
+          {
+            "key": "expire_value",
+            "type": "string",
+            "value": "null"
+          }
+        ],
+        "description": "방패 정보"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 169,
+        "height": 450
+      },
+      "parentId": "SzOxOKs37pknZ1jKLON6"
+    },
+    {
+      "id": "QJIFYZ0soeu1hzvmNYlZ",
+      "type": "entity",
+      "position": {
+        "x": 922.8768096657404,
+        "y": 574.9499011638738
+      },
+      "data": {
+        "label": "획득률 증가",
+        "entityKey": "item_skill_money_Boost_1",
+        "attributes": [
+          {
+            "key": "item_id",
+            "type": "number",
+            "value": "1001"
+          },
+          {
+            "key": "item_name",
+            "type": "string",
+            "value": "주사위"
+          },
+          {
+            "key": "item_category",
+            "type": "string",
+            "value": "DICE"
+          },
+          {
+            "key": "use_type",
+            "type": "string",
+            "value": "GENERAL"
+          },
+          {
+            "key": "skill_type",
+            "type": "string",
+            "value": "NONE"
+          },
+          {
+            "key": "skill_id",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "max_hold_count",
+            "type": "number",
+            "value": "-1"
+          },
+          {
+            "key": "is_stackable",
+            "type": "boolean",
+            "value": "true"
+          },
+          {
+            "key": "icon_id",
+            "type": "string",
+            "value": "icon_dice_1"
+          },
+          {
+            "key": "is_event_item",
+            "type": "boolean",
+            "value": "false"
+          },
+          {
+            "key": "expire_type",
+            "type": "string",
+            "value": "NONE"
+          },
+          {
+            "key": "expire_value",
+            "type": "string",
+            "value": "null"
+          }
+        ],
+        "description": "돈 획득 증가 스킬 버프 발동"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 185,
+        "height": 450
+      },
+      "parentId": "SzOxOKs37pknZ1jKLON6"
+    },
+    {
+      "id": "WgEXaHev2OxIE94scVDh",
+      "type": "entity",
+      "position": {
+        "x": 1183.3630791536434,
+        "y": 574.9499011638738
+      },
+      "data": {
+        "label": "토큰",
+        "entityKey": "item_TOKEN",
+        "attributes": [
+          {
+            "key": "item_id",
+            "type": "number",
+            "value": "1001"
+          },
+          {
+            "key": "item_name",
+            "type": "string",
+            "value": "주사위"
+          },
+          {
+            "key": "item_category",
+            "type": "string",
+            "value": "DICE"
+          },
+          {
+            "key": "use_type",
+            "type": "string",
+            "value": "GENERAL"
+          },
+          {
+            "key": "skill_type",
+            "type": "string",
+            "value": "NONE"
+          },
+          {
+            "key": "skill_id",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "max_hold_count",
+            "type": "number",
+            "value": "-1"
+          },
+          {
+            "key": "is_stackable",
+            "type": "boolean",
+            "value": "true"
+          },
+          {
+            "key": "icon_id",
+            "type": "string",
+            "value": "icon_dice_1"
+          },
+          {
+            "key": "is_event_item",
+            "type": "boolean",
+            "value": "false"
+          },
+          {
+            "key": "expire_type",
+            "type": "string",
+            "value": "NONE"
+          },
+          {
+            "key": "expire_value",
+            "type": "string",
+            "value": "null"
+          }
+        ],
+        "description": "토큰 아이템"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 178,
+        "height": 450
+      },
+      "parentId": "SzOxOKs37pknZ1jKLON6"
+    },
+    {
+      "id": "IJxKepj2389dTGIMsiiv",
+      "type": "entity",
+      "position": {
+        "x": 1439.9344468238942,
+        "y": 574.9499011638738
+      },
+      "data": {
+        "label": "스티커_1",
+        "entityKey": "item_STICKER",
+        "attributes": [
+          {
+            "key": "item_id",
+            "type": "number",
+            "value": "1001"
+          },
+          {
+            "key": "item_name",
+            "type": "string",
+            "value": "주사위"
+          },
+          {
+            "key": "item_category",
+            "type": "string",
+            "value": "DICE"
+          },
+          {
+            "key": "use_type",
+            "type": "string",
+            "value": "GENERAL"
+          },
+          {
+            "key": "skill_type",
+            "type": "string",
+            "value": "NONE"
+          },
+          {
+            "key": "skill_id",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "max_hold_count",
+            "type": "number",
+            "value": "-1"
+          },
+          {
+            "key": "is_stackable",
+            "type": "boolean",
+            "value": "true"
+          },
+          {
+            "key": "icon_id",
+            "type": "string",
+            "value": "icon_dice_1"
+          },
+          {
+            "key": "is_event_item",
+            "type": "boolean",
+            "value": "false"
+          },
+          {
+            "key": "expire_type",
+            "type": "string",
+            "value": "NONE"
+          },
+          {
+            "key": "expire_value",
+            "type": "string",
+            "value": "null"
+          }
+        ],
+        "description": "스티커 아이템"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 214,
+        "height": 450
+      },
+      "parentId": "SzOxOKs37pknZ1jKLON6"
+    },
+    {
+      "id": "F2zmW2hjx316diDeXwWC",
+      "type": "table",
+      "position": {
+        "x": 1087.4703344737777,
+        "y": 172.5
+      },
+      "data": {
+        "tags": [],
+        "label": "",
+        "sheetId": "",
+        "intensity": 5,
+        "description": "",
+        "dataTableKey": "table_mo2d1qjz"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 220,
+        "height": 61
+      },
+      "parentId": "5DllhpAfuMnWrh6G9OIh"
+    },
+    {
+      "id": "P1NAw2L0XVJ2ni0UdZPR",
+      "type": "entity",
+      "position": {
+        "x": 1820.416359873806,
+        "y": 601.0808022984227
+      },
+      "data": {
+        "label": "아이템 발동 주사위 획득율 증가",
+        "entityKey": "",
+        "attributes": [
+          {
+            "key": "skill_id",
+            "type": "string",
+            "value": "SK100"
+          },
+          {
+            "key": "skill_type",
+            "type": "string",
+            "value": "BUFF"
+          },
+          {
+            "key": "target_type",
+            "type": "string",
+            "value": "SELF"
+          },
+          {
+            "key": "effect_type",
+            "type": "string",
+            "value": "DICE_RATE"
+          },
+          {
+            "key": "effect_value",
+            "type": "number",
+            "value": "2"
+          },
+          {
+            "key": "duration_hours",
+            "type": "number",
+            "value": "24"
+          },
+          {
+            "key": "cooltime_hours",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "display_name",
+            "type": "string",
+            "value": "주사위 2배 (24h)"
+          },
+          {
+            "key": "description",
+            "type": "string",
+            "value": "24시간 동안 주사위 획득량이 2배가 됩니다."
+          },
+          {
+            "key": "icon_id",
+            "type": "string",
+            "value": "sk_dice_2x"
+          },
+          {
+            "key": "anim_id",
+            "type": "string",
+            "value": "anim_buff_blue"
+          }
+        ],
+        "description": "3시간 동안 주사위 배수가 최소 x3로 강제 상향됩니다."
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 240,
+        "height": 418
+      },
+      "parentId": "5DllhpAfuMnWrh6G9OIh"
+    },
+    {
+      "id": "PN7asubm6bIajT8Gf5Vo",
+      "type": "entity",
+      "position": {
+        "x": 922.8768096657404,
+        "y": 989.4988871740592
+      },
+      "data": {
+        "color": "crimson",
+        "label": "유저 활성화 스킬 상태",
+        "entityKey": "construction_tile",
+        "attributes": [
+          {
+            "key": "skill_id",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "activated_at",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "expires_at",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "source_type",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "source_id",
+            "type": "number",
+            "value": "0"
+          }
+        ],
+        "description": "skill_id\t발동된 스킬 ID FK\nactivated_at\t스킬 발동 시각\nexpires_at\t만료 시각 (activated_at + duration_hours). ACTIVE·PASSIVE는 null\nsource_type\t발동 출처 (ITEM / MISSION / MILESTONE / EVENT)\nsource_id\t발동 출처 ID"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 240,
+        "height": 226
+      },
+      "parentId": "SzOxOKs37pknZ1jKLON6"
+    },
+    {
+      "id": "g7vA5QRsZLxLv3SDaydD",
+      "type": "entity",
+      "position": {
+        "x": 1562.4587825285585,
+        "y": 601.0808022984227
+      },
+      "data": {
+        "label": "주사위 2배 (24h)",
+        "entityKey": "SK100",
+        "attributes": [
+          {
+            "key": "skill_id",
+            "type": "string",
+            "value": "SK100"
+          },
+          {
+            "key": "skill_type",
+            "type": "string",
+            "value": "BUFF"
+          },
+          {
+            "key": "target_type",
+            "type": "string",
+            "value": "SELF"
+          },
+          {
+            "key": "effect_type",
+            "type": "string",
+            "value": "DICE_RATE"
+          },
+          {
+            "key": "effect_value",
+            "type": "number",
+            "value": "2"
+          },
+          {
+            "key": "duration_hours",
+            "type": "number",
+            "value": "24"
+          },
+          {
+            "key": "cooltime_hours",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "display_name",
+            "type": "string",
+            "value": "주사위 2배 (24h)"
+          },
+          {
+            "key": "description",
+            "type": "string",
+            "value": "24시간 동안 주사위 획득량이 2배가 됩니다."
+          },
+          {
+            "key": "icon_id",
+            "type": "string",
+            "value": "sk_dice_2x"
+          },
+          {
+            "key": "anim_id",
+            "type": "string",
+            "value": "anim_buff_blue"
+          }
+        ],
+        "description": "24시간 동안 주사위 획득량이 2배가 됩니다."
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 240,
+        "height": 418
+      },
+      "parentId": "5DllhpAfuMnWrh6G9OIh"
+    },
+    {
+      "id": "l0dOQ4JDbCygfP0Hoxpn",
+      "type": "entity",
+      "position": {
+        "x": 1300.2776110538912,
+        "y": 601.0808022984227
+      },
+      "data": {
+        "label": "주사위 충전속도 1.5배 (48h)",
+        "entityKey": "SK102",
+        "attributes": [
+          {
+            "key": "skill_id",
+            "type": "string",
+            "value": "SK100"
+          },
+          {
+            "key": "skill_type",
+            "type": "string",
+            "value": "BUFF"
+          },
+          {
+            "key": "target_type",
+            "type": "string",
+            "value": "SELF"
+          },
+          {
+            "key": "effect_type",
+            "type": "string",
+            "value": "DICE_RATE"
+          },
+          {
+            "key": "effect_value",
+            "type": "number",
+            "value": "2"
+          },
+          {
+            "key": "duration_hours",
+            "type": "number",
+            "value": "24"
+          },
+          {
+            "key": "cooltime_hours",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "display_name",
+            "type": "string",
+            "value": "주사위 2배 (24h)"
+          },
+          {
+            "key": "description",
+            "type": "string",
+            "value": "24시간 동안 주사위 획득량이 2배가 됩니다."
+          },
+          {
+            "key": "icon_id",
+            "type": "string",
+            "value": "sk_dice_2x"
+          },
+          {
+            "key": "anim_id",
+            "type": "string",
+            "value": "anim_buff_blue"
+          }
+        ],
+        "description": "48시간 동안 주사위 자동 충전 속도가 1.5배가 됩니다."
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 240,
+        "height": 418
+      },
+      "parentId": "5DllhpAfuMnWrh6G9OIh"
+    },
+    {
+      "id": "qJ9MyOSXSUvOd2YBSPma",
+      "type": "entity",
+      "position": {
+        "x": 1037.2524077508406,
+        "y": 601.0808022984227
+      },
+      "data": {
+        "label": "금전 획득 3배 (1h)",
+        "entityKey": "SK111",
+        "attributes": [
+          {
+            "key": "skill_id",
+            "type": "string",
+            "value": "SK100"
+          },
+          {
+            "key": "skill_type",
+            "type": "string",
+            "value": "BUFF"
+          },
+          {
+            "key": "target_type",
+            "type": "string",
+            "value": "SELF"
+          },
+          {
+            "key": "effect_type",
+            "type": "string",
+            "value": "DICE_RATE"
+          },
+          {
+            "key": "effect_value",
+            "type": "number",
+            "value": "2"
+          },
+          {
+            "key": "duration_hours",
+            "type": "number",
+            "value": "24"
+          },
+          {
+            "key": "cooltime_hours",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "display_name",
+            "type": "string",
+            "value": "주사위 2배 (24h)"
+          },
+          {
+            "key": "description",
+            "type": "string",
+            "value": "24시간 동안 주사위 획득량이 2배가 됩니다."
+          },
+          {
+            "key": "icon_id",
+            "type": "string",
+            "value": "sk_dice_2x"
+          },
+          {
+            "key": "anim_id",
+            "type": "string",
+            "value": "anim_buff_blue"
+          }
+        ],
+        "description": "1시간 동안 금전 획득량이 3배가 됩니다."
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 240,
+        "height": 418
+      },
+      "parentId": "5DllhpAfuMnWrh6G9OIh"
+    },
+    {
+      "id": "ILksJVkdKvZMYYrfQYgn",
+      "type": "entity",
+      "position": {
+        "x": 740.3390580255123,
+        "y": 601.0808022984227
+      },
+      "data": {
+        "label": "임대료 2배 (48h)",
+        "entityKey": "SK120",
+        "attributes": [
+          {
+            "key": "skill_id",
+            "type": "string",
+            "value": "SK100"
+          },
+          {
+            "key": "skill_type",
+            "type": "string",
+            "value": "BUFF"
+          },
+          {
+            "key": "target_type",
+            "type": "string",
+            "value": "SELF"
+          },
+          {
+            "key": "effect_type",
+            "type": "string",
+            "value": "DICE_RATE"
+          },
+          {
+            "key": "effect_value",
+            "type": "number",
+            "value": "2"
+          },
+          {
+            "key": "duration_hours",
+            "type": "number",
+            "value": "24"
+          },
+          {
+            "key": "cooltime_hours",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "display_name",
+            "type": "string",
+            "value": "주사위 2배 (24h)"
+          },
+          {
+            "key": "description",
+            "type": "string",
+            "value": "24시간 동안 주사위 획득량이 2배가 됩니다."
+          },
+          {
+            "key": "icon_id",
+            "type": "string",
+            "value": "sk_dice_2x"
+          },
+          {
+            "key": "anim_id",
+            "type": "string",
+            "value": "anim_buff_blue"
+          }
+        ],
+        "description": "48시간 동안 임대료 수익이 2배가 됩니다."
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 240,
+        "height": 418
+      },
+      "parentId": "5DllhpAfuMnWrh6G9OIh"
+    },
+    {
+      "id": "TiyQh6BIGtO5Uz6ebETh",
+      "type": "entity",
+      "position": {
+        "x": 471.4379968803837,
+        "y": 601.0808022984227
+      },
+      "data": {
+        "label": "건설비 50% 할인 (24h)",
+        "entityKey": "SK130",
+        "attributes": [
+          {
+            "key": "skill_id",
+            "type": "string",
+            "value": "SK100"
+          },
+          {
+            "key": "skill_type",
+            "type": "string",
+            "value": "BUFF"
+          },
+          {
+            "key": "target_type",
+            "type": "string",
+            "value": "SELF"
+          },
+          {
+            "key": "effect_type",
+            "type": "string",
+            "value": "DICE_RATE"
+          },
+          {
+            "key": "effect_value",
+            "type": "number",
+            "value": "2"
+          },
+          {
+            "key": "duration_hours",
+            "type": "number",
+            "value": "24"
+          },
+          {
+            "key": "cooltime_hours",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "display_name",
+            "type": "string",
+            "value": "주사위 2배 (24h)"
+          },
+          {
+            "key": "description",
+            "type": "string",
+            "value": "24시간 동안 주사위 획득량이 2배가 됩니다."
+          },
+          {
+            "key": "icon_id",
+            "type": "string",
+            "value": "sk_dice_2x"
+          },
+          {
+            "key": "anim_id",
+            "type": "string",
+            "value": "anim_buff_blue"
+          }
+        ],
+        "description": "24시간 동안 건설 비용이 50% 할인됩니다."
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 240,
+        "height": 418
+      },
+      "parentId": "5DllhpAfuMnWrh6G9OIh"
+    },
+    {
+      "id": "ByI9CLepl0y2Wy15k4Id",
+      "type": "entity",
+      "position": {
+        "x": 168,
+        "y": 601.0808022984227
+      },
+      "data": {
+        "label": "출발 보상 1.5배 (초선 토큰)",
+        "entityKey": "SK050",
+        "attributes": [
+          {
+            "key": "skill_id",
+            "type": "string",
+            "value": "SK100"
+          },
+          {
+            "key": "skill_type",
+            "type": "string",
+            "value": "BUFF"
+          },
+          {
+            "key": "target_type",
+            "type": "string",
+            "value": "SELF"
+          },
+          {
+            "key": "effect_type",
+            "type": "string",
+            "value": "DICE_RATE"
+          },
+          {
+            "key": "effect_value",
+            "type": "number",
+            "value": "2"
+          },
+          {
+            "key": "duration_hours",
+            "type": "number",
+            "value": "24"
+          },
+          {
+            "key": "cooltime_hours",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "display_name",
+            "type": "string",
+            "value": "주사위 2배 (24h)"
+          },
+          {
+            "key": "description",
+            "type": "string",
+            "value": "24시간 동안 주사위 획득량이 2배가 됩니다."
+          },
+          {
+            "key": "icon_id",
+            "type": "string",
+            "value": "sk_dice_2x"
+          },
+          {
+            "key": "anim_id",
+            "type": "string",
+            "value": "anim_buff_blue"
+          }
+        ],
+        "description": "출발 칸 통과 보상이 1.5배가 됩니다.(패시브)"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 240,
+        "height": 418
+      },
+      "parentId": "5DllhpAfuMnWrh6G9OIh"
+    },
+    {
+      "id": "KSQGYo4mISD80BiqFL3l",
+      "type": "table",
+      "position": {
+        "x": 868.979962864647,
+        "y": 48.72314569848231
+      },
+      "data": {
+        "tags": [],
+        "label": "",
+        "sheetId": "",
+        "intensity": 5,
+        "description": "",
+        "dataTableKey": "table_mo2efrz2"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 220,
+        "height": 61
+      },
+      "parentId": "g0keHxuvyI9J7tFcbwem"
+    },
+    {
+      "id": "u2AVzQM7lJgyHjfcTIOx",
+      "type": "table",
+      "position": {
+        "x": 594.2292279855255,
+        "y": 48.72314569848231
+      },
+      "data": {
+        "tags": [],
+        "label": "",
+        "sheetId": "",
+        "intensity": 5,
+        "description": "",
+        "dataTableKey": "table_mo2ezyir"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 220,
+        "height": 61
+      },
+      "parentId": "g0keHxuvyI9J7tFcbwem"
+    },
+    {
+      "id": "BXnO3Il7F3iANZP4HdhM",
+      "type": "entity",
+      "position": {
+        "x": 868.979962864647,
+        "y": 244.50420123144886
+      },
+      "data": {
+        "label": "개체",
+        "entityKey": "",
+        "attributes": [
+          {
+            "key": "bundle_id",
+            "type": "number",
+            "value": "1001"
+          },
+          {
+            "key": "bundle_name",
+            "type": "string",
+            "value": "출발 보너스 팩"
+          },
+          {
+            "key": "bundle_type",
+            "type": "string",
+            "value": "ALL"
+          },
+          {
+            "key": "pick_count",
+            "type": "number",
+            "value": "6"
+          },
+          {
+            "key": "max_entry_count",
+            "type": "number",
+            "value": "6"
+          },
+          {
+            "key": "description",
+            "type": "string",
+            "value": "시작 칸 통과 시 지급. 주사위+엽전+방패 포함"
+          }
+        ],
+        "description": ""
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 193,
+        "height": 258
+      },
+      "parentId": "g0keHxuvyI9J7tFcbwem"
+    },
+    {
+      "id": "KGnAr00xsaUomh6ARbHz",
+      "type": "entity",
+      "position": {
+        "x": 606.6998286763674,
+        "y": 351.4831504636559
+      },
+      "data": {
+        "label": "출발 보너스 팩",
+        "entityKey": "1001",
+        "attributes": [],
+        "description": "6개 아이템 지급 테스트용"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 175,
+        "height": 66
+      },
+      "parentId": "g0keHxuvyI9J7tFcbwem"
+    },
+    {
+      "id": "QeF0yESG9omK96iD7SMY",
+      "type": "entity",
+      "position": {
+        "x": 547.4871471390534,
+        "y": 171.09579843018128
+      },
+      "data": {
+        "label": "출발 보너스 팩 아이템 리스트",
+        "entityKey": "1001",
+        "attributes": [
+          {
+            "key": "bundle_id",
+            "type": "number",
+            "value": "0"
+          }
+        ],
+        "description": "출발 보너스에 있는 아이템 리스트 정보"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 226,
+        "height": 98
+      },
+      "parentId": "g0keHxuvyI9J7tFcbwem"
+    },
+    {
+      "id": "FPsFiKlxJvN1YRjhORli",
+      "type": "entity",
+      "position": {
+        "x": 387.8078177778061,
+        "y": 351.4831504636559
+      },
+      "data": {
+        "label": "이벤트 랜덤 팩",
+        "entityKey": "2001",
+        "attributes": [],
+        "description": "6개 아이템중 1개만 획득하는 랜덤 상자"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 228,
+        "height": 66
+      },
+      "parentId": "g0keHxuvyI9J7tFcbwem"
+    },
+    {
+      "id": "meRq1SBVHUjeoEPIyRPv",
+      "type": "entity",
+      "position": {
+        "x": 182.17010315670814,
+        "y": 146.37428710553354
+      },
+      "data": {
+        "label": "이벤트 랜덤 팩 아이템 리스트",
+        "entityKey": "2001",
+        "attributes": [
+          {
+            "key": "bundle_id",
+            "type": "number",
+            "value": "0"
+          }
+        ],
+        "description": "출발 보너스에 있는 아이템 리스트 정보"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 226,
+        "height": 98
+      },
+      "parentId": "g0keHxuvyI9J7tFcbwem"
+    },
+    {
+      "id": "lsSD8Z8ZBt486UY4QlU6",
+      "type": "table",
+      "position": {
+        "x": 167.9999999999991,
+        "y": 79.5
+      },
+      "data": {
+        "tags": [],
+        "label": "",
+        "sheetId": "",
+        "intensity": 5,
+        "description": "",
+        "dataTableKey": "table_mo2hj478"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 220,
+        "height": 61
+      },
+      "parentId": "8SzHSgAxstJLtcmNZ4qw"
+    },
+    {
+      "id": "JluCTob05foGhJzN3onb",
+      "type": "table",
+      "position": {
+        "x": 502.5134342121337,
+        "y": 79.5
+      },
+      "data": {
+        "tags": [],
+        "label": "",
+        "sheetId": "",
+        "intensity": 5,
+        "description": "",
+        "dataTableKey": "table_mo2hnkh6"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 220,
+        "height": 61
+      },
+      "parentId": "8SzHSgAxstJLtcmNZ4qw"
+    },
+    {
+      "id": "yWkSx2T0r2NgJwMH7Eg9",
+      "type": "table",
+      "position": {
+        "x": 812.0768982509107,
+        "y": 79.5
+      },
+      "data": {
+        "tags": [],
+        "label": "",
+        "sheetId": "",
+        "intensity": 5,
+        "description": "",
+        "dataTableKey": "table_mo2hoc3j"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 220,
+        "height": 61
+      },
+      "parentId": "8SzHSgAxstJLtcmNZ4qw"
+    },
+    {
+      "id": "cdghX9zKbgO7HnqmTxwv",
+      "type": "entity",
+      "position": {
+        "x": 183.91436498412077,
+        "y": 502.43716113983544
+      },
+      "data": {
+        "label": "개체",
+        "entityKey": "",
+        "attributes": [
+          {
+            "key": "mission_id",
+            "type": "number",
+            "value": "1001"
+          },
+          {
+            "key": "mission_category",
+            "type": "string",
+            "value": "NORMAL"
+          },
+          {
+            "key": "mission_type",
+            "type": "string",
+            "value": "DAILY"
+          },
+          {
+            "key": "claim_type",
+            "type": "string",
+            "value": "MANUAL"
+          },
+          {
+            "key": "mission_tier",
+            "type": "number",
+            "value": "1"
+          },
+          {
+            "key": "display_name",
+            "type": "string",
+            "value": "오늘의 주사위 굴리기"
+          },
+          {
+            "key": "display_desc",
+            "type": "string",
+            "value": "주사위를 10번 굴리세요."
+          },
+          {
+            "key": "reset_interval_hours",
+            "type": "number",
+            "value": "24"
+          },
+          {
+            "key": "reset_base_time",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "active_from",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "active_until",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "trigger_skill_id",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "duration_hours",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "reward_config_id",
+            "type": "number",
+            "value": "2001"
+          },
+          {
+            "key": "next_mission_id",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "is_hidden",
+            "type": "boolean",
+            "value": "false"
+          }
+        ],
+        "description": ""
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 240,
+        "height": 578
+      },
+      "parentId": "8SzHSgAxstJLtcmNZ4qw"
+    },
+    {
+      "id": "ueywHCgJduWZLkxVzJk0",
+      "type": "entity",
+      "position": {
+        "x": 502.5134342121337,
+        "y": 420.9579256605375
+      },
+      "data": {
+        "label": "개체",
+        "entityKey": "",
+        "attributes": [
+          {
+            "key": "condition_id",
+            "type": "number",
+            "value": "1001"
+          },
+          {
+            "key": "mission_id",
+            "type": "number",
+            "value": "1001"
+          },
+          {
+            "key": "type_1",
+            "type": "string",
+            "value": "ROLL_DICE"
+          },
+          {
+            "key": "target_1",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "count_1",
+            "type": "number",
+            "value": "10"
+          },
+          {
+            "key": "type_2",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "target_2",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "count_2",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "type_3",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "target_3",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "count_3",
+            "type": "string",
+            "value": "null"
+          }
+        ],
+        "description": ""
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 160,
+        "height": 418
+      },
+      "parentId": "8SzHSgAxstJLtcmNZ4qw"
+    },
+    {
+      "id": "u185suTtWJuiZ7XD91KB",
+      "type": "entity",
+      "position": {
+        "x": 812.0768982509107,
+        "y": 342.3701891824612
+      },
+      "data": {
+        "label": "개체",
+        "entityKey": "",
+        "attributes": [
+          {
+            "key": "reward_config_id",
+            "type": "number",
+            "value": "2001"
+          },
+          {
+            "key": "reward_name",
+            "type": "string",
+            "value": "일일 기본 보상"
+          },
+          {
+            "key": "bundle_id",
+            "type": "number",
+            "value": "5005"
+          },
+          {
+            "key": "skill_id",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "reward_multiplier_id",
+            "type": "string",
+            "value": "null"
+          }
+        ],
+        "description": ""
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 194,
+        "height": 226
+      },
+      "parentId": "8SzHSgAxstJLtcmNZ4qw"
+    },
+    {
+      "id": "KC3h845PaWa8jBUTfLJf",
+      "type": "entity",
+      "position": {
+        "x": 183.91436498412077,
+        "y": 1028.9486825471722
+      },
+      "data": {
+        "color": "crimson",
+        "label": "유저 미션 진행 상태",
+        "entityKey": "construction_tile",
+        "attributes": [
+          {
+            "key": "user_id",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "mission_id",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "is_claimed",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "reset_at",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "expires_at",
+            "type": "number",
+            "value": "0"
+          }
+        ],
+        "description": "user_id\tbigint\t유저 식별\nmission_id\tbigint\t진행 미션 ID FK\nis_claimed\tbool\t보상 수령 완료 여부\nreset_at\tdatetime\t다음 리셋 기준 시각 (DAILY/WEEKLY)\nexpires_at\tdatetime\t만료 시각 (TRIGGERED용, null=해당 없음)"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 240,
+        "height": 226
+      },
+      "parentId": "8SzHSgAxstJLtcmNZ4qw"
+    },
+    {
+      "id": "CGAgNNuIPzE4gbGFkgBu",
+      "type": "entity",
+      "position": {
+        "x": 517.9728808307727,
+        "y": 1028.9486825471722
+      },
+      "data": {
+        "color": "crimson",
+        "label": "유저 조건 진행 상태",
+        "entityKey": "construction_tile",
+        "attributes": [
+          {
+            "key": "user_id",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "mission_id",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "count_1",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "count_2",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "count_3",
+            "type": "number",
+            "value": "0"
+          }
+        ],
+        "description": "user_id\tbigint\t유저 식별\nmission_id\tbigint\tFK → mission_config\ncount_1\tint\t조건 1 현재 달성 카운트 (0 기본)\ncount_2\tint\t조건 2 현재 달성 카운트 (0 기본)\ncount_3\tint\t조건 3 현재 달성 카운트 (0 기본)"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 240,
+        "height": 226
+      },
+      "parentId": "8SzHSgAxstJLtcmNZ4qw"
+    },
+    {
+      "id": "KQUq87zO0h95Cn4Em94i",
+      "type": "entity",
+      "position": {
+        "x": 3973.378960017872,
+        "y": -1936.792938346338
+      },
+      "data": {
+        "label": "레벨 포인트",
+        "entityKey": "",
+        "attributes": [
+          {
+            "key": "item_id",
+            "type": "number",
+            "value": "999"
+          },
+          {
+            "key": "item_name",
+            "type": "string",
+            "value": "레벮포인트"
+          },
+          {
+            "key": "item_category",
+            "type": "string",
+            "value": "LEVEL"
+          },
+          {
+            "key": "use_type",
+            "type": "string",
+            "value": "GENERAL"
+          },
+          {
+            "key": "skill_type",
+            "type": "string",
+            "value": "NONE"
+          },
+          {
+            "key": "skill_id",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "max_hold_count",
+            "type": "number",
+            "value": "-1"
+          },
+          {
+            "key": "is_stackable",
+            "type": "boolean",
+            "value": "true"
+          },
+          {
+            "key": "icon_id",
+            "type": "string",
+            "value": "LEVEL"
+          },
+          {
+            "key": "is_event_item",
+            "type": "boolean",
+            "value": "false"
+          },
+          {
+            "key": "expire_type",
+            "type": "string",
+            "value": "NONE"
+          },
+          {
+            "key": "expire_value",
+            "type": "string",
+            "value": "null"
+          }
+        ],
+        "description": "레벨 재화 아이템으로 획득률 만큼 레벨이 증가"
+      },
+      "measured": {
+        "width": 240,
+        "height": 450
+      }
+    },
+    {
+      "id": "7dHvfryusfmMWfFJyWUh",
+      "type": "table",
+      "position": {
+        "x": 158,
+        "y": 84.38158193588697
+      },
+      "data": {
+        "tags": [],
+        "label": "",
+        "sheetId": "",
+        "intensity": 5,
+        "description": "",
+        "dataTableKey": "table_mo2m4eu4"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 220,
+        "height": 61
+      },
+      "parentId": "ODau2ATsSm1BIZoXVvKs"
+    },
+    {
+      "id": "3w3AokF7ASagnGIaAKTJ",
+      "type": "entity",
+      "position": {
+        "x": 158,
+        "y": 301.1622190397054
+      },
+      "data": {
+        "label": "개체",
+        "entityKey": "",
+        "attributes": [
+          {
+            "key": "ability_id",
+            "type": "number",
+            "value": "101"
+          },
+          {
+            "key": "rent_rate",
+            "type": "number",
+            "value": "1"
+          },
+          {
+            "key": "dice_regen_rate",
+            "type": "number",
+            "value": "1"
+          },
+          {
+            "key": "shield_max_add",
+            "type": "number",
+            "value": "3"
+          },
+          {
+            "key": "build_cost_rate",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "start_bonus_rate",
+            "type": "number",
+            "value": "1"
+          }
+        ],
+        "description": ""
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 160,
+        "height": 258
+      },
+      "parentId": "ODau2ATsSm1BIZoXVvKs"
+    },
+    {
+      "id": "c47Y6MID5IuWm3YIgTH9",
+      "type": "table",
+      "position": {
+        "x": 533.8444186518009,
+        "y": 79.5
+      },
+      "data": {
+        "tags": [],
+        "label": "",
+        "sheetId": "",
+        "intensity": 5,
+        "description": "",
+        "dataTableKey": "table_mo2m5sb7"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 220,
+        "height": 61
+      },
+      "parentId": "ODau2ATsSm1BIZoXVvKs"
+    },
+    {
+      "id": "nub5V6TBEDYsx70L3qT1",
+      "type": "entity",
+      "position": {
+        "x": 533.8444186518009,
+        "y": 365.50076515706996
+      },
+      "data": {
+        "label": "개체",
+        "entityKey": "",
+        "attributes": [
+          {
+            "key": "reward_id",
+            "type": "number",
+            "value": "1001"
+          },
+          {
+            "key": "track_type",
+            "type": "string",
+            "value": "BASE_LEVEL"
+          },
+          {
+            "key": "condition_type",
+            "type": "string",
+            "value": "ITEM"
+          },
+          {
+            "key": "condition_id",
+            "type": "number",
+            "value": "999"
+          },
+          {
+            "key": "condition_value",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "reward_type",
+            "type": "string",
+            "value": "ABILITY"
+          },
+          {
+            "key": "ability_id",
+            "type": "number",
+            "value": "101"
+          },
+          {
+            "key": "skill_id",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "bundle_id",
+            "type": "string",
+            "value": "null"
+          }
+        ],
+        "description": ""
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 196,
+        "height": 354
+      },
+      "parentId": "ODau2ATsSm1BIZoXVvKs"
+    },
+    {
+      "id": "zZUkwR5WSTXQ6T4fdXLN",
+      "type": "entity",
+      "position": {
+        "x": 169.14450573950035,
+        "y": 594.4488157765682
+      },
+      "data": {
+        "color": "crimson",
+        "label": "유저 마일리지 진행 상태(레벨, 이벤트)",
+        "entityKey": "construction_tile",
+        "attributes": [
+          {
+            "key": "user_id",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "current_ability_id",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "item_id",
+            "type": "number",
+            "value": "0"
+          }
+        ],
+        "description": "user_id\tbigint\t유저 고유 식별자 (PK 1)\t123456\ntrack_type\tstring\t트랙 성격 (PK 2)\tBASE_LEVEL\naccumulated_value\tbigint\t해당 트랙의 현재 누적 포인트/카운트\t5600\nlast_reward_id\tbigint\t마지막으로 달성 및 수령 완료한 보상 ID\t1011\ncurrent_ability_id\tbigint\t현재 적용 중인 영구 어빌리티 시트 ID (ABILITY 트랙 전용)\t111"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 240,
+        "height": 162
+      },
+      "parentId": "ODau2ATsSm1BIZoXVvKs"
+    },
+    {
+      "id": "s8JKt050CTYzzpFl6GiQ",
+      "type": "table",
+      "position": {
+        "x": 162,
+        "y": 79.5
+      },
+      "data": {
+        "tags": [],
+        "label": "",
+        "sheetId": "",
+        "intensity": 5,
+        "description": "",
+        "dataTableKey": "table_mo2pa5kl"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 226,
+        "height": 61
+      },
+      "parentId": "X9RmjUvhJyVDqZju2G5t"
+    },
+    {
+      "id": "PlrYptdwnFXMA4uwEKt1",
+      "type": "entity",
+      "position": {
+        "x": 162,
+        "y": 279.5
+      },
+      "data": {
+        "label": "개체",
+        "entityKey": "",
+        "attributes": [
+          {
+            "key": "priority",
+            "type": "number",
+            "value": "1"
+          },
+          {
+            "key": "recommend_type",
+            "type": "string",
+            "value": "ATTACKER"
+          },
+          {
+            "key": "max_count",
+            "type": "number",
+            "value": "5"
+          },
+          {
+            "key": "level_range",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "is_active",
+            "type": "boolean",
+            "value": "true"
+          }
+        ],
+        "description": ""
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 196,
+        "height": 226
+      },
+      "parentId": "X9RmjUvhJyVDqZju2G5t"
+    },
+    {
+      "id": "lA6RFFPgIxMkbqgMli5O",
+      "type": "table",
+      "position": {
+        "x": 526.2816682053117,
+        "y": 96.07609273106709
+      },
+      "data": {
+        "tags": [],
+        "label": "",
+        "sheetId": "",
+        "intensity": 5,
+        "description": "",
+        "dataTableKey": "table_mo2pbchd"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 220,
+        "height": 61
+      },
+      "parentId": "X9RmjUvhJyVDqZju2G5t"
+    },
+    {
+      "id": "nMPgcvnonYQgI0O5PXIU",
+      "type": "entity",
+      "position": {
+        "x": 526.2816682053117,
+        "y": 296.0760927310671
+      },
+      "data": {
+        "label": "개체",
+        "entityKey": "",
+        "attributes": [
+          {
+            "key": "gift_type",
+            "type": "string",
+            "value": "DICE"
+          },
+          {
+            "key": "daily_send_limit",
+            "type": "number",
+            "value": "20"
+          },
+          {
+            "key": "daily_recv_limit",
+            "type": "number",
+            "value": "20"
+          },
+          {
+            "key": "monthly_send_limit",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "per_friend_daily_limit",
+            "type": "number",
+            "value": "1"
+          },
+          {
+            "key": "gift_item_id",
+            "type": "number",
+            "value": "1001"
+          },
+          {
+            "key": "gift_item_quantity",
+            "type": "number",
+            "value": "5"
+          }
+        ],
+        "description": ""
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 179,
+        "height": 290
+      },
+      "parentId": "X9RmjUvhJyVDqZju2G5t"
+    },
+    {
+      "id": "pDhiFMdNT85HiK6QJZqN",
+      "type": "table",
+      "position": {
+        "x": 813.6594286783911,
+        "y": 96.07609273106709
+      },
+      "data": {
+        "tags": [],
+        "label": "",
+        "sheetId": "",
+        "intensity": 5,
+        "description": "",
+        "dataTableKey": "table_mo2pcbs8"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 249,
+        "height": 61
+      },
+      "parentId": "X9RmjUvhJyVDqZju2G5t"
+    },
+    {
+      "id": "p3qV4QcwbxZDgtTxYYJ3",
+      "type": "entity",
+      "position": {
+        "x": 813.6594286783911,
+        "y": 351.7302364846564
+      },
+      "data": {
+        "label": "개체",
+        "entityKey": "",
+        "attributes": [
+          {
+            "key": "priority",
+            "type": "number",
+            "value": "1"
+          },
+          {
+            "key": "action_type",
+            "type": "string",
+            "value": "HEIST"
+          },
+          {
+            "key": "is_visible",
+            "type": "boolean",
+            "value": "true"
+          },
+          {
+            "key": "retention_days",
+            "type": "number",
+            "value": "7"
+          }
+        ],
+        "description": ""
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 160,
+        "height": 194
+      },
+      "parentId": "X9RmjUvhJyVDqZju2G5t"
+    },
+    {
+      "id": "zk5gZuYg44e9hBWSCdJh",
+      "type": "table",
+      "position": {
+        "x": 1081.811212218413,
+        "y": 96.07609273106709
+      },
+      "data": {
+        "tags": [],
+        "label": "",
+        "sheetId": "",
+        "intensity": 5,
+        "description": "",
+        "dataTableKey": "table_mo2pd9rz"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 220,
+        "height": 61
+      },
+      "parentId": "X9RmjUvhJyVDqZju2G5t"
+    },
+    {
+      "id": "v4qtTK8QBHNtPbfo86Cd",
+      "type": "entity",
+      "position": {
+        "x": 1094.965828014716,
+        "y": 407.38438023824585
+      },
+      "data": {
+        "label": "개체",
+        "entityKey": "",
+        "attributes": [
+          {
+            "key": "npc_id",
+            "type": "number",
+            "value": "9001"
+          },
+          {
+            "key": "nickname",
+            "type": "string",
+            "value": "조운의_창"
+          },
+          {
+            "key": "profile_asset_id",
+            "type": "string",
+            "value": "npc_profile_001"
+          },
+          {
+            "key": "level_point_min",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "level_point_max",
+            "type": "number",
+            "value": "50"
+          },
+          {
+            "key": "shield_rate",
+            "type": "number",
+            "value": "0.1"
+          },
+          {
+            "key": "wealth_min",
+            "type": "number",
+            "value": "10000"
+          },
+          {
+            "key": "wealth_max",
+            "type": "number",
+            "value": "50000"
+          }
+        ],
+        "description": ""
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 230,
+        "height": 322
+      },
+      "parentId": "X9RmjUvhJyVDqZju2G5t"
+    },
+    {
+      "id": "PKyBLMeFC3lzf85TTlLI",
+      "type": "entity",
+      "position": {
+        "x": 628.073053152898,
+        "y": 893.5664955412369
+      },
+      "data": {
+        "color": "crimson",
+        "label": "유저 커뮤니티 관련 정보",
+        "entityKey": "player_timeline_state",
+        "attributes": [
+          {
+            "key": "player_social_state",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "user_id",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "friend_id",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "status",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "initiated_by",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "connect_type",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "friend_id",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "gift_type",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "sent_date",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "gift_type",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "daily_send_count",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "daily_recv_count",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "monthly_send_count",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "actor_id",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "action_type",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "result_value",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "extra_data",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "is_revenged",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "is_read",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "log_date",
+            "type": "number",
+            "value": "0"
+          }
+        ],
+        "description": "player_social_state : 자신 코드\nplayer_friend_relation : 친구 리스트 (user_id\tfriend_id\tstatus\tinitiated_by\tconnect_type)\nplayer_friend_gift_log  : 선물 발송 리스트(friend_id\tgift_type\tsent_date)\nplayer_gift_state : 누적 발송량 (gift_type\tdaily_send_count\tdaily_recv_count\tmonthly_send_count)\nplayer_social_timeline : 타임라인 ui 전용 정보 (actor_id\taction_type\tresult_value\textra_data\tis_revenged\tis_read\tlog_date)"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 240,
+        "height": 706
+      },
+      "parentId": "X9RmjUvhJyVDqZju2G5t"
+    },
+    {
+      "id": "AfmRbhWK6jsZTC2rGMFz",
+      "type": "table",
+      "position": {
+        "x": 158,
+        "y": 79.5
+      },
+      "data": {
+        "tags": [],
+        "label": "",
+        "sheetId": "",
+        "intensity": 5,
+        "description": "",
+        "dataTableKey": "table_mo2q2s6z"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 220,
+        "height": 61
+      },
+      "parentId": "mz2vSeYHTVF2d8ipmF6W"
+    },
+    {
+      "id": "N7gTPwWuMT0sjeGL0cWY",
+      "type": "table",
+      "position": {
+        "x": 446.3808179767566,
+        "y": 79.5
+      },
+      "data": {
+        "tags": [],
+        "label": "",
+        "sheetId": "",
+        "intensity": 5,
+        "description": "",
+        "dataTableKey": "table_mo2q3qzp"
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 220,
+        "height": 61
+      },
+      "parentId": "mz2vSeYHTVF2d8ipmF6W"
+    },
+    {
+      "id": "Xjvn7CraOEHgFibjS3Ot",
+      "type": "entity",
+      "position": {
+        "x": 446.3808179767566,
+        "y": 311.1033773125213
+      },
+      "data": {
+        "label": "개체",
+        "entityKey": "",
+        "attributes": [
+          {
+            "key": "match_type",
+            "type": "string",
+            "value": "REVENGE"
+          },
+          {
+            "key": "priority",
+            "type": "number",
+            "value": "1"
+          },
+          {
+            "key": "level_range",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "friend_active_hours",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "revenge_max_count",
+            "type": "number",
+            "value": "10"
+          },
+          {
+            "key": "friend_max_count",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "random_max_count",
+            "type": "string",
+            "value": "null"
+          }
+        ],
+        "description": ""
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 183,
+        "height": 290
+      },
+      "parentId": "mz2vSeYHTVF2d8ipmF6W"
+    },
+    {
+      "id": "U9vo2DxsJ9JT0j2LmjGQ",
+      "type": "entity",
+      "position": {
+        "x": 158,
+        "y": 272.1827297847407
+      },
+      "data": {
+        "label": "개체",
+        "entityKey": "",
+        "attributes": [
+          {
+            "key": "action_type",
+            "type": "string",
+            "value": "SHUTDOWN"
+          },
+          {
+            "key": "trigger_rate",
+            "type": "number",
+            "value": "0.7"
+          },
+          {
+            "key": "hit_reward_rate",
+            "type": "number",
+            "value": "1"
+          },
+          {
+            "key": "blocked_reward_rate",
+            "type": "number",
+            "value": "0.35"
+          }
+        ],
+        "description": ""
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 189,
+        "height": 194
+      },
+      "parentId": "mz2vSeYHTVF2d8ipmF6W"
+    },
+    {
+      "id": "V3AkpvRUElrXMMufwXoE",
+      "type": "table",
+      "position": {
+        "x": 339.4270875765965,
+        "y": 78.49999999999955
+      },
+      "data": {
+        "tags": [],
+        "label": "",
+        "sheetId": "",
+        "description": "",
+        "dataTableKey": "table_mo8bdto5"
+      },
+      "measured": {
+        "width": 220,
+        "height": 61
+      },
+      "parentId": "fCQbcim0pjn4WQW1uLn4",
+      "extent": "parent"
+    },
+    {
+      "id": "aTG1IjyevI0XEjdvpg1X",
+      "type": "entity",
+      "position": {
+        "x": 339.4270875765965,
+        "y": 472.9488538144806
+      },
+      "data": {
+        "label": "개체",
+        "entityKey": "",
+        "attributes": [
+          {
+            "key": "event_id",
+            "type": "number",
+            "value": "10001"
+          },
+          {
+            "key": "event_name",
+            "type": "string",
+            "value": "콩나무 노다지"
+          },
+          {
+            "key": "event_type",
+            "type": "string",
+            "value": "TILE_POINT"
+          },
+          {
+            "key": "active_from",
+            "type": "string",
+            "value": "2026-05-01 13:00:00"
+          },
+          {
+            "key": "active_until",
+            "type": "string",
+            "value": "2026-05-04 13:00:00"
+          },
+          {
+            "key": "is_pickup_type",
+            "type": "boolean",
+            "value": "false"
+          },
+          {
+            "key": "tile_type_1",
+            "type": "string",
+            "value": "CHANCE"
+          },
+          {
+            "key": "tile_point_1",
+            "type": "number",
+            "value": "1"
+          },
+          {
+            "key": "tile_type_2",
+            "type": "string",
+            "value": "COMMUNITY_CHEST"
+          },
+          {
+            "key": "tile_point_2",
+            "type": "number",
+            "value": "1"
+          },
+          {
+            "key": "tile_type_3",
+            "type": "string",
+            "value": "RAILROAD"
+          },
+          {
+            "key": "tile_point_3",
+            "type": "number",
+            "value": "2"
+          },
+          {
+            "key": "milestone_group_id",
+            "type": "number",
+            "value": "2010"
+          },
+          {
+            "key": "mission_slot_1",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "mission_slot_2",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "mission_slot_3",
+            "type": "string",
+            "value": "null"
+          }
+        ],
+        "description": ""
+      },
+      "measured": {
+        "width": 235,
+        "height": 578
+      },
+      "parentId": "fCQbcim0pjn4WQW1uLn4",
+      "extent": "parent"
+    },
+    {
+      "id": "zwDV0aqLb5HYUEUvOe3k",
+      "type": "entity",
+      "position": {
+        "x": 168,
+        "y": 1069.7129124054045
+      },
+      "data": {
+        "color": "crimson",
+        "label": "이벤트 진행",
+        "entityKey": "construction_tile",
+        "attributes": [
+          {
+            "key": "user_id",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "event_id",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "accumulated_point",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "last_rewarded_step",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "is_expired",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "created_at",
+            "type": "number",
+            "value": "0"
+          }
+        ],
+        "description": "현재 진행되는 스테이지 보드 타일 위의 집/호텔 상태를 저장한다."
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 240,
+        "height": 258
+      },
+      "parentId": "fCQbcim0pjn4WQW1uLn4"
+    },
+    {
+      "id": "3mfCLAn5u0RDCY1tFGMS",
+      "type": "table",
+      "position": {
+        "x": 635.9236341394353,
+        "y": 78.49999999999955
+      },
+      "data": {
+        "tags": [],
+        "label": "",
+        "sheetId": "",
+        "description": "",
+        "dataTableKey": "table_mo8cweel"
+      },
+      "measured": {
+        "width": 220,
+        "height": 61
+      },
+      "parentId": "fCQbcim0pjn4WQW1uLn4",
+      "extent": "parent"
+    },
+    {
+      "id": "OX2iZLby5u9Y6wnGkGcA",
+      "type": "entity",
+      "position": {
+        "x": 635.9236341394353,
+        "y": 270.9415659335341
+      },
+      "data": {
+        "label": "개체",
+        "entityKey": "",
+        "attributes": [
+          {
+            "key": "tile_config_id",
+            "type": "number",
+            "value": "20001"
+          },
+          {
+            "key": "event_id",
+            "type": "number",
+            "value": "10001"
+          },
+          {
+            "key": "tile_type",
+            "type": "string",
+            "value": "CHANCE"
+          },
+          {
+            "key": "tile_point",
+            "type": "number",
+            "value": "1"
+          },
+          {
+            "key": "sort_order",
+            "type": "number",
+            "value": "1"
+          }
+        ],
+        "description": ""
+      },
+      "measured": {
+        "width": 160,
+        "height": 226
+      },
+      "parentId": "fCQbcim0pjn4WQW1uLn4",
+      "extent": "parent"
+    },
+    {
+      "id": "89wjO9FeKkWfpYBnuj0W",
+      "type": "table",
+      "position": {
+        "x": 158,
+        "y": 78.49999999999955
+      },
+      "data": {
+        "tags": [],
+        "label": "",
+        "sheetId": "",
+        "description": "",
+        "dataTableKey": "table_mo9bu8w9"
+      },
+      "measured": {
+        "width": 220,
+        "height": 61
+      },
+      "parentId": "gbDmjKaUGhe2B9okvsmn",
+      "extent": "parent"
+    },
+    {
+      "id": "FqJTMD352dBPO5bJKEst",
+      "type": "entity",
+      "position": {
+        "x": 158,
+        "y": 330.3029789701127
+      },
+      "data": {
+        "label": "개체",
+        "entityKey": "",
+        "attributes": [
+          {
+            "key": "album_id",
+            "type": "string",
+            "value": "album_001"
+          },
+          {
+            "key": "album_name",
+            "type": "string",
+            "value": "동화 이야기 앨범"
+          },
+          {
+            "key": "season_id",
+            "type": "string",
+            "value": "season_001"
+          },
+          {
+            "key": "total_sets",
+            "type": "number",
+            "value": "6"
+          },
+          {
+            "key": "total_stickers",
+            "type": "number",
+            "value": "60"
+          },
+          {
+            "key": "album_complete_bundle_id",
+            "type": "number",
+            "value": "9001"
+          }
+        ],
+        "description": ""
+      },
+      "measured": {
+        "width": 218,
+        "height": 258
+      },
+      "parentId": "gbDmjKaUGhe2B9okvsmn",
+      "extent": "parent"
+    },
+    {
+      "id": "8bZjbKzqVEOCnDd7MH2u",
+      "type": "table",
+      "position": {
+        "x": 617.5090167029302,
+        "y": 78.49999999999955
+      },
+      "data": {
+        "tags": [],
+        "label": "",
+        "sheetId": "",
+        "description": "",
+        "dataTableKey": "table_mo9bwfl5"
+      },
+      "measured": {
+        "width": 220,
+        "height": 61
+      },
+      "parentId": "gbDmjKaUGhe2B9okvsmn",
+      "extent": "parent"
+    },
+    {
+      "id": "Z9fVMGPeRPJUn45JaIMB",
+      "type": "entity",
+      "position": {
+        "x": 617.5090167029302,
+        "y": 339.79648050635114
+      },
+      "data": {
+        "label": "개체",
+        "entityKey": "",
+        "attributes": [
+          {
+            "key": "set_id",
+            "type": "number",
+            "value": "101"
+          },
+          {
+            "key": "album_id",
+            "type": "string",
+            "value": "album_001"
+          },
+          {
+            "key": "set_name",
+            "type": "string",
+            "value": "삼국의 영웅들"
+          },
+          {
+            "key": "set_order",
+            "type": "number",
+            "value": "1"
+          },
+          {
+            "key": "sticker_count",
+            "type": "number",
+            "value": "10"
+          },
+          {
+            "key": "complete_bundle_id",
+            "type": "number",
+            "value": "6001"
+          }
+        ],
+        "description": ""
+      },
+      "measured": {
+        "width": 185,
+        "height": 258
+      },
+      "parentId": "gbDmjKaUGhe2B9okvsmn",
+      "extent": "parent"
+    },
+    {
+      "id": "avb2eJ3PJtw9HOAvLpH6",
+      "type": "entity",
+      "position": {
+        "x": 158,
+        "y": 903.291325598886
+      },
+      "data": {
+        "label": "스티커",
+        "description": "스티커 아이템",
+        "entityKey": "STICKER_1",
+        "attributes": [
+          {
+            "key": "item_id",
+            "type": "number",
+            "value": "999"
+          },
+          {
+            "key": "item_name",
+            "type": "string",
+            "value": "레벨 포인트"
+          },
+          {
+            "key": "item_category",
+            "type": "string",
+            "value": "LEVEL"
+          },
+          {
+            "key": "use_type",
+            "type": "string",
+            "value": "GENERAL"
+          },
+          {
+            "key": "skill_type",
+            "type": "string",
+            "value": "NONE"
+          },
+          {
+            "key": "skill_id",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "max_hold_count",
+            "type": "number",
+            "value": "-1"
+          },
+          {
+            "key": "is_stackable",
+            "type": "boolean",
+            "value": "true"
+          },
+          {
+            "key": "icon_id",
+            "type": "string",
+            "value": "icon_level_pt"
+          },
+          {
+            "key": "is_event_item",
+            "type": "boolean",
+            "value": "false"
+          },
+          {
+            "key": "expire_type",
+            "type": "string",
+            "value": "NONE"
+          },
+          {
+            "key": "expire_value",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "rarity",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "is_gold",
+            "type": "string",
+            "value": "null"
+          },
+          {
+            "key": "sticker_set_id",
+            "type": "string",
+            "value": "null"
+          }
+        ]
+      },
+      "parentId": "gbDmjKaUGhe2B9okvsmn",
+      "extent": "parent",
+      "measured": {
+        "width": 214,
+        "height": 546
+      }
+    },
+    {
+      "id": "lMxbHF3olmFfI0H9TSQC",
+      "type": "table",
+      "position": {
+        "x": 168,
+        "y": 78.5
+      },
+      "data": {
+        "label": "",
+        "description": "",
+        "tags": [],
+        "dataTableKey": "table_mo9dsbbo",
+        "sheetId": ""
+      },
+      "measured": {
+        "width": 220,
+        "height": 61
+      },
+      "parentId": "Ta8X09mNIHFHLPSczGjL",
+      "extent": "parent"
+    },
+    {
+      "id": "DeU4r4z0K4agQeA20btk",
+      "type": "entity",
+      "position": {
+        "x": 168,
+        "y": 335.47097330163297
+      },
+      "data": {
+        "label": "개체",
+        "description": "",
+        "entityKey": "",
+        "attributes": [
+          {
+            "key": "season_id",
+            "type": "string",
+            "value": "season_001"
+          },
+          {
+            "key": "season_name",
+            "type": "string",
+            "value": "동화 이야기"
+          },
+          {
+            "key": "theme_key",
+            "type": "string",
+            "value": "fairytale"
+          },
+          {
+            "key": "active_from",
+            "type": "string",
+            "value": "2026-05-01 00:00:00"
+          },
+          {
+            "key": "active_until",
+            "type": "string",
+            "value": "2026-06-15 23:59:59"
+          },
+          {
+            "key": "album_id",
+            "type": "string",
+            "value": "album_001"
+          },
+          {
+            "key": "tycoon_express_name",
+            "type": "string",
+            "value": "동화 이야기 익스프레스"
+          }
+        ]
+      },
+      "measured": {
+        "width": 240,
+        "height": 290
+      },
+      "parentId": "Ta8X09mNIHFHLPSczGjL",
+      "extent": "parent"
+    },
+    {
+      "id": "CZIXG7TicgH0lvheR0EW",
+      "type": "table",
+      "position": {
+        "x": 513.6453218238148,
+        "y": 78.60179780381577
+      },
+      "data": {
+        "label": "",
+        "description": "",
+        "tags": [],
+        "dataTableKey": "table_mo9dtwkx",
+        "sheetId": ""
+      },
+      "measured": {
+        "width": 220,
+        "height": 61
+      },
+      "parentId": "Ta8X09mNIHFHLPSczGjL",
+      "extent": "parent"
+    },
+    {
+      "id": "mKUiLrh23gv7ObdsXU6E",
+      "type": "entity",
+      "position": {
+        "x": 521.900829354393,
+        "y": 322.7661046183607
+      },
+      "data": {
+        "label": "개체",
+        "description": "",
+        "entityKey": "",
+        "attributes": [
+          {
+            "key": "class_config_id",
+            "type": "number",
+            "value": "1"
+          },
+          {
+            "key": "season_id",
+            "type": "string",
+            "value": "season_001"
+          },
+          {
+            "key": "class_level",
+            "type": "number",
+            "value": "1"
+          },
+          {
+            "key": "class_name",
+            "type": "string",
+            "value": "타이쿤 클래스"
+          },
+          {
+            "key": "required_coins",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "tournament_reward_rate",
+            "type": "number",
+            "value": "1"
+          },
+          {
+            "key": "instant_bundle_id",
+            "type": "string",
+            "value": "null"
+          }
+        ]
+      },
+      "measured": {
+        "width": 200,
+        "height": 290
+      },
+      "parentId": "Ta8X09mNIHFHLPSczGjL",
+      "extent": "parent"
+    },
+    {
+      "id": "y5ztfif3XG1ZTUOhVqba",
+      "type": "entity",
+      "position": {
+        "x": 378.4319775060967,
+        "y": 735.0085603279749
+      },
+      "data": {
+        "color": "crimson",
+        "label": "시즌 관련 데이터",
+        "entityKey": "construction_tile",
+        "attributes": [
+          {
+            "key": "season_id",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "current_class_level",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "accumulated_coins",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "is_completed",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "last_updated_at",
+            "type": "number",
+            "value": "0"
+          }
+        ],
+        "description": "현재 진행되는 스테이지 보드 타일 위의 집/호텔 상태를 저장한다."
+      },
+      "extent": "parent",
+      "measured": {
+        "width": 240,
+        "height": 226
+      },
+      "parentId": "Ta8X09mNIHFHLPSczGjL"
+    },
+    {
+      "id": "pqyYJqmviY4G696hLkR5",
+      "type": "table",
+      "position": {
+        "x": 716.9252287189738,
+        "y": 704.3295003635371
+      },
+      "data": {
+        "label": "",
+        "description": "",
+        "tags": [],
+        "dataTableKey": "table_mo9tty0f",
+        "sheetId": ""
+      },
+      "measured": {
+        "width": 262,
+        "height": 61
+      },
+      "parentId": "Ta8X09mNIHFHLPSczGjL",
+      "extent": "parent"
+    },
+    {
+      "id": "K77vYrpncYJSOcotb5Sj",
+      "type": "entity",
+      "position": {
+        "x": 716.9252287189738,
+        "y": 896.900939892063
+      },
+      "data": {
+        "label": "개체",
+        "description": "",
+        "entityKey": "",
+        "attributes": [
+          {
+            "key": "reward_config_id",
+            "type": "number",
+            "value": "30001"
+          },
+          {
+            "key": "event_id",
+            "type": "number",
+            "value": "20001"
+          },
+          {
+            "key": "rank_from",
+            "type": "number",
+            "value": "1"
+          },
+          {
+            "key": "rank_to",
+            "type": "number",
+            "value": "1"
+          },
+          {
+            "key": "bundle_id",
+            "type": "number",
+            "value": "1004"
+          },
+          {
+            "key": "tycoon_coins",
+            "type": "number",
+            "value": "8"
+          }
+        ]
+      },
+      "measured": {
+        "width": 177,
+        "height": 258
+      },
+      "parentId": "Ta8X09mNIHFHLPSczGjL",
+      "extent": "parent"
+    },
+    {
+      "id": "MF3YVA1l71ZDw8jeOl6e",
+      "type": "table",
+      "position": {
+        "x": 5167.420947926588,
+        "y": -3064.3017543638384
+      },
+      "data": {
+        "label": "",
+        "description": "",
+        "tags": [],
+        "dataTableKey": "table_mob0g3ii",
+        "sheetId": ""
+      },
+      "measured": {
+        "width": 241,
+        "height": 61
+      }
+    },
+    {
+      "id": "cx7mauwpiHq8DjxQ0M6o",
+      "type": "table",
+      "position": {
+        "x": 5497.958489950845,
+        "y": -3039.044732880257
+      },
+      "data": {
+        "label": "",
+        "description": "",
+        "tags": [],
+        "dataTableKey": "table_mob0gs71",
+        "sheetId": ""
+      },
+      "measured": {
+        "width": 220,
+        "height": 61
+      }
+    },
+    {
+      "id": "m50f240zlxRoWqeb887y",
+      "type": "entity",
+      "position": {
+        "x": 5497.958489950845,
+        "y": -2839.044732880257
+      },
+      "data": {
+        "label": "개체",
+        "description": "",
+        "entityKey": "",
+        "attributes": [
+          {
+            "key": "minigame_config_id",
+            "type": "number",
+            "value": "1"
+          },
+          {
+            "key": "minigame_type",
+            "type": "string",
+            "value": "SHUTDOWN"
+          },
+          {
+            "key": "trigger_weight",
+            "type": "number",
+            "value": "70"
+          }
+        ]
+      },
+      "measured": {
+        "width": 186,
+        "height": 162
+      }
+    },
+    {
+      "id": "1Cdlu9gUGTFXwuRUVZA1",
+      "type": "entity",
+      "position": {
+        "x": 5167.420947926588,
+        "y": -2864.3017543638384
+      },
+      "data": {
+        "label": "개체",
+        "description": "",
+        "entityKey": "",
+        "attributes": [
+          {
+            "key": "id",
+            "type": "string",
+            "value": "evr1"
+          },
+          {
+            "key": "reward_id",
+            "type": "number",
+            "value": "99999"
+          },
+          {
+            "key": "event_id",
+            "type": "number",
+            "value": "99999"
+          },
+          {
+            "key": "minigame",
+            "type": "string",
+            "value": "SHUTDOWN"
+          },
+          {
+            "key": "result_type",
+            "type": "string",
+            "value": "성공"
+          },
+          {
+            "key": "item_id",
+            "type": "number",
+            "value": "6002"
+          },
+          {
+            "key": "quantity",
+            "type": "number",
+            "value": "4"
+          }
+        ]
+      },
+      "measured": {
+        "width": 160,
+        "height": 290
+      }
+    },
+    {
+      "id": "69qCQ2yBTh9eHTHRP6Cw",
+      "type": "table",
+      "position": {
+        "x": 5983.64915938331,
+        "y": -3044.4322577298576
+      },
+      "data": {
+        "label": "",
+        "description": "",
+        "tags": [],
+        "dataTableKey": "table_mo8cweel",
+        "sheetId": ""
+      },
+      "measured": {
+        "width": 220,
+        "height": 61
+      }
+    },
+    {
+      "id": "DTX1wvKU0rPdRWHf3Od8",
+      "type": "entity",
+      "position": {
+        "x": 5983.64915938331,
+        "y": -2844.4322577298576
+      },
+      "data": {
+        "label": "개체",
+        "description": "",
+        "entityKey": "",
+        "attributes": [
+          {
+            "key": "tile_config_id",
+            "type": "number",
+            "value": "20001"
+          },
+          {
+            "key": "event_id",
+            "type": "number",
+            "value": "10001"
+          },
+          {
+            "key": "tile_type",
+            "type": "string",
+            "value": "CHANCE"
+          },
+          {
+            "key": "item_id",
+            "type": "number",
+            "value": "6001"
+          },
+          {
+            "key": "tile_point",
+            "type": "number",
+            "value": "1"
+          }
+        ]
+      },
+      "measured": {
+        "width": 160,
+        "height": 226
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "nQOZxPfXBoQ6xkep5uIE",
+      "source": "28LWitcRycj71r7QfhPr",
+      "target": "9AvGqusINN81kRUnPTKe",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 2,
+        "dataTableRowExpression": "2",
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "stage_id"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "stage_name"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "stage_order"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "reward_scale"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "unlock_condition"
+          },
+          {
+            "sourceColumnIndex": 5,
+            "targetKey": "theme_asset_id"
+          },
+          {
+            "sourceColumnIndex": 6,
+            "targetKey": "tile_config_stage_id"
+          },
+          {
+            "sourceColumnIndex": 7,
+            "targetKey": "shutdown_base_reward"
+          },
+          {
+            "sourceColumnIndex": 8,
+            "targetKey": "shutdown_hit_rate"
+          },
+          {
+            "sourceColumnIndex": 9,
+            "targetKey": "shutdown_blocked_rate"
+          },
+          {
+            "sourceColumnIndex": 10,
+            "targetKey": "heist_rate_small"
+          },
+          {
+            "sourceColumnIndex": 11,
+            "targetKey": "heist_rate_medium"
+          },
+          {
+            "sourceColumnIndex": 12,
+            "targetKey": "heist_rate_large"
+          },
+          {
+            "sourceColumnIndex": 13,
+            "targetKey": "heist_reward_small"
+          },
+          {
+            "sourceColumnIndex": 14,
+            "targetKey": "heist_reward_medium"
+          },
+          {
+            "sourceColumnIndex": 15,
+            "targetKey": "heist_reward_large"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "Em71KQyZfCv2Tdq67p6p",
+      "source": "FVDZ7cTwyfszCfQIkfXI",
+      "target": "GemAp3lQpMnlvfWt9EUQ",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 2,
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "color_group_id"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "stage_id"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "color_name"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "color_hex"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "color_asset_id"
+          },
+          {
+            "sourceColumnIndex": 5,
+            "targetKey": "set_bonus_type"
+          },
+          {
+            "sourceColumnIndex": 6,
+            "targetKey": "set_bonus_value"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "8JWvv7ecad9vfeXSrLWy",
+      "source": "7mKOR05XVitozhYgjwXr",
+      "target": "P7QK1rBynz8NFagg6Bs6",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 2,
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "set_goal_id"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "color_group_id"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "completion_type"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "required_tile_count"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "required_tile_ids"
+          },
+          {
+            "sourceColumnIndex": 5,
+            "targetKey": "reward_type"
+          },
+          {
+            "sourceColumnIndex": 6,
+            "targetKey": "reward_value"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__9AvGqusINN81kRUnPTKebottom-XCJIgspaYBuc3oXO7FF5top",
+      "source": "9AvGqusINN81kRUnPTKe",
+      "target": "XCJIgspaYBuc3oXO7FF5",
+      "data": {
+        "animated": false,
+        "entityEntityAttributeMappings": [
+          {
+            "sourceKey": "stage_id",
+            "targetKey": "stage_id"
+          },
+          {
+            "sourceKey": "reward_scale",
+            "targetKey": "reward_scale"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__GemAp3lQpMnlvfWt9EUQbottom-VItXLy9gQ60X3aHqLEsYtop",
+      "source": "GemAp3lQpMnlvfWt9EUQ",
+      "target": "VItXLy9gQ60X3aHqLEsY",
+      "data": {
+        "animated": false,
+        "entityEntityAttributeMappings": [
+          {
+            "sourceKey": "color_group_id",
+            "targetKey": "color_group_id"
+          },
+          {
+            "sourceKey": "set_bonus_value",
+            "targetKey": "set_bonus_value"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__P7QK1rBynz8NFagg6Bs6bottom-ajprwvGQ7k2CK0vJJ5HUtop",
+      "source": "P7QK1rBynz8NFagg6Bs6",
+      "target": "ajprwvGQ7k2CK0vJJ5HU",
+      "data": {
+        "animated": false,
+        "entityEntityAttributeMappings": [
+          {
+            "sourceKey": "set_goal_id",
+            "targetKey": "land_set"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__VItXLy9gQ60X3aHqLEsYbottom-zELV9vnAS43zj1184G8dtop",
+      "source": "VItXLy9gQ60X3aHqLEsY",
+      "target": "zELV9vnAS43zj1184G8d",
+      "data": {
+        "animated": false,
+        "entityEntityAttributeMappings": [
+          {
+            "sourceKey": "color_group_id",
+            "targetKey": "set_bonus_value"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__ajprwvGQ7k2CK0vJJ5HUbottom-zELV9vnAS43zj1184G8dtop",
+      "source": "ajprwvGQ7k2CK0vJJ5HU",
+      "target": "zELV9vnAS43zj1184G8d",
+      "data": {
+        "animated": false,
+        "entityEntityAttributeMappings": [
+          {
+            "sourceKey": "land_set",
+            "targetKey": "set_bonus_value"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__XCJIgspaYBuc3oXO7FF5bottom-weQSBPtbMjRU8q9nvGKstop",
+      "source": "XCJIgspaYBuc3oXO7FF5",
+      "target": "weQSBPtbMjRU8q9nvGKs",
+      "data": {
+        "animated": false,
+        "entityEntityAttributeMappings": [
+          {
+            "sourceKey": "reward_scale",
+            "targetKey": "reward_scale"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__AJNyvyIZI1j2Su49bxD9bottom-weQSBPtbMjRU8q9nvGKstop",
+      "source": "AJNyvyIZI1j2Su49bxD9",
+      "target": "weQSBPtbMjRU8q9nvGKs",
+      "data": {
+        "animated": false,
+        "entityEntityAttributeMappings": [
+          {
+            "sourceKey": "base_reward",
+            "targetKey": "base_reward"
+          },
+          {
+            "sourceKey": "pass_reward",
+            "targetKey": "pass_reward"
+          },
+          {
+            "sourceKey": "land_bonus",
+            "targetKey": "land_bonus"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__weQSBPtbMjRU8q9nvGKsbottom-9s3igIkjGp4YHwHTpEu8top",
+      "source": "weQSBPtbMjRU8q9nvGKs",
+      "target": "9s3igIkjGp4YHwHTpEu8",
+      "data": {
+        "animated": false,
+        "entityAttributeKey": "reward_scale"
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__zELV9vnAS43zj1184G8dbottom-iBd78W0Zd2ADwjyF9Hdytop",
+      "source": "zELV9vnAS43zj1184G8d",
+      "target": "iBd78W0Zd2ADwjyF9Hdy",
+      "data": {
+        "animated": false,
+        "entityAttributeKey": "set_bonus_value"
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "qNiRaPAlc3cHUHNWuUGW",
+      "source": "vzjQBxNyuSW1tE9zmLBZ",
+      "target": "P2N9ojz7CKbRYlFGWFT1",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 2,
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "tile_id"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "stage_id"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "tile_index"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "tile_type"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "field_group"
+          },
+          {
+            "sourceColumnIndex": 5,
+            "targetKey": "display_name"
+          },
+          {
+            "sourceColumnIndex": 6,
+            "targetKey": "multiplier_apply"
+          },
+          {
+            "sourceColumnIndex": 7,
+            "targetKey": "color_group_id"
+          },
+          {
+            "sourceColumnIndex": 8,
+            "targetKey": "base_reward"
+          },
+          {
+            "sourceColumnIndex": 9,
+            "targetKey": "pass_reward"
+          },
+          {
+            "sourceColumnIndex": 10,
+            "targetKey": "land_bonus"
+          },
+          {
+            "sourceColumnIndex": 11,
+            "targetKey": "visit_reward"
+          },
+          {
+            "sourceColumnIndex": 12,
+            "targetKey": "rest_reward"
+          },
+          {
+            "sourceColumnIndex": 13,
+            "targetKey": "event_linked"
+          },
+          {
+            "sourceColumnIndex": 14,
+            "targetKey": "target_tile_index"
+          },
+          {
+            "sourceColumnIndex": 15,
+            "targetKey": "card_pool_id"
+          },
+          {
+            "sourceColumnIndex": 16,
+            "targetKey": "tax_formula_type"
+          },
+          {
+            "sourceColumnIndex": 17,
+            "targetKey": "tax_ratio"
+          },
+          {
+            "sourceColumnIndex": 18,
+            "targetKey": "tax_fixed_value"
+          },
+          {
+            "sourceColumnIndex": 19,
+            "targetKey": "action_pool_id"
+          },
+          {
+            "sourceColumnIndex": 20,
+            "targetKey": "fund_pool_id"
+          },
+          {
+            "sourceColumnIndex": 21,
+            "targetKey": "facility_icon_id"
+          },
+          {
+            "sourceColumnIndex": 22,
+            "targetKey": "dice_formula_type"
+          },
+          {
+            "sourceColumnIndex": 23,
+            "targetKey": "reward_multiplier"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "TX306gzD2ZLvbcBsnJel",
+      "source": "sdG5vZfg3NkoSQgA2s2Y",
+      "target": "KUsSzK6nifQ4THoiOmCX",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 2,
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "reward_id"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "color_group_id"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "build_stage"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "flat_bonus"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "final_reward_formula"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__KUsSzK6nifQ4THoiOmCXbottom-50PY7Ro2jRZ63Ai3Hcuqtop",
+      "source": "KUsSzK6nifQ4THoiOmCX",
+      "target": "50PY7Ro2jRZ63Ai3Hcuq",
+      "data": {
+        "animated": false,
+        "entityEntityAttributeMappings": []
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__50PY7Ro2jRZ63Ai3Hcuqbottom-weQSBPtbMjRU8q9nvGKstop",
+      "source": "50PY7Ro2jRZ63Ai3Hcuq",
+      "target": "weQSBPtbMjRU8q9nvGKs",
+      "data": {
+        "animated": false,
+        "entityEntityAttributeMappings": [
+          {
+            "sourceKey": "reward_id",
+            "targetKey": "reward_scale"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "5n2crj2n56hNrmAeYRIC",
+      "source": "P1O93MepN665CgWwZuzq",
+      "target": "QBcSyBBx2kIpccogv6v9",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 2,
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "config_id"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "landmark_id"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "stage_id"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "slot_index"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "step_index"
+          },
+          {
+            "sourceColumnIndex": 5,
+            "targetKey": "display_name"
+          },
+          {
+            "sourceColumnIndex": 6,
+            "targetKey": "build_cost"
+          },
+          {
+            "sourceColumnIndex": 7,
+            "targetKey": "repair_cost"
+          },
+          {
+            "sourceColumnIndex": 8,
+            "targetKey": "level_point"
+          },
+          {
+            "sourceColumnIndex": 9,
+            "targetKey": "house_count"
+          },
+          {
+            "sourceColumnIndex": 10,
+            "targetKey": "prefab_id"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__QBcSyBBx2kIpccogv6v9bottom-LpCpHZMB5D5YOmRBJVGDtop",
+      "source": "QBcSyBBx2kIpccogv6v9",
+      "target": "LpCpHZMB5D5YOmRBJVGD",
+      "data": {
+        "animated": false,
+        "dataPropagationSchedule": "each_step",
+        "entityEntityAttributeMappings": []
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__QBcSyBBx2kIpccogv6v9bottom-IFF40UB3OjZwsFR5w4Lltop",
+      "source": "QBcSyBBx2kIpccogv6v9",
+      "target": "IFF40UB3OjZwsFR5w4Ll",
+      "data": {
+        "animated": false,
+        "dataPropagationSchedule": "each_step",
+        "entityEntityAttributeMappings": []
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "LGsxsTQHEj1pWMbKH3Oh",
+      "source": "iS9Da2FTwCIm5XtiMDNg",
+      "target": "G0wUJgr3XSwkohuYVTAA",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 3,
+        "dataTableRowExpression": "3",
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "item_id"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "item_name"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "item_category"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "use_type"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "skill_type"
+          },
+          {
+            "sourceColumnIndex": 5,
+            "targetKey": "skill_id"
+          },
+          {
+            "sourceColumnIndex": 6,
+            "targetKey": "max_hold_count"
+          },
+          {
+            "sourceColumnIndex": 7,
+            "targetKey": "is_stackable"
+          },
+          {
+            "sourceColumnIndex": 8,
+            "targetKey": "icon_id"
+          },
+          {
+            "sourceColumnIndex": 9,
+            "targetKey": "is_event_item"
+          },
+          {
+            "sourceColumnIndex": 10,
+            "targetKey": "expire_type"
+          },
+          {
+            "sourceColumnIndex": 11,
+            "targetKey": "expire_value"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "gPKeHDG120lx3P0QAoKD",
+      "source": "iS9Da2FTwCIm5XtiMDNg",
+      "target": "lCKc80wM4TwC3ev6nxz3",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 4,
+        "dataTableRowExpression": "4",
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "item_id"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "item_name"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "item_category"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "use_type"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "skill_type"
+          },
+          {
+            "sourceColumnIndex": 5,
+            "targetKey": "skill_id"
+          },
+          {
+            "sourceColumnIndex": 6,
+            "targetKey": "max_hold_count"
+          },
+          {
+            "sourceColumnIndex": 7,
+            "targetKey": "is_stackable"
+          },
+          {
+            "sourceColumnIndex": 8,
+            "targetKey": "icon_id"
+          },
+          {
+            "sourceColumnIndex": 9,
+            "targetKey": "is_event_item"
+          },
+          {
+            "sourceColumnIndex": 10,
+            "targetKey": "expire_type"
+          },
+          {
+            "sourceColumnIndex": 11,
+            "targetKey": "expire_value"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "6wvXl3aytMdv8zKCgtQ4",
+      "source": "iS9Da2FTwCIm5XtiMDNg",
+      "target": "oyP2CkxCJlxbZJuMUe8y",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 5,
+        "dataTableRowExpression": "5",
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "item_id"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "item_name"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "item_category"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "use_type"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "skill_type"
+          },
+          {
+            "sourceColumnIndex": 5,
+            "targetKey": "skill_id"
+          },
+          {
+            "sourceColumnIndex": 6,
+            "targetKey": "max_hold_count"
+          },
+          {
+            "sourceColumnIndex": 7,
+            "targetKey": "is_stackable"
+          },
+          {
+            "sourceColumnIndex": 8,
+            "targetKey": "icon_id"
+          },
+          {
+            "sourceColumnIndex": 9,
+            "targetKey": "is_event_item"
+          },
+          {
+            "sourceColumnIndex": 10,
+            "targetKey": "expire_type"
+          },
+          {
+            "sourceColumnIndex": 11,
+            "targetKey": "expire_value"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "Bf76MdRJGTyvSEjEIZT2",
+      "source": "iS9Da2FTwCIm5XtiMDNg",
+      "target": "QJIFYZ0soeu1hzvmNYlZ",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 6,
+        "dataTableRowExpression": "6",
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "item_id"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "item_name"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "item_category"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "use_type"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "skill_type"
+          },
+          {
+            "sourceColumnIndex": 5,
+            "targetKey": "skill_id"
+          },
+          {
+            "sourceColumnIndex": 6,
+            "targetKey": "max_hold_count"
+          },
+          {
+            "sourceColumnIndex": 7,
+            "targetKey": "is_stackable"
+          },
+          {
+            "sourceColumnIndex": 8,
+            "targetKey": "icon_id"
+          },
+          {
+            "sourceColumnIndex": 9,
+            "targetKey": "is_event_item"
+          },
+          {
+            "sourceColumnIndex": 10,
+            "targetKey": "expire_type"
+          },
+          {
+            "sourceColumnIndex": 11,
+            "targetKey": "expire_value"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "enQCgLSlKKwzDFBHJHEU",
+      "source": "iS9Da2FTwCIm5XtiMDNg",
+      "target": "WgEXaHev2OxIE94scVDh",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 10,
+        "dataTableRowExpression": "10",
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "item_id"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "item_name"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "item_category"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "use_type"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "skill_type"
+          },
+          {
+            "sourceColumnIndex": 5,
+            "targetKey": "skill_id"
+          },
+          {
+            "sourceColumnIndex": 6,
+            "targetKey": "max_hold_count"
+          },
+          {
+            "sourceColumnIndex": 7,
+            "targetKey": "is_stackable"
+          },
+          {
+            "sourceColumnIndex": 8,
+            "targetKey": "icon_id"
+          },
+          {
+            "sourceColumnIndex": 9,
+            "targetKey": "is_event_item"
+          },
+          {
+            "sourceColumnIndex": 10,
+            "targetKey": "expire_type"
+          },
+          {
+            "sourceColumnIndex": 11,
+            "targetKey": "expire_value"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "2zqVCoxp3ZGqMx4OHyyy",
+      "source": "iS9Da2FTwCIm5XtiMDNg",
+      "target": "IJxKepj2389dTGIMsiiv",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 22,
+        "dataTableRowExpression": "22",
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "item_id"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "item_name"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "item_category"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "use_type"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "skill_type"
+          },
+          {
+            "sourceColumnIndex": 5,
+            "targetKey": "skill_id"
+          },
+          {
+            "sourceColumnIndex": 6,
+            "targetKey": "max_hold_count"
+          },
+          {
+            "sourceColumnIndex": 7,
+            "targetKey": "is_stackable"
+          },
+          {
+            "sourceColumnIndex": 8,
+            "targetKey": "icon_id"
+          },
+          {
+            "sourceColumnIndex": 9,
+            "targetKey": "is_event_item"
+          },
+          {
+            "sourceColumnIndex": 10,
+            "targetKey": "expire_type"
+          },
+          {
+            "sourceColumnIndex": 11,
+            "targetKey": "expire_value"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "BOxT6dqgzldCqhNstMfV",
+      "source": "F2zmW2hjx316diDeXwWC",
+      "target": "P1NAw2L0XVJ2ni0UdZPR",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 18,
+        "dataTableRowExpression": "18",
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "skill_id"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "skill_type"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "target_type"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "effect_type"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "effect_value"
+          },
+          {
+            "sourceColumnIndex": 5,
+            "targetKey": "duration_hours"
+          },
+          {
+            "sourceColumnIndex": 6,
+            "targetKey": "cooltime_hours"
+          },
+          {
+            "sourceColumnIndex": 7,
+            "targetKey": "display_name"
+          },
+          {
+            "sourceColumnIndex": 8,
+            "targetKey": "description"
+          },
+          {
+            "sourceColumnIndex": 9,
+            "targetKey": "icon_id"
+          },
+          {
+            "sourceColumnIndex": 10,
+            "targetKey": "anim_id"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__P1NAw2L0XVJ2ni0UdZPRright-PN7asubm6bIajT8Gf5Vobottom",
+      "source": "P1NAw2L0XVJ2ni0UdZPR",
+      "target": "PN7asubm6bIajT8Gf5Vo",
+      "data": {
+        "animated": false,
+        "entityEntityAttributeMappings": [
+          {
+            "sourceKey": "skill_id",
+            "targetKey": "skill_id"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "right",
+      "targetHandle": "bottom"
+    },
+    {
+      "id": "xy-edge__QJIFYZ0soeu1hzvmNYlZbottom-PN7asubm6bIajT8Gf5Votop",
+      "source": "QJIFYZ0soeu1hzvmNYlZ",
+      "target": "PN7asubm6bIajT8Gf5Vo",
+      "data": {
+        "animated": false,
+        "entityEntityAttributeMappings": [
+          {
+            "sourceKey": "skill_id",
+            "targetKey": "skill_id"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "1gwMGJfy8DaCXOjaTBFT",
+      "source": "F2zmW2hjx316diDeXwWC",
+      "target": "g7vA5QRsZLxLv3SDaydD",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 2,
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "skill_id"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "skill_type"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "target_type"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "effect_type"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "effect_value"
+          },
+          {
+            "sourceColumnIndex": 5,
+            "targetKey": "duration_hours"
+          },
+          {
+            "sourceColumnIndex": 6,
+            "targetKey": "cooltime_hours"
+          },
+          {
+            "sourceColumnIndex": 7,
+            "targetKey": "display_name"
+          },
+          {
+            "sourceColumnIndex": 8,
+            "targetKey": "description"
+          },
+          {
+            "sourceColumnIndex": 9,
+            "targetKey": "icon_id"
+          },
+          {
+            "sourceColumnIndex": 10,
+            "targetKey": "anim_id"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "CwyOY7UklREFUGoFpq2R",
+      "source": "F2zmW2hjx316diDeXwWC",
+      "target": "l0dOQ4JDbCygfP0Hoxpn",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 4,
+        "dataTableRowExpression": "4",
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "skill_id"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "skill_type"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "target_type"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "effect_type"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "effect_value"
+          },
+          {
+            "sourceColumnIndex": 5,
+            "targetKey": "duration_hours"
+          },
+          {
+            "sourceColumnIndex": 6,
+            "targetKey": "cooltime_hours"
+          },
+          {
+            "sourceColumnIndex": 7,
+            "targetKey": "display_name"
+          },
+          {
+            "sourceColumnIndex": 8,
+            "targetKey": "description"
+          },
+          {
+            "sourceColumnIndex": 9,
+            "targetKey": "icon_id"
+          },
+          {
+            "sourceColumnIndex": 10,
+            "targetKey": "anim_id"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "glL184Hfjaj3rs9vptnm",
+      "source": "F2zmW2hjx316diDeXwWC",
+      "target": "qJ9MyOSXSUvOd2YBSPma",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 7,
+        "dataTableRowExpression": "7",
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "skill_id"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "skill_type"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "target_type"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "effect_type"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "effect_value"
+          },
+          {
+            "sourceColumnIndex": 5,
+            "targetKey": "duration_hours"
+          },
+          {
+            "sourceColumnIndex": 6,
+            "targetKey": "cooltime_hours"
+          },
+          {
+            "sourceColumnIndex": 7,
+            "targetKey": "display_name"
+          },
+          {
+            "sourceColumnIndex": 8,
+            "targetKey": "description"
+          },
+          {
+            "sourceColumnIndex": 9,
+            "targetKey": "icon_id"
+          },
+          {
+            "sourceColumnIndex": 10,
+            "targetKey": "anim_id"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "IztYjejYp3Fhzo3pmbgr",
+      "source": "F2zmW2hjx316diDeXwWC",
+      "target": "ILksJVkdKvZMYYrfQYgn",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 9,
+        "dataTableRowExpression": "9",
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "skill_id"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "skill_type"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "target_type"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "effect_type"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "effect_value"
+          },
+          {
+            "sourceColumnIndex": 5,
+            "targetKey": "duration_hours"
+          },
+          {
+            "sourceColumnIndex": 6,
+            "targetKey": "cooltime_hours"
+          },
+          {
+            "sourceColumnIndex": 7,
+            "targetKey": "display_name"
+          },
+          {
+            "sourceColumnIndex": 8,
+            "targetKey": "description"
+          },
+          {
+            "sourceColumnIndex": 9,
+            "targetKey": "icon_id"
+          },
+          {
+            "sourceColumnIndex": 10,
+            "targetKey": "anim_id"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "GVTeHLIn81nikOA4o2WN",
+      "source": "F2zmW2hjx316diDeXwWC",
+      "target": "TiyQh6BIGtO5Uz6ebETh",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 11,
+        "dataTableRowExpression": "11",
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "skill_id"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "skill_type"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "target_type"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "effect_type"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "effect_value"
+          },
+          {
+            "sourceColumnIndex": 5,
+            "targetKey": "duration_hours"
+          },
+          {
+            "sourceColumnIndex": 6,
+            "targetKey": "cooltime_hours"
+          },
+          {
+            "sourceColumnIndex": 7,
+            "targetKey": "display_name"
+          },
+          {
+            "sourceColumnIndex": 8,
+            "targetKey": "description"
+          },
+          {
+            "sourceColumnIndex": 9,
+            "targetKey": "icon_id"
+          },
+          {
+            "sourceColumnIndex": 10,
+            "targetKey": "anim_id"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "IzsIQCqKRHnYAHU920ia",
+      "source": "F2zmW2hjx316diDeXwWC",
+      "target": "ByI9CLepl0y2Wy15k4Id",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 25,
+        "dataTableRowExpression": "25",
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "skill_id"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "skill_type"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "target_type"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "effect_type"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "effect_value"
+          },
+          {
+            "sourceColumnIndex": 5,
+            "targetKey": "duration_hours"
+          },
+          {
+            "sourceColumnIndex": 6,
+            "targetKey": "cooltime_hours"
+          },
+          {
+            "sourceColumnIndex": 7,
+            "targetKey": "display_name"
+          },
+          {
+            "sourceColumnIndex": 8,
+            "targetKey": "description"
+          },
+          {
+            "sourceColumnIndex": 9,
+            "targetKey": "icon_id"
+          },
+          {
+            "sourceColumnIndex": 10,
+            "targetKey": "anim_id"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "TIXzeEd3a5jfbAisYL7C",
+      "source": "KSQGYo4mISD80BiqFL3l",
+      "target": "BXnO3Il7F3iANZP4HdhM",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 2,
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "bundle_id"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "bundle_name"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "bundle_type"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "pick_count"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "max_entry_count"
+          },
+          {
+            "sourceColumnIndex": 5,
+            "targetKey": "description"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__u2AVzQM7lJgyHjfcTIOxbottom-QeF0yESG9omK96iD7SMYtop",
+      "source": "u2AVzQM7lJgyHjfcTIOx",
+      "target": "QeF0yESG9omK96iD7SMY",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 2,
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "bundle_id"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__BXnO3Il7F3iANZP4HdhMbottom-KGnAr00xsaUomh6ARbHztop",
+      "source": "BXnO3Il7F3iANZP4HdhM",
+      "target": "KGnAr00xsaUomh6ARbHz",
+      "data": {
+        "animated": false,
+        "entityEntityAttributeMappings": []
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__BXnO3Il7F3iANZP4HdhMbottom-FPsFiKlxJvN1YRjhORlitop",
+      "source": "BXnO3Il7F3iANZP4HdhM",
+      "target": "FPsFiKlxJvN1YRjhORli",
+      "data": {
+        "animated": false,
+        "entityEntityAttributeMappings": []
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__QeF0yESG9omK96iD7SMYbottom-KGnAr00xsaUomh6ARbHzright",
+      "source": "QeF0yESG9omK96iD7SMY",
+      "target": "KGnAr00xsaUomh6ARbHz",
+      "data": {
+        "animated": false,
+        "entityEntityAttributeMappings": []
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__u2AVzQM7lJgyHjfcTIOxbottom-meRq1SBVHUjeoEPIyRPvtop",
+      "source": "u2AVzQM7lJgyHjfcTIOx",
+      "target": "meRq1SBVHUjeoEPIyRPv",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 8,
+        "dataTableRowExpression": "8",
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "bundle_id"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__meRq1SBVHUjeoEPIyRPvbottom-FPsFiKlxJvN1YRjhORliright",
+      "source": "meRq1SBVHUjeoEPIyRPv",
+      "target": "FPsFiKlxJvN1YRjhORli",
+      "data": {
+        "animated": false,
+        "entityEntityAttributeMappings": []
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "nySr5KsonVSOQbeMIdEG",
+      "source": "lsSD8Z8ZBt486UY4QlU6",
+      "target": "cdghX9zKbgO7HnqmTxwv",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 27,
+        "dataTableRowExpression": "27",
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "mission_id"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "mission_category"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "mission_type"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "claim_type"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "mission_tier"
+          },
+          {
+            "sourceColumnIndex": 5,
+            "targetKey": "display_name"
+          },
+          {
+            "sourceColumnIndex": 6,
+            "targetKey": "display_desc"
+          },
+          {
+            "sourceColumnIndex": 7,
+            "targetKey": "reset_interval_hours"
+          },
+          {
+            "sourceColumnIndex": 8,
+            "targetKey": "reset_base_time"
+          },
+          {
+            "sourceColumnIndex": 9,
+            "targetKey": "active_from"
+          },
+          {
+            "sourceColumnIndex": 10,
+            "targetKey": "active_until"
+          },
+          {
+            "sourceColumnIndex": 11,
+            "targetKey": "trigger_skill_id"
+          },
+          {
+            "sourceColumnIndex": 12,
+            "targetKey": "duration_hours"
+          },
+          {
+            "sourceColumnIndex": 13,
+            "targetKey": "reward_config_id"
+          },
+          {
+            "sourceColumnIndex": 14,
+            "targetKey": "next_mission_id"
+          },
+          {
+            "sourceColumnIndex": 15,
+            "targetKey": "is_hidden"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "P8R9oZVhGT2REvCVFHJV",
+      "source": "JluCTob05foGhJzN3onb",
+      "target": "ueywHCgJduWZLkxVzJk0",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 2,
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "condition_id"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "mission_id"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "type_1"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "target_1"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "count_1"
+          },
+          {
+            "sourceColumnIndex": 5,
+            "targetKey": "type_2"
+          },
+          {
+            "sourceColumnIndex": 6,
+            "targetKey": "target_2"
+          },
+          {
+            "sourceColumnIndex": 7,
+            "targetKey": "count_2"
+          },
+          {
+            "sourceColumnIndex": 8,
+            "targetKey": "type_3"
+          },
+          {
+            "sourceColumnIndex": 9,
+            "targetKey": "target_3"
+          },
+          {
+            "sourceColumnIndex": 10,
+            "targetKey": "count_3"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "D6X16cETkokNYuliF4hG",
+      "source": "yWkSx2T0r2NgJwMH7Eg9",
+      "target": "u185suTtWJuiZ7XD91KB",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 2,
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "reward_config_id"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "reward_name"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "bundle_id"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "skill_id"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "reward_multiplier_id"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__cdghX9zKbgO7HnqmTxwvbottom-KC3h845PaWa8jBUTfLJftop",
+      "source": "cdghX9zKbgO7HnqmTxwv",
+      "target": "KC3h845PaWa8jBUTfLJf",
+      "data": {
+        "animated": false,
+        "entityEntityAttributeMappings": [
+          {
+            "sourceKey": "mission_id",
+            "targetKey": "mission_id"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__cdghX9zKbgO7HnqmTxwvbottom-CGAgNNuIPzE4gbGFkgButop",
+      "source": "cdghX9zKbgO7HnqmTxwv",
+      "target": "CGAgNNuIPzE4gbGFkgBu",
+      "data": {
+        "animated": false,
+        "entityEntityAttributeMappings": [
+          {
+            "sourceKey": "mission_id",
+            "targetKey": "mission_id"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "kLCq1p9vXuuIxV0EqTyM",
+      "source": "iS9Da2FTwCIm5XtiMDNg",
+      "target": "KQUq87zO0h95Cn4Em94i",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 2,
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "item_id"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "item_name"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "item_category"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "use_type"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "skill_type"
+          },
+          {
+            "sourceColumnIndex": 5,
+            "targetKey": "skill_id"
+          },
+          {
+            "sourceColumnIndex": 6,
+            "targetKey": "max_hold_count"
+          },
+          {
+            "sourceColumnIndex": 7,
+            "targetKey": "is_stackable"
+          },
+          {
+            "sourceColumnIndex": 8,
+            "targetKey": "icon_id"
+          },
+          {
+            "sourceColumnIndex": 9,
+            "targetKey": "is_event_item"
+          },
+          {
+            "sourceColumnIndex": 10,
+            "targetKey": "expire_type"
+          },
+          {
+            "sourceColumnIndex": 11,
+            "targetKey": "expire_value"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "bottom"
+    },
+    {
+      "id": "6PiixA2rhFOPccSAhMn9",
+      "source": "7dHvfryusfmMWfFJyWUh",
+      "target": "3w3AokF7ASagnGIaAKTJ",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 2,
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "ability_id"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "rent_rate"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "dice_regen_rate"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "shield_max_add"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "build_cost_rate"
+          },
+          {
+            "sourceColumnIndex": 5,
+            "targetKey": "start_bonus_rate"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "UUpW6pCIkevCeYNpW9pu",
+      "source": "c47Y6MID5IuWm3YIgTH9",
+      "target": "nub5V6TBEDYsx70L3qT1",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 2,
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "reward_id"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "track_type"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "condition_type"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "condition_id"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "condition_value"
+          },
+          {
+            "sourceColumnIndex": 5,
+            "targetKey": "reward_type"
+          },
+          {
+            "sourceColumnIndex": 6,
+            "targetKey": "ability_id"
+          },
+          {
+            "sourceColumnIndex": 7,
+            "targetKey": "skill_id"
+          },
+          {
+            "sourceColumnIndex": 8,
+            "targetKey": "bundle_id"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__nub5V6TBEDYsx70L3qT1bottom-zZUkwR5WSTXQ6T4fdXLNright",
+      "source": "nub5V6TBEDYsx70L3qT1",
+      "target": "zZUkwR5WSTXQ6T4fdXLN",
+      "data": {
+        "animated": false,
+        "entityEntityAttributeMappings": [
+          {
+            "sourceKey": "ability_id",
+            "targetKey": "current_ability_id"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "right"
+    },
+    {
+      "id": "xy-edge__3w3AokF7ASagnGIaAKTJbottom-zZUkwR5WSTXQ6T4fdXLNtop",
+      "source": "3w3AokF7ASagnGIaAKTJ",
+      "target": "zZUkwR5WSTXQ6T4fdXLN",
+      "data": {
+        "animated": false,
+        "entityEntityAttributeMappings": [
+          {
+            "sourceKey": "ability_id",
+            "targetKey": "current_ability_id"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__KQUq87zO0h95Cn4Em94iright-zZUkwR5WSTXQ6T4fdXLNleft",
+      "source": "KQUq87zO0h95Cn4Em94i",
+      "target": "zZUkwR5WSTXQ6T4fdXLN",
+      "data": {
+        "animated": false,
+        "entityEntityAttributeMappings": [
+          {
+            "sourceKey": "item_id",
+            "targetKey": "item_id"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "id": "ZN7DTvY9u9ak1jIxEMFr",
+      "source": "s8JKt050CTYzzpFl6GiQ",
+      "target": "PlrYptdwnFXMA4uwEKt1",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 2,
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "priority"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "recommend_type"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "max_count"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "level_range"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "is_active"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "mNEK43mcOiAWEbkB5Yfp",
+      "source": "lA6RFFPgIxMkbqgMli5O",
+      "target": "nMPgcvnonYQgI0O5PXIU",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 2,
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "gift_type"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "daily_send_limit"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "daily_recv_limit"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "monthly_send_limit"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "per_friend_daily_limit"
+          },
+          {
+            "sourceColumnIndex": 5,
+            "targetKey": "gift_item_id"
+          },
+          {
+            "sourceColumnIndex": 6,
+            "targetKey": "gift_item_quantity"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "6Jsemwt9nfg9nGTszVxH",
+      "source": "pDhiFMdNT85HiK6QJZqN",
+      "target": "p3qV4QcwbxZDgtTxYYJ3",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 2,
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "priority"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "action_type"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "is_visible"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "retention_days"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "Zjo9uZlb971fEiYzi9N8",
+      "source": "zk5gZuYg44e9hBWSCdJh",
+      "target": "v4qtTK8QBHNtPbfo86Cd",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 2,
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "npc_id"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "nickname"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "profile_asset_id"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "level_point_min"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "level_point_max"
+          },
+          {
+            "sourceColumnIndex": 5,
+            "targetKey": "shield_rate"
+          },
+          {
+            "sourceColumnIndex": 6,
+            "targetKey": "wealth_min"
+          },
+          {
+            "sourceColumnIndex": 7,
+            "targetKey": "wealth_max"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "CGOI91kbao2iqa9E5iLn",
+      "source": "N7gTPwWuMT0sjeGL0cWY",
+      "target": "Xjvn7CraOEHgFibjS3Ot",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 2,
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "match_type"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "priority"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "level_range"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "friend_active_hours"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "revenge_max_count"
+          },
+          {
+            "sourceColumnIndex": 5,
+            "targetKey": "friend_max_count"
+          },
+          {
+            "sourceColumnIndex": 6,
+            "targetKey": "random_max_count"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "PBnZX7LvdB21xLD9cSyP",
+      "source": "AfmRbhWK6jsZTC2rGMFz",
+      "target": "U9vo2DxsJ9JT0j2LmjGQ",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 2,
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "action_type"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "trigger_rate"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "hit_reward_rate"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "blocked_reward_rate"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e03grXl7xFPtexl5PHko",
+      "source": "V3AkpvRUElrXMMufwXoE",
+      "target": "aTG1IjyevI0XEjdvpg1X",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 2,
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "event_id"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "event_name"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "event_type"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "active_from"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "active_until"
+          },
+          {
+            "sourceColumnIndex": 5,
+            "targetKey": "is_pickup_type"
+          },
+          {
+            "sourceColumnIndex": 6,
+            "targetKey": "tile_type_1"
+          },
+          {
+            "sourceColumnIndex": 7,
+            "targetKey": "tile_point_1"
+          },
+          {
+            "sourceColumnIndex": 8,
+            "targetKey": "tile_type_2"
+          },
+          {
+            "sourceColumnIndex": 9,
+            "targetKey": "tile_point_2"
+          },
+          {
+            "sourceColumnIndex": 10,
+            "targetKey": "tile_type_3"
+          },
+          {
+            "sourceColumnIndex": 11,
+            "targetKey": "tile_point_3"
+          },
+          {
+            "sourceColumnIndex": 12,
+            "targetKey": "milestone_group_id"
+          },
+          {
+            "sourceColumnIndex": 13,
+            "targetKey": "mission_slot_1"
+          },
+          {
+            "sourceColumnIndex": 14,
+            "targetKey": "mission_slot_2"
+          },
+          {
+            "sourceColumnIndex": 15,
+            "targetKey": "mission_slot_3"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__aTG1IjyevI0XEjdvpg1Xleft-nub5V6TBEDYsx70L3qT1right",
+      "source": "aTG1IjyevI0XEjdvpg1X",
+      "target": "nub5V6TBEDYsx70L3qT1",
+      "data": {
+        "animated": false,
+        "entityEntityAttributeMappings": [
+          {
+            "sourceKey": "event_id",
+            "targetKey": "condition_id"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "id": "xy-edge__vzjQBxNyuSW1tE9zmLBZtop-aTG1IjyevI0XEjdvpg1Xleft",
+      "source": "vzjQBxNyuSW1tE9zmLBZ",
+      "target": "aTG1IjyevI0XEjdvpg1X",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 8,
+        "dataTableRowExpression": "8",
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "tile_type_1"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "top",
+      "targetHandle": "left"
+    },
+    {
+      "id": "xy-edge__aTG1IjyevI0XEjdvpg1Xbottom-zwDV0aqLb5HYUEUvOe3ktop",
+      "source": "aTG1IjyevI0XEjdvpg1X",
+      "target": "zwDV0aqLb5HYUEUvOe3k",
+      "data": {
+        "animated": false,
+        "entityEntityAttributeMappings": [
+          {
+            "sourceKey": "event_id",
+            "targetKey": "event_id"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "JEzgs7uCPsgDfsUtayuk",
+      "source": "3mfCLAn5u0RDCY1tFGMS",
+      "target": "OX2iZLby5u9Y6wnGkGcA",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 2,
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "tile_config_id"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "event_id"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "tile_type"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "tile_point"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "sort_order"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__OX2iZLby5u9Y6wnGkGcAleft-aTG1IjyevI0XEjdvpg1Xright",
+      "source": "OX2iZLby5u9Y6wnGkGcA",
+      "target": "aTG1IjyevI0XEjdvpg1X",
+      "data": {
+        "animated": false,
+        "entityEntityAttributeMappings": [
+          {
+            "sourceKey": "event_id",
+            "targetKey": "event_id"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "left",
+      "targetHandle": "right"
+    },
+    {
+      "id": "ogqJfQR25JFAiqkIYkrT",
+      "source": "89wjO9FeKkWfpYBnuj0W",
+      "target": "FqJTMD352dBPO5bJKEst",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 2,
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "album_id"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "album_name"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "season_id"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "total_sets"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "total_stickers"
+          },
+          {
+            "sourceColumnIndex": 5,
+            "targetKey": "album_complete_bundle_id"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "YweAmfhnQmLWYNxWMylx",
+      "source": "8bZjbKzqVEOCnDd7MH2u",
+      "target": "Z9fVMGPeRPJUn45JaIMB",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 2,
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "set_id"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "album_id"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "set_name"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "set_order"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "sticker_count"
+          },
+          {
+            "sourceColumnIndex": 5,
+            "targetKey": "complete_bundle_id"
+          }
+        ]
+      },
+      "type": "data",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "source": "iS9Da2FTwCIm5XtiMDNg",
+      "sourceHandle": "top",
+      "target": "avb2eJ3PJtw9HOAvLpH6",
+      "targetHandle": "left",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 21,
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "item_id"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "item_name"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "item_category"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "use_type"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "skill_type"
+          },
+          {
+            "sourceColumnIndex": 5,
+            "targetKey": "skill_id"
+          },
+          {
+            "sourceColumnIndex": 6,
+            "targetKey": "max_hold_count"
+          },
+          {
+            "sourceColumnIndex": 7,
+            "targetKey": "is_stackable"
+          },
+          {
+            "sourceColumnIndex": 8,
+            "targetKey": "icon_id"
+          },
+          {
+            "sourceColumnIndex": 9,
+            "targetKey": "is_event_item"
+          },
+          {
+            "sourceColumnIndex": 10,
+            "targetKey": "expire_type"
+          },
+          {
+            "sourceColumnIndex": 11,
+            "targetKey": "expire_value"
+          },
+          {
+            "sourceColumnIndex": 12,
+            "targetKey": "rarity"
+          },
+          {
+            "sourceColumnIndex": 13,
+            "targetKey": "is_gold"
+          },
+          {
+            "sourceColumnIndex": 14,
+            "targetKey": "sticker_set_id"
+          }
+        ],
+        "dataTableRowExpression": "21"
+      },
+      "type": "data",
+      "id": "xy-edge__iS9Da2FTwCIm5XtiMDNgtop-avb2eJ3PJtw9HOAvLpH6right"
+    },
+    {
+      "source": "avb2eJ3PJtw9HOAvLpH6",
+      "sourceHandle": "top",
+      "target": "FqJTMD352dBPO5bJKEst",
+      "targetHandle": "bottom",
+      "data": {
+        "animated": false,
+        "entityEntityAttributeMappings": [
+          {
+            "sourceKey": "expire_value",
+            "targetKey": "season_id"
+          }
+        ]
+      },
+      "type": "data",
+      "id": "xy-edge__avb2eJ3PJtw9HOAvLpH6top-FqJTMD352dBPO5bJKEstbottom"
+    },
+    {
+      "id": "ZFKJXGTXCe4xjCtOyJfK",
+      "source": "lMxbHF3olmFfI0H9TSQC",
+      "target": "DeU4r4z0K4agQeA20btk",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "type": "data",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 2,
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "season_id"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "season_name"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "theme_key"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "active_from"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "active_until"
+          },
+          {
+            "sourceColumnIndex": 5,
+            "targetKey": "album_id"
+          },
+          {
+            "sourceColumnIndex": 6,
+            "targetKey": "tycoon_express_name"
+          }
+        ]
+      }
+    },
+    {
+      "id": "BGZKpi0FcdhaYqcSuYyF",
+      "source": "CZIXG7TicgH0lvheR0EW",
+      "target": "mKUiLrh23gv7ObdsXU6E",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "type": "data",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 2,
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "class_config_id"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "season_id"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "class_level"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "class_name"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "required_coins"
+          },
+          {
+            "sourceColumnIndex": 5,
+            "targetKey": "tournament_reward_rate"
+          },
+          {
+            "sourceColumnIndex": 6,
+            "targetKey": "instant_bundle_id"
+          }
+        ]
+      }
+    },
+    {
+      "source": "DeU4r4z0K4agQeA20btk",
+      "sourceHandle": "right",
+      "target": "mKUiLrh23gv7ObdsXU6E",
+      "targetHandle": "left",
+      "data": {
+        "animated": false,
+        "entityEntityAttributeMappings": [
+          {
+            "sourceKey": "season_id",
+            "targetKey": "season_id"
+          }
+        ]
+      },
+      "type": "data",
+      "id": "xy-edge__DeU4r4z0K4agQeA20btkright-mKUiLrh23gv7ObdsXU6Eleft"
+    },
+    {
+      "source": "DeU4r4z0K4agQeA20btk",
+      "sourceHandle": "bottom",
+      "target": "y5ztfif3XG1ZTUOhVqba",
+      "targetHandle": "top",
+      "data": {
+        "animated": false,
+        "entityEntityAttributeMappings": [
+          {
+            "sourceKey": "season_id",
+            "targetKey": "season_id"
+          }
+        ]
+      },
+      "type": "data",
+      "id": "xy-edge__DeU4r4z0K4agQeA20btkbottom-y5ztfif3XG1ZTUOhVqbatop"
+    },
+    {
+      "source": "mKUiLrh23gv7ObdsXU6E",
+      "sourceHandle": "bottom",
+      "target": "y5ztfif3XG1ZTUOhVqba",
+      "targetHandle": "top",
+      "data": {
+        "animated": false,
+        "entityEntityAttributeMappings": [
+          {
+            "sourceKey": "season_id",
+            "targetKey": "season_id"
+          }
+        ]
+      },
+      "type": "data",
+      "id": "xy-edge__mKUiLrh23gv7ObdsXU6Ebottom-y5ztfif3XG1ZTUOhVqbatop"
+    },
+    {
+      "id": "HFPsq72rKPEe0TP7GDba",
+      "source": "pqyYJqmviY4G696hLkR5",
+      "target": "K77vYrpncYJSOcotb5Sj",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "type": "data",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 2,
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "reward_config_id"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "event_id"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "rank_from"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "rank_to"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "bundle_id"
+          },
+          {
+            "sourceColumnIndex": 5,
+            "targetKey": "tycoon_coins"
+          }
+        ]
+      }
+    },
+    {
+      "id": "WeBCMvfWBrS53Y4uelLH",
+      "source": "cx7mauwpiHq8DjxQ0M6o",
+      "target": "m50f240zlxRoWqeb887y",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "type": "data",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 2,
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "minigame_config_id"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "minigame_type"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "trigger_weight"
+          }
+        ]
+      }
+    },
+    {
+      "id": "RoZduszQ13XNwTfLJs7o",
+      "source": "MF3YVA1l71ZDw8jeOl6e",
+      "target": "1Cdlu9gUGTFXwuRUVZA1",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "type": "data",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 2,
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "id"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "reward_id"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "event_id"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "minigame"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "result_type"
+          },
+          {
+            "sourceColumnIndex": 5,
+            "targetKey": "item_id"
+          },
+          {
+            "sourceColumnIndex": 6,
+            "targetKey": "quantity"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gPtvQGDApyMk8pppTaSM",
+      "source": "69qCQ2yBTh9eHTHRP6Cw",
+      "target": "DTX1wvKU0rPdRWHf3Od8",
+      "sourceHandle": "bottom",
+      "targetHandle": "top",
+      "type": "data",
+      "data": {
+        "animated": false,
+        "dataTableRowNumber": 2,
+        "tableEntityAttributeMappings": [
+          {
+            "sourceColumnIndex": 0,
+            "targetKey": "tile_config_id"
+          },
+          {
+            "sourceColumnIndex": 1,
+            "targetKey": "event_id"
+          },
+          {
+            "sourceColumnIndex": 2,
+            "targetKey": "tile_type"
+          },
+          {
+            "sourceColumnIndex": 3,
+            "targetKey": "item_id"
+          },
+          {
+            "sourceColumnIndex": 4,
+            "targetKey": "tile_point"
+          }
+        ]
+      }
+    }
+  ],
+  "resources": [
+    {
+      "id": "TQ69017d4lXmieRhQkyD",
+      "key": "exp",
+      "name": "경험치",
+      "color": "#0091ff",
+      "icon": "triangle",
+      "order": 0
+    },
+    {
+      "id": "4IrGgoV9zIhLJgDyMYc5",
+      "key": "gold",
+      "name": "골드",
+      "color": "#9a8e09",
+      "icon": "badge_dollar_sign",
+      "order": 0
+    },
+    {
+      "id": "RxSBA6AdAN6aw2A3HMuh",
+      "key": "season_coin",
+      "name": "시즌 코인",
+      "color": "jade",
+      "icon": "earth",
+      "order": 0
+    },
+    {
+      "id": "b9IIno96wHPlMOJpAYCt",
+      "key": "event_point",
+      "name": "이벤트 포인트",
+      "color": "salmon",
+      "icon": "beer",
+      "order": 0
+    },
+    {
+      "id": "fxSsNBrFWeGhOUnP3cEE",
+      "key": "apple",
+      "name": "apple",
+      "color": "#667727",
+      "icon": "apple",
+      "order": 0
+    },
+    {
+      "id": "GH3otoS69nSlQtU0sRBe",
+      "key": "LjFFeQfJibzToAWeOUs9",
+      "name": "무기",
+      "color": "#ffa424",
+      "icon": "sword",
+      "order": 1
+    },
+    {
+      "id": "fm49nJ85OAEh5K0BT1NB",
+      "key": "item",
+      "name": "아이템",
+      "color": "#b53ccd",
+      "icon": "sword",
+      "order": 1
+    },
+    {
+      "id": "dlctHidqjrV5f1nSJngQ",
+      "key": "dice",
+      "name": "주사위",
+      "description": "돌릴 수 있는 주사위",
+      "color": "#ff00a2",
+      "icon": "package",
+      "order": 2
+    },
+    {
+      "id": "PY0f9zbxUh4pFPedVs0k",
+      "key": "money",
+      "name": "돈",
+      "description": "건설에 사용되는 자원",
+      "color": "#ffe11f",
+      "icon": "dollar_sign",
+      "order": 3
+    },
+    {
+      "id": "zLKIdC5rLjeT1PaErh1Q",
+      "key": "event_count",
+      "name": "이벤트 카운트",
+      "description": "해당 자원이 소모되면 이벤트가 발동",
+      "color": "#09dffb",
+      "icon": "rocket",
+      "order": 7
+    },
+    {
+      "id": "S0iJs8Mp3XUkMPrJD7kH",
+      "key": "me_1",
+      "name": "타이쿤 재화 아이템",
+      "description": "정거장 보드에서 획득하는 타이쿤 재화 이이템",
+      "color": "salmon",
+      "icon": "car",
+      "order": 8
+    },
+    {
+      "id": "DQmUJRNdcPHmAgDbiSqo",
+      "key": "session_item",
+      "name": "시즌 아이템",
+      "description": "시즌 토너먼트 재화",
+      "color": "jade",
+      "icon": "earth",
+      "order": 9
+    }
+  ]
+}

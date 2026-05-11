@@ -1,0 +1,2099 @@
+{
+  "version": 1,
+  "designName": "주사위 게임 2차_완료 (0429)",
+  "exportedAt": "2026-04-29T10:06:34.850Z",
+  "nodes": [
+    {
+      "id": "n_entry",
+      "type": "entry",
+      "position": {
+        "x": 670,
+        "y": 0
+      },
+      "data": {
+        "label": "진입",
+        "mockSpec": {
+          "root": "screen",
+          "elements": {
+            "s1": {
+              "type": "Spacer",
+              "props": {}
+            },
+            "s2": {
+              "type": "Spacer",
+              "props": {}
+            },
+            "s3": {
+              "type": "Spacer",
+              "props": {}
+            },
+            "t1": {
+              "type": "Text",
+              "props": {
+                "text": "🎲 DICE MASTER",
+                "variant": "title"
+              }
+            },
+            "t2": {
+              "type": "Text",
+              "props": {
+                "text": "커스텀 엣지 완전체",
+                "variant": "subtitle"
+              }
+            },
+            "body": {
+              "type": "VStack",
+              "props": {
+                "spacing": 30
+              },
+              "children": [
+                "s1",
+                "t_grp",
+                "s2",
+                "btn_grp",
+                "s3"
+              ]
+            },
+            "t_grp": {
+              "type": "VStack",
+              "props": {
+                "spacing": 10
+              },
+              "children": [
+                "t1",
+                "t2"
+              ]
+            },
+            "screen": {
+              "type": "Screen",
+              "props": {},
+              "children": [
+                "body"
+              ]
+            },
+            "b_enter": {
+              "type": "Button",
+              "props": {
+                "label": "🏰 입장하기",
+                "variant": "primary",
+                "targetNodeId": "n_initial_setup"
+              }
+            },
+            "btn_grp": {
+              "type": "VStack",
+              "props": {
+                "spacing": 16
+              },
+              "children": [
+                "b_enter"
+              ]
+            }
+          },
+          "mockInitialState": {
+            "sdt": {
+              "autonomy": 0,
+              "competence": 0,
+              "motivation": 50,
+              "relatedness": 0
+            },
+            "dice": 10,
+            "gold": 0,
+            "roll": 0,
+            "bet_high": -1,
+            "win_rate": 0,
+            "money_gain": 0,
+            "total_wins": 0,
+            "total_games": 0,
+            "sim.activeModal": "",
+            "sim.activeScene": "",
+            "sim.currentStep": 0,
+            "sim.activeScreen": ""
+          }
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 58
+      }
+    },
+    {
+      "id": "n_initial_setup",
+      "type": "trigger",
+      "position": {
+        "x": 670,
+        "y": 250
+      },
+      "data": {
+        "label": "게임 설정",
+        "attributes": [
+          {
+            "key": "gold",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "dice",
+            "type": "number",
+            "value": "10"
+          },
+          {
+            "key": "total_games",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "total_wins",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "win_rate",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "bet_high",
+            "type": "number",
+            "value": "-1"
+          },
+          {
+            "key": "roll",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "money_gain",
+            "type": "number",
+            "value": "0"
+          }
+        ],
+        "description": "게임 시작 시 모든 변수를 초기화합니다.\n수치를 바꾸고 싶으면 여기서 변경하세요."
+      },
+      "measured": {
+        "width": 280,
+        "height": 279
+      }
+    },
+    {
+      "id": "n_lobby",
+      "type": "choice",
+      "position": {
+        "x": 670,
+        "y": 500
+      },
+      "data": {
+        "label": "로비",
+        "mockSpec": {
+          "root": "screen",
+          "elements": {
+            "t": {
+              "type": "Text",
+              "props": {
+                "text": "🏠 게임 로비",
+                "variant": "title"
+              }
+            },
+            "s1": {
+              "type": "Spacer",
+              "props": {}
+            },
+            "s2": {
+              "type": "Spacer",
+              "props": {}
+            },
+            "s3": {
+              "type": "Spacer",
+              "props": {}
+            },
+            "body": {
+              "type": "VStack",
+              "props": {
+                "spacing": 30
+              },
+              "children": [
+                "s1",
+                "t",
+                "d_card",
+                "s2",
+                "btns",
+                "s3"
+              ]
+            },
+            "btns": {
+              "type": "VStack",
+              "props": {
+                "spacing": 12
+              },
+              "children": [
+                "b_start",
+                "b_refill"
+              ]
+            },
+            "dc_t": {
+              "type": "Text",
+              "props": {
+                "text": "현재 보유 주사위",
+                "variant": "muted"
+              }
+            },
+            "dc_v": {
+              "type": "Text",
+              "props": {
+                "text": "🎲 {{dice}}개",
+                "variant": "title"
+              }
+            },
+            "d_card": {
+              "type": "VStack",
+              "props": {
+                "spacing": 8
+              },
+              "children": [
+                "dc_t",
+                "dc_v"
+              ]
+            },
+            "screen": {
+              "type": "Screen",
+              "props": {},
+              "children": [
+                "body"
+              ]
+            },
+            "b_start": {
+              "type": "Button",
+              "props": {
+                "label": "🎮 게임 시작하기",
+                "variant": "primary",
+                "targetNodeId": "n_gate_dice_check"
+              }
+            },
+            "b_refill": {
+              "type": "Button",
+              "props": {
+                "label": "🔋 주사위 10개 충전",
+                "variant": "secondary",
+                "targetNodeId": "n_modal_refill"
+              }
+            }
+          }
+        },
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "n_refill_logic",
+      "type": "trigger",
+      "position": {
+        "x": 357.5407357040482,
+        "y": 750
+      },
+      "data": {
+        "label": "주사위 충전",
+        "attributes": [
+          {
+            "key": "dice",
+            "type": "number",
+            "value": "dice + 10"
+          }
+        ]
+      },
+      "measured": {
+        "width": 220,
+        "height": 71
+      }
+    },
+    {
+      "id": "n_gate_dice_check",
+      "type": "gate",
+      "position": {
+        "x": 670,
+        "y": 882.6345291502796
+      },
+      "data": {
+        "label": "잔량 확인",
+        "condition": "dice > 0",
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "n_choice_bet",
+      "type": "choice",
+      "position": {
+        "x": 357.5407357040482,
+        "y": 1018.0256674074674
+      },
+      "data": {
+        "label": "베팅 선택",
+        "mockSpec": {
+          "root": "screen",
+          "elements": {
+            "t": {
+              "type": "Text",
+              "props": {
+                "text": "주사위를 던지세요!",
+                "variant": "title"
+              }
+            },
+            "bh": {
+              "type": "Button",
+              "props": {
+                "label": "📈 높음 (4, 5, 6)",
+                "variant": "secondary",
+                "targetNodeId": "n_high_calc"
+              }
+            },
+            "bl": {
+              "type": "Button",
+              "props": {
+                "label": "📉 낮음 (1, 2, 3)",
+                "variant": "secondary",
+                "targetNodeId": "n_low_calc"
+              }
+            },
+            "s1": {
+              "type": "Spacer",
+              "props": {}
+            },
+            "s2": {
+              "type": "Spacer",
+              "props": {}
+            },
+            "st": {
+              "type": "Text",
+              "props": {
+                "text": "높을까요? 낮을까요?",
+                "variant": "subtitle"
+              }
+            },
+            "top": {
+              "type": "TopArea",
+              "props": {},
+              "children": [
+                "header_row"
+              ]
+            },
+            "body": {
+              "type": "VStack",
+              "props": {
+                "spacing": 30
+              },
+              "children": [
+                "s1",
+                "t_grp",
+                "bh",
+                "guide",
+                "bl",
+                "s2"
+              ]
+            },
+            "f_sp": {
+              "type": "Spacer",
+              "props": {}
+            },
+            "h_sp": {
+              "type": "Spacer",
+              "props": {}
+            },
+            "f_row": {
+              "type": "HStack",
+              "props": {
+                "spacing": 0
+              },
+              "children": [
+                "f_rate",
+                "f_sp",
+                "f_total"
+              ]
+            },
+            "guide": {
+              "type": "Text",
+              "props": {
+                "text": "💡 팁: 행운을 빌어요!",
+                "variant": "muted"
+              }
+            },
+            "t_grp": {
+              "type": "VStack",
+              "props": {
+                "spacing": 10
+              },
+              "children": [
+                "t",
+                "st"
+              ]
+            },
+            "f_rate": {
+              "type": "Text",
+              "props": {
+                "text": "📊 성공률: {{win_rate}}%",
+                "variant": "muted"
+              }
+            },
+            "footer": {
+              "type": "VStack",
+              "props": {
+                "spacing": 10
+              },
+              "children": [
+                "f_divider",
+                "f_row"
+              ]
+            },
+            "m_dice": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "dice"
+              }
+            },
+            "m_gold": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "gold"
+              }
+            },
+            "screen": {
+              "type": "Screen",
+              "props": {},
+              "children": [
+                "top",
+                "body",
+                "footer"
+              ]
+            },
+            "f_total": {
+              "type": "Text",
+              "props": {
+                "text": "🏁 플레이: {{total_games}}회",
+                "variant": "muted"
+              }
+            },
+            "f_divider": {
+              "type": "Divider",
+              "props": {}
+            },
+            "header_row": {
+              "type": "HStack",
+              "props": {
+                "spacing": 0
+              },
+              "children": [
+                "m_gold",
+                "h_sp",
+                "m_dice"
+              ]
+            }
+          }
+        },
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "n_high_calc",
+      "type": "trigger",
+      "position": {
+        "x": 233.68681597036408,
+        "y": 1254.3348174733565
+      },
+      "data": {
+        "label": "높음 (-1)",
+        "attributes": [
+          {
+            "key": "bet_high",
+            "type": "number",
+            "value": "1"
+          },
+          {
+            "key": "roll",
+            "type": "number",
+            "value": "rand.d6()"
+          },
+          {
+            "key": "total_games",
+            "type": "number",
+            "value": "total_games + 1"
+          }
+        ]
+      },
+      "measured": {
+        "width": 220,
+        "height": 119
+      }
+    },
+    {
+      "id": "n_low_calc",
+      "type": "trigger",
+      "position": {
+        "x": 480.27232840309324,
+        "y": 1254.3348174733565
+      },
+      "data": {
+        "label": "낮음 (-1)",
+        "attributes": [
+          {
+            "key": "bet_high",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "roll",
+            "type": "number",
+            "value": "rand.d6()"
+          },
+          {
+            "key": "total_games",
+            "type": "number",
+            "value": "total_games + 1"
+          }
+        ]
+      },
+      "measured": {
+        "width": 220,
+        "height": 119
+      }
+    },
+    {
+      "id": "n_gate_judge",
+      "type": "gate",
+      "position": {
+        "x": 357.5407357040482,
+        "y": 1581.1886809210944
+      },
+      "data": {
+        "label": "판정",
+        "condition": "(bet_high == 1 && roll >= 4) || (bet_high == 0 && roll <= 3)",
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 280,
+        "height": 65
+      }
+    },
+    {
+      "id": "n_ui_win",
+      "type": "choice",
+      "position": {
+        "x": 198.59093163261923,
+        "y": 1883.662979358234
+      },
+      "data": {
+        "label": "승리 화면",
+        "mockSpec": {
+          "root": "screen",
+          "elements": {
+            "t": {
+              "type": "Text",
+              "props": {
+                "text": "🎉 예측 성공!",
+                "variant": "title"
+              }
+            },
+            "s1": {
+              "type": "Spacer",
+              "props": {}
+            },
+            "s2": {
+              "type": "Spacer",
+              "props": {}
+            },
+            "s3": {
+              "type": "Spacer",
+              "props": {}
+            },
+            "btn": {
+              "type": "Button",
+              "props": {
+                "label": "💰 보상 받기 (1G)",
+                "variant": "primary",
+                "targetNodeId": "n_reward_hub"
+              }
+            },
+            "r_m": {
+              "type": "Text",
+              "props": {
+                "text": "대단해요! 보상을 획득하세요.",
+                "variant": "subtitle"
+              }
+            },
+            "r_v": {
+              "type": "Text",
+              "props": {
+                "text": "🎲 결과: {{roll}}",
+                "variant": "title"
+              }
+            },
+            "top": {
+              "type": "TopArea",
+              "props": {},
+              "children": [
+                "header_row"
+              ]
+            },
+            "body": {
+              "type": "VStack",
+              "props": {
+                "spacing": 40
+              },
+              "children": [
+                "s1",
+                "t",
+                "res_box",
+                "s2",
+                "btn",
+                "s3"
+              ]
+            },
+            "f_sp": {
+              "type": "Spacer",
+              "props": {}
+            },
+            "h_sp": {
+              "type": "Spacer",
+              "props": {}
+            },
+            "f_row": {
+              "type": "HStack",
+              "props": {
+                "spacing": 0
+              },
+              "children": [
+                "f_rate",
+                "f_sp",
+                "f_total"
+              ]
+            },
+            "f_rate": {
+              "type": "Text",
+              "props": {
+                "text": "📊 성공률: {{win_rate}}%",
+                "variant": "muted"
+              }
+            },
+            "footer": {
+              "type": "VStack",
+              "props": {
+                "spacing": 10
+              },
+              "children": [
+                "f_divider",
+                "f_row"
+              ]
+            },
+            "m_dice": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "dice"
+              }
+            },
+            "m_gold": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "gold"
+              }
+            },
+            "screen": {
+              "type": "Screen",
+              "props": {},
+              "children": [
+                "top",
+                "body",
+                "footer"
+              ]
+            },
+            "f_total": {
+              "type": "Text",
+              "props": {
+                "text": "🏁 플레이: {{total_games}}회",
+                "variant": "muted"
+              }
+            },
+            "res_box": {
+              "type": "VStack",
+              "props": {
+                "spacing": 10
+              },
+              "children": [
+                "r_v",
+                "r_m"
+              ]
+            },
+            "f_divider": {
+              "type": "Divider",
+              "props": {}
+            },
+            "header_row": {
+              "type": "HStack",
+              "props": {
+                "spacing": 0
+              },
+              "children": [
+                "m_gold",
+                "h_sp",
+                "m_dice"
+              ]
+            }
+          }
+        },
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "n_ui_fail",
+      "type": "choice",
+      "position": {
+        "x": 542,
+        "y": 1883.662979358234
+      },
+      "data": {
+        "label": "패배 화면",
+        "mockSpec": {
+          "root": "screen",
+          "elements": {
+            "t": {
+              "type": "Text",
+              "props": {
+                "text": "😢 예측 실패",
+                "variant": "title"
+              }
+            },
+            "s1": {
+              "type": "Spacer",
+              "props": {}
+            },
+            "s2": {
+              "type": "Spacer",
+              "props": {}
+            },
+            "s3": {
+              "type": "Spacer",
+              "props": {}
+            },
+            "btn": {
+              "type": "Button",
+              "props": {
+                "label": "🔄 정산하러 가기",
+                "variant": "secondary",
+                "targetNodeId": "n_settle_win"
+              }
+            },
+            "r_m": {
+              "type": "Text",
+              "props": {
+                "text": "다음 기회를 노려보세요!",
+                "variant": "subtitle"
+              }
+            },
+            "r_v": {
+              "type": "Text",
+              "props": {
+                "text": "🎲 결과: {{roll}}",
+                "variant": "title"
+              }
+            },
+            "top": {
+              "type": "TopArea",
+              "props": {},
+              "children": [
+                "header_row"
+              ]
+            },
+            "body": {
+              "type": "VStack",
+              "props": {
+                "spacing": 40
+              },
+              "children": [
+                "s1",
+                "t",
+                "res_box",
+                "s2",
+                "btn",
+                "s3"
+              ]
+            },
+            "f_sp": {
+              "type": "Spacer",
+              "props": {}
+            },
+            "h_sp": {
+              "type": "Spacer",
+              "props": {}
+            },
+            "f_row": {
+              "type": "HStack",
+              "props": {
+                "spacing": 0
+              },
+              "children": [
+                "f_rate",
+                "f_sp",
+                "f_total"
+              ]
+            },
+            "f_rate": {
+              "type": "Text",
+              "props": {
+                "text": "📊 성공률: {{win_rate}}%",
+                "variant": "muted"
+              }
+            },
+            "footer": {
+              "type": "VStack",
+              "props": {
+                "spacing": 10
+              },
+              "children": [
+                "f_divider",
+                "f_row"
+              ]
+            },
+            "m_dice": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "dice"
+              }
+            },
+            "m_gold": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "gold"
+              }
+            },
+            "screen": {
+              "type": "Screen",
+              "props": {},
+              "children": [
+                "top",
+                "body",
+                "footer"
+              ]
+            },
+            "f_total": {
+              "type": "Text",
+              "props": {
+                "text": "🏁 플레이: {{total_games}}회",
+                "variant": "muted"
+              }
+            },
+            "res_box": {
+              "type": "VStack",
+              "props": {
+                "spacing": 10
+              },
+              "children": [
+                "r_v",
+                "r_m"
+              ]
+            },
+            "f_divider": {
+              "type": "Divider",
+              "props": {}
+            },
+            "header_row": {
+              "type": "HStack",
+              "props": {
+                "spacing": 0
+              },
+              "children": [
+                "m_gold",
+                "h_sp",
+                "m_dice"
+              ]
+            }
+          }
+        },
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "n_res_gold",
+      "type": "reward",
+      "position": {
+        "x": 198.59093163261923,
+        "y": 2153.3518337156015
+      },
+      "data": {
+        "label": "골드 획득 +1",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 3,
+          "motivation": 5,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 60
+      }
+    },
+    {
+      "id": "n_settle_win",
+      "type": "choice",
+      "position": {
+        "x": 1027.0681789431856,
+        "y": 2262.3039433217127
+      },
+      "data": {
+        "label": "정산 화면",
+        "mockSpec": {
+          "root": "screen",
+          "elements": {
+            "m": {
+              "type": "Text",
+              "props": {
+                "text": "오빠의 금고가 든든해졌어요!",
+                "variant": "subtitle"
+              }
+            },
+            "t": {
+              "type": "Text",
+              "props": {
+                "text": "💰 정산 완료!",
+                "variant": "title"
+              }
+            },
+            "b1": {
+              "type": "Button",
+              "props": {
+                "label": "🎲 계속 플레이하기",
+                "variant": "primary",
+                "targetNodeId": "n_gate_dice_check"
+              }
+            },
+            "b2": {
+              "type": "Button",
+              "props": {
+                "label": "🏠 로비로 돌아가기",
+                "variant": "secondary",
+                "targetNodeId": "n_lobby"
+              }
+            },
+            "s1": {
+              "type": "Spacer",
+              "props": {}
+            },
+            "s2": {
+              "type": "Spacer",
+              "props": {}
+            },
+            "s3": {
+              "type": "Spacer",
+              "props": {}
+            },
+            "top": {
+              "type": "TopArea",
+              "props": {},
+              "children": [
+                "header_row"
+              ]
+            },
+            "body": {
+              "type": "VStack",
+              "props": {
+                "spacing": 40
+              },
+              "children": [
+                "s1",
+                "t",
+                "m",
+                "s2",
+                "btns",
+                "s3"
+              ]
+            },
+            "btns": {
+              "type": "VStack",
+              "props": {
+                "spacing": 16
+              },
+              "children": [
+                "b1",
+                "b2"
+              ]
+            },
+            "f_sp": {
+              "type": "Spacer",
+              "props": {}
+            },
+            "h_sp": {
+              "type": "Spacer",
+              "props": {}
+            },
+            "f_row": {
+              "type": "HStack",
+              "props": {
+                "spacing": 0
+              },
+              "children": [
+                "f_rate",
+                "f_sp",
+                "f_total"
+              ]
+            },
+            "f_rate": {
+              "type": "Text",
+              "props": {
+                "text": "📊 성공률: {{win_rate}}%",
+                "variant": "muted"
+              }
+            },
+            "footer": {
+              "type": "VStack",
+              "props": {
+                "spacing": 10
+              },
+              "children": [
+                "f_divider",
+                "f_row"
+              ]
+            },
+            "m_dice": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "dice"
+              }
+            },
+            "m_gold": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "gold"
+              }
+            },
+            "screen": {
+              "type": "Screen",
+              "props": {},
+              "children": [
+                "top",
+                "body",
+                "footer"
+              ]
+            },
+            "f_total": {
+              "type": "Text",
+              "props": {
+                "text": "🏁 플레이: {{total_games}}회",
+                "variant": "muted"
+              }
+            },
+            "f_divider": {
+              "type": "Divider",
+              "props": {}
+            },
+            "header_row": {
+              "type": "HStack",
+              "props": {
+                "spacing": 0
+              },
+              "children": [
+                "m_gold",
+                "h_sp",
+                "m_dice"
+              ]
+            }
+          }
+        },
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "n_final_score",
+      "type": "success",
+      "position": {
+        "x": 962.7653626035797,
+        "y": 882.6345291502796
+      },
+      "data": {
+        "label": "최종 결과",
+        "mockSpec": {
+          "root": "screen",
+          "elements": {
+            "t": {
+              "type": "Text",
+              "props": {
+                "text": "🏁 최종 성적표",
+                "variant": "title"
+              }
+            },
+            "l1": {
+              "type": "Text",
+              "props": {
+                "text": "총 획득 골드",
+                "variant": "muted"
+              }
+            },
+            "l2": {
+              "type": "Text",
+              "props": {
+                "text": "총 플레이 횟수",
+                "variant": "muted"
+              }
+            },
+            "l3": {
+              "type": "Text",
+              "props": {
+                "text": "최종 성공 확률",
+                "variant": "muted"
+              }
+            },
+            "r1": {
+              "type": "HStack",
+              "props": {},
+              "children": [
+                "l1",
+                "sp1",
+                "v1"
+              ]
+            },
+            "r2": {
+              "type": "HStack",
+              "props": {},
+              "children": [
+                "l2",
+                "sp2",
+                "v2"
+              ]
+            },
+            "r3": {
+              "type": "HStack",
+              "props": {},
+              "children": [
+                "l3",
+                "sp3",
+                "v3"
+              ]
+            },
+            "s1": {
+              "type": "Spacer",
+              "props": {}
+            },
+            "s2": {
+              "type": "Spacer",
+              "props": {}
+            },
+            "s3": {
+              "type": "Spacer",
+              "props": {}
+            },
+            "v1": {
+              "type": "Text",
+              "props": {
+                "text": "{{gold}} G",
+                "variant": "title"
+              }
+            },
+            "v2": {
+              "type": "Text",
+              "props": {
+                "text": "{{total_games}} 회",
+                "variant": "title"
+              }
+            },
+            "v3": {
+              "type": "Text",
+              "props": {
+                "text": "{{win_rate}} %",
+                "variant": "title"
+              }
+            },
+            "btn": {
+              "type": "Button",
+              "props": {
+                "label": "다시 처음으로",
+                "variant": "primary",
+                "targetNodeId": "n_lobby"
+              }
+            },
+            "sp1": {
+              "type": "Spacer",
+              "props": {}
+            },
+            "sp2": {
+              "type": "Spacer",
+              "props": {}
+            },
+            "sp3": {
+              "type": "Spacer",
+              "props": {}
+            },
+            "body": {
+              "type": "VStack",
+              "props": {
+                "spacing": 40
+              },
+              "children": [
+                "s1",
+                "t",
+                "list",
+                "s2",
+                "btn",
+                "s3"
+              ]
+            },
+            "list": {
+              "type": "VStack",
+              "props": {
+                "spacing": 16
+              },
+              "children": [
+                "r1",
+                "r2",
+                "r3"
+              ]
+            },
+            "screen": {
+              "type": "Screen",
+              "props": {},
+              "children": [
+                "body"
+              ]
+            }
+          }
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 58
+      }
+    },
+    {
+      "id": "n_disposal_dice",
+      "type": "disposal",
+      "position": {
+        "x": 112.66114836932843,
+        "y": 750
+      },
+      "data": {
+        "label": "주사위 소비",
+        "intensity": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "disposalType": "optional",
+        "demandElasticity": 5
+      },
+      "measured": {
+        "width": 220,
+        "height": 77
+      }
+    },
+    {
+      "id": "n_res_dice",
+      "type": "resource",
+      "position": {
+        "x": -124.65891018627985,
+        "y": 724.978842661545
+      },
+      "data": {
+        "label": "주사위",
+        "resourceId": "p8F8F8IgosHL1aPu3Kyq",
+        "description": "주사위 1개 소비",
+        "resourceKey": "dice"
+      },
+      "measured": {
+        "width": 56,
+        "height": 56
+      }
+    },
+    {
+      "id": "y1pncmlTofhiIjhhbXvi",
+      "type": "scene",
+      "position": {
+        "x": 357.5407357040482,
+        "y": 1435.8641150987714
+      },
+      "data": {
+        "tags": [],
+        "label": "주사위 굴리기 연출",
+        "mockSpec": {
+          "root": "1B0Ki8DsrL7W3vlmsyfX",
+          "elements": {
+            "roll_desc": {
+              "type": "Text",
+              "props": {
+                "text": "결과: {{roll}}",
+                "variant": "emphasis"
+              }
+            },
+            "modal_body": {
+              "type": "VStack",
+              "props": {
+                "spacing": 20
+              },
+              "children": [
+                "roll_title",
+                "roll_desc",
+                "roll_result",
+                "btn_confirm"
+              ]
+            },
+            "roll_title": {
+              "type": "Text",
+              "props": {
+                "text": "🎲 주사위를 굴렸습니다!",
+                "variant": "title"
+              }
+            },
+            "btn_confirm": {
+              "type": "Button",
+              "props": {
+                "label": "✅ 확인",
+                "variant": "secondary",
+                "targetNodeId": "n_gate_judge"
+              }
+            },
+            "roll_result": {
+              "type": "Text",
+              "props": {
+                "text": "진행중입니다...",
+                "variant": "muted"
+              }
+            },
+            "1B0Ki8DsrL7W3vlmsyfX": {
+              "type": "Modal",
+              "props": {
+                "hidden": false
+              },
+              "children": [
+                "modal_body"
+              ]
+            }
+          }
+        },
+        "description": "",
+        "loadingTime": "instant",
+        "mockInitialState": {}
+      },
+      "measured": {
+        "width": 220,
+        "height": 60
+      }
+    },
+    {
+      "id": "n_modal_refill",
+      "type": "scene",
+      "position": {
+        "x": 368.8437478565245,
+        "y": 500
+      },
+      "data": {
+        "label": "주사위 충전 모달",
+        "mockSpec": {
+          "root": "modal_root",
+          "elements": {
+            "btn_row": {
+              "type": "VStack",
+              "props": {
+                "spacing": 12
+              },
+              "children": [
+                "btn_confirm",
+                "btn_close"
+              ]
+            },
+            "btn_close": {
+              "type": "Button",
+              "props": {
+                "label": "✖ 닫기",
+                "variant": "secondary",
+                "targetNodeId": "n_lobby"
+              }
+            },
+            "modal_body": {
+              "type": "VStack",
+              "props": {
+                "spacing": 24
+              },
+              "children": [
+                "modal_title",
+                "modal_desc",
+                "modal_divider",
+                "btn_row"
+              ]
+            },
+            "modal_desc": {
+              "type": "Text",
+              "props": {
+                "text": "주사위 10개를 충전합니다.",
+                "variant": "body"
+              }
+            },
+            "modal_root": {
+              "type": "Modal",
+              "props": {
+                "hidden": false
+              },
+              "children": [
+                "modal_body"
+              ]
+            },
+            "btn_confirm": {
+              "type": "Button",
+              "props": {
+                "label": "✅ 충전 완료",
+                "variant": "secondary",
+                "targetNodeId": "n_refill_logic"
+              }
+            },
+            "modal_title": {
+              "type": "Text",
+              "props": {
+                "text": "🎲 주사위 충전",
+                "variant": "title"
+              }
+            },
+            "modal_divider": {
+              "type": "Divider",
+              "props": {}
+            }
+          }
+        },
+        "sdtEffects": {
+          "autonomy": 2,
+          "competence": 0,
+          "motivation": 5,
+          "relatedness": 0
+        },
+        "loadingTime": "instant"
+      },
+      "measured": {
+        "width": 220,
+        "height": 60
+      }
+    },
+    {
+      "id": "memo_overview",
+      "type": "memo",
+      "position": {
+        "x": 1001.5555513119168,
+        "y": -127.12735939886852
+      },
+      "data": {
+        "label": "어려운 버전 — 이 템플릿은 무엇인가요?",
+        "description": "통계, 연출, 충전 팝업까지 갖춘 완성형 템플릿입니다.\n실제 게임에 가깝게 구현하고 싶을 때 사용하세요.\n\n게임 흐름:\n진입 > 설정 > 로비 > 소비 > 베팅 > 굴리기 연출 > 판정 > 승리/패배 > 정산 > 반복\n\n쉬운 버전과의 차이:\n- 승률 통계 트래킹\n- 주사위 굴리기 연출 팝업\n- 충전 모달 팝업\n- 승리/패배 화면 분리\n- 정산 화면에서 계속/로비 선택"
+      },
+      "width": 333,
+      "height": 300,
+      "measured": {
+        "width": 333,
+        "height": 300
+      },
+      "resizing": false
+    },
+    {
+      "id": "memo_init",
+      "type": "memo",
+      "position": {
+        "x": 357.5407357040482,
+        "y": 249.6897985584368
+      },
+      "data": {
+        "label": "게임 설정 노드는 왜 필요한가요?",
+        "collapsed": true,
+        "description": "게임이 시작될 때 모든 변수가 올바른 초기값을 가져야\n오류 없이 작동합니다.\n\n진입 노드 직후 반드시 이 노드를 배치하세요.\n진입 노드에서 바로 변수를 쓰면 알 수 없는 변수 오류가 발생합니다.\n\n수치 조정 위치: 이 노드의 각 항목\ndice: 시작 주사위 수\ngold: 시작 골드\ntotal_games, total_wins: 통계 초기값 (0 고정)",
+        "_expandedHeight": 275
+      },
+      "style": {
+        "height": 36
+      },
+      "width": 321,
+      "height": 36,
+      "measured": {
+        "width": 321,
+        "height": 36
+      },
+      "resizing": false
+    },
+    {
+      "id": "memo_stats",
+      "type": "memo",
+      "position": {
+        "x": 981.9693838935772,
+        "y": 291.9347869545569
+      },
+      "data": {
+        "label": "통계 트래킹은 왜 필요한가요?",
+        "collapsed": false,
+        "description": "플레이어가 지금까지 얼마나 잘했는지 보여주기 위한 기능입니다.\n승률을 표시하면 게임에 더 몰입하게 됩니다.\n\n사용 변수:\ntotal_games: 전체 게임 횟수\ntotal_wins: 승리 횟수\nwin_rate: 누적 승률 (%)\n\n승률 계산 공식:\nwin_rate = total_wins * 100 / total_games\n\n업데이트 위치:\n- 높음/낮음 선택 시 → total_games +1\n- 승리 시 → total_wins +1\n- 판정 후 → win_rate 재계산  ",
+        "_expandedHeight": 372
+      },
+      "style": {
+        "height": 372
+      },
+      "width": 311,
+      "height": 372,
+      "measured": {
+        "width": 311,
+        "height": 372
+      },
+      "resizing": false
+    },
+    {
+      "id": "memo_modal",
+      "type": "memo",
+      "position": {
+        "x": 66.58239037259003,
+        "y": 500
+      },
+      "data": {
+        "label": "모달 팝업은 어떻게 만드나요?",
+        "collapsed": true,
+        "description": "장면(scene) 노드에서 Modal 컴포넌트를 사용합니다.\n버튼을 누르면 다음 노드로 이동하는 팝업을 만들 수 있습니다.\n\n사용 방법:\nButton의 targetNodeId에 이동할 노드 ID를 입력합니다.\n{{변수명}} 형식으로 현재 값을 화면에 표시할 수 있습니다.\n예) {{roll}} → 굴린 주사위 숫자 표시\n\n현재 사용 중인 모달:\n1. 충전 모달: 충전 완료 또는 닫기 선택\n2. 굴리기 연출: 주사위 결과 확인 후 다음 단계로",
+        "_expandedHeight": 271
+      },
+      "style": {
+        "height": 36
+      },
+      "width": 335,
+      "height": 36,
+      "measured": {
+        "width": 335,
+        "height": 36
+      },
+      "resizing": false
+    },
+    {
+      "id": "memo_sdt",
+      "type": "memo",
+      "position": {
+        "x": 1393.9882993923209,
+        "y": 291.9347869545569
+      },
+      "data": {
+        "label": "SDT 수치는 왜 설정하나요?",
+        "collapsed": true,
+        "description": "LLE 시뮬레이터가 플레이어의 심리 상태를 분석하기 위해 사용합니다.\n설정하지 않으면 시뮬레이터가 도중에 멈출 수 있습니다.\n\n4개 항목:\n- 자율성(autonomy): 플레이어가 스스로 선택하는 느낌\n- 유능감(competence): 잘하고 있다는 느낌 (승리 시 높게)\n- 관계성(relatedness): 다른 사람과 연결된 느낌\n- 동기(motivation): 계속하고 싶은 의욕\n\n권장 설정:\n승리 노드: competence 20, motivation 30\n베팅 노드: autonomy 5, motivation 20\n기타 노드: 모두 0",
+        "_expandedHeight": 296
+      },
+      "style": {
+        "height": 36
+      },
+      "width": 466,
+      "height": 36,
+      "measured": {
+        "width": 466,
+        "height": 36
+      },
+      "resizing": false
+    },
+    {
+      "id": "memo_loop",
+      "type": "memo",
+      "position": {
+        "x": 1489.5103954773585,
+        "y": 1135.5650286899954
+      },
+      "data": {
+        "label": "게임은 어떻게 반복되나요?",
+        "description": "정산 화면에서 계속하기를 누르면 다시 주사위 잔량 확인으로 돌아갑니다.\n\n루프 복귀 연결:\n정산 화면(아래) → 잔량 확인(왼쪽)\n\n종료 조건:\n주사위가 0개이면 최종 결과 화면으로 이동합니다.\n\n연결선 방향 규칙:\n- 일반 흐름: 아래에서 나가 위로 들어옴\n- 분기 거짓 경로: 오른쪽에서 나가 왼쪽으로 들어옴\n- 루프 복귀선: 아래에서 나가 왼쪽으로 들어옴  \n- 같은 노드에 여러 선이 들어올 때: 입구 방향을 다르게 지정 "
+      },
+      "width": 412,
+      "height": 316,
+      "measured": {
+        "width": 412,
+        "height": 316
+      },
+      "resizing": false
+    },
+    {
+      "id": "memo_naming",
+      "type": "memo",
+      "position": {
+        "x": 1464.2353628491007,
+        "y": 1435.8641150987714
+      },
+      "data": {
+        "label": "노드 이름 짓기 규칙",
+        "description": "노드 ID에 하이픈(-)을 사용하면 오류가 발생합니다.\n반드시 언더바(_)를 사용하세요.\n\n잘못된 예: n-init, n-gate-dice\n올바른 예: n_init, n_gate_dice\n\n이유:\nLLE 엔진이 하이픈을 빼기 연산으로 인식하여\n조건식 계산 시 오류가 발생합니다.   "
+      },
+      "width": 357,
+      "height": 232,
+      "measured": {
+        "width": 357,
+        "height": 232
+      },
+      "resizing": false
+    },
+    {
+      "id": "C9Hq5KRq2xiHjFEwDyCi",
+      "type": "memo",
+      "position": {
+        "x": 939.0683754630174,
+        "y": 593.6851105672197
+      },
+      "data": {
+        "color": "salmon",
+        "label": "버튼 처리",
+        "collapsed": false,
+        "description": "버튼은 확률적인으로 진행 되지 않고 사용자의 선택으로 결정\n목업 화면에서 해당 버튼을 클릭하여 이동할 노드를 선택",
+        "_expandedHeight": 160
+      },
+      "style": {
+        "height": 160
+      },
+      "width": 220,
+      "height": 160,
+      "measured": {
+        "width": 220,
+        "height": 160
+      }
+    },
+    {
+      "id": "eLNcIhZal0vA39yqdVMU",
+      "type": "memo",
+      "position": {
+        "x": 1304.8198276643977,
+        "y": 2195.703874224897
+      },
+      "data": {
+        "color": "salmon",
+        "label": "정보 처리",
+        "collapsed": false,
+        "description": "변수 사용\ntotal_games: 전체 게임 횟수\ntotal_wins: 승리 횟수\nwin_rate: 누적 승률 (%)\n\n승률 계산 공식:\nwin_rate = total_wins * 100 / total_games\n",
+        "_expandedHeight": 160
+      },
+      "style": {
+        "height": 160
+      },
+      "width": 234,
+      "height": 283,
+      "measured": {
+        "width": 234,
+        "height": 283
+      },
+      "resizing": false
+    },
+    {
+      "id": "Z5PZ0q7NS7Ky0uTSEODe",
+      "type": "memo",
+      "position": {
+        "x": -51.45156507601342,
+        "y": 1928.8446782562162
+      },
+      "data": {
+        "color": "salmon",
+        "label": "트리거 다양한게 활용",
+        "collapsed": false,
+        "description": "골드를 소모 시키기 위해 트리거를 사용해도 됩니다.",
+        "_expandedHeight": 160
+      },
+      "style": {
+        "height": 160
+      },
+      "width": 233,
+      "height": 100,
+      "measured": {
+        "width": 233,
+        "height": 100
+      },
+      "resizing": false
+    },
+    {
+      "id": "n_7Sh8pLXfHq",
+      "type": "resource",
+      "position": {
+        "x": 496.74769822071306,
+        "y": 2029.9012163037323
+      },
+      "data": {
+        "tags": [],
+        "label": "자원",
+        "resourceId": "B0ubePt85yGolsY5SBRa",
+        "description": "",
+        "resourceKey": "gold"
+      },
+      "measured": {
+        "width": 56,
+        "height": 56
+      }
+    },
+    {
+      "id": "n_gold_calc",
+      "type": "trigger",
+      "position": {
+        "x": 198.59093163261923,
+        "y": 2006.899920959102
+      },
+      "data": {
+        "label": "골드 계산",
+        "attributes": [
+          {
+            "key": "gold",
+            "type": "number",
+            "value": "gold + 1"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 71
+      }
+    },
+    {
+      "id": "n_emo_success",
+      "type": "emotion",
+      "position": {
+        "x": 198.59093163261923,
+        "y": 1752.4475060475374
+      },
+      "data": {
+        "tags": [],
+        "label": "감정 (완벽한 예측!)",
+        "arousal": "high",
+        "needState": "satisfied",
+        "needSource": "competence",
+        "description": "내 예상이 딱 들어맞았어!",
+        "emotionType": "성취감",
+        "frictionScore": 0,
+        "playerSegment": []
+      },
+      "measured": {
+        "width": 220,
+        "height": 111
+      }
+    },
+    {
+      "id": "n_emo_fail",
+      "type": "emotion",
+      "position": {
+        "x": 542,
+        "y": 1752.4475060475374
+      },
+      "data": {
+        "tags": [],
+        "label": "감정 (아쉬운 빗나감)",
+        "arousal": "high",
+        "needState": "frustrated",
+        "needSource": "competence",
+        "description": "하... 주사위 신이 나를 버렸네.",
+        "emotionType": "좌절감",
+        "frictionScore": 20,
+        "playerSegment": []
+      },
+      "measured": {
+        "width": 220,
+        "height": 111
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "xy-edge__n_entrybottom-n_initial_setuptop",
+      "source": "n_entry",
+      "target": "n_initial_setup",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__n_initial_setupbottom-n_lobbytop",
+      "source": "n_initial_setup",
+      "target": "n_lobby",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__n_lobbyright-n_modal_refilleft",
+      "source": "n_lobby",
+      "target": "n_modal_refill",
+      "data": {
+        "label": "충전 이동"
+      },
+      "type": "exec",
+      "sourceHandle": "left",
+      "targetHandle": "right"
+    },
+    {
+      "id": "xy-edge__n_gate_dice_checkbottom-n_disposal_dicetop-true",
+      "source": "n_gate_dice_check",
+      "target": "n_disposal_dice",
+      "data": {
+        "gateBranch": "true"
+      },
+      "type": "exec",
+      "sourceHandle": "left",
+      "targetHandle": "bottom"
+    },
+    {
+      "id": "xy-edge__n_gate_dice_checkbottom-n_final_scoretop-false",
+      "source": "n_gate_dice_check",
+      "target": "n_final_score",
+      "data": {
+        "gateBranch": "false"
+      },
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "id": "xy-edge__n_choice_betbottom-n_high_calctop",
+      "source": "n_choice_bet",
+      "target": "n_high_calc",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__n_choice_betbottom-n_low_calctop",
+      "source": "n_choice_bet",
+      "target": "n_low_calc",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__n_gate_judgebottom-n_ui_wintop-true",
+      "source": "n_gate_judge",
+      "target": "n_emo_success",
+      "data": {
+        "gateBranch": "true"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__n_gate_judgebottom-n_ui_failtop-false",
+      "source": "n_gate_judge",
+      "target": "n_emo_fail",
+      "data": {
+        "gateBranch": "false"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__n_refill_logicbottom-n_lobbyright",
+      "source": "n_refill_logic",
+      "target": "n_lobby",
+      "data": {
+        "label": "로비 귀환"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "right"
+    },
+    {
+      "id": "xy-edge__n_ui_failbottom-n_settle_winleft",
+      "source": "n_ui_fail",
+      "target": "n_settle_win",
+      "data": {
+        "label": "패배 정산"
+      },
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__n_settle_winbottom-n_gate_dice_checkleft",
+      "source": "n_settle_win",
+      "target": "n_gate_dice_check",
+      "data": {
+        "label": "재진입"
+      },
+      "type": "exec",
+      "sourceHandle": "top",
+      "targetHandle": "bottom"
+    },
+    {
+      "id": "xy-edge__n_settle_winbottom-n_lobbyright",
+      "source": "n_settle_win",
+      "target": "n_lobby",
+      "data": {
+        "label": "로비 귀환"
+      },
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "right"
+    },
+    {
+      "id": "xy-edge__n_disposal_dicebottom-n_choice_bettop",
+      "source": "n_disposal_dice",
+      "target": "n_choice_bet",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "left",
+      "targetHandle": "left"
+    },
+    {
+      "id": "xy-edge__n_res_diceleft-n_disposal_diceright",
+      "source": "n_res_dice",
+      "target": "n_disposal_dice",
+      "data": {
+        "amount": 1
+      },
+      "type": "resource",
+      "sourceHandle": "bottom",
+      "targetHandle": "left"
+    },
+    {
+      "id": "xy-edge__n_high_calcleft-y1pncmlTofhiIjhhbXviright",
+      "source": "n_high_calc",
+      "target": "y1pncmlTofhiIjhhbXvi",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__n_low_calcleft-y1pncmlTofhiIjhhbXvibottom",
+      "source": "n_low_calc",
+      "target": "y1pncmlTofhiIjhhbXvi",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__n_modal_refilbottom-n_refill_logictop",
+      "source": "n_modal_refill",
+      "target": "n_refill_logic",
+      "data": {
+        "label": "충전 완료"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__n_modal_refilright-n_lobbyright",
+      "source": "n_modal_refill",
+      "target": "n_lobby",
+      "data": {
+        "label": "닫기"
+      },
+      "type": "exec",
+      "sourceHandle": "top",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__y1pncmlTofhiIjhhbXvibottom-n_gate_judgetop",
+      "source": "y1pncmlTofhiIjhhbXvi",
+      "target": "n_gate_judge",
+      "data": {
+        "label": "확인"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__n_ui_winbottom-n_gold_calctop",
+      "source": "n_ui_win",
+      "target": "n_gold_calc",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__n_res_goldbottom-n_settle_wintop",
+      "source": "n_res_gold",
+      "target": "n_settle_win",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__n_lobbybottom-n_gate_dice_checktop",
+      "source": "n_lobby",
+      "target": "n_gate_dice_check",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__n_res_goldright-n_gold_resleft",
+      "source": "n_res_gold",
+      "target": "n_7Sh8pLXfHq",
+      "data": {
+        "amount": 1,
+        "resourceAmountExpression": "1"
+      },
+      "type": "resource",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "id": "xy-edge__n_gold_calcbottom-n_res_goldtop",
+      "source": "n_gold_calc",
+      "target": "n_res_gold",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "e_win_emo_to_ui",
+      "source": "n_emo_success",
+      "target": "n_ui_win",
+      "data": {},
+      "type": "exec"
+    },
+    {
+      "id": "e_fail_emo_to_ui",
+      "source": "n_emo_fail",
+      "target": "n_ui_fail",
+      "data": {},
+      "type": "exec"
+    }
+  ],
+  "resources": [
+    {
+      "id": "B0ubePt85yGolsY5SBRa",
+      "key": "gold",
+      "name": "골드",
+      "color": "#FFD700",
+      "icon": "coin",
+      "order": 0
+    },
+    {
+      "id": "XQecVcGX0EJpSXKSzXs5",
+      "key": "dice",
+      "name": "주사위",
+      "color": "marigold",
+      "icon": "box",
+      "order": 0
+    }
+  ]
+}

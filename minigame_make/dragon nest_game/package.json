@@ -1,0 +1,15 @@
+{
+  "name": "dragon-nest-pinball",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "matter-js": "^0.19.0"
+  },
+  "devDependencies": {
+    "vite": "^5.3.0"
+  }
+}

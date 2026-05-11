@@ -1,0 +1,879 @@
+{
+  "version": 1,
+  "designName": "전투_1단계_완료(0429)",
+  "exportedAt": "2026-04-29T10:06:07.586Z",
+  "nodes": [
+    {
+      "id": "3dMvnKaXtRBlG9qJOqe0",
+      "type": "entry",
+      "position": {
+        "x": 320,
+        "y": 0
+      },
+      "data": {
+        "tags": [],
+        "label": "전투 시작",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 50,
+          "relatedness": 0
+        },
+        "description": "",
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 58
+      }
+    },
+    {
+      "id": "xbB65S1FVTQsKviTmpCo",
+      "type": "gate",
+      "position": {
+        "x": 147.15821368376936,
+        "y": 811.8603460712803
+      },
+      "data": {
+        "tags": [],
+        "label": "적 사망?",
+        "condition": "rand.d100() < 80",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "relatedness": 0
+        },
+        "description": "",
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "WOGebJtUG9fTXv1AggCH",
+      "type": "action",
+      "position": {
+        "x": 320,
+        "y": 1000
+      },
+      "data": {
+        "tags": [],
+        "label": "적 반격",
+        "duration": "short",
+        "difficulty": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": -5,
+          "motivation": -8,
+          "relatedness": 0
+        },
+        "description": "",
+        "frictionScore": 12
+      },
+      "measured": {
+        "width": 220,
+        "height": 85
+      }
+    },
+    {
+      "id": "dbClGLpmQ22hftQwXs3M",
+      "type": "gate",
+      "position": {
+        "x": 655.3459584869133,
+        "y": 1000
+      },
+      "data": {
+        "tags": [],
+        "label": "플레이어 사망?",
+        "condition": "rand.d100() < 10",
+        "description": "",
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "JmXYql8aC8Thnor1Xcox",
+      "type": "reward",
+      "position": {
+        "x": -306.5928777670837,
+        "y": 1132.4331087584217
+      },
+      "data": {
+        "tags": [],
+        "label": "승리!",
+        "mockSpec": {
+          "root": "victory-screen",
+          "elements": {
+            "top-area": {
+              "type": "TopArea",
+              "props": {},
+              "children": [
+                "top-spacer",
+                "top-gold",
+                "top-score"
+              ]
+            },
+            "top-gold": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "gold"
+              },
+              "children": []
+            },
+            "top-score": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "score"
+              },
+              "children": []
+            },
+            "top-spacer": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            },
+            "body-vstack": {
+              "type": "VStack",
+              "props": {},
+              "children": [
+                "body-spacer-top",
+                "victory-title",
+                "victory-subtitle",
+                "divider-spacer",
+                "body-spacer-bottom",
+                "find-enemy-btn"
+              ]
+            },
+            "bottom-area": {
+              "type": "BottomArea",
+              "props": {},
+              "children": []
+            },
+            "victory-title": {
+              "type": "Text",
+              "props": {
+                "text": "🏆 승리!",
+                "variant": "title"
+              },
+              "children": []
+            },
+            "divider-spacer": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            },
+            "find-enemy-btn": {
+              "on": {
+                "press": {
+                  "action": "setState",
+                  "params": {
+                    "value": 0,
+                    "statePath": "/sim.currentStep"
+                  }
+                }
+              },
+              "type": "Button",
+              "props": {
+                "label": "⚔️ 적 찾기",
+                "variant": "primary",
+                "targetNodeId": "HIOoyUfUBzgoZfaJbe2o"
+              },
+              "children": []
+            },
+            "victory-screen": {
+              "type": "Screen",
+              "props": {
+                "scrollable": false
+              },
+              "children": [
+                "top-area",
+                "body-vstack",
+                "bottom-area"
+              ]
+            },
+            "body-spacer-top": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            },
+            "victory-subtitle": {
+              "type": "Text",
+              "props": {
+                "text": "적을 물리쳤습니다!",
+                "variant": "subtitle"
+              },
+              "children": []
+            },
+            "body-spacer-bottom": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            }
+          }
+        },
+        "mockPrompt": "승리 팝업\n적 찾기 버튼",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 10,
+          "motivation": -15,
+          "relatedness": 0
+        },
+        "description": "",
+        "frictionScore": 5,
+        "mockGeneratedAt": "2026-04-27T09:28:43.283Z",
+        "mockInitialState": {
+          "hp": 45,
+          "dice": 3,
+          "gold": 120,
+          "item": 2,
+          "score": 870,
+          "sdt.autonomy": 50,
+          "sdt.competence": 50,
+          "sdt.motivation": 50,
+          "sdt.relatedness": 50,
+          "sim.activeModal": "",
+          "sim.activeScene": "",
+          "sim.currentStep": 0,
+          "sim.activeScreen": "",
+          "LjFFeQfJibzToAWeOUs9": 1
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 60
+      }
+    },
+    {
+      "id": "PkGUAqSomtLEOXEuyofe",
+      "type": "failure",
+      "position": {
+        "x": 978.6932217033885,
+        "y": 1000
+      },
+      "data": {
+        "tags": [],
+        "label": "패배...",
+        "mockSpec": {
+          "root": "defeat-screen",
+          "elements": {
+            "spacer-il": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            },
+            "spacer-ir": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            },
+            "spacer-bot": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            },
+            "spacer-top": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            },
+            "defeat-body": {
+              "type": "VStack",
+              "props": {},
+              "children": [
+                "spacer-top",
+                "defeat-icon-row",
+                "defeat-title",
+                "defeat-subtitle",
+                "defeat-divider-text",
+                "spacer-bot",
+                "defeat-restart-btn"
+              ]
+            },
+            "defeat-title": {
+              "type": "Text",
+              "props": {
+                "text": "패배...",
+                "variant": "title"
+              },
+              "children": []
+            },
+            "defeat-screen": {
+              "type": "Screen",
+              "props": {
+                "scrollable": false
+              },
+              "children": [
+                "defeat-top-area",
+                "defeat-body"
+              ]
+            },
+            "defeat-icon-row": {
+              "type": "HStack",
+              "props": {},
+              "children": [
+                "spacer-il",
+                "defeat-skull-text",
+                "spacer-ir"
+              ]
+            },
+            "defeat-subtitle": {
+              "type": "Text",
+              "props": {
+                "text": "전투에서 쓰러졌습니다. 다시 도전해 보세요!",
+                "variant": "muted"
+              },
+              "children": []
+            },
+            "defeat-top-area": {
+              "type": "TopArea",
+              "props": {},
+              "children": [
+                "defeat-score-meter",
+                "defeat-gold-meter"
+              ]
+            },
+            "defeat-gold-meter": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "gold"
+              },
+              "children": []
+            },
+            "defeat-skull-text": {
+              "type": "Text",
+              "props": {
+                "text": "💀",
+                "variant": "title"
+              },
+              "children": []
+            },
+            "defeat-restart-btn": {
+              "on": {
+                "press": {
+                  "action": "setState",
+                  "params": {
+                    "value": 0,
+                    "statePath": "/sim.currentStep"
+                  }
+                }
+              },
+              "type": "Button",
+              "props": {
+                "label": "🔄  게임 다시 시작",
+                "variant": "primary",
+                "targetNodeId": "HIOoyUfUBzgoZfaJbe2o"
+              },
+              "children": []
+            },
+            "defeat-score-meter": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "score"
+              },
+              "children": []
+            },
+            "defeat-divider-text": {
+              "type": "Text",
+              "props": {
+                "text": "— 최종 기록 —",
+                "variant": "muted"
+              },
+              "children": []
+            }
+          }
+        },
+        "mockPrompt": "패배 팝업\n게임 다시 시작 버튼",
+        "description": "",
+        "mockGeneratedAt": "2026-04-27T09:29:57.918Z",
+        "mockInitialState": {
+          "hp": 0,
+          "dice": 2,
+          "gold": 120,
+          "item": 1,
+          "score": 340,
+          "sdt.autonomy": 50,
+          "sdt.competence": 50,
+          "sdt.motivation": 50,
+          "sdt.relatedness": 50,
+          "sim.activeModal": "",
+          "sim.activeScene": "",
+          "sim.currentStep": 0,
+          "sim.activeScreen": "PkGUAqSomtLEOXEuyofe",
+          "LjFFeQfJibzToAWeOUs9": 1
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 58
+      }
+    },
+    {
+      "id": "HIOoyUfUBzgoZfaJbe2o",
+      "type": "choice",
+      "position": {
+        "x": 320,
+        "y": 250
+      },
+      "data": {
+        "tags": [],
+        "label": "공격 or 대기?",
+        "mockSpec": {
+          "root": "screen-root",
+          "elements": {
+            "btn-wait": {
+              "on": {
+                "press": {
+                  "action": "setState",
+                  "params": {
+                    "value": 2,
+                    "statePath": "/sim.currentStep"
+                  }
+                }
+              },
+              "type": "Button",
+              "props": {
+                "label": "🛡️ 대기 (방어 태세)",
+                "variant": "secondary",
+                "targetNodeId": "fo2aXM16YcyoQpjqlom6"
+              },
+              "children": [],
+              "targetNodeId": "fo2aXM16YcyoQpjqlom6"
+            },
+            "top-area": {
+              "type": "TopArea",
+              "props": {},
+              "children": [
+                "meter-score",
+                "meter-gold"
+              ]
+            },
+            "btn-attack": {
+              "on": {
+                "press": {
+                  "action": "setState",
+                  "params": {
+                    "value": 1,
+                    "statePath": "/sim.currentStep"
+                  }
+                }
+              },
+              "type": "Button",
+              "props": {
+                "label": "⚔️ 공격",
+                "variant": "primary",
+                "targetNodeId": "lxkO9hDma1yfobSxAcnR"
+              },
+              "children": [],
+              "targetNodeId": "lxkO9hDma1yfobSxAcnR"
+            },
+            "meter-gold": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "gold"
+              },
+              "children": []
+            },
+            "spacer-btn": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            },
+            "spacer-mid": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            },
+            "turn-label": {
+              "type": "Text",
+              "props": {
+                "text": "⚔️ 턴 진행 중",
+                "variant": "muted"
+              },
+              "children": []
+            },
+            "vs-divider": {
+              "type": "Text",
+              "props": {
+                "text": "— VS —",
+                "variant": "muted"
+              },
+              "children": []
+            },
+            "bottom-area": {
+              "type": "BottomArea",
+              "props": {},
+              "children": [
+                "tab-attack-info",
+                "tab-wait-info"
+              ]
+            },
+            "main-vstack": {
+              "type": "VStack",
+              "props": {},
+              "children": [
+                "turn-label",
+                "vs-divider",
+                "spacer-mid",
+                "prompt-text",
+                "spacer-btn",
+                "btn-attack",
+                "btn-wait"
+              ]
+            },
+            "meter-score": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "score"
+              },
+              "children": []
+            },
+            "prompt-text": {
+              "type": "Text",
+              "props": {
+                "text": "행동을 선택하세요",
+                "variant": "emphasis"
+              },
+              "children": []
+            },
+            "screen-root": {
+              "type": "Screen",
+              "props": {
+                "scrollable": false
+              },
+              "children": [
+                "top-area",
+                "main-vstack",
+                "bottom-area"
+              ]
+            },
+            "tab-wait-info": {
+              "type": "TabBarButton",
+              "props": {
+                "icon": "shield",
+                "label": "대기"
+              },
+              "children": []
+            },
+            "tab-attack-info": {
+              "type": "TabBarButton",
+              "props": {
+                "icon": "sword",
+                "label": "공격"
+              },
+              "children": []
+            }
+          }
+        },
+        "mockPrompt": "공격 버튼\n대기 버튼 \n생성해줘",
+        "sdtEffects": {
+          "autonomy": 2,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "플레이어가 공격 또는 대기를 선택하는 분기. 공격 선택 시 즉시 공격 실행, 대기 선택 시 적 반격 없이 다음 턴으로.",
+        "frictionScore": 1,
+        "choiceStrategy": "uniform",
+        "mockGeneratedAt": "2026-04-27T09:25:12.510Z",
+        "mockInitialState": {
+          "hp": 72,
+          "dice": 3,
+          "gold": 0,
+          "item": 0,
+          "score": 120,
+          "sdt.autonomy": 50,
+          "sdt.competence": 50,
+          "sdt.motivation": 50,
+          "sdt.relatedness": 50,
+          "sim.activeModal": "",
+          "sim.activeScene": "",
+          "sim.currentStep": 0,
+          "sim.activeScreen": "",
+          "LjFFeQfJibzToAWeOUs9": 0
+        }
+      },
+      "measured": {
+        "width": 280,
+        "height": 105
+      }
+    },
+    {
+      "id": "lxkO9hDma1yfobSxAcnR",
+      "type": "action",
+      "position": {
+        "x": 147.15821368376936,
+        "y": 500
+      },
+      "data": {
+        "tags": [],
+        "label": "공격 실행",
+        "duration": "short",
+        "difficulty": 5,
+        "sdtEffects": {
+          "autonomy": 2,
+          "competence": 2,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "플레이어가 적을 공격. 데미지를 입히고 적 사망 여부 판정으로 이동.",
+        "frictionScore": 2
+      },
+      "measured": {
+        "width": 280,
+        "height": 125
+      }
+    },
+    {
+      "id": "fo2aXM16YcyoQpjqlom6",
+      "type": "action",
+      "position": {
+        "x": 486.97521665850184,
+        "y": 500
+      },
+      "data": {
+        "tags": [],
+        "label": "대기 (방어 태세)",
+        "duration": "short",
+        "difficulty": 5,
+        "sdtEffects": {
+          "autonomy": 1,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "플레이어가 이번 턴 행동을 넘기고 방어 태세를 취함. 적 반격 피해 감소 등의 효과 적용 가능.",
+        "frictionScore": 1
+      },
+      "measured": {
+        "width": 280,
+        "height": 125
+      }
+    },
+    {
+      "id": "n_7Sh8pLXfHq",
+      "type": "resource",
+      "position": {
+        "x": 126.10736431527442,
+        "y": 1132.4331087584217
+      },
+      "data": {
+        "tags": [],
+        "label": "자원",
+        "resourceId": "B0ubePt85yGolsY5SBRa",
+        "description": "",
+        "resourceKey": "gold"
+      },
+      "measured": {
+        "width": 56,
+        "height": 56
+      }
+    },
+    {
+      "id": "n_emotion_victory",
+      "type": "emotion",
+      "position": {
+        "x": -213.65736284889317,
+        "y": 811.8603460712803
+      },
+      "data": {
+        "tags": [],
+        "label": "감정 (성취감)",
+        "arousal": "high",
+        "needState": "satisfied",
+        "needSource": "competence",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 5,
+          "motivation": 5,
+          "relatedness": 0
+        },
+        "description": "적을 물리쳐서 유능감이 충족될 때 발생하는 감정",
+        "emotionType": "성취감",
+        "frictionScore": 0,
+        "playerSegment": []
+      },
+      "measured": {
+        "width": 280,
+        "height": 129
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "xy-edge__xbB65S1FVTQsKviTmpCobottom-WOGebJtUG9fTXv1AggCHtop",
+      "source": "xbB65S1FVTQsKviTmpCo",
+      "target": "WOGebJtUG9fTXv1AggCH",
+      "data": {
+        "label": "적 생존 (false)",
+        "gateBranch": "false"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "left"
+    },
+    {
+      "id": "xy-edge__WOGebJtUG9fTXv1AggCHbottom-dbClGLpmQ22hftQwXs3Mtop",
+      "source": "WOGebJtUG9fTXv1AggCH",
+      "target": "dbClGLpmQ22hftQwXs3M",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "id": "xy-edge__dbClGLpmQ22hftQwXs3Mright-PkGUAqSomtLEOXEuyofetop",
+      "source": "dbClGLpmQ22hftQwXs3M",
+      "target": "PkGUAqSomtLEOXEuyofe",
+      "data": {
+        "label": "플레이어 사망 (true)",
+        "gateBranch": "true"
+      },
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "id": "xy-edge__HIOoyUfUBzgoZfaJbe2oleft-lxkO9hDma1yfobSxAcnRtop",
+      "source": "HIOoyUfUBzgoZfaJbe2o",
+      "target": "lxkO9hDma1yfobSxAcnR",
+      "data": {
+        "label": "공격 선택"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__HIOoyUfUBzgoZfaJbe2oright-fo2aXM16YcyoQpjqlom6top",
+      "source": "HIOoyUfUBzgoZfaJbe2o",
+      "target": "fo2aXM16YcyoQpjqlom6",
+      "data": {
+        "label": "대기 선택"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__lxkO9hDma1yfobSxAcnRbottom-xbB65S1FVTQsKviTmpCotop",
+      "source": "lxkO9hDma1yfobSxAcnR",
+      "target": "xbB65S1FVTQsKviTmpCo",
+      "data": {
+        "label": "공격"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__fo2aXM16YcyoQpjqlom6bottom-WOGebJtUG9fTXv1AggCHtop",
+      "source": "fo2aXM16YcyoQpjqlom6",
+      "target": "WOGebJtUG9fTXv1AggCH",
+      "data": {
+        "label": "대기 후 적 반격"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__3dMvnKaXtRBlG9qJOqe0bottom-HIOoyUfUBzgoZfaJbe2otop",
+      "source": "3dMvnKaXtRBlG9qJOqe0",
+      "target": "HIOoyUfUBzgoZfaJbe2o",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__dbClGLpmQ22hftQwXs3Mleft-HIOoyUfUBzgoZfaJbe2oleft",
+      "source": "dbClGLpmQ22hftQwXs3M",
+      "target": "HIOoyUfUBzgoZfaJbe2o",
+      "data": {
+        "label": "생존 → 다음 턴",
+        "gateBranch": "false"
+      },
+      "type": "exec",
+      "sourceHandle": "top",
+      "targetHandle": "right"
+    },
+    {
+      "id": "xy-edge__PkGUAqSomtLEOXEuyoferight-HIOoyUfUBzgoZfaJbe2oright",
+      "source": "PkGUAqSomtLEOXEuyofe",
+      "target": "HIOoyUfUBzgoZfaJbe2o",
+      "data": {
+        "label": "패배후 부활"
+      },
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "right"
+    },
+    {
+      "id": "xy-edge__JmXYql8aC8Thnor1Xcoxright-goldleft",
+      "source": "JmXYql8aC8Thnor1Xcox",
+      "target": "n_7Sh8pLXfHq",
+      "data": {
+        "amount": 1,
+        "resourceAmountExpression": "1"
+      },
+      "type": "resource",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "id": "edge_gate_to_emotion",
+      "source": "xbB65S1FVTQsKviTmpCo",
+      "target": "n_emotion_victory",
+      "data": {
+        "label": "적 사망 (true)",
+        "gateBranch": "true"
+      },
+      "type": "exec",
+      "sourceHandle": "left",
+      "targetHandle": "right"
+    },
+    {
+      "id": "edge_emotion_to_success",
+      "source": "n_emotion_victory",
+      "target": "JmXYql8aC8Thnor1Xcox",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "edge_victory_restart",
+      "source": "JmXYql8aC8Thnor1Xcox",
+      "target": "HIOoyUfUBzgoZfaJbe2o",
+      "data": {
+        "label": "적 찾기 (다시 시작)"
+      },
+      "type": "exec",
+      "sourceHandle": "left",
+      "targetHandle": "left"
+    }
+  ],
+  "resources": [
+    {
+      "id": "B0ubePt85yGolsY5SBRa",
+      "key": "gold",
+      "name": "골드",
+      "color": "#FFD700",
+      "icon": "coin",
+      "order": 0
+    },
+    {
+      "id": "XQecVcGX0EJpSXKSzXs5",
+      "key": "dice",
+      "name": "주사위",
+      "color": "marigold",
+      "icon": "box",
+      "order": 0
+    }
+  ]
+}

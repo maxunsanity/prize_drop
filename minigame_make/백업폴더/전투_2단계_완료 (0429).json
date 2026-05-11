@@ -1,0 +1,1956 @@
+{
+  "version": 1,
+  "designName": "전투_2단계_완료 (0429)",
+  "exportedAt": "2026-04-29T10:06:22.957Z",
+  "nodes": [
+    {
+      "id": "3dMvnKaXtRBlG9qJOqe0",
+      "type": "entry",
+      "position": {
+        "x": 320,
+        "y": -439.55065064946854
+      },
+      "data": {
+        "tags": [],
+        "label": "전투 시작",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 80,
+          "relatedness": 0
+        },
+        "description": "",
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 58
+      }
+    },
+    {
+      "id": "xbB65S1FVTQsKviTmpCo",
+      "type": "gate",
+      "position": {
+        "x": 115.35565965626444,
+        "y": 921.1987050797724
+      },
+      "data": {
+        "tags": [],
+        "label": "적 사망?",
+        "condition": "enemy_hp <= 0",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "",
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "WOGebJtUG9fTXv1AggCH",
+      "type": "action",
+      "position": {
+        "x": 115.35565965626444,
+        "y": 1463.1876227897837
+      },
+      "data": {
+        "tags": [],
+        "label": "적 반격",
+        "duration": "short",
+        "difficulty": 5,
+        "sdtEffects": {
+          "autonomy": -2,
+          "competence": -5,
+          "motivation": -3,
+          "relatedness": 0
+        },
+        "description": "",
+        "frictionScore": 1
+      },
+      "measured": {
+        "width": 220,
+        "height": 85
+      }
+    },
+    {
+      "id": "dbClGLpmQ22hftQwXs3M",
+      "type": "gate",
+      "position": {
+        "x": 727.9501519637444,
+        "y": 1299.6745875049778
+      },
+      "data": {
+        "tags": [],
+        "label": "플레이어 사망?",
+        "condition": "player_hp <= 0",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "",
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 65
+      }
+    },
+    {
+      "id": "JmXYql8aC8Thnor1Xcox",
+      "type": "reward",
+      "position": {
+        "x": -256.18764575419004,
+        "y": 1463.1876227897837
+      },
+      "data": {
+        "tags": [],
+        "label": "승리!",
+        "mockSpec": {
+          "root": "victory-screen",
+          "elements": {
+            "top-hp": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "player_hp"
+              },
+              "children": []
+            },
+            "top-area": {
+              "type": "TopArea",
+              "props": {},
+              "children": [
+                "top-hp",
+                "top-spacer",
+                "top-gold",
+                "top-score"
+              ]
+            },
+            "top-gold": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "gold"
+              },
+              "children": []
+            },
+            "top-score": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "score"
+              },
+              "children": []
+            },
+            "top-spacer": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            },
+            "body-vstack": {
+              "type": "VStack",
+              "props": {},
+              "children": [
+                "body-spacer-top",
+                "victory-title",
+                "victory-subtitle",
+                "victory-hp-left",
+                "divider-spacer",
+                "body-spacer-bottom",
+                "find-enemy-btn"
+              ]
+            },
+            "bottom-area": {
+              "type": "BottomArea",
+              "props": {},
+              "children": [
+                "bottom-dice",
+                "bottom-item",
+                "bottom-weapon"
+              ]
+            },
+            "bottom-dice": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "dice"
+              },
+              "children": []
+            },
+            "bottom-item": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "item"
+              },
+              "children": []
+            },
+            "bottom-weapon": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "LjFFeQfJibzToAWeOUs9"
+              },
+              "children": []
+            },
+            "victory-title": {
+              "type": "Text",
+              "props": {
+                "text": "🏆 승리!",
+                "variant": "title"
+              },
+              "children": []
+            },
+            "divider-spacer": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            },
+            "find-enemy-btn": {
+              "on": {
+                "press": {
+                  "action": "navigate",
+                  "params": {
+                    "targetNodeId": "n_init_player"
+                  }
+                }
+              },
+              "type": "Button",
+              "props": {
+                "label": "⚔️ 적 찾기",
+                "variant": "primary",
+                "targetNodeId": "n_init_player"
+              },
+              "children": []
+            },
+            "victory-screen": {
+              "type": "Screen",
+              "props": {
+                "scrollable": false
+              },
+              "children": [
+                "top-area",
+                "body-vstack",
+                "bottom-area"
+              ]
+            },
+            "body-spacer-top": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            },
+            "victory-hp-left": {
+              "type": "Text",
+              "props": {
+                "text": "남은 나의 체력: {{player_hp}} / {{player_max_hp}}",
+                "variant": "muted"
+              },
+              "children": []
+            },
+            "victory-subtitle": {
+              "type": "Text",
+              "props": {
+                "text": "대단해요! 총 {{turn_count}}번의 맹공으로 적을 산산조각 냈습니다!",
+                "variant": "subtitle"
+              },
+              "children": []
+            },
+            "body-spacer-bottom": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            }
+          }
+        },
+        "mockPrompt": "승리 팝업\n적 찾기 버튼",
+        "sdtEffects": {
+          "autonomy": 5,
+          "competence": 20,
+          "motivation": 20,
+          "relatedness": 0
+        },
+        "description": "",
+        "frictionScore": 5,
+        "mockGeneratedAt": "2026-04-27T09:28:43.283Z",
+        "mockInitialState": {
+          "dice": 3,
+          "gold": 120,
+          "item": 2,
+          "score": 870,
+          "enemy_hp": 50,
+          "player_hp": 45,
+          "turn_count": 4,
+          "enemy_max_hp": 50,
+          "sdt.autonomy": 50,
+          "player_max_hp": 100,
+          "enemy_hp_ratio": 1,
+          "sdt.competence": 50,
+          "sdt.motivation": 50,
+          "player_hp_ratio": 0.45,
+          "sdt.relatedness": 50,
+          "sim.activeModal": "",
+          "sim.activeScene": "",
+          "sim.currentStep": 0,
+          "sim.activeScreen": "",
+          "LjFFeQfJibzToAWeOUs9": 1
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 60
+      }
+    },
+    {
+      "id": "PkGUAqSomtLEOXEuyofe",
+      "type": "failure",
+      "position": {
+        "x": 727.9501519637444,
+        "y": 1492.392178328935
+      },
+      "data": {
+        "tags": [],
+        "label": "패배...",
+        "mockSpec": {
+          "root": "defeat-screen",
+          "elements": {
+            "spacer-il": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            },
+            "spacer-ir": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            },
+            "spacer-bot": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            },
+            "spacer-top": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            },
+            "defeat-body": {
+              "type": "VStack",
+              "props": {},
+              "children": [
+                "spacer-top",
+                "defeat-icon-row",
+                "defeat-title",
+                "defeat-subtitle",
+                "defeat-divider-text",
+                "spacer-bot",
+                "defeat-restart-btn"
+              ]
+            },
+            "defeat-title": {
+              "type": "Text",
+              "props": {
+                "text": "패배...",
+                "variant": "title"
+              },
+              "children": []
+            },
+            "defeat-screen": {
+              "type": "Screen",
+              "props": {
+                "scrollable": false
+              },
+              "children": [
+                "defeat-top-area",
+                "defeat-body"
+              ]
+            },
+            "defeat-hp-meter": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "player_hp"
+              },
+              "children": []
+            },
+            "defeat-icon-row": {
+              "type": "HStack",
+              "props": {},
+              "children": [
+                "spacer-il",
+                "defeat-skull-text",
+                "spacer-ir"
+              ]
+            },
+            "defeat-subtitle": {
+              "type": "Text",
+              "props": {
+                "text": "전투에서 쓰러졌습니다. 다시 도전해 보세요!",
+                "variant": "muted"
+              },
+              "children": []
+            },
+            "defeat-top-area": {
+              "type": "TopArea",
+              "props": {},
+              "children": [
+                "defeat-hp-meter",
+                "defeat-enemy-hp-meter",
+                "defeat-score-meter",
+                "defeat-gold-meter"
+              ]
+            },
+            "defeat-gold-meter": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "gold"
+              },
+              "children": []
+            },
+            "defeat-skull-text": {
+              "type": "Text",
+              "props": {
+                "text": "💀",
+                "variant": "title"
+              },
+              "children": []
+            },
+            "defeat-restart-btn": {
+              "on": {
+                "press": {
+                  "action": "navigate",
+                  "params": {
+                    "targetNodeId": "n_init_player"
+                  }
+                }
+              },
+              "type": "Button",
+              "props": {
+                "label": "🔄  게임 다시 시작",
+                "variant": "primary",
+                "targetNodeId": "n_init_player"
+              },
+              "children": []
+            },
+            "defeat-score-meter": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "score"
+              },
+              "children": []
+            },
+            "defeat-divider-text": {
+              "type": "Text",
+              "props": {
+                "text": "— 최종 기록 —",
+                "variant": "muted"
+              },
+              "children": []
+            },
+            "defeat-enemy-hp-meter": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "enemy_hp"
+              },
+              "children": []
+            }
+          }
+        },
+        "mockPrompt": "패배 팝업\n게임 다시 시작 버튼",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "",
+        "frictionScore": 0,
+        "mockGeneratedAt": "2026-04-27T09:29:57.918Z",
+        "mockInitialState": {
+          "dice": 2,
+          "gold": 120,
+          "item": 1,
+          "score": 340,
+          "enemy_hp": 50,
+          "player_hp": 0,
+          "turn_count": 4,
+          "enemy_max_hp": 50,
+          "sdt.autonomy": 50,
+          "player_max_hp": 100,
+          "enemy_hp_ratio": 1,
+          "sdt.competence": 50,
+          "sdt.motivation": 50,
+          "player_hp_ratio": 0,
+          "sdt.relatedness": 50,
+          "sim.activeModal": "",
+          "sim.activeScene": "",
+          "sim.currentStep": 0,
+          "sim.activeScreen": "PkGUAqSomtLEOXEuyofe",
+          "LjFFeQfJibzToAWeOUs9": 1
+        }
+      },
+      "measured": {
+        "width": 220,
+        "height": 58
+      }
+    },
+    {
+      "id": "HIOoyUfUBzgoZfaJbe2o",
+      "type": "choice",
+      "position": {
+        "x": 320,
+        "y": 222.01375245579567
+      },
+      "data": {
+        "tags": [],
+        "label": "공격 or 대기?",
+        "mockSpec": {
+          "root": "battle-screen",
+          "elements": {
+            "vs-text": {
+              "type": "Text",
+              "props": {
+                "text": "VS",
+                "variant": "emphasis"
+              },
+              "children": []
+            },
+            "btn-wait": {
+              "on": {
+                "press": {
+                  "action": "setState",
+                  "params": {
+                    "value": 2,
+                    "statePath": "/sim.currentStep"
+                  }
+                }
+              },
+              "type": "Button",
+              "props": {
+                "label": "🛡️  대기",
+                "variant": "secondary",
+                "targetNodeId": "fo2aXM16YcyoQpjqlom6"
+              },
+              "children": []
+            },
+            "res-gold": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "gold"
+              },
+              "children": []
+            },
+            "tab-flee": {
+              "type": "TabBarButton",
+              "props": {
+                "icon": "trending_up",
+                "label": "도주"
+              },
+              "children": []
+            },
+            "tab-item": {
+              "type": "TabBarButton",
+              "props": {
+                "icon": "box",
+                "label": "아이템"
+              },
+              "children": []
+            },
+            "top-area": {
+              "type": "TopArea",
+              "props": {},
+              "children": [
+                "meter-gold",
+                "meter-score"
+              ]
+            },
+            "res-score": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "score"
+              },
+              "children": []
+            },
+            "btn-attack": {
+              "on": {
+                "press": {
+                  "action": "setState",
+                  "params": {
+                    "value": 1,
+                    "statePath": "/sim.currentStep"
+                  }
+                }
+              },
+              "type": "Button",
+              "props": {
+                "label": "⚔️  공격",
+                "variant": "primary",
+                "targetNodeId": "lxkO9hDma1yfobSxAcnR"
+              },
+              "children": []
+            },
+            "enemy-card": {
+              "type": "VStack",
+              "props": {},
+              "children": [
+                "enemy-avatar",
+                "enemy-name",
+                "enemy-level",
+                "enemy-hp-label-row",
+                "enemy-hp-bar"
+              ]
+            },
+            "enemy-name": {
+              "type": "Text",
+              "props": {
+                "text": "암흑 드래곤",
+                "variant": "subtitle"
+              },
+              "children": []
+            },
+            "meter-gold": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "gold"
+              },
+              "children": []
+            },
+            "mid-spacer": {
+              "type": "Spacer",
+              "props": {},
+              "children": []
+            },
+            "tab-battle": {
+              "type": "TabBarButton",
+              "props": {
+                "icon": "sword",
+                "label": "전투"
+              },
+              "children": []
+            },
+            "turn-label": {
+              "type": "Text",
+              "props": {
+                "text": "⚔️  전투 중 — 행동을 선택하세요",
+                "variant": "title"
+              },
+              "children": []
+            },
+            "vs-section": {
+              "type": "HStack",
+              "props": {},
+              "children": [
+                "player-card",
+                "vs-text",
+                "enemy-card"
+              ]
+            },
+            "action-hint": {
+              "type": "Text",
+              "props": {
+                "text": "이번 턴 행동을 선택하세요:",
+                "variant": "muted"
+              },
+              "children": []
+            },
+            "battle-body": {
+              "type": "VStack",
+              "props": {},
+              "children": [
+                "turn-label",
+                "vs-section",
+                "mid-spacer",
+                "status-section",
+                "action-hint",
+                "action-buttons"
+              ]
+            },
+            "bottom-area": {
+              "type": "BottomArea",
+              "props": {},
+              "children": [
+                "tab-battle",
+                "tab-item",
+                "tab-flee"
+              ]
+            },
+            "enemy-level": {
+              "type": "Text",
+              "props": {
+                "text": "",
+                "variant": "muted"
+              },
+              "children": []
+            },
+            "meter-score": {
+              "type": "ResourceMeter",
+              "props": {
+                "resourceKey": "score"
+              },
+              "children": []
+            },
+            "player-card": {
+              "type": "VStack",
+              "props": {},
+              "children": [
+                "player-avatar",
+                "player-name",
+                "player-level",
+                "player-hp-label-row",
+                "player-hp-bar"
+              ]
+            },
+            "player-name": {
+              "type": "Text",
+              "props": {
+                "text": "용사",
+                "variant": "subtitle"
+              },
+              "children": []
+            },
+            "enemy-avatar": {
+              "type": "Text",
+              "props": {
+                "text": "🐉",
+                "variant": "title"
+              },
+              "children": []
+            },
+            "player-level": {
+              "type": "Text",
+              "props": {
+                "text": "",
+                "variant": "muted"
+              },
+              "children": []
+            },
+            "battle-screen": {
+              "type": "Screen",
+              "props": {
+                "scrollable": false
+              },
+              "children": [
+                "top-area",
+                "battle-body",
+                "bottom-area"
+              ]
+            },
+            "player-avatar": {
+              "type": "Text",
+              "props": {
+                "text": "🧙",
+                "variant": "title"
+              },
+              "children": []
+            },
+            "action-buttons": {
+              "type": "VStack",
+              "props": {},
+              "children": [
+                "btn-attack",
+                "btn-wait"
+              ]
+            },
+            "enemy-hp-label": {
+              "type": "Text",
+              "props": {
+                "text": "HP",
+                "variant": "muted"
+              },
+              "children": []
+            },
+            "status-section": {
+              "type": "HStack",
+              "props": {}
+            },
+            "player-hp-label": {
+              "type": "Text",
+              "props": {
+                "text": "HP",
+                "variant": "muted"
+              },
+              "children": []
+            }
+          }
+        },
+        "mockPrompt": "공격과 대기 버튼의 위치가 맘에 안드는데..",
+        "sdtEffects": {
+          "autonomy": 15,
+          "competence": 2,
+          "motivation": 5,
+          "relatedness": 0
+        },
+        "description": "플레이어가 공격 또는 대기를 선택하는 분기. 공격 선택 시 즉시 공격 실행, 대기 선택 시 적 반격 없이 다음 턴으로.",
+        "frictionScore": 1,
+        "choiceStrategy": "uniform",
+        "mockGeneratedAt": "2026-04-28T03:51:48.451Z",
+        "mockInitialState": {
+          "hp": 0,
+          "dice": 3,
+          "gold": 120,
+          "item": 5,
+          "score": 340,
+          "enemy_hp": 0.55,
+          "player_hp": 0.72,
+          "sdt.autonomy": 50,
+          "enemy_hp_ratio": 1,
+          "sdt.competence": 50,
+          "sdt.motivation": 50,
+          "player_hp_ratio": 1,
+          "sdt.relatedness": 50,
+          "sim.activeModal": "",
+          "sim.activeScene": "",
+          "sim.currentStep": 0,
+          "sim.activeScreen": "",
+          "LjFFeQfJibzToAWeOUs9": 2
+        }
+      },
+      "measured": {
+        "width": 280,
+        "height": 105
+      }
+    },
+    {
+      "id": "lxkO9hDma1yfobSxAcnR",
+      "type": "action",
+      "position": {
+        "x": 143.81411780668557,
+        "y": 416.041257367387
+      },
+      "data": {
+        "tags": [],
+        "label": "공격 실행",
+        "duration": "short",
+        "difficulty": 5,
+        "sdtEffects": {
+          "autonomy": 10,
+          "competence": 5,
+          "motivation": -2,
+          "relatedness": 0
+        },
+        "description": "플레이어가 적을 공격. 데미지를 입히고 적 사망 여부 판정으로 이동.",
+        "frictionScore": 2
+      },
+      "measured": {
+        "width": 280,
+        "height": 125
+      }
+    },
+    {
+      "id": "fo2aXM16YcyoQpjqlom6",
+      "type": "action",
+      "position": {
+        "x": 487,
+        "y": 416.041257367387
+      },
+      "data": {
+        "tags": [],
+        "label": "대기 (방어 태세)",
+        "duration": "short",
+        "difficulty": 5,
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "플레이어가 이번 턴 행동을 넘기고 방어 태세를 취함. 적 반격 피해 감소 등의 효과 적용 가능.",
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 280,
+        "height": 125
+      }
+    },
+    {
+      "id": "trig_player_atk",
+      "type": "trigger",
+      "position": {
+        "x": 115.35565965626444,
+        "y": 760
+      },
+      "data": {
+        "tags": [],
+        "label": "플레이어 공격 계산",
+        "attributes": [
+          {
+            "key": "enemy_hp",
+            "type": "number",
+            "value": "enemy_hp - damage"
+          },
+          {
+            "key": "enemy_hp_ratio",
+            "type": "number",
+            "value": "(enemy_hp - damage) / enemy_max_hp"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "",
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 95
+      }
+    },
+    {
+      "id": "trig_enemy_atk",
+      "type": "trigger",
+      "position": {
+        "x": 385.73082211252137,
+        "y": 1446.2124826290772
+      },
+      "data": {
+        "tags": [],
+        "label": "적 공격 계산",
+        "attributes": [
+          {
+            "key": "player_hp",
+            "type": "number",
+            "value": "player_hp - damage"
+          },
+          {
+            "key": "player_hp_ratio",
+            "type": "number",
+            "value": "(player_hp - damage) / player_max_hp"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "",
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 95
+      }
+    },
+    {
+      "id": "trig_calc_p_dmg",
+      "type": "trigger",
+      "position": {
+        "x": 115.35565965626444,
+        "y": 610.884086444008
+      },
+      "data": {
+        "tags": [],
+        "label": "플레이어 데미지 굴림",
+        "attributes": [
+          {
+            "key": "damage",
+            "type": "number",
+            "value": "player_atk + rand.d6()"
+          },
+          {
+            "key": "turn_count",
+            "type": "number",
+            "value": "turn_count + 1"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "",
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 95
+      }
+    },
+    {
+      "id": "trig_calc_e_dmg",
+      "type": "trigger",
+      "position": {
+        "x": 385.73082211252137,
+        "y": 1319.5804855681665
+      },
+      "data": {
+        "tags": [],
+        "label": "적 데미지 굴림",
+        "attributes": [
+          {
+            "key": "damage",
+            "type": "number",
+            "value": "enemy_atk + rand.d6()"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "",
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 71
+      }
+    },
+    {
+      "id": "n_init_player",
+      "type": "trigger",
+      "position": {
+        "x": 320,
+        "y": -222.92390096324118
+      },
+      "data": {
+        "tags": [],
+        "label": "플레이어 변수 초기화",
+        "attributes": [
+          {
+            "key": "player_hp",
+            "type": "number",
+            "value": "100"
+          },
+          {
+            "key": "player_max_hp",
+            "type": "number",
+            "value": "100"
+          },
+          {
+            "key": "player_hp_ratio",
+            "type": "number",
+            "value": "1"
+          },
+          {
+            "key": "player_atk",
+            "type": "number",
+            "value": "10"
+          },
+          {
+            "key": "damage",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "turn_count",
+            "type": "number",
+            "value": "0"
+          },
+          {
+            "key": "defense_roll",
+            "type": "number",
+            "value": "0"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "",
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 215
+      }
+    },
+    {
+      "id": "n_init_enemy",
+      "type": "trigger",
+      "position": {
+        "x": 320,
+        "y": 25.175489821247623
+      },
+      "data": {
+        "tags": [],
+        "label": "적 변수 초기화",
+        "attributes": [
+          {
+            "key": "enemy_hp",
+            "type": "number",
+            "value": "50"
+          },
+          {
+            "key": "enemy_max_hp",
+            "type": "number",
+            "value": "50"
+          },
+          {
+            "key": "enemy_hp_ratio",
+            "type": "number",
+            "value": "1"
+          },
+          {
+            "key": "enemy_atk",
+            "type": "number",
+            "value": "5"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "",
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 143
+      }
+    },
+    {
+      "id": "memo_overview",
+      "type": "memo",
+      "position": {
+        "x": 599.7631385497237,
+        "y": -554.3604285864922
+      },
+      "data": {
+        "label": "전투 시스템 2단계 — 전체 구조",
+        "description": "턴제 전투 시뮬레이션 템플릿입니다.\n\n전체 흐름:\n① 초기화 (플레이어/적 변수 셋팅)\n② 전투 메인 루프 (공격 or 대기 선택)\n③ 플레이어 공격 → 적 사망 체크\n④ 적 반격 → 플레이어 사망 체크\n⑤ 승리 또는 패배 종료\n\n수치 조정 위치:\n- 플레이어 체력/공격력: [플레이어 변수 초기화] 노드\n- 적 체력/공격력: [적 변수 초기화] 노드"
+      },
+      "width": 300,
+      "height": 284,
+      "measured": {
+        "width": 300,
+        "height": 284
+      },
+      "resizing": false
+    },
+    {
+      "id": "memo_init",
+      "type": "memo",
+      "position": {
+        "x": 46.72055470524876,
+        "y": -141.4937695614886
+      },
+      "data": {
+        "label": "초기화 노드는 왜 2개인가요?",
+        "collapsed": true,
+        "description": "플레이어 변수와 적 변수를 분리하여 관리합니다.\n가독성을 높이고 한쪽만 수정할 때 실수를 줄입니다.\n\n[플레이어 변수 초기화]에서 조정:\n- player_hp: 플레이어 체력 (기본 100)\n- player_atk: 공격력 (기본 10)\n\n[적 변수 초기화]에서 조정:\n- enemy_hp: 적 체력 (기본 50)\n- enemy_atk: 적 공격력 (기본 5)\n\n승리/패배 후 재시작 시 반드시 이 노드를 거쳐야\n모든 상태가 초기화됩니다.",
+        "_expandedHeight": 313
+      },
+      "style": {
+        "height": 36
+      },
+      "width": 307,
+      "height": 36,
+      "measured": {
+        "width": 307,
+        "height": 36
+      },
+      "resizing": false
+    },
+    {
+      "id": "memo_damage",
+      "type": "memo",
+      "position": {
+        "x": -177.462238928947,
+        "y": 772.5751002574357
+      },
+      "data": {
+        "label": "damage 변수는 왜 필요한가요?",
+        "collapsed": true,
+        "description": "이번 턴에 발생한 데미지를 임시로 저장하는 변수입니다.\n\n왜 따로 저장하나요?\nLLE trigger 노드 안에서 변수를 선언하고\n즉시 그 변수를 다른 계산에 쓰면 오류가 발생합니다.\n반드시 [데미지 굴림] 노드에서 먼저 저장하고\n[공격 계산] 노드에서 꺼내 써야 합니다.\n\n올바른 순서:\n1. trig_calc_p_dmg: damage = player_atk + rand.d6()\n2. trig_player_atk: enemy_hp = enemy_hp - damage\n\n잘못된 방식 (오류 발생):\nenemy_hp = enemy_hp - (player_atk + rand.d6())",
+        "_expandedHeight": 328
+      },
+      "style": {
+        "height": 36
+      },
+      "width": 351,
+      "height": 36,
+      "measured": {
+        "width": 351,
+        "height": 36
+      },
+      "resizing": false
+    },
+    {
+      "id": "memo_ratio",
+      "type": "memo",
+      "position": {
+        "x": 615.9387624912426,
+        "y": -306.829109360042
+      },
+      "data": {
+        "label": "hp_ratio 변수는 왜 필요한가요?",
+        "collapsed": true,
+        "description": "UI 화면의 HP 게이지 바(Progress)를 표시하기 위한 변수입니다.\n게이지는 0.0~1.0 사이의 비율 값을 필요로 합니다.\n\n계산 공식:\nplayer_hp_ratio = player_hp / player_max_hp\nenemy_hp_ratio = enemy_hp / enemy_max_hp\n\n게이지 연결 방법:\nmockSpec의 Progress 컴포넌트 props.value에\n{ \"$state\": \"/player_hp_ratio\" } 형식으로 바인딩합니다.\n\n주의: 매 공격 계산 후 반드시 갱신해야 합니다.",
+        "_expandedHeight": 309
+      },
+      "style": {
+        "height": 36
+      },
+      "width": 346,
+      "height": 36,
+      "measured": {
+        "width": 346,
+        "height": 36
+      },
+      "resizing": false
+    },
+    {
+      "id": "memo_p_attack",
+      "type": "memo",
+      "position": {
+        "x": -185.79826173386243,
+        "y": 416.041257367387
+      },
+      "data": {
+        "label": "플레이어 공격 시퀀스",
+        "collapsed": true,
+        "description": "공격 선택 후 순서대로 진행됩니다.\n\n① 공격 실행 (action): 공격 연출\n② trig_calc_p_dmg (trigger):\n   damage = player_atk + rand.d6()\n   turn_count = turn_count + 1\n③ trig_player_atk (trigger):\n   enemy_hp = enemy_hp - damage\n   enemy_hp_ratio = enemy_hp / enemy_max_hp\n④ 적 사망 게이트: enemy_hp <= 0\n   true → 승리\n   false → 적 반격으로 이동\n\n공격력 조정: player_atk 값 변경\n주사위 범위 조정: rand.d6() → rand.d10() 등으로 변경",
+        "_expandedHeight": 367
+      },
+      "style": {
+        "height": 36
+      },
+      "width": 365,
+      "height": 36,
+      "measured": {
+        "width": 365,
+        "height": 36
+      },
+      "resizing": false
+    },
+    {
+      "id": "memo_e_attack",
+      "type": "memo",
+      "position": {
+        "x": 115.35565965626444,
+        "y": 1541.0335929935568
+      },
+      "data": {
+        "label": "적 반격 시퀀스",
+        "collapsed": true,
+        "description": "플레이어가 공격하면 자동으로 적이 반격합니다.\n\n① 적 반격 (action): 반격 연출\n② trig_calc_e_dmg (trigger):\n   damage = enemy_atk + rand.d6()\n③ trig_enemy_atk (trigger):\n   player_hp = player_hp - damage\n   player_hp_ratio = player_hp / player_max_hp\n④ 플레이어 사망 게이트: player_hp <= 0\n   true → 패배\n   false → 전투 메인 루프로 복귀\n\n적 강도 조정: enemy_atk 값 변경\n적 체력 조정: enemy_hp, enemy_max_hp 값 변경           ",
+        "_expandedHeight": 342
+      },
+      "style": {
+        "height": 36
+      },
+      "width": 406,
+      "height": 36,
+      "measured": {
+        "width": 406,
+        "height": 36
+      },
+      "resizing": false
+    },
+    {
+      "id": "memo_wait",
+      "type": "memo",
+      "position": {
+        "x": 1042.715216289896,
+        "y": 416.041257367387
+      },
+      "data": {
+        "label": "대기(방어 태세) 기능",
+        "collapsed": true,
+        "description": "공격 대신 대기를 선택하면 적 반격만 받습니다.\n현재는 기본 구현 상태입니다.\n\n확장 아이디어:\n- 방어 시 player_hp 감소량을 절반으로 줄이기\n  trig_enemy_atk에서 damage * 0.5 적용\n- 방어 성공 시 카운터 공격 추가\n- 특정 횟수 대기 시 스킬 게이지 충전\n\n구현 위치:\n[대기 (방어 태세)] action 노드 이후에\n조건 trigger를 추가하면 됩니다.",
+        "_expandedHeight": 299
+      },
+      "style": {
+        "height": 36
+      },
+      "width": 299,
+      "height": 36,
+      "measured": {
+        "width": 299,
+        "height": 36
+      },
+      "resizing": false
+    },
+    {
+      "id": "memo_turn",
+      "type": "memo",
+      "position": {
+        "x": 600.9387624912426,
+        "y": -165.18837811716807
+      },
+      "data": {
+        "label": "turn_count 변수 활용법",
+        "collapsed": true,
+        "description": "누적 공격 횟수를 기록하는 변수입니다.\n현재는 집계 목적으로만 사용됩니다.\n\n활용 방법:\n- 특정 턴 이후 보스 강화 패턴 발동\n  예) turn_count >= 5 gate 추가\n- 빠른 클리어 보너스 계산\n- 전투 리포트 화면에 {{turn_count}} 턴 클리어 표시\n\n업데이트 위치:\ntrig_calc_p_dmg 노드에서\nturn_count = turn_count + 1",
+        "_expandedHeight": 295
+      },
+      "style": {
+        "height": 36
+      },
+      "width": 328,
+      "height": 36,
+      "measured": {
+        "width": 328,
+        "height": 36
+      },
+      "resizing": false
+    },
+    {
+      "id": "memo_gate",
+      "type": "memo",
+      "position": {
+        "x": 1061.7630436080535,
+        "y": 1332.754527570588
+      },
+      "data": {
+        "label": "사망 판정 게이트 원칙",
+        "collapsed": true,
+        "description": "전투에서 게이트는 사망 여부를 판단합니다.\n반드시 true/false 양방향을 연결해야 합니다.\n\n[적 사망?]: enemy_hp <= 0\n- true (bottom) → 승리\n- false (right) → 적 반격 시퀀스\n\n[플레이어 사망?]: player_hp <= 0\n- true (bottom) → 패배\n- false (right) → 전투 메인 루프 복귀\n\n주의: hp가 음수가 되어도 <= 0 조건이 작동합니다.\n0 미만으로 내려가는 것을 막으려면\ntrig_atk에서 max(0, hp - damage) 처리 추가.            ",
+        "_expandedHeight": 338
+      },
+      "style": {
+        "height": 36
+      },
+      "width": 376,
+      "height": 36,
+      "measured": {
+        "width": 376,
+        "height": 36
+      },
+      "resizing": false
+    },
+    {
+      "id": "memo_ui",
+      "type": "memo",
+      "position": {
+        "x": 987.9649473345446,
+        "y": -614.2600655291039
+      },
+      "data": {
+        "label": "UI 화면에 변수 표시하는 방법",
+        "description": "두 가지 방법으로 변수 값을 화면에 표시합니다.\n\n① 텍스트 바인딩 (Handlebars):\n{{player_hp}} / {{player_max_hp}}\n텍스트 컴포넌트의 text props에 직접 입력합니다.\n\n② 게이지 바인딩 (Progress):\nprops.value에 { \"$state\": \"/player_hp_ratio\" }\n0.0~1.0 비율 변수를 실시간으로 추적합니다.\n\n주의: 비율 변수는 공격 계산 직후 반드시 갱신해야\n게이지가 올바르게 줄어들도록 표시됩니다.\n\n표시 예시:\n체력: {{player_hp}} / {{player_max_hp}}\n공격력: {{player_atk}}\n턴: {{turn_count}}"
+      },
+      "width": 458,
+      "height": 402,
+      "measured": {
+        "width": 458,
+        "height": 402
+      },
+      "resizing": false
+    },
+    {
+      "id": "trig_defense_roll",
+      "type": "trigger",
+      "position": {
+        "x": 487,
+        "y": 610.884086444008
+      },
+      "data": {
+        "label": "방어 굴림",
+        "attributes": [
+          {
+            "key": "defense_roll",
+            "type": "number",
+            "value": "rand.d6()"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "방어 성공 여부를 결정하는 주사위를 굴립니다."
+      },
+      "measured": {
+        "width": 280,
+        "height": 111
+      }
+    },
+    {
+      "id": "gate_defense",
+      "type": "gate",
+      "position": {
+        "x": 487,
+        "y": 760
+      },
+      "data": {
+        "label": "방어 성공?",
+        "condition": "defense_roll >= 4",
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "4 이상이면 성공 (50% 확률)",
+        "frictionScore": 0
+      },
+      "measured": {
+        "width": 220,
+        "height": 87
+      }
+    },
+    {
+      "id": "trig_defense_success",
+      "type": "trigger",
+      "position": {
+        "x": 487,
+        "y": 958.5183754430586
+      },
+      "data": {
+        "label": "방어 성공 — 데미지 감소",
+        "attributes": [
+          {
+            "key": "damage",
+            "type": "number",
+            "value": "enemy_atk + rand.d6()"
+          },
+          {
+            "key": "player_hp",
+            "type": "number",
+            "value": "player_hp - (damage * 0.7)"
+          },
+          {
+            "key": "player_hp_ratio",
+            "type": "number",
+            "value": "player_hp / player_max_hp"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 3,
+          "motivation": 5,
+          "relatedness": 0
+        },
+        "description": "적 데미지를 30% 감소시킵니다."
+      },
+      "measured": {
+        "width": 229,
+        "height": 141
+      }
+    },
+    {
+      "id": "trig_defense_fail",
+      "type": "trigger",
+      "position": {
+        "x": 1032.0322798473699,
+        "y": 958.5183754430586
+      },
+      "data": {
+        "label": "방어 실패 — 데미지 그대로",
+        "attributes": [
+          {
+            "key": "damage",
+            "type": "number",
+            "value": "enemy_atk + rand.d6()"
+          },
+          {
+            "key": "player_hp",
+            "type": "number",
+            "value": "player_hp - damage"
+          },
+          {
+            "key": "player_hp_ratio",
+            "type": "number",
+            "value": "player_hp / player_max_hp"
+          }
+        ],
+        "sdtEffects": {
+          "autonomy": 0,
+          "competence": 0,
+          "motivation": 0,
+          "relatedness": 0
+        },
+        "description": "실패하여 적 데미지를 그대로 받습니다."
+      },
+      "measured": {
+        "width": 257,
+        "height": 141
+      }
+    },
+    {
+      "id": "memo_defense",
+      "type": "memo",
+      "position": {
+        "x": 1073.647583766896,
+        "y": 760
+      },
+      "data": {
+        "label": "방어 시스템 (2단계)",
+        "collapsed": true,
+        "description": "방어를 선택하면 적의 공격을 막을 기회가 생깁니다.\n\n방어 흐름:\n① 방어 굴림: rand.d6()\n② gate: defense_roll >= 4 (50% 확률)\n   성공 → 데미지 × 0.7 (30% 감소)\n   실패 → 데미지 그대로\n③ 플레이어 사망 체크 후 루프 복귀\n\n수치 조정:\n- 성공 확률: defense_roll >= 4 의 숫자 변경\n  (>=3 이면 67% / >=5 이면 33%)\n- 감소율: damage * 0.7 의 0.7 값 변경\n  (0.5 이면 50% 감소 / 0.9 이면 10% 감소)\n\n3단계 확장 예정:\n- 즉시 반격 보너스\n- 방어력 수치 누적",
+        "_expandedHeight": 404
+      },
+      "style": {
+        "height": 36
+      },
+      "width": 348,
+      "height": 36,
+      "measured": {
+        "width": 348,
+        "height": 36
+      },
+      "resizing": false
+    },
+    {
+      "id": "n_s3AlQ2hFny",
+      "type": "memo",
+      "position": {
+        "x": 656.6425281664656,
+        "y": -262.03990569828716
+      },
+      "data": {
+        "color": "coral",
+        "label": "HP 게이지 비율 변수란?",
+        "collapsed": true,
+        "description": "화면에 HP 게이지 바를 표시하기 위한 변수입니다.\nLLE의 게이지(Progress) 컴포넌트는 0.0~1.0 사이의 비율 값만 받습니다.\n현재 HP를 최대 HP로 나누어 비율로 변환합니다.\n계산 공식:\nplayer_hp_ratio = player_hp / player_max_hp\n예시:\n체력 70/100 → 0.7 → 게이지 70% 표시\n체력 30/100 → 0.3 → 게이지 30% 표시\n게이지 연결 방법:\nmockSpec의 Progress 컴포넌트 props.value에\n{ \"$state\": \"/player_hp_ratio\" } 형식으로 입력합니다.\n주의:\n공격을 받을 때마다 player_hp 를 깎은 직후\nplayer_hp_ratio 도 함께 갱신해야 게이지가 올바르게 줄어듭니다.\nUI 없이 시뮬레이터만 사용할 경우 이 변수는 없어도 동작합니다.\n실제 화면에 게이지를 붙일 때 필요합니다.",
+        "_expandedHeight": 374
+      },
+      "style": {
+        "height": 36
+      },
+      "width": 429,
+      "height": 36,
+      "measured": {
+        "width": 429,
+        "height": 36
+      },
+      "resizing": false
+    },
+    {
+      "id": "n_ZVrtFvQkEA",
+      "type": "memo",
+      "position": {
+        "x": 610.9387624912426,
+        "y": -120.20478001024384
+      },
+      "data": {
+        "color": "marigold",
+        "label": "defense_roll 방어 굴림 변수",
+        "collapsed": true,
+        "description": "방어를 선택했을 때 성공 여부를 결정하는 주사위 결과값입니다.\n방어를 선택하면 1~6 사이의 숫자를 무작위로 뽑습니다.\n이 숫자가 기준값 이상이면 방어 성공, 미만이면 방어 실패입니다.\n계산 공식:\ndefense_roll = rand.d6()\n판정 기준:\ndefense_roll >= 4 → 방어 성공 (4, 5, 6 해당 = 50% 확률)\ndefense_roll < 4  → 방어 실패 (1, 2, 3 해당 = 50% 확률)\n성공 시: 적 데미지를 30% 줄여서 받습니다.\n실패 시: 적 데미지를 그대로 받습니다.\n확률 조정 방법:\n[방어 성공?] 게이트 노드의 조건값을 변경하세요.\n\n= 3 으로 바꾸면 성공 확률 67%\n= 5 로 바꾸면 성공 확률 33%\n\n3단계 확장 예정:\n방어 성공 시 즉시 반격 및 방어력 수치 누적 시스템 추가 예정입니다.",
+        "_expandedHeight": 413
+      },
+      "style": {
+        "height": 36
+      },
+      "width": 346,
+      "height": 36,
+      "measured": {
+        "width": 346,
+        "height": 36
+      },
+      "resizing": false
+    },
+    {
+      "id": "n_7Sh8pLXfHq",
+      "type": "resource",
+      "position": {
+        "x": 43.812354245809956,
+        "y": 1463.1876227897837
+      },
+      "data": {
+        "tags": [],
+        "label": "자원",
+        "resourceId": "B0ubePt85yGolsY5SBRa",
+        "description": "",
+        "resourceKey": "gold"
+      },
+      "measured": {
+        "width": 56,
+        "height": 56
+      }
+    },
+    {
+      "id": "n_outcome_emotion",
+      "type": "emotion",
+      "position": {
+        "x": -107.56229926313523,
+        "y": 1095.1269391980475
+      },
+      "data": {
+        "tags": [],
+        "label": "감정 (성취감)",
+        "arousal": "high",
+        "needState": "satisfied",
+        "needSource": "competence",
+        "description": "",
+        "emotionType": "성취감",
+        "frictionScore": 0,
+        "playerSegment": []
+      },
+      "measured": {
+        "width": 220,
+        "height": 89
+      }
+    },
+    {
+      "id": "n_outcome_prog",
+      "type": "progression",
+      "position": {
+        "x": -107.56229926313523,
+        "y": 1253.877139584377
+      },
+      "data": {
+        "label": "성장 (레벨업)",
+        "sdtEffects": {
+          "competence": 10,
+          "motivation": 20
+        },
+        "progressionType": "level"
+      },
+      "measured": {
+        "width": 220,
+        "height": 60
+      }
+    },
+    {
+      "id": "n_outcome_frustration",
+      "type": "emotion",
+      "position": {
+        "x": 987.9649473345446,
+        "y": 1727.5097101974277
+      },
+      "data": {
+        "tags": [],
+        "label": "감정 (좌절)",
+        "arousal": "high",
+        "needState": "frustrated",
+        "needSource": "competence",
+        "description": "",
+        "emotionType": "좌절감",
+        "frictionScore": 0,
+        "playerSegment": []
+      },
+      "measured": {
+        "width": 220,
+        "height": 89
+      }
+    },
+    {
+      "id": "n_micro_frustration",
+      "type": "emotion",
+      "position": {
+        "x": 713.6470169276695,
+        "y": 1727.5097101974277
+      },
+      "data": {
+        "tags": [],
+        "label": "감정 ",
+        "arousal": "high",
+        "needState": "building",
+        "needSource": "competence",
+        "description": "",
+        "emotionType": "도전감",
+        "frictionScore": 0,
+        "playerSegment": []
+      },
+      "measured": {
+        "width": 220,
+        "height": 89
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "xy-edge__xbB65S1FVTQsKviTmpCobottom-WOGebJtUG9fTXv1AggCHtop",
+      "source": "xbB65S1FVTQsKviTmpCo",
+      "target": "WOGebJtUG9fTXv1AggCH",
+      "data": {
+        "label": "적 생존 (false)",
+        "gateBranch": "false"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__WOGebJtUG9fTXv1AggCHbottom-trig_enemy_atkleft",
+      "source": "WOGebJtUG9fTXv1AggCH",
+      "target": "trig_calc_e_dmg",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "id": "xy-edge__HIOoyUfUBzgoZfaJbe2oleft-lxkO9hDma1yfobSxAcnRtop",
+      "source": "HIOoyUfUBzgoZfaJbe2o",
+      "target": "lxkO9hDma1yfobSxAcnR",
+      "data": {
+        "label": "공격 선택"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__HIOoyUfUBzgoZfaJbe2oright-fo2aXM16YcyoQpjqlom6top",
+      "source": "HIOoyUfUBzgoZfaJbe2o",
+      "target": "fo2aXM16YcyoQpjqlom6",
+      "data": {
+        "label": "대기 선택"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__lxkO9hDma1yfobSxAcnRbottom-trig_player_atktop",
+      "source": "lxkO9hDma1yfobSxAcnR",
+      "target": "trig_calc_p_dmg",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__trig_player_atkbottom-xbB65S1FVTQsKviTmpCotop",
+      "source": "trig_player_atk",
+      "target": "xbB65S1FVTQsKviTmpCo",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__fo2aXM16YcyoQpjqlom6bottom-WOGebJtUG9fTXv1AggCHtop",
+      "source": "fo2aXM16YcyoQpjqlom6",
+      "target": "trig_defense_roll",
+      "data": {
+        "label": "대기 후 적 반격"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__3dMvnKaXtRBlG9qJOqe0bottom-n_inittop",
+      "source": "3dMvnKaXtRBlG9qJOqe0",
+      "target": "n_init_player",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__n_initbottom-HIOoyUfUBzgoZfaJbe2otop",
+      "source": "n_init_enemy",
+      "target": "HIOoyUfUBzgoZfaJbe2o",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__dbClGLpmQ22hftQwXs3Mleft-HIOoyUfUBzgoZfaJbe2oleft",
+      "source": "dbClGLpmQ22hftQwXs3M",
+      "target": "HIOoyUfUBzgoZfaJbe2o",
+      "data": {
+        "label": "생존 → 다음 턴",
+        "gateBranch": "false"
+      },
+      "type": "exec",
+      "sourceHandle": "top",
+      "targetHandle": "right"
+    },
+    {
+      "id": "edge_victory_to_init",
+      "source": "JmXYql8aC8Thnor1Xcox",
+      "target": "n_init_player",
+      "data": {
+        "label": "적 찾기"
+      },
+      "type": "exec",
+      "sourceHandle": "left",
+      "targetHandle": "left"
+    },
+    {
+      "id": "edge_failure_to_init",
+      "source": "PkGUAqSomtLEOXEuyofe",
+      "target": "n_init_player",
+      "data": {
+        "label": "다시 시작"
+      },
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "right"
+    },
+    {
+      "id": "xy-edge__trig_calc_p_dmgbottom-trig_player_atktop_639c5526",
+      "source": "trig_calc_p_dmg",
+      "target": "trig_player_atk",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__trig_calc_e_dmgbottom-trig_enemy_atktop_8ab6c4c4",
+      "source": "trig_calc_e_dmg",
+      "target": "trig_enemy_atk",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__n_init_playerbottom-n_init_enemytop_b40ec29d",
+      "source": "n_init_player",
+      "target": "n_init_enemy",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__trig_defense_rollbottom-gate_defensetop",
+      "source": "trig_defense_roll",
+      "target": "gate_defense",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__gate_defensebottom-trig_defense_successtop-true",
+      "source": "gate_defense",
+      "target": "trig_defense_success",
+      "data": {
+        "gateBranch": "true"
+      },
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__gate_defenseright-trig_defense_failleft-false",
+      "source": "gate_defense",
+      "target": "trig_defense_fail",
+      "data": {
+        "gateBranch": "false"
+      },
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "id": "xy-edge__trig_defense_successbottom-gate_defense_deathtop",
+      "source": "trig_defense_success",
+      "target": "dbClGLpmQ22hftQwXs3M",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "xy-edge__JmXYql8aC8Thnor1Xcoxright-goldleft",
+      "source": "JmXYql8aC8Thnor1Xcox",
+      "target": "n_7Sh8pLXfHq",
+      "data": {
+        "amount": 1,
+        "resourceAmountExpression": "1"
+      },
+      "type": "resource",
+      "sourceHandle": "right",
+      "targetHandle": "left"
+    },
+    {
+      "id": "edge_gate_to_emo",
+      "source": "xbB65S1FVTQsKviTmpCo",
+      "target": "n_outcome_emotion",
+      "data": {
+        "label": "적 처치!",
+        "gateBranch": "true"
+      },
+      "type": "exec",
+      "sourceHandle": "left",
+      "targetHandle": "top"
+    },
+    {
+      "id": "edge_emo_to_prog",
+      "source": "n_outcome_emotion",
+      "target": "n_outcome_prog",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "edge_prog_to_victory",
+      "source": "n_outcome_prog",
+      "target": "JmXYql8aC8Thnor1Xcox",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "edge_gate_to_frustration",
+      "source": "dbClGLpmQ22hftQwXs3M",
+      "target": "n_outcome_frustration",
+      "data": {
+        "label": "플레이어 쓰러짐",
+        "gateBranch": "true"
+      },
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "right"
+    },
+    {
+      "id": "edge_frustration_to_defeat",
+      "source": "n_outcome_frustration",
+      "target": "PkGUAqSomtLEOXEuyofe",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "top",
+      "targetHandle": "right"
+    },
+    {
+      "id": "edge_trig_to_micro",
+      "source": "trig_enemy_atk",
+      "target": "n_micro_frustration",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "bottom",
+      "targetHandle": "top"
+    },
+    {
+      "id": "edge_micro_to_gate",
+      "source": "n_micro_frustration",
+      "target": "dbClGLpmQ22hftQwXs3M",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "left",
+      "targetHandle": "left"
+    },
+    {
+      "id": "e_2XZpy4CJU6",
+      "source": "trig_defense_fail",
+      "target": "n_micro_frustration",
+      "data": {},
+      "type": "exec",
+      "sourceHandle": "right",
+      "targetHandle": "bottom"
+    }
+  ],
+  "resources": [
+    {
+      "id": "B0ubePt85yGolsY5SBRa",
+      "key": "gold",
+      "name": "골드",
+      "color": "#FFD700",
+      "icon": "coin",
+      "order": 0
+    },
+    {
+      "id": "XQecVcGX0EJpSXKSzXs5",
+      "key": "dice",
+      "name": "주사위",
+      "color": "marigold",
+      "icon": "box",
+      "order": 0
+    }
+  ]
+}

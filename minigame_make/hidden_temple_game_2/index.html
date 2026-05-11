@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Hidden Temple</title>
+  <link rel="stylesheet" href="/src/index.css">
+</head>
+<body>
+  <div id="ui-layer" style="display:flex; flex-direction:column; width:100%; height:100%; position:absolute; top:0; left:0; pointer-events:none;">
+    
+    <!-- TOP SECTION -->
+    <div class="top-section" style="display:flex; flex-direction:column; align-items:center; background:#faf8f5; pointer-events:auto; z-index:50;">
+      <div class="top-bar" style="display:flex; justify-content:space-between; width:100%; padding:8px 12px;">
+        <button id="cheat-btn" class="sketch-btn">+100 ⛏️</button>
+        <div class="timer-badge">⏳ 숨겨진 사원</div>
+        <button id="reset-btn" class="sketch-btn">리셋</button>
+      </div>
+      
+      <!-- Door UI -->
+      <div class="door-container">
+        <div class="door-circle"><div class="door-inner">🚪</div></div>
+      </div>
+      
+      <!-- Stage Progress Bar (Chests & Lines) -->
+      <div class="stage-progress" id="stage-progress" style="display:flex; justify-content:center; align-items:center;">
+        <div class="chest active" data-stage="1">I</div><div class="line"></div>
+        <div class="chest" data-stage="2">II</div><div class="line"></div>
+        <div class="chest" data-stage="3">III</div><div class="line"></div>
+        <div class="chest" data-stage="4">IV</div><div class="line"></div>
+        <div class="chest" data-stage="5">V</div>
+      </div>
+      
+      <!-- Resource Counters -->
+      <div class="counter-container" style="display:flex; gap:12px; margin-top:8px; margin-bottom:8px;">
+        <div class="pickaxe-counter" id="pickaxe-counter">⛏️ 50</div>
+        <div class="gem-counter" id="gem-counter">💎 0 / 2</div>
+      </div>
+    </div>
+
+    <!-- MAIN AREA (Canvas + Bottom Slots) -->
+    <div class="main-area" style="flex:1; display:flex; flex-direction:column; width:100%; position:relative;">
+      
+      <!-- Three.js Canvas Container -->
+      <div id="canvas-container" style="flex:1; width:100%; position:relative; pointer-events:auto; cursor:none; border-top:2px solid #222; border-bottom:2px solid #222; overflow:hidden;">
+        <canvas id="game-canvas" style="width:100%; height:100%; outline:none; display:block;"></canvas>
+        <div id="emoji-overlay" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none;"></div>
+      </div>
+      
+      <!-- Bottom Item Slots -->
+      <div class="item-slot-bar" id="item-slot-bar" style="height:72px; display:flex; justify-content:center; align-items:center; gap:10px; pointer-events:auto; background:#faf8f5; flex-shrink:0;">
+        <div class="item-slot"></div>
+        <div class="item-slot"></div>
+        <div class="item-slot"></div>
+      </div>
+    </div>
+
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
