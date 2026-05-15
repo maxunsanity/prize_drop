@@ -22,9 +22,19 @@ function HudTopSectionImpl({ children }: ComponentRenderProps) {
   return <div className="prizedrop-hud-top">{children}</div>;
 }
 
-// 공 수 + 배수 한 줄 (flex row)
-function ControlsRowImpl({ children }: ComponentRenderProps) {
-  return <div className="prizedrop-controls-row">{children}</div>;
+// 신규: 스테이터스 콘솔 (공 수 + 배수)
+function StatusPanelImpl({ children }: ComponentRenderProps) {
+  return <div className="prizedrop-status-panel">{children}</div>;
+}
+
+// 신규: 머신 헤드 (드롭 버튼들을 감싸는 종이 프레임)
+function MachineHeadImpl({ children }: ComponentRenderProps) {
+  return (
+    <div className="prizedrop-machine-head">
+      <div className="machine-head-body">{children}</div>
+      <div className="machine-head-bottom-line" />
+    </div>
+  );
 }
 
 // 보드 공간 확보용 spacer — pointer-events: none 으로 클릭 통과
@@ -54,16 +64,18 @@ function MultiplierImpl({ element, emit }: ComponentRenderProps) {
   );
 }
 
-// 드롭 버튼 — emit은 runtime params를 지원하지 않아 bridge 직접 호출
+// 드롭 버튼 — 각 버튼마다 종이 배출구(Launcher)를 감싸도록 변경
 function DropButtonsImpl() {
   return (
     <div id="jr-overlay-buttons">
       {[0, 1, 2, 3, 4].map(i => (
-        <button
-          key={i}
-          className="btn-drop"
-          onClick={() => dispatchGameAction('release_drop', i)}
-        />
+        <div key={i} className="drop-launcher">
+          <button
+            className="btn-drop"
+            onClick={() => dispatchGameAction('release_drop', i)}
+          />
+          <div className="launcher-spout" />
+        </div>
       ))}
     </div>
   );
@@ -106,6 +118,13 @@ function MilestoneBarImpl({ element }: ComponentRenderProps) {
     : 1;
   const fillWidth = (step + segProgress) / total * 100;
 
+  // 세이프 존 (10% ~ 90% 구간 사용)을 적용하여 아이콘 쏠림 방지
+  const getMarkLeft = (i: number) => {
+    const p = (i + 1) / total;
+    const safePadding = 10; // %
+    return safePadding + p * (100 - safePadding * 2);
+  };
+
   return (
     <div className="ms-wrap">
       <div className={`ms-gain ${p.showGain ? 'ms-gain--on' : ''}`}>
@@ -115,7 +134,7 @@ function MilestoneBarImpl({ element }: ComponentRenderProps) {
       <div className="ms-track">
         <div className="ms-fill" style={{ width: `${fillWidth}%` }} />
         {thresholds.map((t, i) => (
-          <div key={i} className={`ms-mark ${i < step ? 'ms-mark--done' : ''}`} style={{ left: `${((i + 1) / total) * 100}%` }}>
+          <div key={i} className={`ms-mark ${i < step ? 'ms-mark--done' : ''}`} style={{ left: `${getMarkLeft(i)}%` }}>
             <div className="ms-mark-icon">{i < step ? '✓' : '🎁'}</div>
             <div className="ms-mark-num">{t}</div>
           </div>
@@ -189,7 +208,8 @@ function RewardModalImpl({ element, emit }: ComponentRenderProps) {
 export const prizedropRegistry: ComponentRegistry = {
   PrizedropHudRoot: HudRootImpl,
   PrizedropHudTopSection: HudTopSectionImpl,
-  PrizedropHudControlsRow: ControlsRowImpl,
+  PrizedropHudStatusPanel: StatusPanelImpl,
+  PrizedropHudMachineHead: MachineHeadImpl,
   PrizedropHudBoardSpacer: BoardSpacerImpl,
   PrizedropHudBallCount: BallCountImpl,
   PrizedropHudMultiplier: MultiplierImpl,
@@ -240,12 +260,17 @@ export const mainHudSpec: Spec = {
     hud_top: {
       type: 'PrizedropHudTopSection',
       props: {},
-      children: ['controls_row', 'drop_buttons'],
+      children: ['status_panel', 'machine_head'],
     },
-    controls_row: {
-      type: 'PrizedropHudControlsRow',
+    status_panel: {
+      type: 'PrizedropHudStatusPanel',
       props: {},
       children: ['ball_count', 'multiplier'],
+    },
+    machine_head: {
+      type: 'PrizedropHudMachineHead',
+      props: {},
+      children: ['drop_buttons'],
     },
     board_spacer: {
       type: 'PrizedropHudBoardSpacer',

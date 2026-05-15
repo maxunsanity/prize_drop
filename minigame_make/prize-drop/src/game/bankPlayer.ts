@@ -21,6 +21,7 @@ export class BankPlayer {
   private banks = new Map<string, BankPath[]>();
   private scene: THREE.Scene;
   private viewHeight: number;
+  private activeBalls = new Set<THREE.Object3D>();
 
   constructor(scene: THREE.Scene, viewHeight: number) {
     this.scene = scene;
@@ -79,6 +80,7 @@ export class BankPlayer {
     const path = paths[Math.floor(Math.random() * paths.length)];
     const ball = createBallMesh();
     this.scene.add(ball);
+    this.activeBalls.add(ball);
 
     const first = path.keyframes[0];
     ball.position.set(first.x, BOARD_CONSTANTS.HEIGHT - first.y, 10);
@@ -113,6 +115,7 @@ export class BankPlayer {
             requestAnimationFrame(sink);
           } else {
             this.scene.remove(ball);
+            this.activeBalls.delete(ball);
           }
         };
         requestAnimationFrame(sink);
@@ -137,6 +140,10 @@ export class BankPlayer {
 
     requestAnimationFrame(tick);
     return true;
+  }
+
+  getActiveBalls(): THREE.Object3D[] {
+    return Array.from(this.activeBalls);
   }
 }
 

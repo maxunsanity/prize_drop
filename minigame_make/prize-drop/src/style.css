@@ -36,14 +36,16 @@ body {
 }
 
 /* 1. Top UI Area */
-#top-ui-area {
-  height: 80px;
+.prizedrop-hud-top {
+  height: 110px;
   width: 100%;
   position: relative;
-  z-index: 10;
+  z-index: 20;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 5px;
 }
 
 /* 2. The Machine Area (Fullscreen by default) */
@@ -115,30 +117,155 @@ body {
   100% { opacity: 0; }
 }
 
-/* HUD & Buttons */
-#jr-hud-widgets { display: flex; justify-content: center; align-items: center; gap: 10px; position: relative; }
+/* ── Paper Status Panel (Dark Version) ── */
+.prizedrop-status-panel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  background: var(--bps-ink); /* 진한 잉크색 */
+  border: 2px solid var(--bps-gray);
+  padding: 5px 12px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  z-index: 25;
+  margin-bottom: 2px;
+  color: white; /* 텍스트는 흰색으로 */
+}
 
-/* 공 카운트 */
-.ball-hud { display: flex; align-items: center; gap: 5px; background: white; border: 2px solid var(--bps-ink); border-radius: 50px; padding: 3px 8px 3px 10px; box-shadow: 2px 2px 0px #000; }
-.ball-icon { font-size: 13px; line-height: 1; }
-.ball-count { font-size: 13px; font-weight: 900; color: var(--bps-ink); min-width: 18px; text-align: center; }
-.btn-add-balls { background: var(--bps-ink); color: white; border: none; border-radius: 50px; padding: 2px 8px; font-size: 10px; font-weight: 900; cursor: pointer; font-family: var(--font-main); }
+/* ── Paper Machine Head (Dark Version) ── */
+.prizedrop-machine-head {
+  width: 360px; /* 보드 너비와 동일하게 */
+  position: relative;
+  z-index: 21;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-/* 배수 */
-.multiplier-circle { width: 34px; height: 34px; background: white; border: 2px solid var(--bps-ink); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: 900; font-size: 12px; box-shadow: 2px 2px 0px #000; cursor: pointer; flex-shrink: 0; }
+.machine-head-body {
+  width: 100%;
+  background: var(--bps-ink); /* 진한 잉크색 */
+  border: 2px solid var(--bps-ink);
+  border-radius: 12px 12px 0 0;
+  padding: 8px 20px 6px; /* 하단 패딩 대폭 축소 */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
 
-#jr-overlay-buttons { margin-top: 5px; display: flex; justify-content: space-between; width: 300px; margin-left: auto; margin-right: auto; }
-.btn-drop { width: 28px; height: 28px; border-radius: 50%; background: white; border: 2px solid var(--bps-ink); cursor: pointer; box-shadow: 2px 2px 0px #000; display: flex; justify-content: center; align-items: center; }
-.btn-drop::after { content: '▼'; font-size: 8px; }
+.machine-head-bottom-line {
+  width: 100%;
+  height: 6px;
+  background: var(--bps-gray); /* 구분선은 밝게 */
+  border-bottom: 2px solid var(--bps-ink);
+}
+
+/* 드롭 버튼 & 런처 */
+#jr-overlay-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.drop-launcher {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.btn-drop {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--bps-paper);
+  border: 3px solid var(--bps-ink);
+  cursor: pointer;
+  box-shadow: 2px 2px 0px rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  transition: transform 0.1s;
+}
+
+.btn-drop:active { transform: translateY(2px); box-shadow: 0px 0px 0px #000; }
+.btn-drop::after { content: '▼'; font-size: 10px; font-weight: 900; color: var(--bps-ink); }
+
+/* 런처 배출구 (Spout) — 길이를 아주 짧게 조절 */
+.launcher-spout {
+  width: 14px;
+  height: 6px;
+  background: var(--bps-paper);
+  border-left: 2px solid var(--bps-ink);
+  border-right: 2px solid var(--bps-ink);
+  border-bottom: 2px solid var(--bps-ink);
+  margin-top: -2px;
+  z-index: 1;
+}
+
+/* 공 카운트 & 배수 미세 조정 */
+.ball-hud {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255,255,255,0.1); /* 어두운 배경에 맞게 투명감 */
+  border: 1.5px solid var(--bps-gray);
+  border-radius: 8px;
+  padding: 2px 8px;
+}
+.ball-icon { font-size: 13px; }
+.ball-count { font-size: 13px; font-weight: 900; color: white; }
+.btn-add-balls {
+  background: var(--bps-gray);
+  color: var(--bps-ink);
+  border: none;
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-size: 9px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.multiplier-circle {
+  width: 30px;
+  height: 30px;
+  background: var(--bps-gray);
+  color: var(--bps-ink);
+  border: 1px solid var(--bps-ink);
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 900;
+  font-size: 11px;
+  cursor: pointer;
+}
 
 /* 공 없음 경고 토스트 */
 .ball-warning { position: absolute; bottom: 140px; left: 50%; transform: translateX(-50%); background: #1a1a1a; color: white; font-size: 11px; font-weight: 800; padding: 8px 16px; border-radius: 50px; white-space: nowrap; z-index: 200; animation: rw-fade-in 0.15s ease; font-family: var(--font-main); }
 
-/* Slot Items */
-.slot-item { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; border-left: 1px solid rgba(0,0,0,0.1); }
-.slot-item:first-child { border-left: none; }
-.lightning-icon { width: 8px; height: 14px; background: var(--bps-ink); clip-path: polygon(50% 0%, 0% 60%, 40% 60%, 20% 100%, 100% 40%, 60% 40%); }
-.slot-val { font-size: 8px; font-weight: 900; color: var(--bps-ink); }
+/* 슬롯 3D 느낌 (적당한 깊이감) */
+#slot-labels {
+  height: 50px;
+  width: 100%;
+  display: flex;
+  background: #e8e8d8; /* 보드보다 살짝 어둡게 */
+  border-top: 1px solid var(--bps-gray); /* 두꺼운 검정 대신 얇은 회색으로 */
+  box-shadow: inset 0 5px 10px rgba(0,0,0,0.1); 
+  z-index: 5;
+  cursor: pointer;
+}
+
+.slot-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-left: 1px solid rgba(0,0,0,0.15);
+  box-shadow: inset 1px 0 3px rgba(255,255,255,0.4); /* 각 슬롯 경계 입체감 */
+}
 
 /* ── HUD Layout (json-render) ──────────────────────────────── */
 .prizedrop-hud-root {
@@ -154,10 +281,10 @@ body {
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: flex-start;
   align-items: center;
-  gap: 6px;
-  padding: 8px 0 4px;
+  padding: 5px 0 0; /* 상단 패딩 최소화 */
+  z-index: 20;
 }
 
 .prizedrop-controls-row {
@@ -179,10 +306,12 @@ body {
   position: relative;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
-  padding: 10px 14px 8px;
-  gap: 7px;
-  background: #1a1a28;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0 0;
+  gap: 8px;
+  background: #0c0c14;
+  border-top: 2px solid var(--bps-gray);
   flex: 1;
 }
 
@@ -208,10 +337,10 @@ body {
 .ms-gain-arrow { color: #4cde6a; font-size: 12px; line-height: 1; }
 .ms-gain-num { color: #4cde6a; font-size: 12px; font-weight: 900; letter-spacing: -0.5px; }
 
-/* 트랙 */
+/* 트랙 — 좌우 대칭을 위해 고정 폭과 margin 사용 */
 .ms-track {
-  width: calc(100% - 22px);
-  align-self: center;
+  width: 320px; /* 명시적 너비로 쏠림 원천 차단 */
+  margin: 0 auto;
   flex-shrink: 0;
   position: relative;
   height: 22px;
@@ -285,6 +414,7 @@ body {
   letter-spacing: 1px;
   text-transform: uppercase;
   text-align: center;
+  width: 100%; /* 너비 확보 후 센터링 */
 }
 .ms-cycle-badge {
   display: inline-block;

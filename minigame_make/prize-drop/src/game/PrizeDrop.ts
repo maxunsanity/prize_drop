@@ -24,6 +24,13 @@ export class PrizeDrop implements GameActions {
   private currentMultiplier = 1;
   private milestonesCleared: boolean[];
   private cycleCount = 0;
+  private rewardMeshes: { 
+    mesh: THREE.Mesh, 
+    outline: THREE.Mesh, 
+    ripples: THREE.Mesh[], 
+    originalRadius: number, 
+    lastHitTime: number 
+  }[] = [];
 
   constructor(container: HTMLElement, private data: LoadedGameData) {
     this.viewWidth = container.clientWidth || BOARD_CONSTANTS.WIDTH;
@@ -120,11 +127,26 @@ export class PrizeDrop implements GameActions {
         const rewardMesh = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: '#ffffff' }));
         rewardMesh.position.set(cx, cy, 2);
         obstacleGroup.add(rewardMesh);
-        const outlineGeo = new THREE.RingGeometry(r - 2, r + 1, 32);
+        
+        const outlineGeo = new THREE.RingGeometry(r - 1.5, r + 1.5, 32);
         const outline = new THREE.Mesh(outlineGeo, new THREE.MeshBasicMaterial({ color: '#1a1a1a', side: THREE.DoubleSide }));
         outline.position.set(cx, cy, 2.1);
         obstacleGroup.add(outline);
-      } else if (body.label === 'obstacle') {
+        // 애니메이션 관리를 위해 저장 (리플 라인 추가)
+        const ripples: THREE.Mesh[] = [];
+        const rippleGeo = new THREE.RingGeometry(r - 1, r, 32);
+        const rippleMat = new THREE.MeshBasicMaterial({ color: '#1a1a1a', transparent: true, opacity: 0 });
+        
+        for (let i = 0; i < 2; i++) {
+          const ripple = new THREE.Mesh(rippleGeo, rippleMat.clone());
+          ripple.position.set(cx, cy, 2.05); // 원과 테두리 사이
+          ripple.visible = false;
+          obstacleGroup.add(ripple);
+          ripples.push(ripple);
+        }
+
+        this.rewardMeshes.push({ mesh: rewardMesh, outline, ripples, originalRadius: r, lastHitTime: 0 });
+      } else if (body.label === 'obstacle' || body.label === 'bumper') {
         const vCount = body.vertices?.length ?? 4;
         const r = body.originalRadius ?? (vCount === 3 ? 24 : 30);
         let geo: THREE.BufferGeometry;
@@ -139,30 +161,15 @@ export class PrizeDrop implements GameActions {
           }
           geo = new THREE.ShapeGeometry(shape);
         } else {
-          geo = new THREE.CircleGeometry(r, 4);
+          geo = new THREE.CircleGeometry(r, 4); // Diamond or Square
         }
 
-        const mat = new THREE.MeshBasicMaterial({ color: '#c8c8b8' });
+        // 다이아몬드, 범퍼, 삼각형은 모두 아주 단단한 블랙 솔리드
+        const mat = new THREE.MeshBasicMaterial({ color: '#1a1a1a' });
         const mesh = new THREE.Mesh(geo, mat);
-        mesh.position.set(cx, cy, 0);
+        mesh.position.set(cx, cy, 0.5);
         if (vCount === 4) mesh.rotation.z = Math.PI / 4;
         obstacleGroup.add(mesh);
-
-        const edgeGeo = new THREE.EdgesGeometry(geo);
-        const edges = new THREE.LineSegments(edgeGeo, new THREE.LineBasicMaterial({ color: '#888877' }));
-        edges.position.set(cx, cy, 0.1);
-        edges.rotation.copy(mesh.rotation);
-        obstacleGroup.add(edges);
-      } else if (body.label === 'bumper') {
-        const side = (body.originalRadius ?? 10) * 2;
-        const geo = new THREE.PlaneGeometry(side, side);
-        const mesh = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: '#c8c8b8' }));
-        mesh.position.set(cx, cy, 0);
-        obstacleGroup.add(mesh);
-        const edgeGeo = new THREE.EdgesGeometry(geo);
-        const edges = new THREE.LineSegments(edgeGeo, new THREE.LineBasicMaterial({ color: '#888877' }));
-        edges.position.set(cx, cy, 0.1);
-        obstacleGroup.add(edges);
       }
     });
 
@@ -173,10 +180,69 @@ export class PrizeDrop implements GameActions {
     Matter.World.clear(engine.world, false);
   }
 
-  // ── 렌더 루프 (물리 없음 — Three.js 렌더만) ──────────────────
+  // ── 렌더 루프 ───────────────────────────────────────────
   private startRenderLoop() {
     const loop = () => {
       requestAnimationFrame(loop);
+      
+      const now = Date.now();
+      const balls = this.bankPlayer.getActiveBalls();
+      const ballRadius = 9; // boardBuilder.ts 수치와 동기화
+
+      // 우퍼 바운스 로직: 모든 활성 구슬과 보상 원형의 충돌 체크
+      this.rewardMeshes.forEach(rm => {
+        let isHit = false;
+        balls.forEach(ball => {
+          const dx = ball.position.x - rm.mesh.position.x;
+          const dy = ball.position.y - rm.mesh.position.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          
+          // 충돌 감지 (Pre-sim이라도 시각적 효과를 위해 거리 체크)
+          if (dist < rm.originalRadius + ballRadius + 2) {
+            isHit = true;
+          }
+        });
+
+        if (isHit && now - rm.lastHitTime > 150) {
+          rm.lastHitTime = now;
+        }
+
+        // 바운스 & 리플 애니메이션
+        const elapsed = now - rm.lastHitTime;
+        if (elapsed < 400) {
+          // 1. 메인 바운스 (0~300ms)
+          if (elapsed < 300) {
+            const s = elapsed < 80 ? 1 + (elapsed / 80) * 0.12 : 1.12 - ((elapsed - 80) / 220) * 0.12;
+            rm.mesh.scale.set(s, s, 1);
+            rm.outline.scale.set(s, s, 1);
+          } else {
+            rm.mesh.scale.set(1, 1, 1);
+            rm.outline.scale.set(1, 1, 1);
+          }
+
+          // 2. 소닉 리플 (안쪽으로 수축)
+          rm.ripples.forEach((ripple, idx) => {
+            const delay = idx * 120; // 라인간 시간차
+            const rElapsed = elapsed - delay;
+            const rDuration = 280;
+
+            if (rElapsed > 0 && rElapsed < rDuration) {
+              ripple.visible = true;
+              const p = rElapsed / rDuration;
+              const s = 1 - p; // 1 -> 0 (점으로 수축)
+              ripple.scale.set(s, s, 1);
+              (ripple.material as THREE.MeshBasicMaterial).opacity = (1 - p) * 0.6;
+            } else {
+              ripple.visible = false;
+            }
+          });
+        } else {
+          rm.mesh.scale.set(1, 1, 1);
+          rm.outline.scale.set(1, 1, 1);
+          rm.ripples.forEach(r => r.visible = false);
+        }
+      });
+
       this.renderer.render(this.scene, this.camera);
     };
     loop();
