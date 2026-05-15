@@ -1,0 +1,306 @@
+import React from 'react';
+import {
+  Renderer,
+  ComponentRegistry,
+  Spec,
+  ComponentRenderProps,
+} from '@json-render/react';
+import { ActionHandler } from '@json-render/core';
+import { hudStore } from '../game/hudExternalStore';
+import { dispatchGameAction } from '../game/gameControlBridge';
+import { rewardModalStore } from '../game/rewardModalStore';
+
+// ── Registry 구현 ────────────────────────────────────────────────
+
+// 전체 HUD root 래퍼 — flex column, 646px 고정 높이로 레이아웃 잡음
+function HudRootImpl({ children }: ComponentRenderProps) {
+  return <div className="prizedrop-hud-root">{children}</div>;
+}
+
+// 상단 컨트롤 영역 — 110px 고정
+function HudTopSectionImpl({ children }: ComponentRenderProps) {
+  return <div className="prizedrop-hud-top">{children}</div>;
+}
+
+// 공 수 + 배수 한 줄 (flex row)
+function ControlsRowImpl({ children }: ComponentRenderProps) {
+  return <div className="prizedrop-controls-row">{children}</div>;
+}
+
+// 보드 공간 확보용 spacer — pointer-events: none 으로 클릭 통과
+function BoardSpacerImpl() {
+  return <div className="prizedrop-board-spacer" />;
+}
+
+function BallCountImpl({ element, emit }: ComponentRenderProps) {
+  const p = (element.props ?? {}) as { ballCount?: unknown; showWarning?: unknown };
+  const count = Number(p.ballCount ?? 0);
+  return (
+    <div className="ball-hud">
+      <span className="ball-icon">⚾</span>
+      <span className="ball-count">{count}</span>
+      <button className="btn-add-balls" onClick={() => (emit as any)('press')}>+10</button>
+      {!!p.showWarning && <div className="ball-warning">공이 부족합니다!</div>}
+    </div>
+  );
+}
+
+function MultiplierImpl({ element, emit }: ComponentRenderProps) {
+  const p = (element.props ?? {}) as { multiplier?: unknown };
+  return (
+    <div className="multiplier-circle" onClick={() => (emit as any)('press')}>
+      x{Number(p.multiplier ?? 1)}
+    </div>
+  );
+}
+
+// 드롭 버튼 — emit은 runtime params를 지원하지 않아 bridge 직접 호출
+function DropButtonsImpl() {
+  return (
+    <div id="jr-overlay-buttons">
+      {[0, 1, 2, 3, 4].map(i => (
+        <button
+          key={i}
+          className="btn-drop"
+          onClick={() => dispatchGameAction('release_drop', i)}
+        />
+      ))}
+    </div>
+  );
+}
+
+function SlotLabelsImpl() {
+  const labels = [1, 10, 20, 100, 20, 10, 1];
+  return (
+    <div id="slot-labels">
+      {labels.map((v, i) => (
+        <div key={i} className="slot-item">
+          <div className="lightning-icon" />
+          <div className="slot-val">{v}</div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function MilestoneBarImpl({ element }: ComponentRenderProps) {
+  const p = (element.props ?? {}) as {
+    sessionLightning?: unknown;
+    milestoneStep?: unknown;
+    milestoneThresholds?: unknown;
+    lastGain?: unknown;
+    showGain?: unknown;
+    cycleCount?: unknown;
+  };
+
+  const step = Number(p.milestoneStep ?? 0);
+  const thresholds = (p.milestoneThresholds as number[]) ?? [100, 200, 300, 400, 500];
+  const sessionLightning = Number(p.sessionLightning ?? 0);
+  const total = thresholds.length;
+
+  // 균등 구간 공식 (CURSOR_AND_AGENT_EXPERIENCE.md 섹션 52)
+  const prevThreshold = step === 0 ? 0 : thresholds[step - 1];
+  const nextThreshold = thresholds[step] ?? thresholds[total - 1];
+  const segProgress = nextThreshold > prevThreshold
+    ? Math.max(0, Math.min((sessionLightning - prevThreshold) / (nextThreshold - prevThreshold), 1))
+    : 1;
+  const fillWidth = (step + segProgress) / total * 100;
+
+  return (
+    <div className="ms-wrap">
+      <div className={`ms-gain ${p.showGain ? 'ms-gain--on' : ''}`}>
+        <span className="ms-gain-arrow">▲</span>
+        <span className="ms-gain-num">+{Number(p.lastGain ?? 0)}</span>
+      </div>
+      <div className="ms-track">
+        <div className="ms-fill" style={{ width: `${fillWidth}%` }} />
+        {thresholds.map((t, i) => (
+          <div key={i} className={`ms-mark ${i < step ? 'ms-mark--done' : ''}`} style={{ left: `${((i + 1) / total) * 100}%` }}>
+            <div className="ms-mark-icon">{i < step ? '✓' : '🎁'}</div>
+            <div className="ms-mark-num">{t}</div>
+          </div>
+        ))}
+      </div>
+      <div className="ms-count">
+        NEXT REWARD AT {nextThreshold}
+        {Number(p.cycleCount ?? 0) > 0 && <span className="ms-cycle-badge">ROUND {Number(p.cycleCount)}</span>}
+      </div>
+    </div>
+  );
+}
+
+function RewardModalImpl({ element, emit }: ComponentRenderProps) {
+  const p = (element.props ?? {}) as {
+    visible?: unknown;
+    modalType?: unknown;
+    modalStep?: unknown;
+    rewardAmount?: unknown;
+    rewardType?: unknown;
+    remaining?: unknown;
+    cycleCount?: unknown;
+  };
+
+  if (!p.visible) return null;
+
+  const modalType = String(p.modalType ?? '');
+  const isJackpot = modalType === 'jackpot';
+  const isComplete = modalType === 'complete';
+  const remaining = Number(p.remaining ?? 0);
+
+  return (
+    <div className="rw-overlay" onClick={isComplete ? undefined : () => (emit as any)('close')}>
+      <div
+        className={`rw-card ${isJackpot ? 'rw-card--jackpot' : ''} ${isComplete ? 'rw-card--complete' : ''}`}
+        onClick={e => e.stopPropagation()}
+      >
+        {modalType === 'milestone' && (
+          <>
+            <div className="rw-icon">🎲</div>
+            <div className="rw-label">마일스톤 {Number(p.modalStep ?? 0)}단계 달성!</div>
+            <div className="rw-amount">+{Number(p.rewardAmount ?? 0)}</div>
+            <div className="rw-unit">{String(p.rewardType ?? 'Dice')}</div>
+          </>
+        )}
+        {isJackpot && (
+          <>
+            <div className="rw-icon">🎰</div>
+            <div className="rw-label">JACKPOT</div>
+            <div className="rw-amount">+{Number(p.rewardAmount ?? 0)}</div>
+            <div className="rw-unit">번개</div>
+          </>
+        )}
+        {isComplete && (
+          <>
+            <div className="rw-icon">🎉</div>
+            <div className="rw-label rw-label--complete">모든 이벤트를 진행하셨습니다!</div>
+            {Number(p.cycleCount ?? 0) > 1 && (
+              <div className="rw-unit">{Number(p.cycleCount ?? 0)}번째 완주</div>
+            )}
+          </>
+        )}
+        <button className="rw-close" onClick={() => (emit as any)('close')}>
+          {remaining > 0 ? `확인 (${remaining}개 남음)` : '확인'}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export const prizedropRegistry: ComponentRegistry = {
+  PrizedropHudRoot: HudRootImpl,
+  PrizedropHudTopSection: HudTopSectionImpl,
+  PrizedropHudControlsRow: ControlsRowImpl,
+  PrizedropHudBoardSpacer: BoardSpacerImpl,
+  PrizedropHudBallCount: BallCountImpl,
+  PrizedropHudMultiplier: MultiplierImpl,
+  PrizedropHudDropButtons: DropButtonsImpl,
+  PrizedropHudSlotLabels: SlotLabelsImpl,
+  PrizedropHudMilestoneBar: MilestoneBarImpl,
+  PrizedropHudRewardModal: RewardModalImpl,
+};
+
+// ── Action Handlers ──────────────────────────────────────────────
+
+export const overlayActionHandlers: Record<string, ActionHandler> = {
+  prizedropDropBall: async () => {
+    dispatchGameAction('release_drop', 2);
+  },
+  prizedropAddBalls: async () => {
+    hudStore.update({ '/hud/ball_count': (hudStore.getSnapshot()['/hud/ball_count'] as number) + 10 });
+  },
+  prizedropCycleMultiplier: async () => {
+    dispatchGameAction('select_multiplier');
+  },
+  prizedropDismissModal: async () => {
+    rewardModalStore.dismiss();
+  },
+};
+
+// ── Spec ─────────────────────────────────────────────────────────
+// 구조:
+//   root (HudRoot — flex column, 646px)
+//     hud_top (HudTopSection — 110px)
+//       controls_row (ControlsRow — flex row)
+//         ball_count
+//         multiplier
+//       drop_buttons
+//     board_spacer (396px, pointer-events: none)
+//     slot_labels (50px)
+//     milestone_bar
+//     reward_modal (position: absolute overlay)
+
+export const mainHudSpec: Spec = {
+  root: 'root',
+  elements: {
+    root: {
+      type: 'PrizedropHudRoot',
+      props: {},
+      children: ['hud_top', 'board_spacer', 'slot_labels', 'milestone_bar', 'reward_modal'],
+    },
+    hud_top: {
+      type: 'PrizedropHudTopSection',
+      props: {},
+      children: ['controls_row', 'drop_buttons'],
+    },
+    controls_row: {
+      type: 'PrizedropHudControlsRow',
+      props: {},
+      children: ['ball_count', 'multiplier'],
+    },
+    board_spacer: {
+      type: 'PrizedropHudBoardSpacer',
+      props: {},
+    },
+    ball_count: {
+      type: 'PrizedropHudBallCount',
+      props: {
+        ballCount: { $state: '/hud/ball_count' },
+        showWarning: { $state: '/hud/show_warning' },
+      },
+      on: { press: { action: 'prizedropAddBalls' } },
+    },
+    multiplier: {
+      type: 'PrizedropHudMultiplier',
+      props: {
+        multiplier: { $state: '/hud/multiplier' },
+      },
+      on: { press: { action: 'prizedropCycleMultiplier' } },
+    },
+    drop_buttons: {
+      type: 'PrizedropHudDropButtons',
+      props: {},
+    },
+    slot_labels: {
+      type: 'PrizedropHudSlotLabels',
+      props: {},
+    },
+    milestone_bar: {
+      type: 'PrizedropHudMilestoneBar',
+      props: {
+        sessionLightning: { $state: '/hud/session_lightning' },
+        milestoneStep: { $state: '/hud/milestone_step' },
+        milestoneThresholds: { $state: '/hud/milestone_thresholds' },
+        lastGain: { $state: '/hud/last_gain' },
+        showGain: { $state: '/hud/show_gain' },
+        cycleCount: { $state: '/hud/cycle_count' },
+      },
+    },
+    reward_modal: {
+      type: 'PrizedropHudRewardModal',
+      props: {
+        visible: { $state: '/hud/modal_visible' },
+        modalType: { $state: '/hud/modal_type' },
+        modalStep: { $state: '/hud/modal_step' },
+        rewardAmount: { $state: '/hud/modal_reward_amount' },
+        rewardType: { $state: '/hud/modal_reward_type' },
+        remaining: { $state: '/hud/modal_remaining' },
+        cycleCount: { $state: '/hud/modal_cycle_count' },
+      },
+      on: { close: { action: 'prizedropDismissModal' } },
+    },
+  },
+};
+
+export const GameJsonHud = () => {
+  return <Renderer spec={mainHudSpec} registry={prizedropRegistry} />;
+};

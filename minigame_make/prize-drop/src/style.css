@@ -1,0 +1,371 @@
+/* [V5.0: The Flash & Hidden Reward] 🔞💋 */
+:root {
+  --bps-paper: #f0f0e8;
+  --bps-ink: #1a1a1a;
+  --bps-gray: #d1d1c1;
+  --font-main: 'Outfit', -apple-system, sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #a0a090;
+  font-family: var(--font-main);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#prize-drop-root {
+  position: relative;
+  width: 366px;
+  height: 646px;
+  background-color: var(--bps-paper);
+  border: 3px solid var(--bps-ink);
+  border-radius: 24px;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 1. Top UI Area */
+#top-ui-area {
+  height: 80px;
+  width: 100%;
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* 2. The Machine Area (Fullscreen by default) */
+#machine-area {
+  flex: 1;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  background-color: var(--bps-paper);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+#game-viewport {
+  flex: 1;
+  width: 100%;
+  overflow: hidden;
+}
+
+#game-viewport canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+#slot-labels {
+  height: 50px;
+  width: 100%;
+  display: flex;
+  background: rgba(0,0,0,0.03);
+  z-index: 5;
+  cursor: pointer;
+}
+
+/* 3. Bottom Reward UI (Hidden underneath) */
+#bottom-reward-ui {
+  height: 120px; /* 항상 고정 표시 */
+  width: 100%;
+  background-color: #2c2c34;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  color: white;
+  overflow: hidden;
+}
+
+/* The Flash Effect Overlay */
+#flash-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+}
+
+#flash-overlay.active {
+  animation: flash-anim 0.4s ease-out;
+}
+
+@keyframes flash-anim {
+  0% { opacity: 0.8; }
+  100% { opacity: 0; }
+}
+
+/* HUD & Buttons */
+#jr-hud-widgets { display: flex; justify-content: center; align-items: center; gap: 10px; position: relative; }
+
+/* 공 카운트 */
+.ball-hud { display: flex; align-items: center; gap: 5px; background: white; border: 2px solid var(--bps-ink); border-radius: 50px; padding: 3px 8px 3px 10px; box-shadow: 2px 2px 0px #000; }
+.ball-icon { font-size: 13px; line-height: 1; }
+.ball-count { font-size: 13px; font-weight: 900; color: var(--bps-ink); min-width: 18px; text-align: center; }
+.btn-add-balls { background: var(--bps-ink); color: white; border: none; border-radius: 50px; padding: 2px 8px; font-size: 10px; font-weight: 900; cursor: pointer; font-family: var(--font-main); }
+
+/* 배수 */
+.multiplier-circle { width: 34px; height: 34px; background: white; border: 2px solid var(--bps-ink); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: 900; font-size: 12px; box-shadow: 2px 2px 0px #000; cursor: pointer; flex-shrink: 0; }
+
+#jr-overlay-buttons { margin-top: 5px; display: flex; justify-content: space-between; width: 300px; margin-left: auto; margin-right: auto; }
+.btn-drop { width: 28px; height: 28px; border-radius: 50%; background: white; border: 2px solid var(--bps-ink); cursor: pointer; box-shadow: 2px 2px 0px #000; display: flex; justify-content: center; align-items: center; }
+.btn-drop::after { content: '▼'; font-size: 8px; }
+
+/* 공 없음 경고 토스트 */
+.ball-warning { position: absolute; bottom: 140px; left: 50%; transform: translateX(-50%); background: #1a1a1a; color: white; font-size: 11px; font-weight: 800; padding: 8px 16px; border-radius: 50px; white-space: nowrap; z-index: 200; animation: rw-fade-in 0.15s ease; font-family: var(--font-main); }
+
+/* Slot Items */
+.slot-item { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; border-left: 1px solid rgba(0,0,0,0.1); }
+.slot-item:first-child { border-left: none; }
+.lightning-icon { width: 8px; height: 14px; background: var(--bps-ink); clip-path: polygon(50% 0%, 0% 60%, 40% 60%, 20% 100%, 100% 40%, 60% 40%); }
+.slot-val { font-size: 8px; font-weight: 900; color: var(--bps-ink); }
+
+/* ── HUD Layout (json-render) ──────────────────────────────── */
+.prizedrop-hud-root {
+  width: 100%;
+  height: 646px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.prizedrop-hud-top {
+  height: 110px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 0 4px;
+}
+
+.prizedrop-controls-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.prizedrop-board-spacer {
+  height: 396px;
+  flex-shrink: 0;
+  pointer-events: none;
+}
+
+/* ── Milestone Bar ─────────────────────────────────────────── */
+.ms-wrap {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 10px 14px 8px;
+  gap: 7px;
+  background: #1a1a28;
+  flex: 1;
+}
+
+.ms-row {
+  width: 100%;
+}
+
+/* +N 배지 — absolute로 트랙 위에 오버레이 */
+.ms-gain {
+  position: absolute;
+  left: 6px;
+  top: 12px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 5;
+  pointer-events: none;
+}
+.ms-gain--on { opacity: 1; }
+.ms-gain-arrow { color: #4cde6a; font-size: 12px; line-height: 1; }
+.ms-gain-num { color: #4cde6a; font-size: 12px; font-weight: 900; letter-spacing: -0.5px; }
+
+/* 트랙 */
+.ms-track {
+  width: calc(100% - 22px);
+  align-self: center;
+  flex-shrink: 0;
+  position: relative;
+  height: 22px;
+  background: #0e0e1c;
+  border-radius: 11px;
+  overflow: visible;
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+/* 채움 */
+.ms-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #3a7bd5, #5ab0ff);
+  border-radius: 11px;
+  transition: width 0.4s ease;
+  min-width: 22px;
+}
+
+/* 마커 */
+.ms-mark {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  z-index: 2;
+}
+
+.ms-mark-icon {
+  width: 22px;
+  height: 22px;
+  background: #3a3a4e;
+  border: 1.5px solid rgba(255,255,255,0.15);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  line-height: 1;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+}
+
+.ms-mark--done .ms-mark-icon {
+  background: #4cde6a;
+  border-color: #2eb84e;
+  color: #1a1a1a;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.ms-mark-num {
+  font-size: 7px;
+  font-weight: 800;
+  color: rgba(255,255,255,0.5);
+  margin-top: 3px;
+  white-space: nowrap;
+}
+
+.ms-mark--done .ms-mark-num { color: #4cde6a; }
+
+/* 보상 카운트 */
+.ms-count {
+  font-size: 9px;
+  font-weight: 800;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-align: center;
+}
+.ms-cycle-badge {
+  display: inline-block;
+  margin-left: 6px;
+  background: #4cde6a;
+  color: #1a1a1a;
+  font-size: 8px;
+  font-weight: 900;
+  padding: 1px 5px;
+  border-radius: 4px;
+  vertical-align: middle;
+}
+
+/* ── Reward Modal ──────────────────────────────────────────── */
+.rw-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: rw-fade-in 0.15s ease;
+}
+
+@keyframes rw-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.rw-card {
+  background: var(--bps-paper);
+  border: 3px solid var(--bps-ink);
+  border-radius: 20px;
+  padding: 28px 36px 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 4px 4px 0px #000;
+  animation: rw-pop 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  min-width: 200px;
+}
+
+.rw-card--jackpot {
+  border-color: #f0c040;
+  box-shadow: 4px 4px 0px #c09000;
+  background: #fffff0;
+}
+
+@keyframes rw-pop {
+  from { transform: scale(0.7); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+.rw-icon   { font-size: 40px; line-height: 1; }
+.rw-label  { font-size: 13px; font-weight: 800; color: var(--bps-ink); margin-top: 4px; }
+.rw-amount { font-size: 48px; font-weight: 900; color: var(--bps-ink); line-height: 1.1; }
+.rw-unit   { font-size: 12px; font-weight: 700; color: #666; }
+
+.rw-card--complete {
+  border-color: #4cde6a;
+  box-shadow: 4px 4px 0px #2eb84e;
+  background: #f0fff4;
+}
+
+.rw-label--complete {
+  font-size: 15px;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.rw-close {
+  margin-top: 14px;
+  padding: 7px 28px;
+  background: var(--bps-ink);
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  font-family: var(--font-main);
+}

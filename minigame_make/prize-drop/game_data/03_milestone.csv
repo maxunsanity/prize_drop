@@ -1,0 +1,6 @@
+step,threshold_lightning,reward_type,reward_amount
+1,100,Dice,10
+2,200,Dice,20
+3,300,Dice,30
+4,400,Dice,40
+5,500,Dice,60
