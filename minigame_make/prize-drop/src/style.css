@@ -339,8 +339,8 @@ body {
 
 /* 트랙 — 좌우 대칭을 위해 고정 폭과 margin 사용 */
 .ms-track {
-  width: 320px; /* 명시적 너비로 쏠림 원천 차단 */
-  margin: 0 auto;
+  width: calc(100% - 22px); /* 양쪽 11px 여백 — 끝 마커 overflow 공간 확보 */
+  margin: 0 11px;
   flex-shrink: 0;
   position: relative;
   height: 22px;

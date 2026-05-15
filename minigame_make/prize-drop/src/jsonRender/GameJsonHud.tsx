@@ -110,20 +110,12 @@ function MilestoneBarImpl({ element }: ComponentRenderProps) {
   const sessionLightning = Number(p.sessionLightning ?? 0);
   const total = thresholds.length;
 
-  // 균등 구간 공식 (CURSOR_AND_AGENT_EXPERIENCE.md 섹션 52)
   const prevThreshold = step === 0 ? 0 : thresholds[step - 1];
   const nextThreshold = thresholds[step] ?? thresholds[total - 1];
   const segProgress = nextThreshold > prevThreshold
     ? Math.max(0, Math.min((sessionLightning - prevThreshold) / (nextThreshold - prevThreshold), 1))
     : 1;
   const fillWidth = (step + segProgress) / total * 100;
-
-  // 세이프 존 (10% ~ 90% 구간 사용)을 적용하여 아이콘 쏠림 방지
-  const getMarkLeft = (i: number) => {
-    const p = (i + 1) / total;
-    const safePadding = 10; // %
-    return safePadding + p * (100 - safePadding * 2);
-  };
 
   return (
     <div className="ms-wrap">
@@ -134,7 +126,7 @@ function MilestoneBarImpl({ element }: ComponentRenderProps) {
       <div className="ms-track">
         <div className="ms-fill" style={{ width: `${fillWidth}%` }} />
         {thresholds.map((t, i) => (
-          <div key={i} className={`ms-mark ${i < step ? 'ms-mark--done' : ''}`} style={{ left: `${getMarkLeft(i)}%` }}>
+          <div key={i} className={`ms-mark ${i < step ? 'ms-mark--done' : ''}`} style={{ left: `${(i + 1) / total * 100}%` }}>
             <div className="ms-mark-icon">{i < step ? '✓' : '🎁'}</div>
             <div className="ms-mark-num">{t}</div>
           </div>
