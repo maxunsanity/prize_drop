@@ -1,0 +1,16 @@
+entity_key,design_sample_cell_index
+tile_go,2
+tile_s1,3
+tile_s2,8
+tile_chance,9
+tile_visit,12
+tile_s3,13
+tile_util_1,14
+tile_s4,18
+tile_park,22
+tile_s5,23
+tile_s6,28
+tile_util_2,30
+tile_s7,33
+tile_community,35
+tile_s8,39

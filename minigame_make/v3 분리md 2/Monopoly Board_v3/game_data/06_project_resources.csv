@@ -1,0 +1,5 @@
+resource_key,name,description,color,icon,order,project_slug
+season_coin,시즌 코인,,jade,earth,0,monopolygo
+dice,주사위,돌릴 수 있는 주사위,#ff00a2,package,2,monopolygo
+money,돈,건설에 사용되는 자원,#ffe11f,dollar_sign,3,monopolygo
+me_1,타이쿤 재화 아이템,정거장 보드에서 획득하는 타이쿤 재화 이이템,salmon,car,8,monopolygo

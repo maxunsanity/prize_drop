@@ -1,0 +1,8 @@
+card_id,deck_kind,title_stub,effect_kind,effect_arg,notes,weight,priority
+ch_money,chance,복불복 · 용돈,money_from_tile,,기본 30%,30,1
+ch_move,chance,복불복 · 정거장 이동,warp_station,15,기본 30%,30,1
+ch_dice,chance,복불복 · 주사위,dice_bonus,,기본 40%,40,1
+co_pay,community,사회기금 · 표준,community_payout,,기본,35,1
+co_dice,community,사회기금 · 주사위,dice_bonus,,25,1
+co_go,community,사회기금 · GO,warp_go,,20,1
+co_move,community,사회기금 · 이동,warp_station,5,20,1

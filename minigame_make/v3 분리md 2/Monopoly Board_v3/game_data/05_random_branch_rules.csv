@@ -1,0 +1,8 @@
+node_id,rule_id,condition,note
+n-station-logic,station_shutdown_vs_heist,rand.d100() <= 50,50% 셧다운 / 50% 강탈
+n-shutdown-gate,shutdown_shield_roll,rand.d100() > 50,50% 성공 궤적
+n-robbery-selector,heist_tier_small,rand.d100() <= 60,강탈: 소 60%
+n-robbery-mid-gate,heist_tier_med_vs_large,rand.d100() <= 75,잔여 중 75% 중간 → 나머지 대형
+n-chance-money-gate,chance_money_branch,chance_rand <= 30,복불복 30% 돈
+n-chance-station-gate,chance_station_branch,chance_rand <= 60,누적 60% 이하 — 정거장 워프 분기 (돈 분기 실패 시)
+n-chance-dice-logic,chance_dice_branch,(else from chance_rand),나머지 궤적 — 주사위 보급 등

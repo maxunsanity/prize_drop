@@ -1,0 +1,70 @@
+text_id,value,locale
+txt_modal_season_end_title,시즌 종료,ko
+txt_modal_season_end_no_dice,주사위가 부족합니다,ko
+txt_modal_money_hold,보유 💰 {money},ko
+txt_modal_dice_remaining,남은 주사위 {dice},ko
+txt_modal_season_end_jail_no_dice,감옥 탈출 비용 주사위 부족,ko
+txt_modal_end_money_short,💰 {money},ko
+txt_modal_end_dice_short,🎲 {dice},ko
+txt_modal_jail_title,감옥,ko
+txt_jail_escape_double,더블! 탈출 +{gain},ko
+txt_jail_escape_fail,실패 −{fine} (남은 시도 {attempts}),ko
+txt_modal_jail_pending_gain,적용 예정 +{money},ko
+txt_modal_jail_after_deduct,즉시 차감 후 {money},ko
+txt_modal_jail_dice_line,🎲 {d1} + {d2} = {roll},ko
+txt_modal_default_result_title,결과,ko
+txt_modal_money_no_change,머니 변동 없음,ko
+txt_modal_pending_gain_line,적용 예정 +{money},ko
+txt_modal_pending_loss_line,적용 예정 {money},ko
+txt_modal_dice_roll_only,주사위 {d1} + {d2} = {roll},ko
+txt_modal_dice_bonus_line,🎲 +{pd} · 굴림 {d1}+{d2}={roll},ko
+txt_modal_season_end_farewell,다음 시즌에 또 만나요,ko
+txt_modal_dice_shortage_title,안내,ko
+txt_modal_dice_shortage_body,주사위가 모자릅니다,ko
+txt_modal_dice_shortage_hint,배수를 ×1로 맞췄어요. (남은 주사위 {dice}),ko
+txt_hud_multiplier_hint,배수 · 탭으로 순환,ko
+txt_hud_auto_btn,AUTO,ko
+txt_hud_auto_hint,자동 굴림 ON/OFF · 켜면 플레이 버튼 색 강조 · 다시 누르면 해제,ko
+txt_hud_roll_jail,탈출,ko
+txt_hud_roll_idle,▶,ko
+txt_hud_roll_title_jail,탈출 시도,ko
+txt_hud_roll_title_idle,굴리기,ko
+txt_hud_dice_stage_idle,idle,ko
+txt_btn_modal_confirm,확인,ko
+txt_aria_dice_region,주사위 영역,ko
+txt_doc_title,모노폴리 미니게임,ko
+txt_err_boundary_title,실행 오류 (개발용 표시),ko
+txt_err_boundary_hint,브라우저 개발자 도구(F12) → Console 탭도 확인해 줘.,ko
+txt_hud_lbl_dice,주사위,ko
+txt_hud_lbl_stage,스테이지,ko
+txt_hud_lbl_money,머니,ko
+txt_hud_stage_jail_suffix, · 감옥 {n},ko
+txt_hud_stage_line,S{stage}{suffix},ko
+txt_hud_timeline_foot,위치 {pos} · {phase},ko
+txt_phase_idle,대기,ko
+txt_phase_rolling,굴림,ko
+txt_phase_moving,이동,ko
+txt_phase_result,결과,ko
+txt_phase_ended,종료,ko
+txt_tile_go_landing,GO 착지 +{m},ko
+txt_tile_go_landing_skip,GO,ko
+txt_tile_land_reward,{name} +{m},ko
+txt_tile_station_shutdown_ok,정거장 셧다운 성공 +{m},ko
+txt_tile_station_shutdown_block,정거장 셧다운 막힘 +{m},ko
+txt_tile_label_heist_s,강탈(소),ko
+txt_tile_label_heist_m,강탈(중),ko
+txt_tile_label_heist_l,강탈(대),ko
+txt_tile_station_heist,정거장 {label} +{m},ko
+txt_tile_chance_money,복불복 돈 +{m},ko
+txt_tile_chance_warp,복불복 → 정거장 이동,ko
+txt_tile_chance_dice,복불복 주사위 +{add},ko
+txt_tile_community,사회기금 +{m},ko
+txt_tile_community_dice,사회기금 · 주사위 +{add},ko
+txt_tile_community_go,사회기금 · GO 이동 +{m},ko
+txt_tile_community_warp,사회기금 → 지정 칸 이동,ko
+txt_tile_corner_visit,기차역 +{m},ko
+txt_tile_corner_park,주차장 +{m},ko
+txt_tile_jail_enter,감옥 입장,ko
+txt_tile_tax_low,세금(저) −{v},ko
+txt_tile_tax_high,세금(고) −{v},ko
+txt_tile_unknown,미정 타일 {type},ko

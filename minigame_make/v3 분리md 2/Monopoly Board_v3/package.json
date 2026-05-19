@@ -1,0 +1,29 @@
+{
+  "name": "monopoly",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "extract": "node scripts/extract-flow-data.mjs",
+    "typecheck": "tsc --noEmit",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@json-render/core": "^0.19.0",
+    "@json-render/react": "^0.19.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "three": "^0.173.0",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "@types/three": "^0.173.0",
+    "@vitejs/plugin-react": "^5.1.2",
+    "typescript": "~5.9.3",
+    "vite": "^7.2.4"
+  }
+}

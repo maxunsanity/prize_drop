@@ -1,0 +1,41 @@
+position,kind,entity_key,notes
+0,go_landing,tile_go,시작칸 도착 (GO)
+1,property,tile_s1,대지 1단계
+2,community_chest,tile_community,사회기금
+3,property,tile_s1,대지 1단계
+4,tax_low,,세금(저)
+5,station,,정거장 — 셧다운/강탈 분기
+6,property,tile_s2,대지 2단계
+7,chance,tile_chance,복불복
+8,property,tile_s2,대지 2단계
+9,property,tile_s2,대지 2단계
+10,corner_visit,,모서리 방문(기차역) — CORNER_VISIT·tile base_reward
+11,property,tile_s3,대지 3단계
+12,utility,tile_util_1,전력공사
+13,property,tile_s3,대지 3단계
+14,property,tile_s3,대지 3단계
+15,station,,정거장
+16,property,tile_s4,대지 4단계
+17,community_chest,tile_community,사회기금
+18,property,tile_s4,대지 4단계
+19,property,tile_s4,대지 4단계
+20,corner_park,,모서리 주차장 — CORNER_PARK·tune.park_reward
+21,property,tile_s5,대지 5단계
+22,chance,tile_chance,복불복
+23,property,tile_s5,대지 5단계
+24,property,tile_s5,대지 5단계
+25,station,,정거장
+26,property,tile_s6,대지 6단계
+27,property,tile_s6,대지 6단계
+28,utility,tile_util_2,수자원공사
+29,property,tile_s6,대지 6단계
+30,jail_visit,,감옥 방문 칸
+31,property,tile_s7,대지 7단계
+32,property,tile_s7,대지 7단계
+33,community_chest,tile_community,사회기금
+34,property,tile_s7,대지 7단계
+35,station,,정거장
+36,chance,tile_chance,복불복
+37,property,tile_s8,대지 8단계
+38,tax_high,,세금(고)
+39,property,tile_s8,대지 8단계

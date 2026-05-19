@@ -1,0 +1,16 @@
+entity_key,base_reward,display_name,description
+tile_s1,0,1단계 지역,tile_s1 보상
+tile_s2,0,2단계 지역,tile_s2 보상
+tile_s3,0,3단계 지역,tile_s3 보상
+tile_s4,0,4단계 지역,tile_s4 보상
+tile_s5,0,5단계 지역,tile_s5 보상
+tile_s6,0,12단계 지역,tile_s6 보상
+tile_s7,0,18단계 지역,tile_s7 보상
+tile_s8,0,21단계 지역,tile_s8 보상
+tile_go,0,시작,tile_go 보상
+tile_visit,0,기차역,tile_visit 보상
+tile_park,0,무인도,tile_park 보상
+tile_util_1,0,전력공사,tile_util_1 보상
+tile_util_2,0,수자원공사,tile_util_2 보상
+tile_community,0,사회기금,tile_community 보상
+tile_chance,0,복불복,tile_chance 보상

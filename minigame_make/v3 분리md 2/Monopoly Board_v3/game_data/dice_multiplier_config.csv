@@ -1,0 +1,10 @@
+multiplier_id,multiplier_value,display_label,dice_cost,is_default
+1,1,×1,1,true
+2,2,×2,2,false
+3,3,×3,3,false
+4,5,×5,5,false
+5,10,×10,10,false
+6,20,×20,20,false
+7,30,×30,30,false
+8,50,×50,50,false
+9,100,×100,100,false
