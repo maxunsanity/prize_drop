@@ -72,6 +72,7 @@ export class Board3D {
 
   dropAnims: { mesh: THREE.Mesh; fromY: number; toY: number; t: number; landed: boolean }[] = [];
   camShake = { intensity: 0 };
+  private _colorBombSrc = new THREE.Vector2();
 
   /* 슬로우 모션 */
   timeScale = 1.0;
@@ -464,7 +465,7 @@ export class Board3D {
         audio.colorBombChain(e.comboIdx);
         break;
       case 'STRIPED_FIRE':
-        this._animStripedFire(e.row, e.col, e.dir);
+        this._animStripedFire(e.row, e.col, e.dir, e.blocks);
         audio.laser();
         break;
       case 'TNT_FIRE':
@@ -602,20 +603,32 @@ export class Board3D {
       const mat = this.blockMaterials.get(block.id);
 
       const startT = this.clock.getElapsedTime();
-      const dur = 0.18;
+      const dur = 0.22; // 튕김을 표현하기 위해 애니메이션 시간을 살짝 늘림
       const holeColor = cfg ? cfg.particleA : 0xffffff;
       const anim = (): void => {
         if (this.disposed) return;
         const t = (this.clock.getElapsedTime() - startT) / dur;
         if (t >= 1) {
           this._removeMesh(block.id);
-          // 블록 소멸 직후 구멍 이펙트 스폰
           this._spawnHoleEffect(wx, wy, holeColor);
           return;
         }
-        const s = t < 0.3 ? 1 + (0.3 - t) / 0.3 * 0.35 : 1 - ((t - 0.3) / 0.7);
-        mesh.scale.set(Math.max(0.01, s), Math.max(0.01, s), 1);
-        if (mat) mat.uniforms['uHighlight'].value = (1 - t) * 1.5;
+
+        // Squash & Stretch & Spin 소멸 연출
+        if (t < 0.25) {
+          const factor = t / 0.25;
+          mesh.scale.set(1.22 * factor + 1.0 * (1 - factor), 0.82 * factor + 1.0 * (1 - factor), 1);
+        } else if (t < 0.5) {
+          const factor = (t - 0.25) / 0.25;
+          mesh.scale.set(0.88 * factor + 1.22 * (1 - factor), 1.25 * factor + 0.82 * (1 - factor), 1);
+        } else {
+          const factor = (t - 0.5) / 0.5;
+          const scale = 1 - factor;
+          mesh.scale.set(Math.max(0.01, scale * 0.88), Math.max(0.01, scale * 1.25), 1);
+          mesh.rotation.z = factor * Math.PI * 0.5; // 소용돌이 회전 소멸
+        }
+
+        if (mat) mat.uniforms['uHighlight'].value = (1 - t) * 1.8;
         requestAnimationFrame(anim);
       };
       requestAnimationFrame(anim);
@@ -628,139 +641,439 @@ export class Board3D {
   }
 
   /* ────────── STRIPED FX — 로켓 레이저 ────────── */
-  private _animStripedFire(row: number, col: number, dir: 'H' | 'V'): void {
+  private _animStripedFire(row: number, col: number, dir: 'H' | 'V', blocks?: Block[]): void {
     const [wx, wy] = gridToWorld(row, col);
 
-    if (dir === 'H') {
-      // 가로 레이저 빔
-      const beamGeo = new THREE.PlaneGeometry(GRID_COLS * BLOCK_UNIT, BLOCK_UNIT * 0.22);
-      const beamMat = new THREE.MeshBasicMaterial({
-        color: 0xffffff, transparent: true, opacity: 0.0,
-        blending: THREE.AdditiveBlending, depthWrite: false,
-      });
-      const beam = new THREE.Mesh(beamGeo, beamMat);
-      beam.position.set(0, wy, 0.3);
-      beam.renderOrder = 10;
-      this.scene.add(beam);
-
-      const startT = this.clock.getElapsedTime();
-      const anim = (): void => {
-        if (this.disposed) { this.scene.remove(beam); return; }
-        const t = (this.clock.getElapsedTime() - startT) / 0.45;
-        if (t >= 1) { this.scene.remove(beam); beam.geometry.dispose(); (beam.material as THREE.Material).dispose(); return; }
-        beamMat.opacity = t < 0.3 ? t / 0.3 * 0.65 : (1 - (t - 0.3) / 0.7) * 0.65;
-        requestAnimationFrame(anim);
-      };
-      requestAnimationFrame(anim);
-
-      // 파티클 스프레이
-      for (let c = 0; c < GRID_COLS; c++) {
-        setTimeout(() => {
-          const [px] = gridToWorld(row, c);
-          burstAtBlock(this.particlePool, px, wy, 0xffffff, 0xaaddff, 6);
-        }, c * 20);
+    // 블록 컬러 및 파티클 색상 추출
+    let beamColor = 0xffffff;
+    let particleColorB = 0xaaddff;
+    if (blocks && blocks.length > 0) {
+      const cfg = this.configMap.get(blocks[0].colorType);
+      if (cfg) {
+        beamColor = cfg.bgColor;
+        particleColorB = cfg.particleB;
       }
     } else {
-      // 세로 레이저 빔
-      const beamGeo = new THREE.PlaneGeometry(BLOCK_UNIT * 0.22, GRID_ROWS * BLOCK_UNIT);
-      const beamMat = new THREE.MeshBasicMaterial({
-        color: 0xffffff, transparent: true, opacity: 0.0,
-        blending: THREE.AdditiveBlending, depthWrite: false,
+      particleColorB = dir === 'H' ? 0xaaddff : 0xffaadd;
+    }
+
+    // 1. 발사 위치 집중 버스트 (22개)
+    burstAtBlock(this.particlePool, wx, wy, 0xffffff, particleColorB, 22);
+
+    // 2. 발사 순간 원형 섬광 (Circle)
+    const flashGeo = new THREE.CircleGeometry(0.5, 32);
+    const flashMat = new THREE.MeshBasicMaterial({
+      color: 0xffffff,
+      transparent: true,
+      opacity: 1.0,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+    });
+    const flash = new THREE.Mesh(flashGeo, flashMat);
+    flash.position.set(wx, wy, 0.35);
+    flash.renderOrder = 11;
+    this.scene.add(flash);
+
+    const flashStartT = this.clock.getElapsedTime();
+    const flashAnim = (): void => {
+      if (this.disposed) { this.scene.remove(flash); flashGeo.dispose(); flashMat.dispose(); return; }
+      const elapsed = this.clock.getElapsedTime() - flashStartT;
+      const t = elapsed / 0.15;
+      if (t >= 1) {
+        this.scene.remove(flash);
+        flashGeo.dispose();
+        flashMat.dispose();
+        return;
+      }
+      const scaleVal = 0.5 + t * 2.0; // 0.5 -> 2.5
+      flash.scale.set(scaleVal, scaleVal, 1);
+      flashMat.opacity = 1 - t;
+      requestAnimationFrame(flashAnim);
+    };
+    requestAnimationFrame(flashAnim);
+
+    // 3. 3겹 레이저 빔 구성
+    let coreGeo: THREE.PlaneGeometry;
+    let glowGeo: THREE.PlaneGeometry;
+    let softGeo: THREE.PlaneGeometry;
+
+    if (dir === 'H') {
+      coreGeo = new THREE.PlaneGeometry(GRID_COLS * BLOCK_UNIT, BLOCK_UNIT * 0.08);
+      glowGeo = new THREE.PlaneGeometry(GRID_COLS * BLOCK_UNIT, BLOCK_UNIT * 0.28);
+      softGeo = new THREE.PlaneGeometry(GRID_COLS * BLOCK_UNIT, BLOCK_UNIT * 0.55);
+    } else {
+      coreGeo = new THREE.PlaneGeometry(BLOCK_UNIT * 0.08, GRID_ROWS * BLOCK_UNIT);
+      glowGeo = new THREE.PlaneGeometry(BLOCK_UNIT * 0.28, GRID_ROWS * BLOCK_UNIT);
+      softGeo = new THREE.PlaneGeometry(BLOCK_UNIT * 0.55, GRID_ROWS * BLOCK_UNIT);
+    }
+
+    const coreMat = new THREE.MeshBasicMaterial({
+      color: 0xffffff, transparent: true, opacity: 0.0,
+      blending: THREE.AdditiveBlending, depthWrite: false,
+    });
+    const glowMat = new THREE.MeshBasicMaterial({
+      color: beamColor, transparent: true, opacity: 0.0,
+      blending: THREE.AdditiveBlending, depthWrite: false,
+    });
+    const softMat = new THREE.MeshBasicMaterial({
+      color: beamColor, transparent: true, opacity: 0.0,
+      blending: THREE.AdditiveBlending, depthWrite: false,
+    });
+
+    const coreMesh = new THREE.Mesh(coreGeo, coreMat);
+    const glowMesh = new THREE.Mesh(glowGeo, glowMat);
+    const softMesh = new THREE.Mesh(softGeo, softMat);
+
+    const meshes = [coreMesh, glowMesh, softMesh];
+    const materials = [coreMat, glowMat, softMat];
+    const maxOpacities = [0.9, 0.55, 0.22];
+
+    meshes.forEach(m => {
+      if (dir === 'H') {
+        m.position.set(0, wy, 0.3);
+      } else {
+        m.position.set(wx, 0, 0.3);
+      }
+      m.renderOrder = 10;
+      this.scene.add(m);
+    });
+
+    const startT = this.clock.getElapsedTime();
+    const anim = (): void => {
+      if (this.disposed) {
+        meshes.forEach(m => this.scene.remove(m));
+        meshes.forEach(m => m.geometry.dispose());
+        materials.forEach(mat => mat.dispose());
+        return;
+      }
+      const t = (this.clock.getElapsedTime() - startT) / 0.45;
+      if (t >= 1) {
+        meshes.forEach(m => this.scene.remove(m));
+        meshes.forEach(m => m.geometry.dispose());
+        materials.forEach(mat => mat.dispose());
+        return;
+      }
+
+      // 빔 등장 효과 (scale.x 또는 scale.y 중심에서 양옆으로 확장)
+      const scaleFactor = t < 0.3 ? t / 0.3 : 1.0;
+      meshes.forEach(m => {
+        if (dir === 'H') {
+          m.scale.set(scaleFactor, 1, 1);
+        } else {
+          m.scale.set(1, scaleFactor, 1);
+        }
       });
-      const beam = new THREE.Mesh(beamGeo, beamMat);
-      beam.position.set(wx, 0, 0.3);
-      beam.renderOrder = 10;
-      this.scene.add(beam);
 
-      const startT = this.clock.getElapsedTime();
-      const anim = (): void => {
-        if (this.disposed) { this.scene.remove(beam); return; }
-        const t = (this.clock.getElapsedTime() - startT) / 0.45;
-        if (t >= 1) { this.scene.remove(beam); beam.geometry.dispose(); (beam.material as THREE.Material).dispose(); return; }
-        beamMat.opacity = t < 0.3 ? t / 0.3 * 0.65 : (1 - (t - 0.3) / 0.7) * 0.65;
-        requestAnimationFrame(anim);
-      };
+      // 투명도 애니메이션
+      materials.forEach((mat, idx) => {
+        const maxOp = maxOpacities[idx];
+        mat.opacity = t < 0.3 ? (t / 0.3) * maxOp : (1 - (t - 0.3) / 0.7) * maxOp;
+      });
+
       requestAnimationFrame(anim);
+    };
+    requestAnimationFrame(anim);
 
-      for (let r = 0; r < GRID_ROWS; r++) {
+    // 4. 주변 블록 미세 진동 효과
+    const neighborMeshes: THREE.Mesh[] = [];
+    this.blockMeshes.forEach(mesh => {
+      const r = mesh.userData['row'];
+      const c = mesh.userData['col'];
+      if (dir === 'H') {
+        if (Math.abs(r - row) === 1) neighborMeshes.push(mesh);
+      } else {
+        if (Math.abs(c - col) === 1) neighborMeshes.push(mesh);
+      }
+    });
+
+    if (neighborMeshes.length > 0) {
+      // ⚠️ DROP 딜레이(380ms)보다 짧게 유지 — 절대 position 덮어쓰면 DROP 애니메이션과 충돌
+      const shakeStartT = this.clock.getElapsedTime();
+      const shakeDur = 0.25;     // 250ms < 380ms DROP 딜레이
+      const shakeIntensity = 0.05;
+
+      const shakeAnim = (): void => {
+        if (this.disposed) return;
+        const elapsed = this.clock.getElapsedTime() - shakeStartT;
+        const t = elapsed / shakeDur;
+        if (t >= 1) return; // DROP 애니메이션이 최종 위치 처리
+
+        const amp = shakeIntensity * (1 - t);
+        const offset = Math.sin(elapsed * Math.PI * 24) * amp;
+
+        neighborMeshes.forEach(m => {
+          // 이미 제거된 메시 스킵 (연쇄 폭발로 사라진 경우)
+          if (!this.blockMeshes.has(m.userData['blockId'] as number)) return;
+          // additive 방식: 현재 위치에 진동 더함 (DROP 값 유지)
+          if (dir === 'H') m.position.y += offset;
+          else m.position.x += offset;
+        });
+
+        requestAnimationFrame(shakeAnim);
+      };
+      requestAnimationFrame(shakeAnim);
+    }
+
+    // 5. 파티클 stagger 지연 발사
+    if (dir === 'H') {
+      for (let c = 0; c < GRID_COLS; c++) {
+        const dist = Math.abs(c - col);
         setTimeout(() => {
+          if (this.disposed) return;
+          const [px] = gridToWorld(row, c);
+          burstAtBlock(this.particlePool, px, wy, 0xffffff, particleColorB, 6);
+        }, dist * 30);
+      }
+    } else {
+      for (let r = 0; r < GRID_ROWS; r++) {
+        const dist = Math.abs(r - row);
+        setTimeout(() => {
+          if (this.disposed) return;
           const [, py] = gridToWorld(r, col);
-          burstAtBlock(this.particlePool, wx, py, 0xffffff, 0xffaadd, 6);
-        }, r * 20);
+          burstAtBlock(this.particlePool, wx, py, 0xffffff, particleColorB, 6);
+        }, dist * 30);
       }
     }
 
-    this.camShake.intensity = Math.max(this.camShake.intensity, 0.08);
-    void col;
+    // 6. 카메라 셰이크 강도 줄임 (0.08 -> 0.04)
+    this.camShake.intensity = Math.max(this.camShake.intensity, 0.04);
   }
 
   /* ────────── TNT FX — 3×3 폭발 ────────── */
   private _animTNTFire(row: number, col: number, blocks: Block[]): void {
     const [wx, wy] = gridToWorld(row, col);
 
-    // 폭발 링 3겹 — 5×5 범위까지 확장
-    const ringColors = [0xff6600, 0xff3300, 0xffaa00];
-    for (let ring = 0; ring < 3; ring++) {
-      setTimeout(() => {
-        const geo = new THREE.RingGeometry(0.1, 0.28, 32);
-        const mat = new THREE.MeshBasicMaterial({
-          color: ringColors[ring],
-          transparent: true, opacity: 0.85,
-          blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.DoubleSide,
-        });
-        const mesh = new THREE.Mesh(geo, mat);
-        mesh.position.set(wx, wy, 0.35);
-        mesh.renderOrder = 12;
-        this.scene.add(mesh);
-
-        const startT = this.clock.getElapsedTime();
-        // 5×5 커버 → 격자 2칸 = worldUnit ~2.2 → targetR을 크게
-        const targetR = (ring + 1) * 2.4;
-        const dur = 0.4;
-        const ringAnim = (): void => {
-          if (this.disposed) { this.scene.remove(mesh); return; }
-          const t = (this.clock.getElapsedTime() - startT) / dur;
-          if (t >= 1) { this.scene.remove(mesh); geo.dispose(); mat.dispose(); return; }
-          const ease = 1 - Math.pow(1 - t, 2); // ease-out-quad
-          const scale = 1 + ease * targetR;
-          mesh.scale.set(scale, scale, 1);
-          mat.opacity = (1 - t) * 0.85;
-          requestAnimationFrame(ringAnim);
-        };
-        requestAnimationFrame(ringAnim);
-      }, ring * 70);
-    }
-
-    // 중심 플래시 (폭발 순간 밝은 원)
-    const flashGeo = new THREE.CircleGeometry(0.4, 24);
-    const flashMat = new THREE.MeshBasicMaterial({
-      color: 0xffffff, transparent: true, opacity: 0.6,
-      blending: THREE.AdditiveBlending, depthWrite: false,
+    // 0. 사전 경고 연출 (80ms)
+    let tntMesh: THREE.Mesh | undefined;
+    this.blockMeshes.forEach(mesh => {
+      if (mesh.userData['row'] === row && mesh.userData['col'] === col) {
+        tntMesh = mesh;
+      }
     });
-    const flash = new THREE.Mesh(flashGeo, flashMat);
-    flash.position.set(wx, wy, 0.4);
-    flash.renderOrder = 13;
-    this.scene.add(flash);
-    const flashStart = this.clock.getElapsedTime();
-    const flashAnim = (): void => {
-      if (this.disposed) { this.scene.remove(flash); return; }
-      const t = (this.clock.getElapsedTime() - flashStart) / 0.18;
-      if (t >= 1) { this.scene.remove(flash); flashGeo.dispose(); flashMat.dispose(); return; }
-      flashMat.opacity = 0.6 * (1 - t);
-      const s = 1 + t * 1.5;
-      flash.scale.set(s, s, 1);
-      requestAnimationFrame(flashAnim);
-    };
-    requestAnimationFrame(flashAnim);
 
-    // 5×5 파티클 버스트 (범위 내 모든 블록)
-    for (const block of blocks) {
-      const [bx, by] = gridToWorld(block.row, block.col);
-      burstAtBlock(this.particlePool, bx, by, 0xff6600, 0xffaa00, 10);
+    if (tntMesh) {
+      const origX = tntMesh.position.x;
+      const preStart = this.clock.getElapsedTime();
+      const preAnim = (): void => {
+        if (this.disposed || !tntMesh || !this.blockMeshes.has(tntMesh.userData['blockId'])) return;
+        const elapsed = this.clock.getElapsedTime() - preStart;
+        const t = elapsed / 0.08;
+        if (t >= 1) {
+          tntMesh.position.x = origX;
+          return;
+        }
+        tntMesh.position.x = origX + Math.sin(elapsed * Math.PI * 30) * 0.06;
+        requestAnimationFrame(preAnim);
+      };
+      requestAnimationFrame(preAnim);
     }
 
-    // 카메라 셰이크 강화 (5×5 대폭발)
-    this.camShake.intensity = Math.max(this.camShake.intensity, 0.22);
+    const warnGeo = new THREE.RingGeometry(0.1, 0.35, 32);
+    const warnMat = new THREE.MeshBasicMaterial({
+      color: 0xff0000,
+      transparent: true,
+      opacity: 0.0,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+      side: THREE.DoubleSide
+    });
+    const warnMesh = new THREE.Mesh(warnGeo, warnMat);
+    warnMesh.position.set(wx, wy, 0.38);
+    warnMesh.renderOrder = 14;
+    this.scene.add(warnMesh);
+
+    const warnStart = this.clock.getElapsedTime();
+    const warnAnim = (): void => {
+      if (this.disposed) { this.scene.remove(warnMesh); warnGeo.dispose(); warnMat.dispose(); return; }
+      const elapsed = this.clock.getElapsedTime() - warnStart;
+      const t = elapsed / 0.08;
+      if (t >= 1) {
+        this.scene.remove(warnMesh);
+        warnGeo.dispose();
+        warnMat.dispose();
+        return;
+      }
+      warnMat.opacity = Math.sin(t * Math.PI) * 0.7;
+      requestAnimationFrame(warnAnim);
+    };
+    requestAnimationFrame(warnAnim);
+
+    // 80ms 후에 대폭발 실행
+    setTimeout(() => {
+      if (this.disposed) return;
+
+      // 1. 충격파 링 (Shockwave Ring)
+      const shockGeo = new THREE.RingGeometry(0.1, 0.13, 32);
+      const shockMat = new THREE.MeshBasicMaterial({
+        color: 0xffffff,
+        transparent: true,
+        opacity: 0.9,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+        side: THREE.DoubleSide
+      });
+      const shockMesh = new THREE.Mesh(shockGeo, shockMat);
+      shockMesh.position.set(wx, wy, 0.36);
+      shockMesh.renderOrder = 13;
+      this.scene.add(shockMesh);
+
+      const shockStart = this.clock.getElapsedTime();
+      const shockAnim = (): void => {
+        if (this.disposed) { this.scene.remove(shockMesh); shockGeo.dispose(); shockMat.dispose(); return; }
+        const elapsed = this.clock.getElapsedTime() - shockStart;
+        const t = elapsed / 0.3;
+        if (t >= 1) {
+          this.scene.remove(shockMesh);
+          shockGeo.dispose();
+          shockMat.dispose();
+          return;
+        }
+        const ease = 1 - Math.pow(1 - t, 3); // cubic ease out
+        const s = 1 + ease * 12.0;
+        shockMesh.scale.set(s, s, 1);
+        shockMat.opacity = (1 - t) * 0.9;
+        requestAnimationFrame(shockAnim);
+      };
+      requestAnimationFrame(shockAnim);
+
+      // 2. 폭발 링 3겹 — 5×5 범위까지 확장
+      const ringColors = [0xff6600, 0xff3300, 0xffaa00];
+      for (let ring = 0; ring < 3; ring++) {
+        setTimeout(() => {
+          if (this.disposed) return;
+          const geo = new THREE.RingGeometry(0.1, 0.28, 32);
+          const mat = new THREE.MeshBasicMaterial({
+            color: ringColors[ring],
+            transparent: true, opacity: 0.85,
+            blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.DoubleSide,
+          });
+          const mesh = new THREE.Mesh(geo, mat);
+          mesh.position.set(wx, wy, 0.35);
+          mesh.renderOrder = 12;
+          this.scene.add(mesh);
+
+          const startT = this.clock.getElapsedTime();
+          const targetR = (ring + 1) * 2.4;
+          const dur = 0.4;
+          const ringAnim = (): void => {
+            if (this.disposed) { this.scene.remove(mesh); return; }
+            const elapsedT = (this.clock.getElapsedTime() - startT) / dur;
+            if (elapsedT >= 1) { this.scene.remove(mesh); geo.dispose(); mat.dispose(); return; }
+            const ease = 1 - Math.pow(1 - elapsedT, 2); // ease-out-quad
+            const scale = 1 + ease * targetR;
+            mesh.scale.set(scale, scale, 1);
+            mat.opacity = (1 - elapsedT) * 0.85;
+            requestAnimationFrame(ringAnim);
+          };
+          requestAnimationFrame(ringAnim);
+        }, ring * 70);
+      }
+
+      // 3. 2레이어 중심 플래시
+      const coreFlashGeo = new THREE.CircleGeometry(0.5, 24);
+      const coreFlashMat = new THREE.MeshBasicMaterial({
+        color: 0xffffff, transparent: true, opacity: 0.8,
+        blending: THREE.AdditiveBlending, depthWrite: false,
+      });
+      const coreFlash = new THREE.Mesh(coreFlashGeo, coreFlashMat);
+      coreFlash.position.set(wx, wy, 0.4);
+      coreFlash.renderOrder = 13;
+      this.scene.add(coreFlash);
+
+      const glowFlashGeo = new THREE.CircleGeometry(0.8, 24);
+      const glowFlashMat = new THREE.MeshBasicMaterial({
+        color: 0xff6600, transparent: true, opacity: 0.6,
+        blending: THREE.AdditiveBlending, depthWrite: false,
+      });
+      const glowFlash = new THREE.Mesh(glowFlashGeo, glowFlashMat);
+      glowFlash.position.set(wx, wy, 0.39);
+      glowFlash.renderOrder = 12;
+      this.scene.add(glowFlash);
+
+      const flashStart = this.clock.getElapsedTime();
+      const flashDur = 0.28;
+      const flashAnim = (): void => {
+        if (this.disposed) {
+          this.scene.remove(coreFlash); coreFlashGeo.dispose(); coreFlashMat.dispose();
+          this.scene.remove(glowFlash); glowFlashGeo.dispose(); glowFlashMat.dispose();
+          return;
+        }
+        const elapsedT = (this.clock.getElapsedTime() - flashStart) / flashDur;
+        if (elapsedT >= 1) {
+          this.scene.remove(coreFlash); coreFlashGeo.dispose(); coreFlashMat.dispose();
+          this.scene.remove(glowFlash); glowFlashGeo.dispose(); glowFlashMat.dispose();
+          return;
+        }
+
+        const ease = 1 - Math.pow(1 - elapsedT, 2);
+        const coreScale = 1.0 + ease * 2.5; // 1.0 -> 3.5
+        const glowScale = 1.0 + ease * 3.5; // 1.0 -> 4.5
+
+        coreFlash.scale.set(coreScale, coreScale, 1);
+        glowFlash.scale.set(glowScale, glowScale, 1);
+
+        coreFlashMat.opacity = 0.8 * (1 - elapsedT);
+        glowFlashMat.opacity = 0.6 * (1 - elapsedT);
+
+        requestAnimationFrame(flashAnim);
+      };
+      requestAnimationFrame(flashAnim);
+
+      // 4. 주변 블록 2D 미세 진동 효과 (맨해튼 거리 3~5인 남은 블록들 대상)
+      const neighborMeshes: THREE.Mesh[] = [];
+      this.blockMeshes.forEach(mesh => {
+        const r = mesh.userData['row'];
+        const c = mesh.userData['col'];
+        const dist = Math.abs(r - row) + Math.abs(c - col);
+        if (dist >= 3 && dist <= 5) {
+          neighborMeshes.push(mesh);
+        }
+      });
+
+      if (neighborMeshes.length > 0) {
+        // ⚠️ DROP 딜레이(380ms)보다 짧게 유지 — 절대 position 덮어쓰면 DROP 애니메이션과 충돌
+        const shakeStartT = this.clock.getElapsedTime();
+        const shakeDur = 0.22;     // 220ms < 380ms DROP 딜레이 (TNT_FIRE는 ~120ms 뒤에 발동)
+        const shakeIntensity = 0.08;
+
+        const shakeAnim = (): void => {
+          if (this.disposed) return;
+          const elapsed = this.clock.getElapsedTime() - shakeStartT;
+          const t = elapsed / shakeDur;
+          if (t >= 1) return; // DROP 애니메이션이 최종 위치 처리
+
+          const amp = shakeIntensity * (1 - t);
+          const offset = Math.sin(elapsed * Math.PI * 26) * amp;
+
+          neighborMeshes.forEach(m => {
+            // 이미 제거된 메시 스킵 (연쇄 폭발로 사라진 경우)
+            if (!this.blockMeshes.has(m.userData['blockId'] as number)) return;
+            // additive 방식: 현재 위치에 진동 더함 (DROP 값 유지)
+            const angle = Math.random() * Math.PI * 2;
+            m.position.x += Math.cos(angle) * offset;
+            m.position.y += Math.sin(angle) * offset;
+          });
+
+          requestAnimationFrame(shakeAnim);
+        };
+        requestAnimationFrame(shakeAnim);
+      }
+
+      // 5. 파티클 버스트
+      // 중심 mega burst (30개)
+      burstAtBlock(this.particlePool, wx, wy, 0xffffff, 0xff3300, 30);
+
+      // 개별 블록 폭발 파티클 (각 12개)
+      for (const block of blocks) {
+        const [bx, by] = gridToWorld(block.row, block.col);
+        burstAtBlock(this.particlePool, bx, by, 0xff6600, 0xffaa00, 12);
+      }
+
+      // 6. 카메라 셰이크 강도 줄임 (0.22 -> 0.08)
+      this.camShake.intensity = Math.max(this.camShake.intensity, 0.08);
+
+    }, 80);
+
     audio.laser();
   }
 
@@ -785,50 +1098,132 @@ export class Board3D {
     const target = targets[0];
     const [tx, ty] = gridToWorld(target.row, target.col);
 
-    const projGeo = new THREE.CircleGeometry(0.14, 16);
-    const projMat = new THREE.MeshBasicMaterial({
-      color: 0x00ddff, transparent: true, opacity: 0.95,
-      blending: THREE.AdditiveBlending, depthWrite: false,
-    });
-    const proj = new THREE.Mesh(projGeo, projMat);
-    proj.position.set(ox, oy, 0.35);
-    proj.renderOrder = 12;
-    this.scene.add(proj);
+    // 3겹의 발사체 구성
+    const projCoreGeo = new THREE.CircleGeometry(0.11, 16);
+    const projGlowGeo = new THREE.CircleGeometry(0.18, 16);
+    const projOuterGeo = new THREE.CircleGeometry(0.26, 16);
 
-    // 꼬리 잔상 링
-    const trailGeo = new THREE.CircleGeometry(0.09, 12);
-    const trailMat = new THREE.MeshBasicMaterial({
-      color: 0x00ffcc, transparent: true, opacity: 0.5,
-      blending: THREE.AdditiveBlending, depthWrite: false,
+    const projCoreMat = new THREE.MeshBasicMaterial({
+      color: 0xffffff, transparent: true, opacity: 0.95,
+      blending: THREE.AdditiveBlending, depthWrite: false
     });
-    const trail = new THREE.Mesh(trailGeo, trailMat);
-    trail.renderOrder = 11;
-    this.scene.add(trail);
+    const projGlowMat = new THREE.MeshBasicMaterial({
+      color: 0x00ffcc, transparent: true, opacity: 0.8,
+      blending: THREE.AdditiveBlending, depthWrite: false
+    });
+    const projOuterMat = new THREE.MeshBasicMaterial({
+      color: 0x00ffcc, transparent: true, opacity: 0.3,
+      blending: THREE.AdditiveBlending, depthWrite: false
+    });
+
+    const projCore = new THREE.Mesh(projCoreGeo, projCoreMat);
+    const projGlow = new THREE.Mesh(projGlowGeo, projGlowMat);
+    const projOuter = new THREE.Mesh(projOuterGeo, projOuterMat);
+
+    projCore.position.set(ox, oy, 0.36); projCore.renderOrder = 14;
+    projGlow.position.set(ox, oy, 0.35); projGlow.renderOrder = 13;
+    projOuter.position.set(ox, oy, 0.34); projOuter.renderOrder = 12;
+
+    this.scene.add(projCore);
+    this.scene.add(projGlow);
+    this.scene.add(projOuter);
+
+    // 5겹 꼬리 잔상 (delay, size, color, opacity 다각화)
+    const trailSpecs = [
+      { size: 0.14, color: 0x00ffcc, delay: 0.04, maxOpacity: 0.5 },
+      { size: 0.10, color: 0x88ffdd, delay: 0.08, maxOpacity: 0.4 },
+      { size: 0.07, color: 0xffaa44, delay: 0.12, maxOpacity: 0.35 },
+      { size: 0.05, color: 0xff8800, delay: 0.16, maxOpacity: 0.3 },
+      { size: 0.03, color: 0xff4400, delay: 0.20, maxOpacity: 0.2 }
+    ];
+
+    const trails = trailSpecs.map(spec => {
+      const geo = new THREE.CircleGeometry(spec.size, 12);
+      const mat = new THREE.MeshBasicMaterial({
+        color: spec.color, transparent: true, opacity: spec.maxOpacity,
+        blending: THREE.AdditiveBlending, depthWrite: false
+      });
+      const mesh = new THREE.Mesh(geo, mat);
+      mesh.position.set(ox, oy, 0.33);
+      mesh.renderOrder = 11;
+      this.scene.add(mesh);
+      return { mesh, geo, mat, spec };
+    });
 
     const startT = this.clock.getElapsedTime();
     const dur = 0.28;
     const fly = (): void => {
       if (this.disposed) {
-        this.scene.remove(proj); this.scene.remove(trail); return;
+        this.scene.remove(projCore); projCoreGeo.dispose(); projCoreMat.dispose();
+        this.scene.remove(projGlow); projGlowGeo.dispose(); projGlowMat.dispose();
+        this.scene.remove(projOuter); projOuterGeo.dispose(); projOuterMat.dispose();
+        trails.forEach(trail => {
+          this.scene.remove(trail.mesh); trail.geo.dispose(); trail.mat.dispose();
+        });
+        return;
       }
-      const t = Math.min(1, (this.clock.getElapsedTime() - startT) / dur);
+      const elapsed = this.clock.getElapsedTime() - startT;
+      const t = Math.min(1, elapsed / dur);
       const ease = 1 - Math.pow(1 - t, 3); // ease-out-cubic
-      proj.position.x = ox + (tx - ox) * ease;
-      proj.position.y = oy + (ty - oy) * ease;
-      projMat.opacity = 0.95 * (1 - t * 0.2);
+      
+      const px = ox + (tx - ox) * ease;
+      const py = oy + (ty - oy) * ease;
 
-      // 꼬리: 살짝 뒤에 따라옴
-      const tTrail = Math.max(0, t - 0.08);
-      const easeTrail = 1 - Math.pow(1 - tTrail, 3);
-      trail.position.x = ox + (tx - ox) * easeTrail;
-      trail.position.y = oy + (ty - oy) * easeTrail;
-      trailMat.opacity = 0.4 * (1 - t);
+      projCore.position.set(px, py, 0.36);
+      projGlow.position.set(px, py, 0.35);
+      projOuter.position.set(px, py, 0.34);
+
+      projCoreMat.opacity = 0.95 * (1 - t * 0.2);
+      projGlowMat.opacity = 0.8 * (1 - t * 0.2);
+      projOuterMat.opacity = 0.3 * (1 - t * 0.2);
+
+      // 꼬리 잔상 5개 위치 지연 업데이트
+      trails.forEach(trail => {
+        const trailT = Math.max(0, Math.min(1, (elapsed - trail.spec.delay) / dur));
+        const easeTrail = 1 - Math.pow(1 - trailT, 3);
+        trail.mesh.position.x = ox + (tx - ox) * easeTrail;
+        trail.mesh.position.y = oy + (ty - oy) * easeTrail;
+        trail.mat.opacity = trail.spec.maxOpacity * (1 - t);
+      });
 
       if (t >= 1) {
-        this.scene.remove(proj); projGeo.dispose(); projMat.dispose();
-        this.scene.remove(trail); trailGeo.dispose(); trailMat.dispose();
-        // 착탄 버스트
-        burstAtBlock(this.particlePool, tx, ty, 0x00ffdd, 0x0088ff, 18);
+        this.scene.remove(projCore); projCoreGeo.dispose(); projCoreMat.dispose();
+        this.scene.remove(projGlow); projGlowGeo.dispose(); projGlowMat.dispose();
+        this.scene.remove(projOuter); projOuterGeo.dispose(); projOuterMat.dispose();
+        trails.forEach(trail => {
+          this.scene.remove(trail.mesh); trail.geo.dispose(); trail.mat.dispose();
+        });
+
+        // 착탄 플래시 추가 (0.15초)
+        const hitFlashGeo = new THREE.CircleGeometry(0.4, 24);
+        const hitFlashMat = new THREE.MeshBasicMaterial({
+          color: 0xffffff, transparent: true, opacity: 1.0,
+          blending: THREE.AdditiveBlending, depthWrite: false
+        });
+        const hitFlash = new THREE.Mesh(hitFlashGeo, hitFlashMat);
+        hitFlash.position.set(tx, ty, 0.38);
+        hitFlash.renderOrder = 13;
+        this.scene.add(hitFlash);
+
+        const hitFlashStart = this.clock.getElapsedTime();
+        const hitFlashAnim = (): void => {
+          if (this.disposed) { this.scene.remove(hitFlash); hitFlashGeo.dispose(); hitFlashMat.dispose(); return; }
+          const elapsedT = (this.clock.getElapsedTime() - hitFlashStart) / 0.15;
+          if (elapsedT >= 1) {
+            this.scene.remove(hitFlash);
+            hitFlashGeo.dispose();
+            hitFlashMat.dispose();
+            return;
+          }
+          const scale = 0.5 + elapsedT * 2.0; // 0.5 -> 2.5
+          hitFlash.scale.set(scale, scale, 1);
+          hitFlashMat.opacity = 1 - elapsedT;
+          requestAnimationFrame(hitFlashAnim);
+        };
+        requestAnimationFrame(hitFlashAnim);
+
+        // 착탄 버스트 (26개)
+        burstAtBlock(this.particlePool, tx, ty, 0x00ffdd, 0x0088ff, 26);
         return;
       }
       requestAnimationFrame(fly);
@@ -838,37 +1233,48 @@ export class Board3D {
 
   /* ────────── PROPELLER 스핀 FX (발동 시) ────────── */
   private _spawnPropellerSpinFX(wx: number, wy: number, color: number): void {
-    const geo = new THREE.RingGeometry(0.25, 0.38, 32);
-    const mat = new THREE.MeshBasicMaterial({
-      color, transparent: true, opacity: 0.7,
-      blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.DoubleSide,
-    });
-    const ring = new THREE.Mesh(geo, mat);
-    ring.position.set(wx, wy, 0.3);
-    ring.renderOrder = 11;
-    this.scene.add(ring);
+    const ringSpecs = [
+      { rInner: 0.25, rOuter: 0.38, opacity: 0.7, delay: 0 },
+      { rInner: 0.18, rOuter: 0.30, opacity: 0.5, delay: 30 },
+      { rInner: 0.10, rOuter: 0.22, opacity: 0.3, delay: 60 }
+    ];
 
-    const startT = this.clock.getElapsedTime();
-    const dur = 0.5;
-    const spin = (): void => {
-      if (this.disposed) { this.scene.remove(ring); return; }
-      const t = (this.clock.getElapsedTime() - startT) / dur;
-      if (t >= 1) { this.scene.remove(ring); geo.dispose(); mat.dispose(); return; }
-      ring.rotation.z = t * Math.PI * 4;
-      mat.opacity = (1 - t) * 0.7;
-      const scale = 1 + t * 0.5;
-      ring.scale.set(scale, scale, 1);
-      requestAnimationFrame(spin);
-    };
-    requestAnimationFrame(spin);
+    ringSpecs.forEach(spec => {
+      setTimeout(() => {
+        if (this.disposed) return;
+        const geo = new THREE.RingGeometry(spec.rInner, spec.rOuter, 32);
+        const mat = new THREE.MeshBasicMaterial({
+          color, transparent: true, opacity: spec.opacity,
+          blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.DoubleSide,
+        });
+        const ring = new THREE.Mesh(geo, mat);
+        ring.position.set(wx, wy, 0.3);
+        ring.renderOrder = 11;
+        this.scene.add(ring);
+
+        const startT = this.clock.getElapsedTime();
+        const dur = 0.5;
+        const spin = (): void => {
+          if (this.disposed) { this.scene.remove(ring); return; }
+          const t = (this.clock.getElapsedTime() - startT) / dur;
+          if (t >= 1) { this.scene.remove(ring); geo.dispose(); mat.dispose(); return; }
+          ring.rotation.z = t * Math.PI * 4;
+          mat.opacity = (1 - t) * spec.opacity;
+          const scale = 1 + t * 0.5;
+          ring.scale.set(scale, scale, 1);
+          requestAnimationFrame(spin);
+        };
+        requestAnimationFrame(spin);
+      }, spec.delay);
+    });
   }
 
   /* ────────── 구멍 이펙트 — 블록 소멸 후 빈 칸 연출 ────────── */
   private _spawnHoleEffect(wx: number, wy: number, glowColor: number): void {
     const col = new THREE.Color(glowColor);
 
-    // ① 어두운 보이드 원 (바닥 깔림)
-    const voidGeo = new THREE.CircleGeometry(BLOCK_UNIT * 0.44, 32);
+    // ① 어두운 보이드 원 (바닥 깔림) — 크기 상향 (0.44 -> 0.55)
+    const voidGeo = new THREE.CircleGeometry(BLOCK_UNIT * 0.55, 32);
     const voidMat = new THREE.MeshBasicMaterial({
       color: 0x000000, transparent: true, opacity: 0.72,
       depthWrite: false,
@@ -878,8 +1284,8 @@ export class Board3D {
     voidMesh.renderOrder = 1;
     this.scene.add(voidMesh);
 
-    // ② 컬러 림 글로우 링
-    const rimGeo = new THREE.RingGeometry(BLOCK_UNIT * 0.34, BLOCK_UNIT * 0.46, 36);
+    // ② 컬러 림 글로우 링 — 두께 상향 (0.34-0.46 -> 0.28-0.46)
+    const rimGeo = new THREE.RingGeometry(BLOCK_UNIT * 0.28, BLOCK_UNIT * 0.46, 36);
     const rimMat = new THREE.MeshBasicMaterial({
       color: col, transparent: true, opacity: 0.0,
       blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.DoubleSide,
@@ -889,9 +1295,9 @@ export class Board3D {
     rimMesh.renderOrder = 1;
     this.scene.add(rimMesh);
 
-    // ③ 위로 떠오르는 잔불 스파크 (3개)
+    // ③ 위로 떠오르는 잔불 스파크 (5개) — 개수 상향 (3개 -> 5개)
     const sparks: { mesh: THREE.Mesh; vy: number; mat: THREE.MeshBasicMaterial }[] = [];
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 5; i++) {
       const sgeo = new THREE.CircleGeometry(0.04 + Math.random() * 0.03, 8);
       const smat = new THREE.MeshBasicMaterial({
         color: col, transparent: true, opacity: 0.9,
@@ -905,11 +1311,12 @@ export class Board3D {
       );
       smesh.renderOrder = 3;
       this.scene.add(smesh);
-      sparks.push({ mesh: smesh, vy: 0.012 + Math.random() * 0.014, mat: smat });
+      // vy 속도 30% 상향 (0.012 -> 0.0156, 0.014 -> 0.0182)
+      sparks.push({ mesh: smesh, vy: (0.012 + Math.random() * 0.014) * 1.30, mat: smat });
     }
 
     const startT = this.clock.getElapsedTime();
-    const DUR    = 0.38; // 380ms — 블록 채워지기 직전까지
+    const DUR    = 0.45; // 지속시간 연장 (380ms -> 450ms)
 
     const tick = (): void => {
       if (this.disposed) {
@@ -929,8 +1336,8 @@ export class Board3D {
       rimMat.opacity = t < 0.10
         ? (t / 0.10) * 0.75
         : 0.75 * (1 - (t - 0.10) / 0.90);
-      // 림 링이 안쪽에서 바깥으로 살짝 확장
-      const rimS = 1 + tE * 0.22;
+      // 림 링 확장 배율 상향 (0.22 -> 0.45)
+      const rimS = 1 + tE * 0.45;
       rimMesh.scale.set(rimS, rimS, 1);
 
       // 스파크 상승 + 페이드
@@ -954,19 +1361,102 @@ export class Board3D {
   }
 
   /* ────────── COLOR_BOMB 체인 ────────── */
+  private _spawnRainbowFlash(): void {
+    const geo = new THREE.PlaneGeometry(GRID_COLS * BLOCK_UNIT + 2.0, GRID_ROWS * BLOCK_UNIT + 2.0);
+    const mat = new THREE.MeshBasicMaterial({
+      color: 0xff00ff,
+      transparent: true,
+      opacity: 0.0,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false
+    });
+    const flash = new THREE.Mesh(geo, mat);
+    flash.position.set(0, 0, 0.5);
+    flash.renderOrder = 15;
+    this.scene.add(flash);
+
+    const startT = this.clock.getElapsedTime();
+    const dur = 0.35;
+    const anim = (): void => {
+      if (this.disposed) { this.scene.remove(flash); geo.dispose(); mat.dispose(); return; }
+      const elapsed = this.clock.getElapsedTime() - startT;
+      const t = elapsed / dur;
+      if (t >= 1) {
+        this.scene.remove(flash);
+        geo.dispose();
+        mat.dispose();
+        return;
+      }
+      const hue = (elapsed * 3.0) % 1.0;
+      mat.color.setHSL(hue, 0.9, 0.6);
+      mat.opacity = Math.sin(t * Math.PI) * 0.25;
+      requestAnimationFrame(anim);
+    };
+    requestAnimationFrame(anim);
+  }
+
+  private _spawnMiniColorFlash(wx: number, wy: number, color: number): void {
+    const geo = new THREE.CircleGeometry(0.32, 16);
+    const mat = new THREE.MeshBasicMaterial({
+      color, transparent: true, opacity: 0.8,
+      blending: THREE.AdditiveBlending, depthWrite: false
+    });
+    const mesh = new THREE.Mesh(geo, mat);
+    mesh.position.set(wx, wy, 0.38);
+    mesh.renderOrder = 13;
+    this.scene.add(mesh);
+
+    const startT = this.clock.getElapsedTime();
+    const anim = (): void => {
+      if (this.disposed) { this.scene.remove(mesh); geo.dispose(); mat.dispose(); return; }
+      const t = (this.clock.getElapsedTime() - startT) / 0.15;
+      if (t >= 1) {
+        this.scene.remove(mesh);
+        geo.dispose();
+        mat.dispose();
+        return;
+      }
+      const scale = 0.5 + t * 1.5;
+      mesh.scale.set(scale, scale, 1);
+      mat.opacity = 0.8 * (1 - t);
+      requestAnimationFrame(anim);
+    };
+    requestAnimationFrame(anim);
+  }
+
   private _animColorBombChain(targets: Block[], comboIdx: number): void {
+    if (comboIdx === 0) {
+      let found = false;
+      this.blockMeshes.forEach(mesh => {
+        if (mesh.userData['blockKind'] === 'COLOR_BOMB') {
+          this._colorBombSrc.set(mesh.position.x, mesh.position.y);
+          found = true;
+        }
+      });
+      if (!found) {
+        this._colorBombSrc.set(0, 0);
+      }
+      this._spawnRainbowFlash();
+    }
+
+    // 아크 발사 연동
+    this.specialFX.fireColorBombArcs(this._colorBombSrc.x, this._colorBombSrc.y, targets, this.configMap);
+
     for (const block of targets) {
       const cfg = this.configMap.get(block.colorType);
       const [wx, wy] = gridToWorld(block.row, block.col);
-      const holeColor = cfg ? cfg.particleA : 0xffffff;
+      const holeColor = cfg ? cfg.bgColor : 0xffffff;
       if (cfg) burstAtBlock(this.particlePool, wx, wy, cfg.particleA, cfg.particleB, 14);
 
       const mesh = this.blockMeshes.get(block.id);
       if (!mesh) {
-        // 메시 없어도 구멍 이펙트는 스폰
         this._spawnHoleEffect(wx, wy, holeColor);
+        this._spawnMiniColorFlash(wx, wy, holeColor);
         continue;
       }
+
+      this._spawnMiniColorFlash(wx, wy, holeColor);
+
       const startT = this.clock.getElapsedTime();
       const dur = 0.14;
       const anim = (): void => {
@@ -974,7 +1464,7 @@ export class Board3D {
         const t = (this.clock.getElapsedTime() - startT) / dur;
         if (t >= 1) {
           this._removeMesh(block.id);
-          this._spawnHoleEffect(wx, wy, holeColor); // ← 구멍 이펙트 추가
+          this._spawnHoleEffect(wx, wy, holeColor);
           return;
         }
         const s = 1 - t;
@@ -1023,7 +1513,8 @@ export class Board3D {
     this.specialMeshIds.delete(blockId); // 특수 블록 추적 해제
     const mat = this.blockMaterials.get(blockId);
     if (mat) {
-      (mat.userData['texture'] as THREE.Texture | undefined)?.dispose();
+      // 텍스처는 blockMaterial.ts의 _texCache에서 공유 관리 — 여기서 dispose 금지
+      // (dispose하면 같은 shape의 다른 블록들이 빈 텍스처로 렌더링됨)
       mat.dispose();
       this.blockMaterials.delete(blockId);
     }

@@ -13,11 +13,11 @@ export const BLOCK_RENDER_ORDER = 2;
 
 /* ── 특수 블록 고정 배경색 ── */
 export const SPECIAL_BG: Record<string, number> = {
-  STRIPED_H:  0x0A1865,  // 딥 스페이스 네이비
-  STRIPED_V:  0x0A1865,
-  PROPELLER:  0x003344,  // 딥 틸
-  TNT:        0x2A0000,  // 다크 크림슨
-  COLOR_BOMB: 0x0D0020,  // 코스믹 퍼플
+  STRIPED_H:  0x2E3E50,  // 더스티 딥 블루 (아론 무드 파스텔 조화)
+  STRIPED_V:  0x2E3E50,
+  PROPELLER:  0x27443E,  // 딥 모스 그린
+  TNT:        0x4E3029,  // 더스티 로즈우드
+  COLOR_BOMB: 0x322442,  // 더스티 라벤더 퍼플
 };
 
 /* ── Vertex Shader ── */
@@ -139,144 +139,78 @@ function drawTriangle(ctx: CanvasRenderingContext2D, cx: number, cy: number, R: 
 /* ═══════════════════════════════════════════════
    헬퍼: 3D 구체 느낌 그라디언트
 ═══════════════════════════════════════════════ */
-function drawSphere3D(
-  ctx: CanvasRenderingContext2D,
-  cx: number, cy: number, r: number,
-  baseColor: string, midColor: string, darkColor: string,
-): void {
-  // 기본 구체
-  const base = ctx.createRadialGradient(cx - r*0.2, cy - r*0.25, r*0.05, cx, cy, r);
-  base.addColorStop(0.0, midColor);
-  base.addColorStop(0.45, baseColor);
-  base.addColorStop(1.0, darkColor);
-  ctx.fillStyle = base;
-  ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI*2); ctx.fill();
-  // 상단 하이라이트 (렌즈 반사)
-  const hl = ctx.createRadialGradient(cx - r*0.3, cy - r*0.35, 0, cx - r*0.15, cy - r*0.2, r*0.6);
-  hl.addColorStop(0.0, 'rgba(255,255,255,0.80)');
-  hl.addColorStop(0.4, 'rgba(255,255,255,0.22)');
-  hl.addColorStop(1.0, 'rgba(255,255,255,0.00)');
-  ctx.fillStyle = hl;
-  ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI*2); ctx.fill();
-  // 하단 반사광
-  const bot = ctx.createRadialGradient(cx + r*0.15, cy + r*0.4, 0, cx, cy + r*0.5, r*0.5);
-  bot.addColorStop(0.0, 'rgba(255,255,255,0.25)');
-  bot.addColorStop(1.0, 'rgba(255,255,255,0.00)');
-  ctx.fillStyle = bot;
-  ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI*2); ctx.fill();
-}
+
 
 /* ═══════════════════════════════════════════════
-   STRIPED_H — 메탈릭 가로 로켓 →
+   STRIPED_H — 에너지 화살 (가로 빔 양방향)
 ═══════════════════════════════════════════════ */
 function drawStripedH(ctx: CanvasRenderingContext2D, cx: number, cy: number): void {
   ctx.save();
-  const bL = cx - TEX*0.36;  // 몸통 왼쪽 끝
-  const bR = cx + TEX*0.26;  // 몸통 오른쪽 끝
-  const bH = TEX*0.28;       // 몸통 반높이
-
-  // ── 스피드 라인 (왼쪽 꼬리) ──
-  const lineData = [
-    { yOff: -bH*0.35, w: TEX*0.30, h: 3.5, a: 0.55 },
-    { yOff:  0,        w: TEX*0.38, h: 5,   a: 0.75 },
-    { yOff:  bH*0.35, w: TEX*0.30, h: 3.5, a: 0.55 },
-  ];
-  for (const l of lineData) {
-    const lg = ctx.createLinearGradient(bL - l.w, cy + l.yOff, bL + 8, cy + l.yOff);
-    lg.addColorStop(0, `rgba(80,160,255,0)`);
-    lg.addColorStop(0.7, `rgba(120,200,255,${l.a})`);
-    lg.addColorStop(1,   `rgba(180,230,255,${l.a})`);
-    ctx.fillStyle = lg;
-    ctx.beginPath();
-    ctx.roundRect(bL - l.w, cy + l.yOff - l.h/2, l.w, l.h, l.h/2);
-    ctx.fill();
-  }
-
-  // ── 엔진 화염 ──
-  const flameX = bL + 6;
-  const fg = ctx.createRadialGradient(flameX, cy, 2, flameX - TEX*0.1, cy, TEX*0.24);
-  fg.addColorStop(0,   'rgba(255,255,200,1.0)');
-  fg.addColorStop(0.25,'rgba(255,180,0,0.95)');
-  fg.addColorStop(0.6, 'rgba(255,60,0,0.55)');
-  fg.addColorStop(1,   'rgba(255,0,0,0)');
-  ctx.fillStyle = fg;
+  const w = TEX * 0.76;
+  const h = TEX * 0.44;
+  
+  // 배경 네온 아크 글로우
+  const glowGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, w * 0.6);
+  glowGrad.addColorStop(0, 'rgba(0, 255, 255, 0.4)');
+  glowGrad.addColorStop(0.6, 'rgba(0, 150, 255, 0.15)');
+  glowGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+  ctx.fillStyle = glowGrad;
   ctx.beginPath();
-  ctx.ellipse(flameX - TEX*0.08, cy, TEX*0.20, bH*0.52, 0, 0, Math.PI*2);
+  ctx.arc(cx, cy, w * 0.6, 0, Math.PI * 2);
   ctx.fill();
 
-  // ── 날개 (fin) ──
-  const finX  = bL + TEX*0.10;
-  const finGrad = ctx.createLinearGradient(finX, cy - bH, finX, cy + bH);
-  finGrad.addColorStop(0, '#FF9933'); finGrad.addColorStop(1, '#CC4400');
-  ctx.fillStyle = finGrad;
-  // 위 날개
+  // 전기 아크 테두리 효과
+  ctx.strokeStyle = 'rgba(180, 255, 255, 0.85)';
+  ctx.lineWidth = 2;
   ctx.beginPath();
-  ctx.moveTo(finX,            cy - bH);
-  ctx.lineTo(finX + TEX*0.14, cy - bH - TEX*0.18);
-  ctx.lineTo(finX + TEX*0.28, cy - bH);
-  ctx.closePath(); ctx.fill();
-  // 아래 날개
-  ctx.beginPath();
-  ctx.moveTo(finX,            cy + bH);
-  ctx.lineTo(finX + TEX*0.14, cy + bH + TEX*0.18);
-  ctx.lineTo(finX + TEX*0.28, cy + bH);
-  ctx.closePath(); ctx.fill();
-
-  // ── 로켓 몸통 ──
-  const bodyGrad = ctx.createLinearGradient(bL, cy - bH, bL, cy + bH);
-  bodyGrad.addColorStop(0,   '#F0F0FF');
-  bodyGrad.addColorStop(0.18,'#FFFFFF');
-  bodyGrad.addColorStop(0.52,'#B0B0C8');
-  bodyGrad.addColorStop(0.82,'#707088');
-  bodyGrad.addColorStop(1,   '#404055');
-  ctx.beginPath();
-  ctx.arc(bL, cy, bH, Math.PI*0.5, Math.PI*1.5);  // 꼬리 반원
-  ctx.lineTo(bR, cy - bH);
-  ctx.lineTo(bR + bH*1.5, cy);                      // 노즈 콘
-  ctx.lineTo(bR, cy + bH);
+  // 위쪽 아크
+  ctx.moveTo(cx - w*0.4, cy);
+  ctx.bezierCurveTo(cx - w*0.2, cy - h*0.25, cx - w*0.1, cy - h*0.35, cx, cy - h*0.2);
+  ctx.bezierCurveTo(cx + w*0.1, cy - h*0.35, cx + w*0.2, cy - h*0.25, cx + w*0.4, cy);
+  // 아래쪽 아크
+  ctx.bezierCurveTo(cx + w*0.2, cy + h*0.25, cx + w*0.1, cy + h*0.35, cx, cy + h*0.2);
+  ctx.bezierCurveTo(cx - w*0.1, cy + h*0.35, cx - w*0.2, cy + h*0.25, cx - w*0.4, cy);
   ctx.closePath();
-  ctx.fillStyle = bodyGrad;
-  ctx.fill();
-
-  // 몸통 테두리
-  ctx.strokeStyle = 'rgba(255,255,255,0.25)';
-  ctx.lineWidth = 1.5;
   ctx.stroke();
 
-  // 상단 하이라이트 줄
-  const topHL = ctx.createLinearGradient(bL, cy - bH, bR, cy - bH);
-  topHL.addColorStop(0, 'rgba(255,255,255,0)');
-  topHL.addColorStop(0.3,'rgba(255,255,255,0.8)');
-  topHL.addColorStop(1,  'rgba(255,255,255,0.1)');
-  ctx.fillStyle = topHL;
+  // 화살 몸통 & 코어 (좌우 양방향 화살표)
+  const bodyGrad = ctx.createLinearGradient(cx - w*0.4, cy, cx + w*0.4, cy);
+  bodyGrad.addColorStop(0, '#00ffff');
+  bodyGrad.addColorStop(0.5, '#ffffff');
+  bodyGrad.addColorStop(1, '#00ffff');
+  
+  ctx.fillStyle = bodyGrad;
   ctx.beginPath();
-  ctx.arc(bL, cy, bH, Math.PI*0.5, Math.PI*1.5);
-  ctx.lineTo(bR, cy - bH);
-  ctx.lineTo(bR, cy - bH*0.55);
-  ctx.lineTo(bL, cy - bH*0.55);
-  ctx.closePath(); ctx.fill();
-
-  // ── 오렌지 스트라이프 밴드 ──
-  const bandX = bL + (bR - bL)*0.30;
-  ctx.fillStyle = '#FF8822';
-  ctx.beginPath();
-  ctx.rect(bandX, cy - bH, TEX*0.055, bH*2);
+  // 왼쪽 화살촉
+  ctx.moveTo(cx - w*0.45, cy);
+  ctx.lineTo(cx - w*0.2, cy - h*0.22);
+  ctx.lineTo(cx - w*0.22, cy - h*0.07);
+  // 샤프트
+  ctx.lineTo(cx + w*0.22, cy - h*0.07);
+  // 오른쪽 화살촉
+  ctx.lineTo(cx + w*0.2, cy - h*0.22);
+  ctx.lineTo(cx + w*0.45, cy);
+  ctx.lineTo(cx + w*0.2, cy + h*0.22);
+  ctx.lineTo(cx + w*0.22, cy + h*0.07);
+  // 샤프트
+  ctx.lineTo(cx - w*0.22, cy + h*0.07);
+  ctx.lineTo(cx - w*0.2, cy + h*0.22);
+  ctx.closePath();
   ctx.fill();
 
-  // ── 포트홀 (창문) ──
-  const winX = bL + (bR - bL)*0.65;
-  const winR = bH * 0.36;
-  drawSphere3D(ctx, winX, cy, winR, '#0055CC', '#88CCFF', '#001144');
-  // 창문 테두리
-  ctx.strokeStyle = 'rgba(255,255,255,0.55)';
-  ctx.lineWidth = 2.5;
-  ctx.beginPath(); ctx.arc(winX, cy, winR, 0, Math.PI*2); ctx.stroke();
+  // 내부 밝은 코어 (흰색 샤프트 라인)
+  ctx.strokeStyle = '#ffffff';
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(cx - w*0.3, cy);
+  ctx.lineTo(cx + w*0.3, cy);
+  ctx.stroke();
 
   ctx.restore();
 }
 
 /* ═══════════════════════════════════════════════
-   STRIPED_V — 메탈릭 세로 로켓 ↑ (H를 90° 회전)
+   STRIPED_V — 세로 에너지 화살 (H를 90° 회전)
 ═══════════════════════════════════════════════ */
 function drawStripedV(ctx: CanvasRenderingContext2D, cx: number, cy: number): void {
   ctx.save();
@@ -287,211 +221,216 @@ function drawStripedV(ctx: CanvasRenderingContext2D, cx: number, cy: number): vo
 }
 
 /* ═══════════════════════════════════════════════
-   PROPELLER — 4날개 메탈릭 로터 (회전 블러 포함)
+   PROPELLER — 헬리콥터 (헬리콥터 이모지 🚁 + 글로우)
 ═══════════════════════════════════════════════ */
-function drawPropeller(ctx: CanvasRenderingContext2D, cx: number, cy: number): void {
-  const R   = TEX * 0.39;
-  const bw  = TEX * 0.19;  // 날개 두께 반값
+function drawSphereCustom(
+  ctx: CanvasRenderingContext2D,
+  cx: number, cy: number, r: number,
+  baseColor: string, midColor: string, darkColor: string
+): void {
+  // 구체 입체감 구현
+  const base = ctx.createRadialGradient(cx - r*0.2, cy - r*0.25, r*0.05, cx, cy, r);
+  base.addColorStop(0.0, midColor);
+  base.addColorStop(0.45, baseColor);
+  base.addColorStop(1.0, darkColor);
+  ctx.fillStyle = base;
+  ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI*2); ctx.fill();
 
-  // ── 모션 블러 날개 (45° 오프셋, 투명) ──
+  // 상단 하이라이트
+  const hl = ctx.createRadialGradient(cx - r*0.3, cy - r*0.35, 0, cx - r*0.15, cy - r*0.2, r*0.6);
+  hl.addColorStop(0.0, 'rgba(255,255,255,0.7)');
+  hl.addColorStop(0.5, 'rgba(255,255,255,0.15)');
+  hl.addColorStop(1.0, 'rgba(255,255,255,0.0)');
+  ctx.fillStyle = hl;
+  ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI*2); ctx.fill();
+}
+
+function drawPropeller(ctx: CanvasRenderingContext2D, cx: number, cy: number): void {
+  const R = TEX * 0.42;
+  const bw = TEX * 0.10;
+  ctx.save();
+
+  // 1. 회전 바람 글로우 배경
+  const windGlow = ctx.createRadialGradient(cx, cy, R * 0.2, cx, cy, R * 1.1);
+  windGlow.addColorStop(0, 'rgba(152, 213, 205, 0.25)'); // 시안 민트
+  windGlow.addColorStop(1, 'rgba(0,0,0,0)');
+  ctx.fillStyle = windGlow;
+  ctx.beginPath(); ctx.arc(cx, cy, R * 1.1, 0, Math.PI * 2); ctx.fill();
+
+  // 2. 4개의 세련된 날개 (Blades) 그리기
   for (let i = 0; i < 4; i++) {
     const ang = (i / 4) * Math.PI * 2 + Math.PI * 0.125;
     ctx.save();
-    ctx.translate(cx, cy); ctx.rotate(ang);
-    ctx.globalAlpha = 0.18;
-    const mg = ctx.createLinearGradient(0, -bw, R, -bw);
-    mg.addColorStop(0, '#AADDFF'); mg.addColorStop(1, '#224466');
-    ctx.fillStyle = mg;
+    ctx.translate(cx, cy);
+    ctx.rotate(ang);
+
+    // 날개 내부 그라디언트 (시안 민트 -> 크림 반투명)
+    const bladeGrad = ctx.createLinearGradient(0, 0, R * 0.9, 0);
+    bladeGrad.addColorStop(0, 'rgba(152, 213, 205, 0.8)');
+    bladeGrad.addColorStop(0.5, 'rgba(252, 250, 242, 0.6)');
+    bladeGrad.addColorStop(1, 'rgba(226, 135, 67, 0.15)'); // 끝부분은 살짝 오렌지빛
+
+    ctx.fillStyle = bladeGrad;
+    ctx.strokeStyle = '#fcfaf2'; // 크림색 얇은 테두리
+    ctx.lineWidth = 1.8;
+
     ctx.beginPath();
-    ctx.ellipse(R*0.5, 0, R*0.5, bw*0.7, 0, 0, Math.PI*2);
-    ctx.fill();
-    ctx.globalAlpha = 1.0;
-    ctx.restore();
-  }
-
-  // ── 실제 날개 4개 ──
-  for (let i = 0; i < 4; i++) {
-    const ang = (i / 4) * Math.PI * 2;
-    ctx.save();
-    ctx.translate(cx, cy); ctx.rotate(ang);
-
-    // 날개 그라디언트 (선두 엣지 밝고 후연 어두움)
-    const wg = ctx.createLinearGradient(-bw, 0, bw, 0);
-    wg.addColorStop(0,   '#DDEEFF');
-    wg.addColorStop(0.35,'#FFFFFF');
-    wg.addColorStop(0.65,'#88AACC');
-    wg.addColorStop(1,   '#334466');
-
-    // 날개 깊이 (루트→팁 테이퍼)
-    const dg = ctx.createLinearGradient(0, 0, R, 0);
-    dg.addColorStop(0,  'rgba(80,140,200,0.3)');
-    dg.addColorStop(0.5,'rgba(255,255,255,0)');
-    dg.addColorStop(1,  'rgba(0,30,60,0.4)');
-
-    ctx.fillStyle = wg;
-    ctx.beginPath();
-    ctx.moveTo(TEX*0.06, -bw);
-    ctx.bezierCurveTo(R*0.4, -bw*1.3, R*0.85, -bw*0.85, R, 0);
-    ctx.bezierCurveTo(R*0.85, bw*0.85, R*0.4, bw*1.3, TEX*0.06, bw);
+    ctx.moveTo(0, 0);
+    // 세련된 유선형 블레이드 형태
+    ctx.bezierCurveTo(R * 0.3, -bw, R * 0.75, -bw * 0.8, R * 0.9, 0);
+    ctx.bezierCurveTo(R * 0.7, bw * 0.8, R * 0.3, bw, 0, 0);
     ctx.closePath();
     ctx.fill();
-
-    // 날개 광택
-    ctx.fillStyle = dg;
-    ctx.beginPath();
-    ctx.moveTo(TEX*0.06, -bw);
-    ctx.bezierCurveTo(R*0.4, -bw*1.3, R*0.85, -bw*0.85, R, 0);
-    ctx.bezierCurveTo(R*0.85, bw*0.85, R*0.4, bw*1.3, TEX*0.06, bw);
-    ctx.closePath();
-    ctx.fill();
-
-    // 날개 테두리
-    ctx.strokeStyle = 'rgba(150,200,255,0.4)';
-    ctx.lineWidth = 1.2;
     ctx.stroke();
+
+    // 블레이드 내부에 속도감을 주는 빗금선 1개
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+    ctx.lineWidth = 1.0;
+    ctx.beginPath();
+    ctx.moveTo(R * 0.25, 0);
+    ctx.lineTo(R * 0.75, 0);
+    ctx.stroke();
+
     ctx.restore();
   }
 
-  // ── 중앙 허브 ──
-  const hubR = TEX * 0.105;
-  drawSphere3D(ctx, cx, cy, hubR, '#6699BB', '#AADDFF', '#112233');
-  // 허브 테두리 링
-  ctx.strokeStyle = 'rgba(180,230,255,0.8)';
-  ctx.lineWidth = 2.5;
-  ctx.beginPath(); ctx.arc(cx, cy, hubR, 0, Math.PI*2); ctx.stroke();
-  // 허브 중심 볼트
-  ctx.fillStyle = '#DDEEFF';
-  ctx.beginPath(); ctx.arc(cx, cy, TEX*0.028, 0, Math.PI*2); ctx.fill();
+  // 3. 중앙 허브 (오렌지 골드 3D 구체)
+  const hubR = R * 0.28;
+  drawSphereCustom(ctx, cx, cy, hubR, '#E28743', '#F1A974', '#9E4F18');
+  
+  // 허브 아웃라인
+  ctx.strokeStyle = '#fcfaf2';
+  ctx.lineWidth = 2.0;
+  ctx.beginPath(); ctx.arc(cx, cy, hubR, 0, Math.PI * 2); ctx.stroke();
+
+  ctx.restore();
 }
 
 /* ═══════════════════════════════════════════════
-   TNT — 클래식 폭탄 구체 (3D 메탈릭)
+   TNT — 폭탄 (클래식 폭탄 커스텀 3D + 도화선 & TNT 텍스트)
 ═══════════════════════════════════════════════ */
 function drawTNT(ctx: CanvasRenderingContext2D, cx: number, cy: number): void {
-  const R = TEX * 0.35;
-
-  // ── 외부 글로우 (위험 분위기) ──
-  const glow = ctx.createRadialGradient(cx, cy, R*0.6, cx, cy, R*1.5);
-  glow.addColorStop(0,   'rgba(255,80,0,0.0)');
-  glow.addColorStop(0.5, 'rgba(200,30,0,0.18)');
-  glow.addColorStop(1,   'rgba(100,0,0,0.0)');
-  ctx.fillStyle = glow;
-  ctx.beginPath(); ctx.arc(cx, cy, R*1.5, 0, Math.PI*2); ctx.fill();
-
-  // ── 폭탄 구체 (어두운 메탈) ──
-  drawSphere3D(ctx, cx, cy, R, '#3A3A3A', '#606060', '#0A0A0A');
-
-  // ── 적색 적도 밴드 ──
+  const R = TEX * 0.38;
   ctx.save();
-  ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI*2); ctx.clip();
-  const bandG = ctx.createLinearGradient(0, cy - R*0.22, 0, cy + R*0.22);
-  bandG.addColorStop(0,   'rgba(180,0,0,0)');
-  bandG.addColorStop(0.25,'rgba(220,20,0,0.75)');
-  bandG.addColorStop(0.5, 'rgba(255,40,0,0.9)');
-  bandG.addColorStop(0.75,'rgba(220,20,0,0.75)');
-  bandG.addColorStop(1,   'rgba(180,0,0,0)');
-  ctx.fillStyle = bandG;
-  ctx.fillRect(cx - R, cy - R*0.22, R*2, R*0.44);
-  ctx.restore();
 
-  // ── 구체 테두리 림라이트 ──
-  ctx.strokeStyle = 'rgba(100,100,120,0.65)';
-  ctx.lineWidth = 2.5;
-  ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI*2); ctx.stroke();
+  // 1. 은은한 배경 광원
+  const glow = ctx.createRadialGradient(cx, cy, 0, cx, cy, R * 1.6);
+  glow.addColorStop(0, 'rgba(226, 135, 67, 0.25)'); // 오렌지/골드 포인트 색상
+  glow.addColorStop(1, 'rgba(0,0,0,0)');
+  ctx.fillStyle = glow;
+  ctx.beginPath(); ctx.arc(cx, cy, R * 1.6, 0, Math.PI * 2); ctx.fill();
 
-  // 상단 림 하이라이트 (밝은 반원호)
-  ctx.strokeStyle = 'rgba(200,200,220,0.50)';
+  // 2. 도화선 그리기 (폭탄 머리 위)
+  ctx.strokeStyle = '#e28743'; // 오렌지 골드
+  ctx.lineWidth = 3;
+  ctx.lineCap = 'round';
+  ctx.beginPath();
+  // 밸브에서 위-오른쪽으로 휘어지는 도화선
+  ctx.moveTo(cx, cy - R * 0.7);
+  ctx.bezierCurveTo(cx + R * 0.2, cy - R * 1.1, cx + R * 0.5, cy - R * 0.9, cx + R * 0.65, cy - R * 1.15);
+  ctx.stroke();
+
+  // 3. 도화선 끝 불꽃 스파크
+  const fx = cx + R * 0.65;
+  const fy = cy - R * 1.15;
+  // 노란색/오렌지색 불꽃 그라디언트
+  const fireGlow = ctx.createRadialGradient(fx, fy, 0, fx, fy, R * 0.35);
+  fireGlow.addColorStop(0, '#ffffff');
+  fireGlow.addColorStop(0.4, '#f1a974');
+  fireGlow.addColorStop(1, 'rgba(226, 135, 67, 0)');
+  ctx.fillStyle = fireGlow;
+  ctx.beginPath(); ctx.arc(fx, fy, R * 0.35, 0, Math.PI*2); ctx.fill();
+
+  // 반짝이 스파크 모양 선
+  ctx.strokeStyle = '#ffffff';
+  ctx.lineWidth = 1.5;
+  for (let i = 0; i < 4; i++) {
+    const angle = (i * Math.PI) / 2 + Math.PI / 4;
+    ctx.beginPath();
+    ctx.moveTo(fx, fy);
+    ctx.lineTo(fx + Math.cos(angle) * R * 0.22, fy + Math.sin(angle) * R * 0.22);
+    ctx.stroke();
+  }
+
+  // 4. 폭탄 머리 밸브 (마개)
+  ctx.fillStyle = '#4A342E';
+  ctx.strokeStyle = '#e28743';
   ctx.lineWidth = 2;
   ctx.beginPath();
-  ctx.arc(cx, cy, R - 1.5, Math.PI*1.15, Math.PI*1.85);
+  ctx.roundRect(cx - R * 0.22, cy - R * 0.78, R * 0.44, R * 0.16, R * 0.04);
+  ctx.fill();
   ctx.stroke();
 
-  // ── 심지 ──
-  const fuseBaseX = cx + R*0.08;
-  const fuseBaseY = cy - R + 4;
-  ctx.strokeStyle = '#C8A050';
-  ctx.lineWidth = 5;
-  ctx.lineCap = 'round';
-  ctx.lineJoin = 'round';
-  ctx.shadowColor = 'rgba(0,0,0,0.5)';
-  ctx.shadowBlur = 4;
-  ctx.beginPath();
-  ctx.moveTo(fuseBaseX, fuseBaseY);
-  ctx.bezierCurveTo(
-    fuseBaseX + TEX*0.15, fuseBaseY - TEX*0.10,
-    fuseBaseX + TEX*0.04, fuseBaseY - TEX*0.22,
-    fuseBaseX + TEX*0.12, fuseBaseY - TEX*0.30,
-  );
-  ctx.stroke();
-  ctx.shadowBlur = 0;
+  // 5. 폭탄 몸체 (더스티 로즈우드 계열 3D 구체)
+  drawSphereCustom(ctx, cx, cy, R * 0.65, '#4E3029', '#7C534B', '#2B1713');
+  // 아웃라인
+  ctx.strokeStyle = '#e28743';
+  ctx.lineWidth = 2.5;
+  ctx.beginPath(); ctx.arc(cx, cy, R * 0.65, 0, Math.PI * 2); ctx.stroke();
 
-  // ── 심지 불꽃 스파크 ──
-  const sparkX = fuseBaseX + TEX*0.12;
-  const sparkY = fuseBaseY - TEX*0.31;
-  // 외부 글로우
-  const sg = ctx.createRadialGradient(sparkX, sparkY, 0, sparkX, sparkY, TEX*0.095);
-  sg.addColorStop(0,   'rgba(255,255,220,1.0)');
-  sg.addColorStop(0.2, 'rgba(255,200,0,0.9)');
-  sg.addColorStop(0.5, 'rgba(255,80,0,0.5)');
-  sg.addColorStop(1,   'rgba(255,0,0,0)');
-  ctx.fillStyle = sg;
-  ctx.beginPath(); ctx.arc(sparkX, sparkY, TEX*0.095, 0, Math.PI*2); ctx.fill();
-  // 스파크 코어
-  ctx.fillStyle = '#FFFADD';
-  ctx.beginPath(); ctx.arc(sparkX, sparkY, TEX*0.026, 0, Math.PI*2); ctx.fill();
+  // 6. 폭탄 표면에 골드로 "TNT" 기하학적 폰트 각인
+  ctx.fillStyle = '#fcfaf2'; // 크림 아이보리
+  ctx.font = `bold ${R * 0.3}px sans-serif`;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('TNT', cx, cy + R * 0.05);
+
+  ctx.restore();
 }
 
 /* ═══════════════════════════════════════════════
-   COLOR_BOMB — 프리즘 에너지 오브 (무지개 크리스탈)
+   COLOR_BOMB — 갤럭시 볼 (은하 나선 + 블랙홀 코어)
 ═══════════════════════════════════════════════ */
 function drawColorBomb(ctx: CanvasRenderingContext2D, cx: number, cy: number): void {
-  const R = TEX * 0.36;
+  const R = TEX * 0.38;
   const RAYS = 8;
   const rayColors = [
-    '#FF3333','#FF8800','#FFEE00','#44FF66',
-    '#22CCFF','#4455FF','#AA33FF','#FF44CC',
+    '#ff3d00', '#ff9100', '#ffd600', '#00e676',
+    '#00b0ff', '#2979ff', '#651fff', '#f50057',
   ];
 
-  // ── 외부 오로라 글로우 ──
-  const outerG = ctx.createRadialGradient(cx, cy, R*0.5, cx, cy, R*1.6);
-  outerG.addColorStop(0,   'rgba(180,80,255,0.0)');
-  outerG.addColorStop(0.45,'rgba(100,0,200,0.30)');
-  outerG.addColorStop(0.8, 'rgba(30,0,80,0.18)');
-  outerG.addColorStop(1,   'rgba(0,0,0,0)');
+  // 1. 외부 무지개 안개 오로라 글로우
+  const outerG = ctx.createRadialGradient(cx, cy, R*0.4, cx, cy, R*1.65);
+  outerG.addColorStop(0, 'rgba(101, 31, 255, 0)');
+  outerG.addColorStop(0.4, 'rgba(101, 31, 255, 0.35)');
+  outerG.addColorStop(0.85, 'rgba(0, 176, 255, 0.15)');
+  outerG.addColorStop(1, 'rgba(0,0,0,0)');
   ctx.fillStyle = outerG;
-  ctx.beginPath(); ctx.arc(cx, cy, R*1.6, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(cx, cy, R*1.65, 0, Math.PI*2); ctx.fill();
 
-  // ── 레인보우 레이 (8방향 빔) ──
+  // 2. 8방향 선명한 은하 빔
   for (let i = 0; i < RAYS; i++) {
     const ang = (i / RAYS) * Math.PI * 2 - Math.PI * 0.5;
-    const tipX = cx + Math.cos(ang) * R * 1.35;
-    const tipY = cy + Math.sin(ang) * R * 1.35;
-    const rayW  = R * 0.22;
+    const tipX = cx + Math.cos(ang) * R * 1.45;
+    const tipY = cy + Math.sin(ang) * R * 1.45;
+    const rayW = R * 0.16;
 
     ctx.save();
-    ctx.translate(cx, cy); ctx.rotate(ang);
-    const rg = ctx.createLinearGradient(0, 0, R*1.35, 0);
-    rg.addColorStop(0,   'rgba(255,255,255,0.6)');
-    rg.addColorStop(0.35, rayColors[i] + 'CC');
-    rg.addColorStop(0.7,  rayColors[i] + '55');
-    rg.addColorStop(1,    rayColors[i] + '00');
+    ctx.translate(cx, cy);
+    ctx.rotate(ang);
+    const rg = ctx.createLinearGradient(0, 0, R*1.45, 0);
+    rg.addColorStop(0, 'rgba(255,255,255,0.85)');
+    rg.addColorStop(0.35, rayColors[i] + 'EE');
+    rg.addColorStop(0.7, rayColors[i] + '55');
+    rg.addColorStop(1, rayColors[i] + '00');
     ctx.fillStyle = rg;
+    
     ctx.beginPath();
-    ctx.moveTo(0, -rayW * 0.08);
-    ctx.lineTo(R*1.35, -rayW * 0.5);
-    ctx.lineTo(R*1.35,  rayW * 0.5);
-    ctx.lineTo(0,  rayW * 0.08);
+    ctx.moveTo(0, -rayW * 0.05);
+    ctx.lineTo(R*1.45, -rayW * 0.4);
+    ctx.lineTo(R*1.45, rayW * 0.4);
+    ctx.lineTo(0, rayW * 0.05);
     ctx.closePath();
     ctx.fill();
     ctx.restore();
 
-    // 레이 끝 스파클
-    const spkG = ctx.createRadialGradient(tipX, tipY, 0, tipX, tipY, TEX*0.055);
-    spkG.addColorStop(0,   rayColors[i] + 'FF');
-    spkG.addColorStop(0.5, rayColors[i] + '55');
-    spkG.addColorStop(1,   'rgba(0,0,0,0)');
+    // 빔 끝 미세 스파크
+    const spkG = ctx.createRadialGradient(tipX, tipY, 0, tipX, tipY, TEX*0.065);
+    spkG.addColorStop(0, rayColors[i] + 'FF');
+    spkG.addColorStop(0.5, rayColors[i] + '66');
+    spkG.addColorStop(1, 'rgba(0,0,0,0)');
     ctx.fillStyle = spkG;
-    ctx.beginPath(); ctx.arc(tipX, tipY, TEX*0.055, 0, Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.arc(tipX, tipY, TEX*0.065, 0, Math.PI*2); ctx.fill();
   }
 
   // ── 메인 구체 (무지개 + 메탈릭) ──
@@ -555,8 +494,14 @@ function drawColorBomb(ctx: CanvasRenderingContext2D, cx: number, cy: number): v
 }
 
 
+const _texCache = new Map<string, THREE.CanvasTexture>();
+
 /* ── 텍스처 생성 (일반 + 특수) ── */
 function createSymbolTexture(shape: string): THREE.CanvasTexture {
+  if (_texCache.has(shape)) {
+    return _texCache.get(shape)!;
+  }
+
   const canvas = document.createElement('canvas');
   canvas.width = canvas.height = TEX;
   const ctx = canvas.getContext('2d')!;
@@ -620,6 +565,7 @@ function createSymbolTexture(shape: string): THREE.CanvasTexture {
 
   const texture = new THREE.CanvasTexture(canvas);
   texture.needsUpdate = true;
+  _texCache.set(shape, texture);   // ← 캐시에 저장 (누락 버그 수정)
   return texture;
 }
 
