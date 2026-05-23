@@ -307,11 +307,26 @@ export class BoardCore {
     const groups: MatchGroup[] = [];
     const matched = new Set<number>();
 
-    // 1. L/T 교차 감지 → TNT (가로 run + 세로 run 교차, 합산 5개 이상)
+    // 1. 5+ 직선 run → COLOR_BOMB (최우선: 먼저 claim)
+    const claimColorBomb = (run: Run): void => {
+      if (run.used || run.blocks.some(b => matched.has(b.id))) return;
+      if (run.blocks.length >= 5) {
+        run.blocks.forEach(b => matched.add(b.id));
+        run.used = true;
+        groups.push({ blocks: run.blocks, hint: 'COLOR_BOMB' });
+      }
+    };
+    hRuns.forEach(claimColorBomb);
+    vRuns.forEach(claimColorBomb);
+
+    // 2. L/T 교차 감지 → TNT
+    //    guard: 5+ run은 step1에서 이미 처리됨 → 여기서 skip
     for (const h of hRuns) {
       if (h.used) continue;
+      if (h.blocks.length >= 5) continue;
       for (const v of vRuns) {
         if (v.used) continue;
+        if (v.blocks.length >= 5) continue;
         if (h.blocks[0].colorType !== v.blocks[0].colorType) continue;
         const hRow = h.blocks[0].row;
         const vCol = v.blocks[0].col;
@@ -328,21 +343,7 @@ export class BoardCore {
       }
     }
 
-    // 2. 나머지 run 처리
-    const processRun = (run: Run): void => {
-      if (run.used || run.blocks.some(b => matched.has(b.id))) return;
-      run.blocks.forEach(b => matched.add(b.id));
-      const len = run.blocks.length;
-      let hint: MatchGroup['hint'];
-      if      (len >= 5)          hint = 'COLOR_BOMB';
-      else if (len === 4)         hint = run.dir === 'H' ? 'STRIPED_H' : 'STRIPED_V';
-      else                        hint = 'NORMAL';
-      groups.push({ blocks: run.blocks, hint });
-    };
-    hRuns.forEach(processRun);
-    vRuns.forEach(processRun);
-
-    // 3. 2×2 같은 색 → PROPELLER
+    // 3. 2×2 같은 색 → PROPELLER (4-straight보다 먼저 claim해야 충돌 방지)
     for (let r = 0; r < GRID_ROWS - 1; r++) {
       for (let c = 0; c < GRID_COLS - 1; c++) {
         const tl = this.grid[r][c];   const tr = this.grid[r][c+1];
@@ -355,6 +356,19 @@ export class BoardCore {
         groups.push({ blocks: [tl,tr,bl,br], hint: 'PROPELLER' });
       }
     }
+
+    // 4. 4-straight → STRIPED, 3-straight → NORMAL (나머지 미처리 run)
+    const processRemainingRun = (run: Run): void => {
+      if (run.used || run.blocks.some(b => matched.has(b.id))) return;
+      run.blocks.forEach(b => matched.add(b.id));
+      const len = run.blocks.length;
+      let hint: MatchGroup['hint'];
+      if (len === 4) hint = run.dir === 'H' ? 'STRIPED_H' : 'STRIPED_V';
+      else           hint = 'NORMAL';
+      groups.push({ blocks: run.blocks, hint });
+    };
+    hRuns.forEach(processRemainingRun);
+    vRuns.forEach(processRemainingRun);
 
     return groups;
   }
