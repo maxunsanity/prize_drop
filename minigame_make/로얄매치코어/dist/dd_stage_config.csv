@@ -1,0 +1,4 @@
+stage_id,mission_type,target_block_type,target_block_count,target_score,target_tile_count,moves_given,difficulty,star1,star2,star3
+1,BLOCK_COLLECTION,BLOCK_04,20,,, 25,easy,500,1000,1500
+2,BLOCK_COLLECTION,BLOCK_04,30,,,28,normal,800,1500,2200
+3,SCORE_TARGET,,,,, 25,normal,1000,2000,3000

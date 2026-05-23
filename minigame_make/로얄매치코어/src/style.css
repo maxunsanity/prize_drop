@@ -1,0 +1,502 @@
+/* ═══════════════════════════════════════════════════
+   style.css — Double Down 게임 스타일
+   레이아웃: 390×844 (iPhone 14) 비율 고정
+   HUD Top 84px / Board flex / HUD Bottom 164px
+   ═══════════════════════════════════════════════════ */
+
+:root {
+  --felt:       #0e3d26;
+  --felt-dark:  #051c11;
+  --gold:       #f5a623;
+  --gold-light: #fbbf24;
+  --card:       #f0e6d3;
+  --ink-dark:   #0f172a;
+  --slate:      #94a3b8;
+
+  /* 레이아웃 존 높이 (px) */
+  --hud-top-h:    84px;
+  --hud-bottom-h: 164px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  background: #000;               /* 레터박스 */
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color: var(--card);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+}
+
+/* ── 루트: 화면 중앙 정렬 ── */
+#root {
+  width: 100%; height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+}
+
+/* ══════════════════════════════════════
+   게임 컨테이너
+   390×844 비율 고정, 화면에 맞게 스케일
+   ══════════════════════════════════════ */
+#dd-app {
+  position: relative;
+  /* 기준 크기: 390 × 844 (iPhone 14) */
+  width:  390px;
+  height: 844px;
+  /* 뷰포트보다 크면 축소 */
+  max-width:  100vw;
+  max-height: 100svh;
+  /* 비율 유지: max-width/max-height 중 더 제한적인 쪽을 기준으로 자동 조정 */
+  aspect-ratio: 390 / 844;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 40%, var(--felt) 0%, var(--felt-dark) 100%);
+}
+
+/* ══════════════════════════════════════
+   Three.js 캔버스 레이어
+   HUD Top 84px, HUD Bottom 164px 사이
+   ══════════════════════════════════════ */
+#dd-board-canvas {
+  position: absolute;
+  inset: 0;
+  width:  100% !important;
+  height: 100% !important;
+  cursor: pointer;
+  touch-action: none;
+  display: block;
+}
+
+/* CSS2D 레이블 레이어 */
+#dd-lane-labels {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* ══════════════════════════════════════
+   HUD TOP — 84px
+   이동횟수 / 타겟 / 스코어 / 버튼
+   ══════════════════════════════════════ */
+.game-hud-top {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: var(--hud-top-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  background: rgba(0,0,0,0.55);
+  border-bottom: 1px solid rgba(245,166,35,0.25);
+  z-index: 10;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.hud-btn {
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  background: rgba(15,23,42,0.85);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: var(--card);
+  font-size: 17px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.1s;
+  flex-shrink: 0;
+}
+.hud-btn:active { transform: scale(0.88); }
+
+/* 재시작 버튼 — 오른쪽에 항상 노출, 색상으로 강조 */
+.hud-btn.hud-restart-btn {
+  font-size: 20px;
+  color: #fbbf24;
+  border-color: rgba(251,191,36,0.3);
+}
+
+/* 이동 횟수 */
+.hud-moves {
+  display: flex; flex-direction: column; align-items: center;
+  background: rgba(15,23,42,0.9);
+  border: 1.5px solid rgba(245,166,35,0.4);
+  border-radius: 14px;
+  padding: 3px 18px;
+  min-width: 72px;
+}
+.hud-moves-label {
+  font-size: 8px; font-weight: 800;
+  letter-spacing: 2px; color: var(--slate);
+}
+.hud-moves-value {
+  font-size: 28px; font-weight: 900;
+  color: var(--gold-light);
+  line-height: 1;
+}
+.hud-moves-value.warning { color: #ef4444; animation: blink 0.5s infinite; }
+.hud-moves-value.bump    { animation: moves-bump 0.30s ease-out; }
+
+/* 타겟 */
+.hud-target {
+  display: flex; align-items: center; gap: 6px;
+  background: rgba(15,23,42,0.8);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 5px 10px;
+}
+.hud-target-icon  { font-size: 20px; }
+.hud-target-info  { display: flex; flex-direction: column; }
+.hud-target-label { font-size: 7px; font-weight: 800; color: var(--slate); letter-spacing: 1px; }
+.hud-target-value { font-size: 14px; font-weight: 900; color: var(--card); line-height: 1; }
+.hud-target-value.punch { animation: target-punch 0.25s ease-out; }
+
+/* 스코어 (이동횟수 아래에 작게) */
+.hud-score {
+  display: flex; flex-direction: column; align-items: center;
+  background: rgba(15,23,42,0.8);
+  border: 1px solid rgba(245,166,35,0.2);
+  border-radius: 10px;
+  padding: 2px 10px;
+}
+.hud-score-label { font-size: 7px; font-weight: 800; color: var(--slate); letter-spacing: 1px; }
+.hud-score-value {
+  font-size: 14px; font-weight: 900;
+  color: var(--gold-light); line-height: 1.1;
+}
+.hud-score-value.flash { animation: score-flash 0.35s ease-out; }
+
+/* ══════════════════════════════════════
+   HUD BOTTOM — 164px
+   스타 게이지 + 아이템 슬롯 3개
+   ══════════════════════════════════════ */
+.game-hud-bottom {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: var(--hud-bottom-h);
+  background: rgba(5,28,17,0.97);
+  border-top: 1px solid rgba(255,255,255,0.07);
+  padding: 10px 16px 20px;
+  z-index: 10;
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+/* 스타 게이지 */
+.star-gauge {
+  display: flex; align-items: center; gap: 8px;
+  flex-shrink: 0;
+}
+.star-gauge-label { font-size: 9px; color: var(--slate); font-weight: 700; white-space: nowrap; }
+.star-gauge-bar {
+  flex: 1; height: 8px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 4px; overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.star-gauge-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  border-radius: 4px; width: 0%;
+  transition: width 0.35s ease;
+}
+.star-gauge-stars { font-size: 13px; color: var(--gold); letter-spacing: -2px; }
+
+/* 아이템 슬롯 */
+.item-slots {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex: 1;
+}
+.item-slot {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.item-slot-icon {
+  width: 58px; height: 58px;
+  border-radius: 14px;
+  background: rgba(15,23,42,0.92);
+  border: 2px solid rgba(255,255,255,0.1);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px;
+  transition: transform 0.1s, border-color 0.2s;
+  box-shadow: 0 4px 0 rgba(0,0,0,0.5);
+}
+.item-slot:active .item-slot-icon {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.5);
+}
+.item-slot.active .item-slot-icon {
+  border-color: var(--gold);
+  box-shadow: 0 0 16px rgba(245,166,35,0.55), 0 4px 0 rgba(0,0,0,0.5);
+  animation: item-pulse 0.8s infinite;
+}
+@keyframes item-pulse {
+  0%, 100% { box-shadow: 0 0 8px rgba(245,166,35,0.4),  0 4px 0 rgba(0,0,0,0.5); }
+  50%       { box-shadow: 0 0 22px rgba(245,166,35,0.85), 0 4px 0 rgba(0,0,0,0.5); }
+}
+.item-slot-label {
+  font-size: 9px; font-weight: 800;
+  color: var(--slate); letter-spacing: 0.5px;
+}
+
+/* ══════════════════════════════════════
+   모달 공통
+   ══════════════════════════════════════ */
+.modal-overlay {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.82);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+  z-index: 50;
+}
+.modal-card {
+  width: 100%; max-width: 340px;
+  background: rgba(12,20,38,0.98);
+  border: 1px solid rgba(245,166,35,0.4);
+  border-radius: 22px;
+  padding: 24px 20px;
+  display: flex; flex-direction: column; align-items: center; gap: 16px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04);
+}
+.modal-title {
+  font-size: 20px; font-weight: 900;
+  color: var(--gold); letter-spacing: 2px; text-align: center;
+}
+
+.btn-primary {
+  width: 100%; padding: 15px;
+  background: linear-gradient(135deg, #16a34a, #15803d);
+  border: 2px solid rgba(255,255,255,0.15);
+  border-radius: 14px;
+  color: #fff; font-size: 16px; font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #14532d;
+  transition: transform 0.1s;
+  letter-spacing: 1px;
+}
+.btn-primary:active { transform: translateY(3px); box-shadow: 0 1px 0 #14532d; }
+
+.btn-gold {
+  width: 100%; padding: 15px;
+  background: linear-gradient(135deg, var(--gold), #e8940f);
+  border: 2px solid rgba(255,255,255,0.2);
+  border-radius: 14px;
+  color: #0f172a; font-size: 16px; font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #b45309;
+  transition: transform 0.1s;
+}
+.btn-gold:active { transform: translateY(3px); box-shadow: 0 1px 0 #b45309; }
+
+.btn-ghost {
+  width: 100%; padding: 11px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  color: var(--slate); font-size: 12px; font-weight: 700;
+  cursor: pointer;
+}
+
+/* ── Entry Modal ── */
+.mission-box {
+  width: 100%;
+  background: rgba(0,0,0,0.4);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 16px;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+}
+.mission-label { font-size: 9px; color: var(--slate); font-weight: 800; letter-spacing: 3px; }
+.mission-icon  { font-size: 36px; }
+.mission-value { font-size: 26px; font-weight: 900; color: var(--card); }
+.mission-sub   { font-size: 11px; color: var(--slate); }
+
+.wallet-row { display: flex; gap: 10px; width: 100%; }
+.wallet-chip {
+  flex: 1; display: flex; align-items: center; gap: 8px;
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px; padding: 8px 12px;
+}
+.wallet-chip span:first-child { font-size: 16px; }
+.wallet-chip-value { font-size: 14px; font-weight: 800; color: var(--gold-light); }
+
+/* ── Success Modal ── */
+.star-reveal { display: flex; gap: 10px; }
+.star-reveal .star {
+  font-size: 42px;
+  opacity: 0; transform: scale(0);
+  transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+}
+.star-reveal .star.show { opacity: 1; transform: scale(1); }
+.star-reveal .star.pop  { animation: star-pop 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+
+.reward-row {
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(0,0,0,0.4);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px; padding: 10px 18px;
+}
+.reward-coin { font-size: 20px; font-weight: 900; color: var(--gold-light); }
+
+/* ── Fail Modal ── */
+.fail-icon { font-size: 52px; }
+.fail-remaining {
+  background: rgba(0,0,0,0.4);
+  border: 1px solid rgba(239,68,68,0.2);
+  border-radius: 12px; padding: 14px 20px;
+  text-align: center; width: 100%;
+}
+.fail-remaining-label { font-size: 10px; color: var(--slate); margin-bottom: 4px; }
+.fail-remaining-value { font-size: 18px; font-weight: 900; color: var(--card); }
+
+/* ══════════════════════════════════════
+   비네팅
+   ══════════════════════════════════════ */
+#vignette-overlay {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0) 100%);
+  transition: background 0.3s;
+  z-index: 5;
+}
+
+/* ══════════════════════════════════════
+   아이템 Announce 오버레이
+   ══════════════════════════════════════ */
+#item-announce-overlay {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 12px; z-index: 60;
+  pointer-events: none;
+  transition: background 0.2s;
+}
+#item-announce-overlay.active { pointer-events: auto; background: rgba(0,0,0,0.82); }
+#announce-icon {
+  font-size: 76px;
+  transform: scale(0);
+  transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+}
+#announce-icon.show { transform: scale(1); }
+#announce-name {
+  font-size: 24px; font-weight: 900; color: var(--gold);
+  opacity: 0; transition: opacity 0.3s 0.2s; letter-spacing: 2px;
+}
+#announce-name.show { opacity: 1; }
+#announce-desc {
+  font-size: 13px; color: var(--slate);
+  text-align: center; max-width: 240px;
+  opacity: 0; transition: opacity 0.3s 0.4s; line-height: 1.6;
+}
+#announce-desc.show { opacity: 1; }
+#announce-hint {
+  font-size: 12px; font-weight: 800;
+  color: var(--gold-light); opacity: 0; margin-top: 6px;
+}
+#announce-hint.show { opacity: 1; animation: blink 0.8s infinite; }
+
+/* ══════════════════════════════════════
+   로딩 오버레이
+   ══════════════════════════════════════ */
+#loading-overlay {
+  position: absolute; inset: 0;
+  background: var(--felt-dark);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 100;
+}
+.loading-content { text-align: center; }
+.loading-title {
+  font-size: 26px; font-weight: 900; color: var(--gold);
+  margin-bottom: 16px; letter-spacing: 2px;
+}
+.loading-bar-wrap {
+  width: 200px; height: 6px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 3px; overflow: hidden;
+}
+.loading-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  border-radius: 3px; width: 0%;
+  transition: width 0.3s;
+}
+
+/* ══════════════════════════════════════
+   콤보 레이블 (CSS2D)
+   ══════════════════════════════════════ */
+.combo-label {
+  font-size: 22px; font-weight: 900;
+  color: var(--gold-light); letter-spacing: 2px;
+  text-shadow: 0 0 20px rgba(251,191,36,0.8), 0 2px 4px rgba(0,0,0,0.8);
+  pointer-events: none; white-space: nowrap;
+  animation: combo-pop 1.2s forwards;
+}
+
+/* ══════════════════════════════════════
+   CSS 애니메이션
+   ══════════════════════════════════════ */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.35; }
+}
+@keyframes moves-bump {
+  0%   { transform: scale(1); }
+  30%  { transform: scale(1.5); color: #fbbf24; }
+  65%  { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+@keyframes target-punch {
+  0%   { transform: scale(1); }
+  25%  { transform: scale(1.4); color: #f5a623; }
+  70%  { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+@keyframes score-flash {
+  0%   { color: var(--gold-light); }
+  40%  { color: #fff; text-shadow: 0 0 14px rgba(251,191,36,0.9); }
+  100% { color: var(--gold-light); }
+}
+@keyframes star-pop {
+  0%   { opacity: 0; transform: scale(0) rotate(-20deg); }
+  60%  { opacity: 1; transform: scale(1.45) rotate(5deg); }
+  80%  { transform: scale(0.9) rotate(-2deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+@keyframes combo-pop {
+  0%   { transform: scale(0) translateY(0);     opacity: 0; }
+  20%  { transform: scale(1.4) translateY(-5px); opacity: 1; }
+  40%  { transform: scale(1.0) translateY(-8px); opacity: 1; }
+  80%  { transform: scale(1.0) translateY(-14px); opacity: 1; }
+  100% { transform: scale(0.8) translateY(-22px); opacity: 0; }
+}
+@keyframes banner-appear {
+  0%   { transform: translateY(-30px) scale(0.8); opacity: 0; }
+  60%  { transform: translateY(4px) scale(1.06); opacity: 1; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+/* 별 팝 딜레이 */
+.star-reveal .star:nth-child(1).pop { animation-delay: 0s; }
+.star-reveal .star:nth-child(2).pop { animation-delay: 0.35s; }
+.star-reveal .star:nth-child(3).pop { animation-delay: 0.70s; }
+
+/* 보너스 배너 */
+.bonus-banner { animation: banner-appear 0.4s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+
+/* 아이템 배지 */
+.item-badge {
+  position: absolute; top: -2px; right: -2px;
+  background: var(--gold); color: var(--ink-dark);
+  font-size: 10px; font-weight: 900;
+  border-radius: 50%; width: 18px; height: 18px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.5);
+}
