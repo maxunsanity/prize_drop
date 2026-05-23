@@ -421,7 +421,7 @@ export class BoardCore {
     const hasColorBomb  = unique.some(b => b.kind === 'COLOR_BOMB');
     const hasPropeller  = unique.some(b => b.kind === 'PROPELLER');
     const hasAnySpecial = unique.some(b => this._isSpecial(b));
-    const delay = hasColorBomb ? 2200 : hasPropeller ? 700 : hasAnySpecial ? 380 : 380;
+    const delay = hasColorBomb ? 1100 : hasPropeller ? 700 : hasAnySpecial ? 380 : 380;
     setTimeout(() => this._dropAndSpawn(), delay);
   }
 
@@ -1168,7 +1168,7 @@ export class BoardCore {
     setTimeout(() => this._activateSpecial(block), 120);
 
     // 특수 종류별 refill 타이밍
-    const delay = block.kind === 'COLOR_BOMB' ? 2200
+    const delay = block.kind === 'COLOR_BOMB' ? 1100
                 : block.kind === 'PROPELLER'  ? 700
                 : 380;
     setTimeout(() => this._dropAndSpawn(), delay);

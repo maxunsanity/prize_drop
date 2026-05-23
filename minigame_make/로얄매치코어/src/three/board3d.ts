@@ -787,7 +787,7 @@ export class Board3D {
     });
 
     if (neighborMeshes.length > 0) {
-      // ⚠️ DROP 딜레이(380ms)보다 짧게 유지 — 절대 position 덮어쓰면 DROP 애니메이션과 충돌
+      // shakeDur < DROP 딜레이(380ms): 셰이크 종료 후 복원해도 DROP과 충돌 없음
       const shakeStartT = this.clock.getElapsedTime();
       const shakeDur = 0.25;     // 250ms < 380ms DROP 딜레이
       const shakeIntensity = 0.05;
@@ -796,17 +796,31 @@ export class Board3D {
         if (this.disposed) return;
         const elapsed = this.clock.getElapsedTime() - shakeStartT;
         const t = elapsed / shakeDur;
-        if (t >= 1) return; // DROP 애니메이션이 최종 위치 처리
+
+        if (t >= 1) {
+          // baseY/col 기준으로 정확히 복원 (additive 누적 방지)
+          neighborMeshes.forEach(m => {
+            if (!this.blockMeshes.has(m.userData['blockId'] as number)) return;
+            if (dir === 'H') {
+              m.position.y = m.userData['baseY'] as number;
+            } else {
+              m.position.x = ((m.userData['col'] as number) - 4) * BLOCK_UNIT;
+            }
+          });
+          return;
+        }
 
         const amp = shakeIntensity * (1 - t);
         const offset = Math.sin(elapsed * Math.PI * 24) * amp;
 
         neighborMeshes.forEach(m => {
-          // 이미 제거된 메시 스킵 (연쇄 폭발로 사라진 경우)
           if (!this.blockMeshes.has(m.userData['blockId'] as number)) return;
-          // additive 방식: 현재 위치에 진동 더함 (DROP 값 유지)
-          if (dir === 'H') m.position.y += offset;
-          else m.position.x += offset;
+          if (dir === 'H') {
+            // baseY 기준 절대 위치: DROP 없는 window(250ms)이므로 baseY 불변
+            m.position.y = (m.userData['baseY'] as number) + offset;
+          } else {
+            m.position.x = ((m.userData['col'] as number) - 4) * BLOCK_UNIT + offset;
+          }
         });
 
         requestAnimationFrame(shakeAnim);
@@ -1031,27 +1045,36 @@ export class Board3D {
       });
 
       if (neighborMeshes.length > 0) {
-        // ⚠️ DROP 딜레이(380ms)보다 짧게 유지 — 절대 position 덮어쓰면 DROP 애니메이션과 충돌
+        // TNT_FIRE는 EXPLODE 후 ~120ms 뒤 발동 → shakeDur(220ms) 종료 시점 ~340ms
+        // DROP 딜레이(380ms)보다 앞이므로 복원 후 DROP과 충돌 없음
         const shakeStartT = this.clock.getElapsedTime();
-        const shakeDur = 0.22;     // 220ms < 380ms DROP 딜레이 (TNT_FIRE는 ~120ms 뒤에 발동)
+        const shakeDur = 0.22;     // 220ms: 종료 시점 ~340ms < DROP 380ms
         const shakeIntensity = 0.08;
 
         const shakeAnim = (): void => {
           if (this.disposed) return;
           const elapsed = this.clock.getElapsedTime() - shakeStartT;
           const t = elapsed / shakeDur;
-          if (t >= 1) return; // DROP 애니메이션이 최종 위치 처리
+
+          if (t >= 1) {
+            // baseY/col 기준으로 정확히 복원 (additive 누적 방지)
+            neighborMeshes.forEach(m => {
+              if (!this.blockMeshes.has(m.userData['blockId'] as number)) return;
+              m.position.x = ((m.userData['col'] as number) - 4) * BLOCK_UNIT;
+              m.position.y = m.userData['baseY'] as number;
+            });
+            return;
+          }
 
           const amp = shakeIntensity * (1 - t);
           const offset = Math.sin(elapsed * Math.PI * 26) * amp;
 
           neighborMeshes.forEach(m => {
-            // 이미 제거된 메시 스킵 (연쇄 폭발로 사라진 경우)
             if (!this.blockMeshes.has(m.userData['blockId'] as number)) return;
-            // additive 방식: 현재 위치에 진동 더함 (DROP 값 유지)
             const angle = Math.random() * Math.PI * 2;
-            m.position.x += Math.cos(angle) * offset;
-            m.position.y += Math.sin(angle) * offset;
+            // baseY/col 기준 절대 위치: additive 누적 없이 정확한 진동
+            m.position.x = ((m.userData['col'] as number) - 4) * BLOCK_UNIT + Math.cos(angle) * offset;
+            m.position.y = (m.userData['baseY'] as number) + Math.sin(angle) * offset;
           });
 
           requestAnimationFrame(shakeAnim);
