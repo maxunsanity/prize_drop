@@ -73,6 +73,7 @@ export class Board3D {
   dropAnims: { mesh: THREE.Mesh; fromY: number; toY: number; t: number; landed: boolean }[] = [];
   camShake = { intensity: 0 };
   private _colorBombSrc = new THREE.Vector2();
+  private _selectedHandMesh: THREE.Mesh | null = null;
 
   /* 슬로우 모션 */
   timeScale = 1.0;
@@ -506,6 +507,9 @@ export class Board3D {
       case 'SUCCESS':
         audio.stageClear();
         for (let i = 0; i < e.stars; i++) audio.star(i);
+        break;
+      case 'ITEM_USE':
+        this._animItemUse(e.item, e.targets, e.row, e.col, e.row2, e.col2);
         break;
       default:
         break;
@@ -1748,6 +1752,412 @@ export class Board3D {
     this.renderer.domElement.remove();
     this.css2d.domElement.remove();
   }
+
+  // HAND 아이템 선택 및 해제
+  setHandSelection(row: number, col: number): void {
+    this.clearHandSelection();
+    const block = boardCore.getBlock(row, col);
+    if (!block) return;
+    const mesh = this.blockMeshes.get(block.id);
+    if (mesh) {
+      this._selectedHandMesh = mesh;
+      mesh.position.z = 0.25;
+      mesh.scale.set(1.1, 1.1, 1);
+    }
+  }
+
+  clearHandSelection(): void {
+    if (this._selectedHandMesh) {
+      this._selectedHandMesh.position.z = 0.05;
+      this._selectedHandMesh.scale.set(1, 1, 1);
+      this._selectedHandMesh = null;
+    }
+  }
+
+  private _animItemUse(
+    item: 'HAMMER' | 'HAND' | 'CLAW',
+    targets: Block[],
+    row: number,
+    col: number,
+    row2?: number,
+    col2?: number
+  ): void {
+    const [wx, wy] = gridToWorld(row, col);
+
+    if (item === 'HAMMER') {
+      // 1. 화면 Dim 효과
+      const dimMat = new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.35, depthWrite: false });
+      const dimGeo = new THREE.PlaneGeometry(GRID_COLS * BLOCK_UNIT * 1.5, GRID_ROWS * BLOCK_UNIT * 1.5);
+      const dimMesh = new THREE.Mesh(dimGeo, dimMat);
+      dimMesh.position.set(0, 0, 0.4);
+      dimMesh.renderOrder = 4;
+      this.scene.add(dimMesh);
+
+      // 2. 3D 망치 생성 및 스폰
+      const hammer = create3DHammer();
+      hammer.position.set(wx + 1.2, wy + 1.5, 2.0); // 타겟 우상단 공중
+      hammer.rotation.z = -Math.PI / 4; // 대각선 기울임
+      hammer.renderOrder = 15;
+      this.scene.add(hammer);
+
+      // 3. 회전 낙하 타격 (180ms)
+      const startT = this.clock.getElapsedTime();
+      const dur = 0.18;
+      const targetPos = new THREE.Vector3(wx, wy, 0.1);
+      const startPos = hammer.position.clone();
+
+      const swing = (): void => {
+        if (this.disposed) { this.scene.remove(dimMesh); this.scene.remove(hammer); return; }
+        const elapsed = this.clock.getElapsedTime() - startT;
+        const t = Math.min(1, elapsed / dur);
+
+        // lerp position
+        hammer.position.lerpVectors(startPos, targetPos, t);
+        // rotation: 쾅 찍는 각도로 회전
+        hammer.rotation.z = -Math.PI / 4 + t * (Math.PI / 3);
+
+        if (t < 1) {
+          requestAnimationFrame(swing);
+        } else {
+          // 타격 발생 시점!
+          this.camShake.intensity = Math.max(this.camShake.intensity, 0.12);
+          audio.itemUse();
+
+          // 충격파 링 효과
+          const ringGeo = new THREE.RingGeometry(0.1, 0.28, 32);
+          const ringMat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.9, blending: THREE.AdditiveBlending, depthWrite: false });
+          const ring = new THREE.Mesh(ringGeo, ringMat);
+          ring.position.set(wx, wy, 0.15);
+          ring.renderOrder = 6;
+          this.scene.add(ring);
+
+          const rStart = this.clock.getElapsedTime();
+          const rDur = 0.25;
+          const ringAnim = (): void => {
+            if (this.disposed) { this.scene.remove(ring); return; }
+            const rt = Math.min(1, (this.clock.getElapsedTime() - rStart) / rDur);
+            const scale = 1.0 + rt * 3.5;
+            ring.scale.set(scale, scale, 1);
+            ringMat.opacity = 0.9 * (1 - rt);
+            if (rt < 1) requestAnimationFrame(ringAnim);
+            else { this.scene.remove(ring); ringGeo.dispose(); ringMat.dispose(); }
+          };
+          requestAnimationFrame(ringAnim);
+
+          // 파티클 방출 (타격 대상 블록의 고유 컬러 사용)
+          let colA = 0xffd700, colB = 0xffffff;
+          if (targets.length > 0) {
+            const cfg = this.configMap.get(targets[0].colorType);
+            if (cfg) { colA = cfg.particleA; colB = cfg.particleB; }
+          }
+          burstAtBlock(this.particlePool, wx, wy, colA, colB, 24);
+
+          // 대상 블록 메쉬 즉각 파괴/삭제
+          targets.forEach(b => {
+            this._removeMesh(b.id);
+            this._spawnHoleEffect(wx, wy, colA);
+          });
+
+          // 망치 튕겨오르며 사라지기 (150ms)
+          const bounceStartT = this.clock.getElapsedTime();
+          const bounceDur = 0.15;
+          const bStartPos = hammer.position.clone();
+          const bEndPos = new THREE.Vector3(wx + 0.4, wy + 0.6, 1.2);
+
+          const bounce = (): void => {
+            if (this.disposed) { this.scene.remove(dimMesh); this.scene.remove(hammer); return; }
+            const bt = Math.min(1, (this.clock.getElapsedTime() - bounceStartT) / bounceDur);
+            hammer.position.lerpVectors(bStartPos, bEndPos, bt);
+            hammer.rotation.z = -Math.PI / 6 * bt;
+            // opacity
+            hammer.traverse(child => {
+              if (child instanceof THREE.Mesh && child.material) {
+                child.material.transparent = true;
+                child.material.opacity = 1 - bt;
+              }
+            });
+
+            if (bt < 1) {
+              requestAnimationFrame(bounce);
+            } else {
+              this.scene.remove(hammer);
+              this.scene.remove(dimMesh);
+              dimGeo.dispose(); dimMat.dispose();
+              hammer.traverse(child => {
+                if (child instanceof THREE.Mesh) {
+                  child.geometry.dispose();
+                  child.material.dispose();
+                }
+              });
+            }
+          };
+          requestAnimationFrame(bounce);
+        }
+      };
+      requestAnimationFrame(swing);
+    }
+
+    else if (item === 'HAND') {
+      if (row2 === undefined || col2 === undefined) return;
+      const [wx2, wy2] = gridToWorld(row2, col2);
+
+      // BoardCore에서 emit 시점에 row/col 업데이트 전에 targets[0]=원래(row,col) 블록,
+      // targets[1]=원래(row2,col2) 블록 순서로 전달받음 → 인덱스 기반 접근 (find로 row 검색 시 이미 스왑 후라 잘못된 블록 반환)
+      const blockA = targets[0];  // 원래 (row, col) → (wx2, wy2)로 이동
+      const blockB = targets[1];  // 원래 (row2, col2) → (wx, wy)로 이동
+      if (!blockA || !blockB) return;
+
+      const m1 = this.blockMeshes.get(blockA.id);
+      const m2 = this.blockMeshes.get(blockB.id);
+      if (!m1 || !m2) return;
+
+      // 1. Z축 띄우기
+      m1.position.z = 0.28;
+      m2.position.z = 0.28;
+      m1.renderOrder = 4;
+      m2.renderOrder = 4;
+
+      // 2. 3D 마법 글러브 스폰
+      const glove1 = create3DHand();
+      const glove2 = create3DHand();
+      glove1.position.set(wx, wy, 0.45);
+      glove2.position.set(wx2, wy2, 0.45);
+      this.scene.add(glove1, glove2);
+
+      // 3. 스왑 애니메이션 (원형 궤적)
+      const startT = this.clock.getElapsedTime();
+      const dur = 0.35; // 350ms
+
+      const cx = (wx + wx2) / 2;
+      const cy = (wy + wy2) / 2;
+      const r  = Math.sqrt((wx - wx2) ** 2 + (wy - wy2) ** 2) / 2;
+      const startAngle = Math.atan2(wy - cy, wx - cx);
+      const targetAngle = startAngle + Math.PI; // 180도 회전
+
+      const rotateSwap = (): void => {
+        if (this.disposed) { this.scene.remove(glove1, glove2); return; }
+        const elapsed = this.clock.getElapsedTime() - startT;
+        const t = Math.min(1, elapsed / dur);
+
+        const currentAngle = startAngle + (targetAngle - startAngle) * easeInOut(t);
+
+        // 블록 1
+        const bx1 = cx + Math.cos(currentAngle) * r;
+        const by1 = cy + Math.sin(currentAngle) * r;
+        m1.position.set(bx1, by1, 0.28);
+        glove1.position.set(bx1, by1, 0.45);
+
+        // 블록 2
+        const bx2 = cx + Math.cos(currentAngle + Math.PI) * r;
+        const by2 = cy + Math.sin(currentAngle + Math.PI) * r;
+        m2.position.set(bx2, by2, 0.28);
+        glove2.position.set(bx2, by2, 0.45);
+
+        if (t < 1) {
+          requestAnimationFrame(rotateSwap);
+        } else {
+          // 완료
+          m1.position.set(wx2, wy2, 0.05);
+          m2.position.set(wx, wy, 0.05);
+          m1.renderOrder = 2;
+          m2.renderOrder = 2;
+
+          m1.userData['row'] = row2; m1.userData['col'] = col2; m1.userData['baseY'] = wy2;
+          m2.userData['row'] = row;  m2.userData['col'] = col;  m2.userData['baseY'] = wy;
+
+          burstAtBlock(this.particlePool, wx, wy, 0xffffff, 0x88ccff, 6);
+          burstAtBlock(this.particlePool, wx2, wy2, 0xffffff, 0x88ccff, 6);
+          audio.tap();
+
+          // 글러브 서서히 소멸
+          const fadeStartT = this.clock.getElapsedTime();
+          const fadeDur = 0.15;
+          const fade = (): void => {
+            if (this.disposed) { this.scene.remove(glove1, glove2); return; }
+            const ft = Math.min(1, (this.clock.getElapsedTime() - fadeStartT) / fadeDur);
+            glove1.traverse(child => { if (child instanceof THREE.Mesh && child.material) child.material.opacity = 1 - ft; });
+            glove2.traverse(child => { if (child instanceof THREE.Mesh && child.material) child.material.opacity = 1 - ft; });
+
+            if (ft < 1) requestAnimationFrame(fade);
+            else {
+              this.scene.remove(glove1, glove2);
+              glove1.traverse(child => { if (child instanceof THREE.Mesh) { child.geometry.dispose(); child.material.dispose(); } });
+              glove2.traverse(child => { if (child instanceof THREE.Mesh) { child.geometry.dispose(); child.material.dispose(); } });
+            }
+          };
+          requestAnimationFrame(fade);
+        }
+      };
+      requestAnimationFrame(rotateSwap);
+    }
+
+    else if (item === 'CLAW') {
+      // 1. Dim 효과
+      const dimMat = new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.38, depthWrite: false });
+      const dimGeo = new THREE.PlaneGeometry(GRID_COLS * BLOCK_UNIT * 1.5, GRID_ROWS * BLOCK_UNIT * 1.5);
+      const dimMesh = new THREE.Mesh(dimGeo, dimMat);
+      dimMesh.position.set(0, 0, 0.4);
+      dimMesh.renderOrder = 4;
+      this.scene.add(dimMesh);
+
+      // 2. 랍스터 집게발 2세트 생성 (가로축 1쌍, 세로축 1쌍)
+      const clawH1 = create3DClaw();
+      const clawH2 = create3DClaw();
+      const clawV1 = create3DClaw();
+      const clawV2 = create3DClaw();
+
+      clawH1.position.set(wx - 4.2, wy, 1.2); clawH1.rotation.z = Math.PI / 2;
+      clawH2.position.set(wx + 4.2, wy, 1.2); clawH2.rotation.z = -Math.PI / 2;
+      clawV1.position.set(wx, wy + 4.2, 1.2); clawV1.rotation.z = 0;
+      clawV2.position.set(wx, wy - 4.2, 1.2); clawV2.rotation.z = Math.PI;
+
+      this.scene.add(clawH1, clawH2, clawV1, clawV2);
+
+      const startT = this.clock.getElapsedTime();
+      const dur = 0.32;
+
+      const rush = (): void => {
+        if (this.disposed) {
+          this.scene.remove(dimMesh, clawH1, clawH2, clawV1, clawV2);
+          return;
+        }
+        const elapsed = this.clock.getElapsedTime() - startT;
+        const t = Math.min(1, elapsed / dur);
+
+        clawH1.position.x = THREE.MathUtils.lerp(wx - 4.2, wx - 0.45, t);
+        clawH2.position.x = THREE.MathUtils.lerp(wx + 4.2, wx + 0.45, t);
+        clawV1.position.y = THREE.MathUtils.lerp(wy + 4.2, wy + 0.45, t);
+        clawV2.position.y = THREE.MathUtils.lerp(wy - 4.2, wy - 0.45, t);
+
+        if (t < 1) {
+          requestAnimationFrame(rush);
+        } else {
+          // 4. 중심 싹둑! 맞물림과 폭발 (100ms)
+          const cutStartT = this.clock.getElapsedTime();
+          const cutDur = 0.08;
+          const bite = (): void => {
+            if (this.disposed) { this.scene.remove(dimMesh, clawH1, clawH2, clawV1, clawV2); return; }
+            const ct = Math.min(1, (this.clock.getElapsedTime() - cutStartT) / cutDur);
+
+            clawH1.position.x = wx - 0.45 + ct * 0.3;
+            clawH2.position.x = wx + 0.45 - ct * 0.3;
+            clawV1.position.y = wy + 0.45 - ct * 0.3;
+            clawV2.position.y = wy - 0.45 + ct * 0.3;
+
+            if (ct < 1) {
+              requestAnimationFrame(bite);
+            } else {
+              this.camShake.intensity = Math.max(this.camShake.intensity, 0.15);
+              audio.laser();
+
+              // 십자축 레이저 방사
+              this.specialFX.fireLaserColor({ kind: 'STRIPED_H', row, col } as Block, 0xff2222);
+              this.specialFX.fireLaserColor({ kind: 'STRIPED_V', row, col } as Block, 0xff2222);
+
+              // 파티클
+              for (let i = 0; i < GRID_COLS; i++) {
+                const [lx, ly] = gridToWorld(row, i);
+                setTimeout(() => burstAtBlock(this.particlePool, lx, ly, 0xff4444, 0xffffff, 5), i * 15);
+              }
+              for (let i = 0; i < GRID_ROWS; i++) {
+                if (i === row) continue;
+                const [lx, ly] = gridToWorld(i, col);
+                setTimeout(() => burstAtBlock(this.particlePool, lx, ly, 0xff4444, 0xffffff, 5), i * 15);
+              }
+
+              this._animExplode(targets, 1);
+
+              const disappearStartT = this.clock.getElapsedTime();
+              const disDur = 0.18;
+              const dis = (): void => {
+                if (this.disposed) { this.scene.remove(dimMesh, clawH1, clawH2, clawV1, clawV2); return; }
+                const dt = Math.min(1, (this.clock.getElapsedTime() - disappearStartT) / disDur);
+
+                clawH1.position.x -= dt * 0.8; clawH1.traverse(child => { if (child instanceof THREE.Mesh && child.material) child.material.opacity = 1 - dt; });
+                clawH2.position.x += dt * 0.8; clawH2.traverse(child => { if (child instanceof THREE.Mesh && child.material) child.material.opacity = 1 - dt; });
+                clawV1.position.y += dt * 0.8; clawV1.traverse(child => { if (child instanceof THREE.Mesh && child.material) child.material.opacity = 1 - dt; });
+                clawV2.position.y -= dt * 0.8; clawV2.traverse(child => { if (child instanceof THREE.Mesh && child.material) child.material.opacity = 1 - dt; });
+
+                if (dt < 1) {
+                  requestAnimationFrame(dis);
+                } else {
+                  this.scene.remove(dimMesh, clawH1, clawH2, clawV1, clawV2);
+                  dimGeo.dispose(); dimMat.dispose();
+                  const allClaws = [clawH1, clawH2, clawV1, clawV2];
+                  allClaws.forEach(cg => {
+                    cg.traverse(child => { if (child instanceof THREE.Mesh) { child.geometry.dispose(); child.material.dispose(); } });
+                  });
+                }
+              };
+              requestAnimationFrame(dis);
+            }
+          };
+          requestAnimationFrame(bite);
+        }
+      };
+      requestAnimationFrame(rush);
+    }
+  }
+}
+
+/* ── 3D 아이템 연출 헬퍼 메쉬 생성기 ── */
+function create3DHammer(): THREE.Group {
+  const group = new THREE.Group();
+  const handleGeo = new THREE.CylinderGeometry(0.04, 0.04, 0.8, 8);
+  const handleMat = new THREE.MeshBasicMaterial({ color: 0xd4af37 });
+  const handle = new THREE.Mesh(handleGeo, handleMat);
+  handle.position.y = -0.3;
+  group.add(handle);
+
+  const headGeo = new THREE.BoxGeometry(0.3, 0.18, 0.18);
+  const headMat = new THREE.MeshBasicMaterial({ color: 0xcc3333 });
+  const head = new THREE.Mesh(headGeo, headMat);
+  head.position.y = 0.1;
+  group.add(head);
+
+  return group;
+}
+
+function create3DHand(): THREE.Group {
+  const group = new THREE.Group();
+  const palmGeo = new THREE.SphereGeometry(0.18, 12, 12);
+  const palmMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+  const palm = new THREE.Mesh(palmGeo, palmMat);
+  group.add(palm);
+
+  for (let i = -1; i <= 1; i++) {
+    const fingerGeo = new THREE.CylinderGeometry(0.035, 0.035, 0.15, 6);
+    const fingerMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+    const finger = new THREE.Mesh(fingerGeo, fingerMat);
+    finger.position.set(i * 0.09, 0.18, 0);
+    finger.rotation.z = -i * 0.15;
+    group.add(finger);
+  }
+
+  return group;
+}
+
+function create3DClaw(): THREE.Group {
+  const group = new THREE.Group();
+  const bodyGeo = new THREE.SphereGeometry(0.24, 12, 12);
+  const bodyMat = new THREE.MeshBasicMaterial({ color: 0xdd2222 });
+  const body = new THREE.Mesh(bodyGeo, bodyMat);
+  body.scale.set(0.7, 1.2, 0.7);
+  group.add(body);
+
+  const leftBladeGeo = new THREE.ConeGeometry(0.08, 0.3, 8);
+  const leftBladeMat = new THREE.MeshBasicMaterial({ color: 0xff4444 });
+  const leftBlade = new THREE.Mesh(leftBladeGeo, leftBladeMat);
+  leftBlade.position.set(-0.12, 0.22, 0);
+  leftBlade.rotation.z = 0.3;
+  group.add(leftBlade);
+
+  const rightBlade = leftBlade.clone();
+  rightBlade.position.x = 0.12;
+  rightBlade.rotation.z = -0.3;
+  group.add(rightBlade);
+
+  return group;
 }
 
 export const board3d = new Board3D();

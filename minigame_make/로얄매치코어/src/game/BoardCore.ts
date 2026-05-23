@@ -60,7 +60,7 @@ export type BoardEvent =
   | { type: 'TARGET_UPDATE'; collected: number; required: number }
   | { type: 'BONUS_TIME_START' }
   | { type: 'BONUS_TIME_END' }
-  | { type: 'ITEM_USE'; item: 'HAMMER' | 'HAND' | 'CLAW'; targets: Block[] }
+  | { type: 'ITEM_USE'; item: 'HAMMER' | 'HAND' | 'CLAW'; row: number; col: number; row2?: number; col2?: number; targets: Block[] }
   | { type: 'SUCCESS'; stars: number; score: number }
   | { type: 'FAIL' }
   | { type: 'COLOR_BOMB_CHAIN'; targets: Block[]; comboIdx: number }
@@ -1189,18 +1189,87 @@ export class BoardCore {
   }
 
   /* ── 아이템 사용 ── */
-  useItem(item: 'HAMMER' | 'HAND' | 'CLAW', row: number, col: number): void {
+  useItem(item: 'HAMMER' | 'HAND' | 'CLAW', row: number, col: number, row2?: number, col2?: number): void {
     if (item !== 'CLAW' && this._locked) return;
-    const block = this.grid[row][col];
-    if (!block) return;
+
     if (item === 'HAMMER') {
+      const block = this.grid[row][col];
+      if (!block) return;
+      // 애니메이션 300ms 동안 보드 잠금
+      this._setPhase('EXPLODE');
       this.grid[row][col] = null;
-      this._emit({ type: 'ITEM_USE', item, targets: [block] });
-      this.moves--;
-      hudExternalStore.set('moves.current', this.moves);
-      this._emit({ type: 'MOVES_UPDATE', moves: this.moves });
+      this._emit({ type: 'ITEM_USE', item, row, col, targets: [block] });
       this._collectTargets([block]);
+      // 직접 타격된 칸에 블로커가 있다면 피해 적용
+      const directBl = this.blockerGrid[row]?.[col];
+      if (directBl) this._applyBlockerDamage(directBl, true);
       setTimeout(() => this._dropAndSpawn(), 300);
+    }
+
+    else if (item === 'HAND') {
+      if (row2 === undefined || col2 === undefined) return;
+      const b1 = this.grid[row][col];
+      const b2 = this.grid[row2][col2];
+      if (!b1 || !b2) return;
+
+      // 스왑 애니메이션 350ms 동안 보드 잠금
+      this._setPhase('SWAP');
+      // targets[0]=b1(원래 row,col), targets[1]=b2(원래 row2,col2) 순서 보장 (board3d 애니에서 참조)
+      this._emit({ type: 'ITEM_USE', item, row, col, row2, col2, targets: [b1, b2] });
+
+      // 강제 위치 교환 (emit 이후에 row/col 업데이트 → board3d가 원래 위치 기준으로 메쉬 탐색 가능)
+      this.grid[row][col] = b2;
+      this.grid[row2][col2] = b1;
+      b1.row = row2; b1.col = col2;
+      b2.row = row; b2.col = col;
+
+      setTimeout(() => this._comboCheck(), 350);
+    }
+
+    else if (item === 'CLAW') {
+      // 랍스터 집게발: 십자 범위 전체 파괴 (row행 전체 + col열 전체)
+      const targets: Block[] = [];
+
+      // 가로줄 수집
+      for (let c = 0; c < GRID_COLS; c++) {
+        const b = this.grid[row][c];
+        if (b) { this.grid[row][c] = null; targets.push(b); }
+      }
+      // 세로줄 수집 (중앙 중복 방지)
+      for (let r = 0; r < GRID_ROWS; r++) {
+        if (r === row) continue;
+        const b = this.grid[r][col];
+        if (b) { this.grid[r][col] = null; targets.push(b); }
+      }
+
+      // 십자축 블로커 직접 타격 (dedup용 hitMap)
+      const blockerHitMap = new Map<number, Blocker>();
+      for (let c = 0; c < GRID_COLS; c++) {
+        const bl = this.blockerGrid[row]?.[c];
+        if (bl && !blockerHitMap.has(bl.id)) {
+          blockerHitMap.set(bl.id, bl);
+          this._applyBlockerDamage(bl, true);
+        }
+      }
+      for (let r = 0; r < GRID_ROWS; r++) {
+        if (r === row) continue;
+        const bl = this.blockerGrid[r]?.[col];
+        if (bl && !blockerHitMap.has(bl.id)) {
+          blockerHitMap.set(bl.id, bl);
+          this._applyBlockerDamage(bl, true);
+        }
+      }
+
+      if (targets.length > 0) {
+        this._collectTargets(targets);
+        // _damageAdjacentBlockers 는 호출하지 않음
+        // → 십자축 블로커는 위에서 이미 직접 타격 완료, 중복 피해 방지
+      }
+
+      // 집게발 돌진+싹둑 애니메이션 400ms 동안 보드 잠금
+      this._setPhase('EXPLODE');
+      this._emit({ type: 'ITEM_USE', item, row, col, targets });
+      setTimeout(() => this._dropAndSpawn(), 400);
     }
   }
 

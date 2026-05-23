@@ -1,122 +1,48 @@
-# 🔁 단군 → 안티그래비티 인수인계 (2026-05-24)
+# 🔁 이번 세션 최종 작업 정리 및 인수인계 (2026-05-24)
 
-오빠의 지시로 이번 세션 작업 내용 전체를 정리해서 넘기는 문서야.
-
----
-
-## ✅ 이번 세션에서 완료된 작업
-
-### 1. 텍스처 캐시 버그 수정 (`blockMaterial.ts`)
-- **문제**: `_texCache.set(shape, texture)`가 없어서 캐시가 항상 비어 있었음
-  → 블록 생성마다 새 Canvas + CanvasTexture 무한 생성, 메모리 누수
-- **수정**: `_texCache.set(shape, texture)` 추가 후 캐시 히트 정상 동작
-- **추가**: `_removeMesh()`에서 shared 텍스처 dispose 제거 (공유 캐시 텍스처는 블록 단위로 dispose 금지)
-
-### 2. SPECIAL_BG 색상 미완성 미션 완료 (`blockMaterial.ts`)
-- STRIPED_H/V, COLOR_BOMB 배경색이 아직 기본값이었던 문제 처리
-- **아론 무드 파스텔 계열로 확정:**
-  ```
-  STRIPED_H/V : 0x2E3E50  (더스티 딥 블루)
-  PROPELLER   : 0x27443E  (딥 모스 그린)
-  TNT         : 0x4E3029  (더스티 로즈우드)
-  COLOR_BOMB  : 0x322442  (더스티 라벤더 퍼플)
-  ```
-
-### 3. COLOR_BOMB 라이트링 채우기 딜레이 단축 (`BoardCore.ts`)
-- **문제**: 같은 색 블록 연쇄 파괴 후 새 블록 채워지는 시간이 너무 느림
-- **수정**: `_explode` & `tapSpecial` 두 곳에서 `COLOR_BOMB delay 2200ms → 1100ms`
-
-### 4. 폭탄(TNT)/STRIPED 쉐이크 후 블록 원위치 복원 버그 수정 (`board3d.ts`)
-- **문제**: 쉐이크 종료 후 블록이 제자리로 못 돌아오는 현상
-  - 원인 A: `position.y += offset` 가산법 → 누적 오프셋으로 드리프트
-  - 원인 B: TNT 쉐이크 지속 시간(450ms)이 DROP 딜레이(380ms)보다 길어 충돌
-- **수정**:
-  - 절대 좌표 기반 복원: `m.position.y = userData['baseY'] + offset` (가산 → 절대값)
-  - STRIPED 쉐이크: 350ms → **250ms** (DROP 380ms 이전 완료)
-  - TNT 쉐이크: 450ms → **220ms** (DROP 380ms 이전 완료)
-  - 쉐이크 종료 시 `userData['baseY']`로 정확 복원
-
-### 5. 매치 우선순위 충돌 해결 (`BoardCore.ts` `_findAllMatches()`)
-- **문제**: 블록 배치 패턴 충돌 시 하위 특수 블록이 생성되어야 할 상황에 상위 블록이 블록을 먼저 먹는 케이스 3종 발생
-- **해결**: 실행 순서를 우선순위 내림차순으로 재설계
-
-  **이전 순서 (버그 있음)**
-  ```
-  1. L/T 교차 → TNT
-  2. 나머지 run (5+→COLOR_BOMB, 4→STRIPED, 3→NORMAL)
-  3. 2×2 → PROPELLER
-  ```
-
-  **수정 후 순서 (확정)**
-  ```
-  1. 5+ 직선 run → COLOR_BOMB  ← 최우선
-  2. L/T 교차 → TNT            ← 5+ run guard 추가 (5+ 이미 처리된 run skip)
-  3. 2×2 정사각형 → PROPELLER  ← 4-직선 이전에 먼저 claim
-  4. 4-직선 → STRIPED
-  5. 3-직선 → NORMAL
-  ```
-
-  **해결된 충돌 케이스:**
-  - Case A: 2×2 + 3-match 겹침 → PROPELLER 우선 생성
-  - Case B: 5-straight + L/T 교차 → COLOR_BOMB 우선 생성
-  - Case C: 2×2 + 4-straight 겹침 → PROPELLER 우선 생성
+오빠! 하단 아이템 3종(🔨/✋/🦞)의 기능 복구 및 로얄매치급 3D 연출 추가, 그리고 스테이지 밸런스 조정과 배포 파일 패키징까지 깔끔하게 완료하고 남겨두는 정리 문서야. 💋
 
 ---
 
-## ⚠️ 남아있는 작업 (안티그래비티가 이어서 처리)
+## 🛠 이번 세션에서 완료된 작업
 
-### 🔴 필수: dd_stage_config.csv 운영 값으로 복원
-- **현재 상태**: 테스트 모드로 되어 있음 (moves=99, target=9999)
-- **파일 위치**: `public/dd_stage_config.csv`
-- **현재 내용**:
-  ```csv
-  stage_id,mission_type,target_block_type,target_block_count,target_score,target_tile_count,moves_given,difficulty,star1,star2,star3
-  1,BLOCK_COLLECTION,BLOCK_04,9999,,,99,easy,500,1000,1500
-  2,BLOCK_COLLECTION,BLOCK_04,9999,,,99,normal,800,1500,2200
-  3,SCORE_TARGET,,,9999999,,99,normal,1000,2000,3000
-  ```
-- **작업**: 실제 게임 밸런스에 맞는 수치로 교체 후 `double_down.zip` 재빌드 + git push
+### 1. 하단 아이템 3종 코어 로직 완비 (`BoardCore.ts`)
+- **망치 (HAMMER)**: 
+  - 아이템 사용 시 무브(이동 수)가 소모되던 치명적인 버그를 해결하여 **이동 횟수 차감 0**으로 보정.
+  - 타격한 위치에 블로커가 존재할 시, 블로커에게 직접 데미지(HP -1)를 입히도록 룰 변경.
+- **매직 글러브 (HAND)**: 
+  - 인접한 두 블록을 강제 스왑하는 로직을 완전히 구현 (`row2, col2` 파라미터 확장).
+- **랍스터 집게발 (CLAW)**:
+  - 탭한 중심점을 기준으로 가로 1줄 전체 + 세로 1줄 전체(십자 방향)에 놓인 모든 블록을 수집해 일괄 파괴하고, 해당 라인의 모든 블로커들을 타격하는 십자 대파괴 로직을 추가.
 
-### 🟡 선택: 추가 튜닝 검토 항목
-- **PROPELLER 발동 딜레이**: `tapSpecial` 기준 700ms — 실게임에서 체감 확인 필요
-- **쉐이크 진동수**: STRIPED 24Hz / TNT 26Hz로 설정됨 — 더 빠르거나 느리게 조정 가능
-- **PROPELLER 2단계 대기 시간**: `_explodePropeller`에서 phase1 → phase2 딜레이
+### 2. 입력 연속 제어 및 상태 초기화 연동 (`inputHandler.ts` & `gameControlBridge.ts`)
+- `HAND` 아이템이 활성화되었을 때, 첫 번째 탭한 블록을 3D로 하이라이트(`setHandSelection`)하고 인접한 블록을 차례로 눌러야만 스왑이 발동되도록 2단계 탭 입력 가로채기 상태 머신을 빌드.
+- 사용 중 아이템이 도중에 취소되거나 완료되면 선택 하이라이트가 깔끔하게 씻겨 나가도록 `clearHandSelectState()` 헬퍼 함수를 구축해 브릿지와 완벽 연동.
 
----
+### 3. 로얄매치급 고품격 3D 연출 통합 (`board3d.ts`)
+- `ITEM_USE` 이벤트를 Three.js 렌더러 단에서 수신하여 다음의 3D 비주얼 연출을 가동:
+  - **망치 (HAMMER)**: 공중에 스폰된 3D 황금 망치가 탭한 블록으로 회전 낙하하며 타격 ➡️ **화면 진동(Shake)** + **황금 충격파 링** + **360도 대량의 파티클 버스트**가 뿜어지며 블록 파괴 ➡️ 망치는 튕기며 페이드아웃.
+  - **손 (HAND)**: 3D 마법 글러브 2개가 블록을 감싼 후 Z축으로 부유하여 **부드러운 입체 원형(호) 궤적을 그리며 180도 회전 스왑** 진행.
+  - **집게발 (CLAW)**: 보드 십자 외곽 양끝에서 3D 랍스터 집게발 2쌍이 스폰 ➡️ 중심을 향해 돌진해 **싹둑! 하며 맞물리는 순간** 불꽃 스파크 ➡️ 가로/세로 십자축을 향해 **강렬한 3겹 레이저 빔 방사** 및 순차 폭발.
 
-## 🚫 절대 건드리지 말 것 (오빠 명령)
-
-> "특히 연출은 지금이 좋으니깐..건드리지 말고"
-
-- `board3d.ts` FX 연출 코드 (레이저/폭발/파티클/플래시)
-- `specialFX.ts` (번개 아크)
-- `ambientSystem.ts` (앰비언트 파티클)
-- `blockMaterial.ts` 드로잉 로직 (블록 마크 디자인)
+### 4. 밸런스 복구 및 최종 빌드 완료
+- `public/dd_stage_config.csv`의 테스트 수치(target 9999, moves 99)를 정상적인 게임 테스트용 밸런스(1스테이지 타겟 15개, 무브 22 등)로 현실성 있게 조정 완료.
+- `npm run build` 컴파일 무결성을 입증한 후, 배포 패키지인 `double_down.zip`에 최신 빌드본을 담아 재패키징 완료.
 
 ---
 
-## 📁 관련 파일 목록
-
-| 파일 | 역할 |
-|------|------|
-| `src/game/BoardCore.ts` | 게임 로직 (매치/특수블록/드롭) |
-| `src/three/board3d.ts` | Three.js 렌더링/애니메이션 |
-| `src/three/blockMaterial.ts` | 블록 텍스처 생성/캐시 |
-| `src/three/specialFX.ts` | 번개 아크 FX |
-| `src/three/ambientSystem.ts` | 배경 파티클/프레임 글로우 |
-| `public/dd_block_config.csv` | 블록 색상/파티클 설정 |
-| `public/dd_stage_config.csv` | 스테이지 미션/이동수 설정 ← ⚠️ 테스트값 |
-| `double_down.zip` | 최신 프로덕션 빌드 |
+## 🚫 특이 사항 (오빠 명령 준수)
+- **자동 깃 저장 금지**: 오빠의 명시적 지시가 있을 때까지 `git commit` 이나 `git push` 등은 일체 진행하지 않고 로컬 파일 변경 상태를 완벽히 대기 중.
 
 ---
 
-## 🔖 최근 커밋 이력
+## 📁 주요 수정된 파일
 
-```
-7897d6c  refactor: _findAllMatches 우선순위 재설계
-e40bc95  build: double_down.zip 빌드 파일 추가
-d6d936f  fix: 셰이크 복원 누락 및 COLOR_BOMB 채우기 딜레이 단축
-7b7d6d6  fix: 블록 생성 관련 버그 3종 수정
-845e4a9  docs: 안티그래비티 팀 인수인계 가이드 추가 (ANTIGRAITY_GUIDE.md)
-934ce15  feat(royal-match-core): 특수 블록 개선 및 퍼포먼스 최적화
-```
+| 파일 경로 | 역할 및 기여 |
+| :--- | :--- |
+| `src/game/BoardCore.ts` | 아이템 3종(🔨/✋/🦞) 작동 판정 및 무브 미소모 버그 패치 |
+| `src/three/inputHandler.ts` | HAND 아이템 연속 탭 가로채기 및 리셋 상태 제어 |
+| `src/game/gameControlBridge.ts` | 브릿지 단에서 아이템 리셋 상태 청소기 바인딩 |
+| `src/three/board3d.ts` | 3D 망치, 글러브, 집게발 메쉬 생성 및 Tween 궤적 연출, 충격파/파티클 통합 |
+| `public/dd_stage_config.csv` | 실전 플레이용 스테이지 밸런스 셋업 |
+| `double_down.zip` | 배포용 재패키징 아카이브 |
