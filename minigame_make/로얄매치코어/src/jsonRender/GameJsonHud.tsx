@@ -122,9 +122,8 @@ function StarGauge({ state }: { state: Record<string, unknown> }): React.ReactEl
 /* ── 아이템 슬롯 ── */
 function ItemSlots({ state }: { state: Record<string, unknown> }): React.ReactElement {
   const items = [
-    { key: 'hammer', icon: '🔨', label: 'HAMMER', action: 'item.use.HAMMER' },
-    { key: 'hand',   icon: '✋', label: 'HAND',   action: 'item.use.HAND'   },
-    { key: 'claw',   icon: '🦞', label: 'CLAW',   action: 'item.use.CLAW'   },
+    { key: 'hammer',  icon: '🔨', label: 'HAMMER',  action: 'item.use.HAMMER'  },
+    { key: 'shuffle', icon: '🔀', label: 'SHUFFLE', action: 'item.use.SHUFFLE' },
   ] as const;
 
   return (
@@ -393,9 +392,8 @@ function ItemAnnounce({ data, onDone }: { data: AnnounceData; onDone: () => void
 }
 
 const ITEM_ANNOUNCE_DATA: Record<string, AnnounceData> = {
-  HAMMER: { icon: '🔨', name: 'HAMMER', desc: '블록 1개를 즉시 파괴합니다.\n어디든 탭하세요.' },
-  HAND:   { icon: '✋', name: 'HAND',   desc: '블록을 어디든 이동시킵니다.\n이동할 블록을 탭하세요.' },
-  CLAW:   { icon: '🦞', name: 'CLAW',   desc: '2개의 블록을 연속 파괴합니다.\n첫 번째 블록을 탭하세요.' },
+  HAMMER:  { icon: '🔨', name: 'HAMMER',  desc: '블록 1개를 즉시 파괴합니다.\n파괴할 블록을 탭하세요.' },
+  SHUFFLE: { icon: '🔀', name: 'SHUFFLE', desc: '보드의 모든 블록을 무작위로\n다시 배치합니다!' },
 };
 
 /* ── 메인 HUD 컴포넌트 ── */
@@ -414,7 +412,7 @@ export function GameJsonHud({
   const [paused, setPaused] = useState(false);
   const [showRestartConfirm, setShowRestartConfirm] = useState(false);
   const [announceItem, setAnnounceItem] = useState<AnnounceData | null>(null);
-  const pendingItemRef = useRef<'HAMMER' | 'HAND' | 'CLAW' | null>(null);
+  const pendingItemRef = useRef<'HAMMER' | 'SHUFFLE' | null>(null);
 
   useEffect(() => {
     const unsub = boardCore.on(e => {
@@ -473,7 +471,7 @@ export function GameJsonHud({
   }, []);
 
   // 아이템 클릭 → announce 시퀀스 후 실제 활성화
-  const handleItemClick = useCallback((itemKey: 'HAMMER' | 'HAND' | 'CLAW'): void => {
+  const handleItemClick = useCallback((itemKey: 'HAMMER' | 'SHUFFLE'): void => {
     const data = ITEM_ANNOUNCE_DATA[itemKey];
     if (!data) return;
     pendingItemRef.current = itemKey;
@@ -485,7 +483,7 @@ export function GameJsonHud({
     // announce 완료 후 실제 아이템 활성화
     if (pendingItemRef.current) {
       const key = `item.use.${pendingItemRef.current}` as
-        'item.use.HAMMER' | 'item.use.HAND' | 'item.use.CLAW';
+        'item.use.HAMMER' | 'item.use.SHUFFLE';
       gameActions[key]();
       pendingItemRef.current = null;
     }
@@ -572,12 +570,11 @@ function HudBottomWithAnnounce({
   onItemClick,
 }: {
   state: Record<string, unknown>;
-  onItemClick: (item: 'HAMMER' | 'HAND' | 'CLAW') => void;
+  onItemClick: (item: 'HAMMER' | 'SHUFFLE') => void;
 }): React.ReactElement {
   const items = [
-    { key: 'hammer' as const, icon: '🔨', label: 'HAMMER', itemKey: 'HAMMER' as const },
-    { key: 'hand'   as const, icon: '✋', label: 'HAND',   itemKey: 'HAND'   as const },
-    { key: 'claw'   as const, icon: '🦞', label: 'CLAW',   itemKey: 'CLAW'   as const },
+    { key: 'hammer'  as const, icon: '🔨', label: 'HAMMER',  itemKey: 'HAMMER'  as const },
+    { key: 'shuffle' as const, icon: '🔀', label: 'SHUFFLE', itemKey: 'SHUFFLE' as const },
   ];
   return (
     <div className="game-hud-bottom">

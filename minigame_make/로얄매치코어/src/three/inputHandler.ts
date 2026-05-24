@@ -60,7 +60,7 @@ function onPointerDown(e: PointerEvent): void {
   const hit = board3d.hitTestBlock(e.clientX, e.clientY);
   if (!hit) return;
 
-  // 아이템 활성 상태 → 아이템 사용
+  // 아이템 활성 상태 → 아이템 사용 (HAMMER: 탭한 블록 파괴)
   const activeItem = getActiveItem();
   if (activeItem) {
     boardCore.useItem(activeItem, hit.row, hit.col);
@@ -182,4 +182,9 @@ export function attachInputHandlers(canvas: HTMLElement): () => void {
     canvas.removeEventListener('pointerup',     onPointerUp);
     canvas.removeEventListener('pointercancel', onPointerCancel);
   };
+}
+
+/** HAND 아이템 제거됨 — 호환성을 위해 stub 유지 */
+export function clearHandSelectState(): void {
+  // no-op: HAND 아이템 제거됨
 }

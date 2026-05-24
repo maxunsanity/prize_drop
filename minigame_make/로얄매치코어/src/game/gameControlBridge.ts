@@ -5,38 +5,40 @@
 
 import { boardCore } from './BoardCore.js';
 import { hudExternalStore } from './hudExternalStore.js';
+import { clearHandSelectState } from '../three/inputHandler.js';
 
-// 활성 아이템 상태
-let _activeItem: 'HAMMER' | 'HAND' | 'CLAW' | null = null;
+// 활성 아이템 상태 (HAMMER만 보드 탭 필요, SHUFFLE은 즉시 실행)
+let _activeItem: 'HAMMER' | null = null;
 
 export function getActiveItem(): typeof _activeItem { return _activeItem; }
 
-export function activateItem(item: 'HAMMER' | 'HAND' | 'CLAW'): void {
+export function activateItem(item: 'HAMMER'): void {
+  clearHandSelectState();
   if (_activeItem === item) {
-    // 토글 해제
     _activeItem = null;
-    hudExternalStore.set(`item.${item.toLowerCase()}.active`, false);
+    hudExternalStore.set('item.hammer.active', false);
   } else {
-    if (_activeItem) {
-      hudExternalStore.set(`item.${_activeItem.toLowerCase()}.active`, false);
+    if (_activeItem !== null) {
+      hudExternalStore.set('item.hammer.active', false);
     }
     _activeItem = item;
-    hudExternalStore.set(`item.${item.toLowerCase()}.active`, true);
+    hudExternalStore.set('item.hammer.active', true);
   }
 }
 
 export function cancelActiveItem(): void {
-  if (_activeItem) {
-    hudExternalStore.set(`item.${_activeItem.toLowerCase()}.active`, false);
+  clearHandSelectState();
+  if (_activeItem !== null) {
+    hudExternalStore.set('item.hammer.active', false);
     _activeItem = null;
   }
 }
 
 // json-render actions (GameJsonHud에서 onAction으로 연결)
 export const gameActions: Record<string, (payload?: unknown) => void> = {
-  'item.use.HAMMER': () => { activateItem('HAMMER'); },
-  'item.use.HAND':   () => { activateItem('HAND'); },
-  'item.use.CLAW':   () => { activateItem('CLAW'); },
+  'item.use.HAMMER':  () => { activateItem('HAMMER'); },
+  // SHUFFLE은 보드 탭 불필요 — 버튼 클릭 즉시 실행
+  'item.use.SHUFFLE': () => { cancelActiveItem(); boardCore.useItem('SHUFFLE', 0, 0); },
 
   'game.pause': () => {
     // TODO: 일시정지 모달
